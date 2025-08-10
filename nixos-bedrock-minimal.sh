@@ -17,7 +17,7 @@ done
 
 read -rp 'Index: ' idx
 ((idx>=1 && idx<=${#disks[@]})) || { echo "Invalid index"; exit 1; }
-disk="/dev/$(awk '{print $1}' <<<"${disks[idx-1]}")"
+DISK="/dev/$(awk '{print $1}' <<<"${disks[idx-1]}")"
 echo "→ selected $DISK"
 
 # 1. パーティション作成
