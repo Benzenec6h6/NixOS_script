@@ -24,6 +24,7 @@ echo "→ selected $DISK"
 parted $DISK -- mklabel gpt
 parted $DISK -- mkpart primary 1MiB 512MiB
 parted $DISK -- mkpart primary 512MiB 100%
+parted $DISK -- set 1 esp on
 
 # 2. フォーマット
 mkfs.fat -F 32 ${DISK}1
