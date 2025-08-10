@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-set -eux
+set -euo pipefail
+#set -eux
 
 mapfile -t disks < <(lsblk -ndo NAME,SIZE,TYPE | awk '$3=="disk" && $1!~/^loop/ {print $1, $2}')
 
@@ -37,7 +38,7 @@ mount ${DISK}1 /mnt/boot
 nixos-generate-config --root /mnt
 
 # 5. 自前のconfiguration.nixをコピー
-cp /tmp/configuration.nix /mnt/etc/nixos/configuration.nix
+cp ./configuration.nix /mnt/etc/nixos/configuration.nix
 
 # 6. インストール
 nixos-install --no-root-passwd
