@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ /etc/nixos/hardware-configuration.nix ];
+  imports = [ ./hardware-configuration.nix ];
 
   networking.hostName = "bedrock-nixos";
 
@@ -14,9 +14,7 @@
     home-manager
   ];
 
-  console = {
-    keyMap = "jp";
-  };
+  console.keyMap = "jp106";
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
