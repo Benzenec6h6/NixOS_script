@@ -16,13 +16,6 @@
   services.xserver.desktopManager.plasma5.enable = false;
   services.xserver.desktopManager.plasma6.enable = true;
 
-  # デフォルトで起動するセッションを指定
-  # i3 をデフォルトにする場合は以下
-  services.xserver.desktopManager.session = "i3";
-
-  # KDE をデフォルトにしたい場合は "plasma" に変更
-  # services.xserver.desktopManager.session = "plasma";
-
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
     xorg.xorgserver xorg.xorgxinit xorg.xorgapp xorg.xorgxmessage
