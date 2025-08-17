@@ -54,11 +54,14 @@
   # GPU / Microcode
   # ---------------------------------
   hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
 
   # NVIDIA
   services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = true;  # RTX 3060 Laptop → open ドライバを使う
+  };
 
   # CPU microcode
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -68,6 +71,7 @@
   # ---------------------------------
   # Power management & services
   # ---------------------------------
+  services.power-profiles-daemon.enable = false;
   services.tlp.enable = true;
   services.printing.enable = true;
   services.blueman.enable = true;
