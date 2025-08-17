@@ -4,15 +4,25 @@
   # ---------------------------------
   # X11 / Wayland
   # ---------------------------------
+  # X サーバーを有効化
   services.xserver.enable = true;
+
+  # ログインマネージャ（LightDM）を有効化
   services.xserver.displayManager.lightdm.enable = true;
 
+  # i3 ウィンドウマネージャを有効化
   services.xserver.windowManager.i3.enable = true;
 
-  services.xserver.desktopManager.plasma6.enable = true;
+  # KDE Plasma 6 を有効化（Plasma 5 は使わない場合は不要）
   services.xserver.desktopManager.plasma5.enable = false;
+  services.xserver.desktopManager.plasma6.enable = true;
 
-  services.xserver.desktopManager.default = "i3"; # LightDM でデフォルト WM
+  # デフォルトで起動するセッションを指定
+  # i3 をデフォルトにする場合は以下
+  services.xserver.desktopManager.session = "i3";
+
+  # KDE をデフォルトにしたい場合は "plasma" に変更
+  # services.xserver.desktopManager.session = "plasma";
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
