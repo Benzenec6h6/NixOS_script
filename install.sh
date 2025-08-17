@@ -40,6 +40,7 @@ nixos-generate-config --root /mnt
 
 # 5. 自前のconfiguration.nixをコピー
 cp ./configuration.nix /mnt/etc/nixos/configuration.nix
+cp -r ./modules /mnt/etc/nixos/
 
 # 6. インストール
 nixos-install --no-root-passwd

@@ -1,62 +1,36 @@
 { config, pkgs, ... }:
 
 {
-  ##############################
-  # 基本ロケールとタイムゾーン
-  ##############################
-  i18n.defaultLocale = "ja_JP.UTF-8";
-  i18n.extraLocales = [ "en_US.UTF-8" ];
-  time.timeZone = "Asia/Tokyo";
-
-  ##############################
-  # フォント
-  ##############################
-  fonts.fonts = with pkgs; [
-    noto-fonts-cjk
-  ];
-
-  ##############################
-  # 日本語入力 fcitx5 + mozc
-  ##############################
-  programs.fcitx5.enable = true;
-  programs.fcitx5.engines = with pkgs.fcitx-engines; [ mozc ];
-
-  # 環境変数を共通設定
-  environment.variables = {
-    GTK_IM_MODULE = "fcitx";
-    QT_IM_MODULE  = "fcitx";
-    XMODIFIERS    = "@im=fcitx";
+  # ---------------------------------
+  # Allow unfree packages
+  # ---------------------------------
+  nixpkgs.config = {
+    allowUnfree = true;
   };
 
-  ##############################
-  # X11系設定
-  ##############################
-  services.xserver.enable = true;
-  services.xserver.layout = "jp106";
-  services.xserver.xkbOptions = "ctrl:nocaps";
+  # ---------------------------------
+  # Import modules
+  # ---------------------------------
+  imports = [
+    ./hardware-configuration.nix
+    ./modules/desktop.nix
+    ./modules/users.nix
+    ./modules/networking.nix
+  ];
 
-  # 試すWMを1つだけ有効化（ここではi3）
-  services.xserver.windowManager.i3.enable = true;
+  # ---------------------------------
+  # Basic system configuration
+  # ---------------------------------
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  # 他WMはコメントアウトしておく
-  # services.xserver.windowManager.openbox.enable = true;
-  # services.xserver.windowManager.xfce.enable = true;
+  time.timeZone = "Asia/Tokyo";
 
-  ##############################
-  # Wayland系設定（コメントアウト）
-  ##############################
-  # services.xserver.windowManager.sway.enable = true;
-  # services.xserver.windowManager.wayfire.enable = true;
+  i18n.defaultLocale = "ja_JP.UTF-8";
 
-  # fcitx5 Wayland対応モジュール（Waylandを試す場合のみ追加）
-  # environment.systemPackages = with pkgs; [
-  #   fcitx5-qt
-  #   fcitx5-gtk
-  # ];
+  users.users.root = {
+    password = "rootpassword";  # 安全に設定
+  };
 
-  ##############################
-  # ログインマネージャ
-  ##############################
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.greeters.gtk.enable = true;
+  system.stateVersion = "23.05"; # 適宜
 }
