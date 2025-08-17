@@ -18,7 +18,7 @@
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
-    xorg.xorgserver xorg.xorgxinit xorg.xorgapp xorg.xorgxmessage
+    xorg.xorgserver xorg.xorgapp xorg.xorgxmessage
     wayland wayland-protocols xorg.xorgxwayland libxkbcommon
     wlr-randr xdg-desktop-portal xdg-desktop-portal-wlr
     # Terminal / Utilities
