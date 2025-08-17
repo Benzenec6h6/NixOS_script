@@ -14,11 +14,31 @@
 
   services.xserver.desktopManager.default = "i3"; # LightDM でデフォルト WM
 
-  # Wayland / wlroots
+  # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
     xorg.xorgserver xorg.xorgxinit xorg.xorgapp xorg.xorgxmessage
     wayland wayland-protocols xorg.xorgxwayland libxkbcommon
     wlr-randr xdg-desktop-portal xdg-desktop-portal-wlr
+    # Terminal / Utilities
+    alacritty foot wezterm tmux starship htop btop nvtop fzf ripgrep unzip unrar p7zip
+
+    # Browsers / GUI apps
+    firefox chromium vscode discord qbittorrent steam
+
+    # Wine
+    wineWowPackages.full
+
+    # Virtualization
+    qemu_full libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
+
+    # Containers
+    docker
+
+    # Dotfile management
+    stow
+
+    # Audio / video
+    pipewire pipewire-alsa pipewire-pulse wireplumber
   ];
 
   # ---------------------------------
@@ -71,32 +91,6 @@
       };
     };
   };
-
-  # ---------------------------------
-  # Common Applications
-  # ---------------------------------
-  environment.systemPackages = with pkgs; [
-    # Terminal / Utilities
-    alacritty foot wezterm tmux starship htop btop nvtop fzf ripgrep unzip unrar p7zip
-
-    # Browsers / GUI apps
-    firefox chromium vscode discord qbittorrent steam
-
-    # Wine
-    wineWowPackages.full
-
-    # Virtualization
-    qemu_full libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
-
-    # Containers
-    docker
-
-    # Dotfile management
-    stow
-
-    # Audio / video
-    pipewire pipewire-alsa pipewire-pulse wireplumber
-  ];
 
   # ---------------------------------
   # Docker
