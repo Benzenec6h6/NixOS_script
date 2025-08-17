@@ -4,7 +4,6 @@
   # ---------------------------------
   # X11 / Wayland
   # ---------------------------------
-  # X サーバーを有効化
   services.xserver.enable = true;
 
   # ログインマネージャ（LightDM）を有効化
@@ -62,9 +61,9 @@
   services.xserver.videoDrivers = [ "nvidia" ];
 
   # CPU microcode
-  #boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages.intel_ucode.enable = true;
-  boot.kernelPackages.amd_ucode.enable = false;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.amd.updateMicrocode = false;
 
   # ---------------------------------
   # Power management & services
