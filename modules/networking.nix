@@ -14,9 +14,6 @@
   services.openssh.passwordAuthentication = false;
   services.openssh.permitRootLogin = "no";
 
-  # DHCP / 固定IPは NetworkManager で管理
-  networking.useDHCP = true;
-
   # firewall
   networking.firewall.enable = true;
 }
