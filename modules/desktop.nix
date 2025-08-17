@@ -32,7 +32,7 @@
   hardware.nvidia.enable = lib.mkDefault (builtins.any (l: l == "nvidia") (builtins.attrNames pkgs));
 
   # CPU microcode
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  #boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages.intel_ucode.enable = true;
   boot.kernelPackages.amd_ucode.enable = false;
 
