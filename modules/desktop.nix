@@ -49,7 +49,7 @@
   hardware.opengl.driSupport32Bit = true;
 
   # NVIDIA
-  hardware.nvidia.enable = lib.mkDefault (builtins.any (l: l == "nvidia") (builtins.attrNames pkgs));
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # CPU microcode
   #boot.kernelPackages = pkgs.linuxPackages_latest;
