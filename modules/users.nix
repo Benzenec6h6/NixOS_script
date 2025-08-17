@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  users.users.me = {
+  users.users.teto = {
     isNormalUser = true;
     description = "Primary developer user";
-    home = "/home/me";
+    home = "/home/teto";
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
 
