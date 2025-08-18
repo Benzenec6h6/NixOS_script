@@ -61,7 +61,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
-    open = true;  # RTX 3060 Laptop → open ドライバを使う
+    open = false;
   };
 
   # CPU microcode
