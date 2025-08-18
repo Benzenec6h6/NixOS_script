@@ -19,10 +19,10 @@
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
      # --- Xorg 必須 ---
-    xorg.xserver xorg.xmessage xorg.xrandr xorg.xev
+    xorg.xorgserver xorg.xmessage xorg.xrandr xorg.xev
 
     # --- Wayland 関連 ---
-    wayland wayland-protocols libxkbcommon xorg.xwayland
+    wayland wayland-protocols libxkbcommon
 
     # --- wlroots/i3 用 ---
     wlr-randr
@@ -31,16 +31,16 @@
     xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-wlr
 
     # Terminal / Utilities
-    alacritty foot wezterm tmux starship htop btop nvtopPackages.full fzf ripgrep unzip unrar p7zip
+    alacritty foot wezterm tmux starship htop btop nvtop fzf ripgrep unzip unrar p7zip
 
     # Browsers / GUI apps
     firefox chromium vscode discord qbittorrent steam
 
     # Wine
-    wineWowPackages.full
+    wineWow
 
     # Virtualization
-    qemu_full libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
+    qemu libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
 
     # Containers
     docker
