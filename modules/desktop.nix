@@ -12,8 +12,7 @@
   # i3 ウィンドウマネージャを有効化
   services.xserver.windowManager.i3.enable = true;
 
-  # KDE Plasma 6 を有効化（Plasma 5 は使わない場合は不要）
-  services.xserver.desktopManager.plasma5.enable = false;
+  # KDE Plasma 6 を有効化
   services.xserver.desktopManager.plasma6.enable = true;
 
   # Wayland / wlroots / Common Applications
@@ -28,7 +27,7 @@
     wlr-randr
 
     # --- XDG portals (DE/WM 統合用) ---
-    xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-wlr
+    xdg-desktop-portal kdePackages.xdg-desktop-portal-kde xdg-desktop-portal-wlr
 
     # Terminal / Utilities
     alacritty foot wezterm tmux starship htop btop nvtop fzf ripgrep unzip unrar p7zip
