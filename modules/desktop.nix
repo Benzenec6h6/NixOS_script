@@ -93,8 +93,6 @@
       jetbrains-mono
       fira-code
       hack-font
-      ttf-cascadia-code
-      adobe-source-han-sans-otc-fonts
     ];
     fontconfig = {
       enable = true;
