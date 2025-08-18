@@ -48,7 +48,7 @@
     stow
 
     # Audio / video
-    pipewire pipewire-pulse wireplumber
+    pipewire wireplumber
   ];
 
   # ---------------------------------
