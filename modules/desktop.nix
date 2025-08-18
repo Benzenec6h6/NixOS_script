@@ -18,11 +18,20 @@
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
-    xorg.xorgserver xorg.xorgapp xorg.xorgxmessage
-    wayland wayland-protocols xorg.xorgxwayland libxkbcommon
-    wlr-randr xdg-desktop-portal xdg-desktop-portal-wlr
+     # --- Xorg 必須 ---
+    xorg.xserver xorg.xmessage xorg.xrandr xorg.xev
+
+    # --- Wayland 関連 ---
+    wayland wayland-protocols libxkbcommon xorg.xwayland
+
+    # --- wlroots/i3 用 ---
+    wlr-randr
+
+    # --- XDG portals (DE/WM 統合用) ---
+    xdg-desktop-portal xdg-desktop-portal-kde xdg-desktop-portal-wlr
+
     # Terminal / Utilities
-    alacritty foot wezterm tmux starship htop btop nvtop fzf ripgrep unzip unrar p7zip
+    alacritty foot wezterm tmux starship htop btop nvtopPackages.full fzf ripgrep unzip unrar p7zip
 
     # Browsers / GUI apps
     firefox chromium vscode discord qbittorrent steam
