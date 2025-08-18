@@ -48,7 +48,7 @@
     stow
 
     # Audio / video
-    pipewire pipewire-alsa pipewire-pulse wireplumber
+    pipewire pipewire-pulse wireplumber
   ];
 
   # ---------------------------------
