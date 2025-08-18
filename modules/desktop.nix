@@ -39,7 +39,7 @@
     wineWowPackages.full
 
     # Virtualization
-    qemu_full libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
+    qemu_full libvirt OVMF dnsmasq swtpm libosinfo virt-viewer virt-install
 
     # Containers
     docker
