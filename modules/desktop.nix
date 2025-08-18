@@ -60,9 +60,11 @@ in
 
   # VM gpu driver
   services.xserver.videoDrivers = if isVM then [ "modesetting" ] else [ "nvidia" ];
-
-  hardware.nvidia.enable = if isVM then false else true;
-  hardware.nvidia.open = if isVM then false else true;
+  hardware.nvidia = {
+    modesetting.enable = if isVM then false else true;
+    powerManagement.enable = if isVM then false else true;
+    open = if isVM then false else true;
+  };
   
   # CPU microcode
   boot.kernelPackages = pkgs.linuxPackages_latest;
