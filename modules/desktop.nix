@@ -1,5 +1,9 @@
 { config, pkgs, lib, ... }:
 
+let 
+    isVM = builtins.pathExists "/dev/kvm";
+in
+
 {
   # ---------------------------------
   # X11 / Wayland
@@ -51,35 +55,27 @@
     pipewire wireplumber
   ];
 
-  # ---------------------------------
   # GPU / Microcode
-  # ---------------------------------
   hardware.opengl.enable = true;
 
   # VM gpu driver
-  isVM = builtins.pathExists "/dev/kvm";
-
   services.xserver.videoDrivers = if isVM then [ "modesetting" ] else [ "nvidia" ];
 
   hardware.nvidia.enable = if isVM then false else true;
   hardware.nvidia.open = if isVM then false else true;
-
+  
   # CPU microcode
   boot.kernelPackages = pkgs.linuxPackages_latest;
   hardware.cpu.intel.updateMicrocode = true;
   hardware.cpu.amd.updateMicrocode = false;
 
-  # ---------------------------------
   # Power management & services
-  # ---------------------------------
   services.power-profiles-daemon.enable = false;
   services.tlp.enable = true;
   services.printing.enable = true;
   services.blueman.enable = true;
 
-  # ---------------------------------
   # Input Method / Fonts
-  # ---------------------------------
   i18n.inputMethod.enabled = "fcitx5";
   i18n.inputMethod.fcitx5.addons = with pkgs; [ fcitx5-mozc ];
 
@@ -104,14 +100,10 @@
     };
   };
 
-  # ---------------------------------
   # Docker
-  # ---------------------------------
   virtualisation.docker.enable = true;
 
-  # ---------------------------------
   # Extra startup
-  # ---------------------------------
   services.xserver.displayManager.sessionCommands = ''
     nm-applet &
     fcitx5 -d &
