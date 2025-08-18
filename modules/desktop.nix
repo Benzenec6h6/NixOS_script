@@ -30,16 +30,16 @@
     xdg-desktop-portal kdePackages.xdg-desktop-portal-kde xdg-desktop-portal-wlr
 
     # Terminal / Utilities
-    alacritty foot wezterm tmux starship htop btop nvtop fzf ripgrep unzip unrar p7zip
+    alacritty foot wezterm tmux starship htop btop nvtopPackages.nvidia fzf ripgrep unzip unrar p7zip
 
     # Browsers / GUI apps
     firefox chromium vscode discord qbittorrent steam
 
     # Wine
-    wineWow
+    wineWowPackages.full
 
     # Virtualization
-    qemu libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
+    qemu_full libvirt edk2-ovmf dnsmasq swtpm libosinfo virt-viewer virt-install
 
     # Containers
     docker
