@@ -56,13 +56,13 @@
   # ---------------------------------
   hardware.opengl.enable = true;
 
-  # NVIDIA
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false;
-  };
+  # VM gpu driver
+  isVM = builtins.pathExists "/dev/kvm";
+
+  services.xserver.videoDrivers = if isVM then [ "modesetting" ] else [ "nvidia" ];
+
+  hardware.nvidia.enable = if isVM then false else true;
+  hardware.nvidia.open = if isVM then false else true;
 
   # CPU microcode
   boot.kernelPackages = pkgs.linuxPackages_latest;
