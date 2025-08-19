@@ -21,7 +21,7 @@ in
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
-     # --- Xorg 必須 ---
+    # --- Xorg 必須 ---
     xorg.xorgserver xorg.xmessage xorg.xrandr xorg.xev
 
     # --- Wayland 関連 ---
@@ -33,23 +33,11 @@ in
     # --- XDG portals (DE/WM 統合用) ---
     xdg-desktop-portal kdePackages.xdg-desktop-portal-kde xdg-desktop-portal-wlr
 
-    # Terminal / Utilities
-    alacritty foot wezterm tmux starship htop btop nvtopPackages.nvidia fzf ripgrep unzip unrar p7zip
-
-    # Browsers / GUI apps
-    firefox chromium vscode discord qbittorrent steam
-
-    # Wine
-    wineWowPackages.full
-
     # Virtualization
     qemu_full libvirt OVMF dnsmasq swtpm libosinfo virt-viewer
 
     # Containers
     docker
-
-    # Dotfile management
-    stow
 
     # Audio / video
     pipewire wireplumber

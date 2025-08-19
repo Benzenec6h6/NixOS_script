@@ -14,8 +14,9 @@
   imports = [
     ./hardware-configuration.nix
     ./modules/desktop.nix
-    ./modules/users.nix
     ./modules/networking.nix
+    <home-manager/nixos>  # ← Home Manager モジュールを追加
+    ./home/teto.nix
   ];
 
   # ---------------------------------
@@ -32,5 +33,17 @@
     password = "rootpassword";  # 安全に設定
   };
 
-  system.stateVersion = "23.05"; # 適宜
+  programs.zsh.enable = true;
+  users.users.teto = {
+    isNormalUser = true;
+    home = "/home/teto";
+    extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
+    shell = pkgs.zsh;
+  };
+
+  # sudo 権限
+  security.sudo.enable = true;
+  security.sudo.wheelNeedsPassword = true;
+
+  system.stateVersion = "25.05"; # 適宜
 }
