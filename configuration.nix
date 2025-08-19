@@ -1,16 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # ---------------------------------
   # Allow unfree packages
-  # ---------------------------------
   nixpkgs.config = {
     allowUnfree = true;
   };
 
-  # ---------------------------------
   # Import modules
-  # ---------------------------------
   imports = [
     ./hardware-configuration.nix
     ./modules/desktop.nix
@@ -19,9 +15,7 @@
     ./home/teto.nix
   ];
 
-  # ---------------------------------
   # Basic system configuration
-  # ---------------------------------
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
