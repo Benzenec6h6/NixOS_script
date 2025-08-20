@@ -44,4 +44,6 @@ cp -r ./modules /mnt/etc/nixos/
 cp -r ./home /mnt/etc/nixos/
 
 # 6. インストール
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
+nix-channel --update
 nixos-install --no-root-passwd
