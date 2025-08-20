@@ -12,7 +12,6 @@
     ./modules/desktop.nix
     ./modules/networking.nix
     <home-manager/nixos>  # ← Home Manager モジュールを追加
-    ./home/teto.nix
   ];
 
   # Basic system configuration
@@ -20,7 +19,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   time.timeZone = "Asia/Tokyo";
-
   i18n.defaultLocale = "ja_JP.UTF-8";
 
   users.users.root = {
@@ -28,6 +26,9 @@
   };
 
   programs.zsh.enable = true;
+  programs.home-manager.enable = true;
+  home-manager.users.teto = import ./home/teto.nix;
+
   users.users.teto = {
     isNormalUser = true;
     password = "userpassword"; # 最初のログイン後変更する
