@@ -31,7 +31,6 @@
     password = "userpassword"; # 最初のログイン後変更する
     home = "/home/teto";
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
-    shell = pkgs.zsh;
   };
 
   # sudo 権限
