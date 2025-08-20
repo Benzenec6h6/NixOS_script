@@ -25,7 +25,7 @@
     password = "rootpassword";  # 最初のログイン後変更する
   };
 
-  programs.zsh.enable = true;
+  home-manager.users.teto = import ./home/teto.nix;
   users.users.teto = {
     isNormalUser = true;
     password = "userpassword"; # 最初のログイン後変更する
