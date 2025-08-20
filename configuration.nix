@@ -24,12 +24,13 @@
   i18n.defaultLocale = "ja_JP.UTF-8";
 
   users.users.root = {
-    password = "rootpassword";  # 安全に設定
+    password = "rootpassword";  # 最初のログイン後変更する
   };
 
   programs.zsh.enable = true;
   users.users.teto = {
     isNormalUser = true;
+    password = "userpassword"; # 最初のログイン後変更する
     home = "/home/teto";
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
     shell = pkgs.zsh;
