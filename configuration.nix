@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
     ./modules/desktop.nix
     ./modules/networking.nix
-    <home-manager/nixos>  # ← Home Manager モジュールを追加
+    (import <home-manager/nixos>)
   ];
 
   # Basic system configuration
@@ -26,9 +26,6 @@
   };
 
   programs.zsh.enable = true;
-  programs.home-manager.enable = true;
-  home-manager.users.teto = import ./home/teto.nix;
-
   users.users.teto = {
     isNormalUser = true;
     password = "userpassword"; # 最初のログイン後変更する
