@@ -41,8 +41,9 @@
   home-manager.users.teto = import ./home/teto.nix;
   users.users.teto = {
     isNormalUser = true;
-    password = "userpassword"; # 最初のログイン後変更する
+    hashedPassword = lib.mkPassword "userpassword"; #うまく行くかわからない。
     home = "/home/teto";
+    createHome = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
   };
 
