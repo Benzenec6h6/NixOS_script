@@ -2,7 +2,22 @@
 
 {
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    # 必要な unfree パッケージだけを許可
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+      "cudatoolkit"
+      "cuda-merged"
+    ];
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
 
   # Import modules
   imports = [
