@@ -2,6 +2,7 @@
 
 {
   # Allow unfree packages
+  /*
   nixpkgs.config = {
     allowUnfree = true;
 
@@ -12,11 +13,6 @@
       "cudatoolkit"
       "cuda-merged"
     ];
-  };
-  /*
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
   };
   */
   # Import modules
