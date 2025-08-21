@@ -13,12 +13,12 @@
       "cuda-merged"
     ];
   };
-
+  /*
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
   };
-
+  */
   # Import modules
   imports = [
     ./hardware-configuration.nix
