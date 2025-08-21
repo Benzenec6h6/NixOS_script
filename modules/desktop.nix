@@ -12,10 +12,10 @@ in
   services.xserver.displayManager.lightdm.enable = true;
 
   # i3 ウィンドウマネージャを有効化
-  services.xserver.windowManager.i3.enable = true;
+  #services.xserver.windowManager.i3.enable = true;
 
   # KDE Plasma 6 を有効化
-  services.xserver.desktopManager.plasma6.enable = true;
+  #services.xserver.desktopManager.plasma6.enable = true;
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
