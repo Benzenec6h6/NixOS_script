@@ -38,12 +38,16 @@ mount ${DISK}1 /mnt/boot
 # 4. 設定ファイル生成
 nixos-generate-config --root /mnt
 
-# 5. 自前のconfiguration.nixをコピー
+# 5. 自前設定をコピー
 cp ./configuration.nix /mnt/etc/nixos/configuration.nix
 cp -r ./modules /mnt/etc/nixos/
 cp -r ./home /mnt/etc/nixos/
+cp ./flake.nix /mnt/etc/nixos/flake.nix
 
 # 6. インストール
 nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
 nix-channel --update
-nixos-install --no-root-passwd
+
+nixos-install \
+  --flake "/mnt/etc/nixos#my-nixos" \
+  --no-root-passwd
