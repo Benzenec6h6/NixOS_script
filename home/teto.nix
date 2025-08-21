@@ -15,7 +15,7 @@
     firefox chromium vscode discord qbittorrent steam
 
     # Wine
-    wineWowPackages.full
+    wineWowPackages.full winetricks
 
     # Dotfile management
     stow git
