@@ -45,9 +45,6 @@ cp -r ./home /mnt/etc/nixos/
 cp ./flake.nix /mnt/etc/nixos/flake.nix
 
 # 6. インストール
-nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
-nix-channel --update
-
 nixos-install \
   --flake "/mnt/etc/nixos#my-nixos" \
   --no-root-passwd
