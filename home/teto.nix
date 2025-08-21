@@ -27,21 +27,23 @@
     userEmail = "aconitinec34h47no11@gmail.com";
   };
 
-  # WM 設定 (i3)
-  xsession = {
-    enable = true; # ← これが大事。i3をHome Managerで使えるようにする
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps; # gaps入りi3
-      config = {
-        modifier = "Mod4";     # SuperキーをModに
-        terminal = "alacritty";
-        keybindings = {
-          "Mod4+Return" = "alacritty";
-          "Mod4+d" = "dmenu_run";
-          "Mod4+Shift+q" = "i3-msg kill";
-        };
+  # Xsession を有効化して WM を管理
+  xsession.enable = true;
+
+  xsession.windowManager.i3 = {
+    enable = true;
+    package = pkgs.i3-gaps;
+    config = {
+      modifier = "Mod4";
+      terminal = "alacritty";
+      keybindings = {
+        "Mod4+Return" = "alacritty";
+        "Mod4+d" = "dmenu_run";
+        "Mod4+Shift+q" = "i3-msg kill";
       };
     };
   };
+
+  # KDE Plasma 6 も LightDM から選べるようにする
+  xsession.desktopManager.plasma6.enable = true;
 }
