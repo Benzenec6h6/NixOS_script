@@ -24,7 +24,6 @@
     ./hardware-configuration.nix
     ./modules/desktop.nix
     ./modules/networking.nix
-    (import <home-manager/nixos>)
   ];
 
   # Basic system configuration
@@ -41,7 +40,7 @@
   home-manager.users.teto = import ./home/teto.nix;
   users.users.teto = {
     isNormalUser = true;
-    hashedPassword = lib.mkPassword "userpassword"; #うまく行くかわからない。
+    initialPassword = "userpassword";
     home = "/home/teto";
     createHome = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
