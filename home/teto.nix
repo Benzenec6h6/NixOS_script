@@ -43,7 +43,4 @@
       };
     };
   };
-
-  # KDE Plasma 6 も LightDM から選べるようにする
-  xsession.desktopManager.plasma6.enable = true;
 }
