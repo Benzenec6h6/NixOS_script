@@ -19,10 +19,12 @@
 
           # 必要な unfree パッケージだけを許可
           allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+            "steam"
             "nvidia-x11"
             "nvidia-settings"
             "cudatoolkit"
             "cuda-merged"
+            "cuda-merged-12.8"
           ];
         };
       };
