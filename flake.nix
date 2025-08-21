@@ -11,20 +11,16 @@
     let
       system = "x86_64-linux";
 
-      # nixpkgs のインスタンスを作成する時に unfree の設定を入れる
       pkgs = import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
-
-          # 必要な unfree パッケージだけを許可
-          allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
+          allowUnfreePredicate = pkg: builtins.elem (pkg.pname or pkg.name) [
             "steam"
             "nvidia-x11"
             "nvidia-settings"
             "cudatoolkit"
             "cuda-merged"
-            "cuda-merged-12.8"
           ];
         };
       };
@@ -35,6 +31,10 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
         ];
       };
     };
