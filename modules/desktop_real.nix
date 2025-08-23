@@ -1,18 +1,11 @@
 { config, pkgs, lib, ... }:
 
-let 
-    isVM = builtins.pathExists "/dev/kvm";
-in
-
 {
   # X11 / Wayland
   services.xserver.enable = true;
 
   # ログインマネージャ（LightDM）を有効化
   services.xserver.displayManager.lightdm.enable = true;
-
-  # i3 ウィンドウマネージャを有効化
-  #services.xserver.windowManager.i3.enable = true;
 
   # KDE Plasma 6 を有効化
   #services.xserver.desktopManager.plasma6.enable = true;
@@ -45,11 +38,11 @@ in
   hardware.opengl.enable = true;
 
   # VM gpu driver
-  services.xserver.videoDrivers = if isVM then [ "modesetting" ] else [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-    modesetting.enable = if isVM then false else true;
-    powerManagement.enable = if isVM then false else true;
-    open = if isVM then false else true;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    open = false;
   };
   
   # CPU microcode
