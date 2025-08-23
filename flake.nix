@@ -24,18 +24,30 @@
           ];
         };
       };
+
+      baseModules = [
+        ./configuration.nix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
     in {
-      nixosConfigurations.my-nixos = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit pkgs; };
-        modules = [
-          ./configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
+      nixosConfigurations = {
+        # VM 用 (QEMU / modesetting)
+        vm = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit pkgs; };
+          modules = baseModules ++ [ ./modules/desktop_vm.nix ];
+        };
+
+        # 実機用 (NVIDIA)
+        real = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit pkgs; };
+          modules = baseModules ++ [ ./modules/desktop_real.nix ];
+        };
       };
     };
 }
