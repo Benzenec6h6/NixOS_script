@@ -44,7 +44,14 @@ cp -r ./modules /mnt/etc/nixos/
 cp -r ./home /mnt/etc/nixos/
 cp ./flake.nix /mnt/etc/nixos/flake.nix
 
+# VM 判定
+if [ -e /dev/kvm ]; then
+  FLAKE_TARGET="vm"
+else
+  FLAKE_TARGET="real"
+fi
+
 # 6. インストール
 nixos-install \
-  --flake "/mnt/etc/nixos#my-nixos" \
+  --flake "/mnt/etc/nixos#$FLAKE_TARGET" \
   --no-root-passwd
