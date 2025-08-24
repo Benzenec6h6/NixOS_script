@@ -4,7 +4,21 @@
   home.stateVersion = "25.05";
 
   # 基本ツール
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;       # 補完を有効化
+    bashCompatibility = true;      # bash 互換モード
+    history.enable = true;         # 履歴管理
+    history.file = "${config.home.homeDirectory}/.zsh_history";
+    extraInit = ''
+      # 独自 PATH
+      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      # デフォルトエディタ
+      export EDITOR=nvim
+      # 必要なら alias もここで定義
+      alias ll="ls -la"
+    '';
+  };
   programs.starship.enable = true;
 
   home.packages = with pkgs; [
