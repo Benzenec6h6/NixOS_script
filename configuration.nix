@@ -18,7 +18,6 @@
     password = "rootpassword";  # 最初のログイン後変更する
   };
 
-  home-manager.users.teto = import ./home/teto.nix;
   users.users.teto = {
     isNormalUser = true;
     initialPassword = "userpassword";
@@ -27,6 +26,8 @@
     shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
   };
+
+  home-manager.users.teto = import ./home/teto.nix { inherit config pkgs; };
 
   # sudo 権限
   security.sudo.enable = true;
