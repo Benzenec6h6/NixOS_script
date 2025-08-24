@@ -14,8 +14,8 @@
     history.enable = true;
     history.file = "${config.home.homeDirectory}/.zsh_history";
 
-    # 初期化スクリプト
-    shellInit = ''
+    # 初期化スクリプトの内容を設定
+    initContent = ''
       # 独自 PATH
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       # デフォルトエディタ
