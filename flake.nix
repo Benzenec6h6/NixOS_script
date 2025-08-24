@@ -33,20 +33,36 @@
           home-manager.useUserPackages = true;
         }
       ];
-    in {
+
+      # Home Manager ユーザー設定を specialArgs に渡す関数
+      addHomeManagerUser = user: homeManagerFile: {
+        home-manager.users.${user} = import homeManagerFile {
+          inherit pkgs;
+          # 必要に応じて config も渡す
+          inherit system;
+        };
+      };
+    in
+    {
       nixosConfigurations = {
         # VM 用 (QEMU / modesetting)
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit pkgs; };
-          modules = baseModules ++ [ ./modules/desktop_vm.nix ];
+          modules = baseModules ++ [
+            ./modules/desktop_vm.nix
+            (addHomeManagerUser "teto" ./home/teto.nix)
+          ];
         };
 
         # 実機用 (NVIDIA)
         real = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit pkgs; };
-          modules = baseModules ++ [ ./modules/desktop_real.nix ];
+          modules = baseModules ++ [
+            ./modules/desktop_real.nix
+            (addHomeManagerUser "teto" ./home/teto.nix)
+          ];
         };
       };
     };
