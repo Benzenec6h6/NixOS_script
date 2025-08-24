@@ -16,6 +16,7 @@
 
   users.users.root = {
     password = "rootpassword";  # 最初のログイン後変更する
+    shell = pkgs.zsh;
   };
 
   home-manager.users.teto = import ./home/teto.nix;
@@ -24,6 +25,7 @@
     initialPassword = "userpassword";
     home = "/home/teto";
     createHome = true;
+    shell = pkgs.zsh;
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
   };
 
