@@ -6,11 +6,16 @@
   # 基本ツール
   programs.zsh = {
     enable = true;
-    enableCompletion = true;       # 補完を有効化
-    bashCompatibility = true;      # bash 互換モード
-    history.enable = true;         # 履歴管理
+
+    # 補完を有効化
+    enableCompletion = true;
+
+    # 履歴管理
+    history.enable = true;
     history.file = "${config.home.homeDirectory}/.zsh_history";
-    extraInit = ''
+
+    # 初期化スクリプト
+    shellInit = ''
       # 独自 PATH
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       # デフォルトエディタ
