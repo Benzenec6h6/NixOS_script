@@ -12,6 +12,8 @@
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
+    # terminal
+    zsh bashInteractive
     # --- Xorg 必須 ---
     xorg.xorgserver xorg.xmessage xorg.xrandr xorg.xev
 
