@@ -16,7 +16,6 @@
 
   users.users.root = {
     password = "rootpassword";  # 最初のログイン後変更する
-    shell = pkgs.zsh;
   };
 
   home-manager.users.teto = import ./home/teto.nix;
