@@ -39,7 +39,7 @@
 
   # VM gpu driver
   services.xserver.videoDrivers = [ "modesetting" ];
-  hardware.nvidia.enable = false;
+  hardware.nvidia = {};
   hardware.opengl.extraPackages = with pkgs; [
     mesa.drivers
   ];
