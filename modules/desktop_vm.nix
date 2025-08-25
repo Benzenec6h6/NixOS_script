@@ -7,6 +7,9 @@
   # ログインマネージャ（LightDM）を有効化
   services.xserver.displayManager.lightdm.enable = true;
 
+  # i3wm enabled
+  services.xserver.windowManager.i3.enable = true;
+
   # KDE Plasma 6 を有効化
   #services.xserver.desktopManager.plasma6.enable = true;
 
