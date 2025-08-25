@@ -3,7 +3,7 @@
 {
   home.stateVersion = "25.05";
 
-  # 基本ツール
+  # zsh
   programs.zsh = {
     enable = true;
 
@@ -11,11 +11,14 @@
     enableCompletion = true;
 
     # 履歴管理
-    history.enable = true;
-    history.file = "${config.home.homeDirectory}/.zsh_history";
+    history = {
+      size = 10000;
+      save = 10000;
+      path = "${config.home.homeDirectory}/.zsh_history";
+    };
 
-    # 初期化スクリプトの内容を設定
-    initContent = ''
+    # 初期化スクリプト
+    initExtra = ''
       # 独自 PATH
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       # デフォルトエディタ
@@ -24,7 +27,13 @@
       alias ll="ls -la"
     '';
   };
-  programs.starship.enable = true;
+  # starship
+  programs.starship = {
+    enable = true;
+    settings = {
+      add_newline = false;
+    };
+  };
 
   home.packages = with pkgs; [
     # Terminal / Utilities
