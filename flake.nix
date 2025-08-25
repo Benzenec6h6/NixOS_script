@@ -31,6 +31,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+          home-manager.users.teto = ./home/teto.nix;
         }
       ];
     in {
