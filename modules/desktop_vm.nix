@@ -8,10 +8,10 @@
   services.xserver.displayManager.lightdm.enable = true;
 
   # i3wm enabled
-  services.xserver.windowManager.i3.enable = true;
+  #services.xserver.windowManager.i3.enable = true;
 
   # KDE Plasma 6 を有効化
-  #services.xserver.desktopManager.plasma6.enable = true;
+  services.xserver.desktopManager.plasma6.enable = true;
 
   # Wayland / wlroots / Common Applications
   environment.systemPackages = with pkgs; [
@@ -87,6 +87,12 @@
 
   # Docker
   virtualisation.docker.enable = true;
+
+  # LightDM で i3 を必ず選択可能にする
+  services.xserver.displayManager.lightdm.sessions = [
+    { name = "i3";  command = "xsession"; }
+    { name = "plasma"; command = "startplasma"; }
+  ];
 
   # Extra startup
   services.xserver.displayManager.sessionCommands = ''
