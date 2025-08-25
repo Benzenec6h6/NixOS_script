@@ -27,6 +27,8 @@
     extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" ];
   };
 
+  programs.zsh.enable = true;
+  
   home-manager.users.teto = import ./home/teto.nix;
 
   # sudo 権限
