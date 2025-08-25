@@ -28,8 +28,8 @@
   };
 
   programs.zsh.enable = true;
-  
-  home-manager.users.teto = import ./home/teto.nix;
+
+  #home-manager.users.teto = import ./home/teto.nix;
 
   # sudo 権限
   security.sudo.enable = true;
