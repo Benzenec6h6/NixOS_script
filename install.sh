@@ -41,6 +41,8 @@ nixos-generate-config --root /mnt
 git clone https://github.com/JaKooLit/NixOS-Hyprland.git /mnt/etc/nixos/NixOS-Hyprland
 cd /mnt/etc/nixos/NixOS-Hyprland
 
+cp /mnt/etc/nixos/hardware-configuration.nix ./hosts/default/hardware.nix
+
 sed -i 's/host = ".*";/host = "default";/' flake.nix
 sed -i "s/username = \".*\";/username = \"${USERNAME}\";/" flake.nix
 
