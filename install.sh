@@ -38,5 +38,8 @@ mount ${DISK}1 /mnt/boot
 # 4. 設定ファイル生成
 nixos-generate-config --root /mnt
 
-# 5. インストール
+# 5. コピー
+cp ./configuration.nix /mnt/etc/nixos/configuration.nix
+
+# 6. インストール
 nixos-install --no-root-passwd
