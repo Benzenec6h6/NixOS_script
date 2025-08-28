@@ -43,7 +43,7 @@ cd /mnt/etc/nixos/NixOS-Hyprland
 
 # --- 8. インストール ---
 # Flake 内の nixosConfigurations 名は NixOS-Hyprland
-sudo nixos-install --flake .#NixOS-Hyprland username=$USERNAME
+sudo nixos-install --flake .#NixOS-Hyprland --extra-flake-args "username=$USERNAME"
 
 echo "== Install complete! =="
 echo "Reboot and login with user: $USERNAME"
