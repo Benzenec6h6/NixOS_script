@@ -41,9 +41,11 @@ nixos-generate-config --root /mnt
 git clone https://github.com/JaKooLit/NixOS-Hyprland.git /mnt/etc/nixos/NixOS-Hyprland
 cd /mnt/etc/nixos/NixOS-Hyprland
 
+sed -i "s/username = \".*\";/username = \"${USERNAME}\";/" flake.nix
+
 # --- 8. インストール ---
 # Flake 内の nixosConfigurations 名は NixOS-Hyprland
-sudo nixos-install --flake .#NixOS-Hyprland --extra-flake-args "username=$USERNAME"
+sudo nixos-install --flake .#NixOS-Hyprland
 
 echo "== Install complete! =="
 echo "Reboot and login with user: $USERNAME"
