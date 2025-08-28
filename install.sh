@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# --- 1. ディスク選択 ---
+# --- 1. 初期設定 ---
+USERNAME="${USERNAME:-teto}"  # 環境変数で指定可能、デフォルト alice
+DISK=""
+
+# --- 2. ディスク選択 ---
 mapfile -t disks < <(lsblk -ndo NAME,SIZE,TYPE | awk '$3=="disk" && $1!~/^loop/ {print $1, $2}')
 if ((${#disks[@]}==0)); then echo "No block device found"; exit 1; fi
 
@@ -15,43 +19,31 @@ read -rp 'Index: ' idx
 DISK="/dev/$(awk '{print $1}' <<<"${disks[idx-1]}")"
 echo "→ selected $DISK"
 
-# --- 2. パーティション作成 ---
+# --- 3. パーティション作成 ---
 parted $DISK -- mklabel gpt
 parted $DISK -- mkpart primary 1MiB 512MiB
 parted $DISK -- mkpart primary 512MiB 100%
 parted $DISK -- set 1 esp on
 
-# --- 3. フォーマット ---
+# --- 4. フォーマット ---
 mkfs.fat -F 32 ${DISK}1
 mkfs.ext4 -F ${DISK}2
 
-# --- 4. マウント ---
+# --- 5. マウント ---
 mount ${DISK}2 /mnt
 mkdir -p /mnt/boot
 mount ${DISK}1 /mnt/boot
 
-# --- 5. ハードウェア設定生成 ---
+# --- 6. ハードウェア設定生成 ---
 nixos-generate-config --root /mnt
 
-# --- 6. Flake クローン ---
+# --- 7. Flake クローン ---
 git clone https://github.com/JaKooLit/NixOS-Hyprland.git /mnt/etc/nixos/NixOS-Hyprland
 cd /mnt/etc/nixos/NixOS-Hyprland
 
-# --- 7. ホスト設定コピー & ユーザー追加 ---
-cd hosts
-cp -r default myhost
-
-# myhost/users.nix に最低ユーザーを作る
-cat > myhost/users.nix <<'EOF'
-{ config, pkgs, ... }:
-{
-  users.users.teto = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    initialPassword = "nixos";
-  };
-}
-EOF
-
 # --- 8. インストール ---
-sudo nixos-install --flake .#myhost
+# Flake 内の nixosConfigurations 名は NixOS-Hyprland
+sudo nixos-install --flake .#NixOS-Hyprland username=$USERNAME
+
+echo "== Install complete! =="
+echo "Reboot and login with user: $USERNAME"
