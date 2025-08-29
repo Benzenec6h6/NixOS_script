@@ -39,7 +39,7 @@ mount ${DISK}1 /mnt/boot
 nixos-generate-config --root /mnt
 
 # === リポジトリ取得 (自分のforkを指定！) ===
-git clone https://github.com/<your-username>/NixOS-Hyprland /mnt/etc/nixos/NixOS-Hyprland
+git clone https://github.com/Benzenec6h6/NixOS-Hyprland.git /mnt/etc/nixos/NixOS-Hyprland
 
 # === hardware.nix のコピー ===
 cp /mnt/etc/nixos/hardware-configuration.nix \
