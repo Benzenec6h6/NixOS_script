@@ -47,4 +47,4 @@ cp /mnt/etc/nixos/hardware-configuration.nix \
    /mnt/etc/nixos/NixOS-Hyprland/hosts/default/hardware.nix
 
 # === インストール ===
-nixos-install --flake /mnt/etc/nixos/NixOS-Hyprland#NixOS-Hyprland --no-root-passwd
+nixos-install --flake path:/mnt/etc/nixos/NixOS-Hyprland#NixOS-Hyprland --no-root-passwd
