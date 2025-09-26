@@ -11,10 +11,19 @@
     # CUPS（プリンタ使う場合）
     printing.enable = false;
 
-    #bluetooth
-    hardware.bluetooth.enable = true;
+    # systemd services / extra tweaks
+    dbus.enable = true;
 
-    hardware.cpu.intel.updateMicrocode = true;
+    # Avahi (mDNS, AirPrint/AirPlay)
+    avahi.enable = false;
+
+    tuned.enable = true;
+
+    flatpak.enable = true;
+
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+    displayManager.sddm.theme = "catppuccin-mocha";
 
     # サウンド (PipeWire + WirePlumber)
     pipewire = {
@@ -32,19 +41,14 @@
     };
   };
 
-  # systemd services / extra tweaks
-  services.dbus.enable = true;
+  #bluetooth
+  hardware.bluetooth.enable = true;
 
-  # Avahi (mDNS, AirPrint/AirPlay)
-  services.avahi.enable = false;
-
-  services.tuned.enable = true;
+  hardware.cpu.intel.updateMicrocode = true;
 
   virtualisation.docker.enable = true;
 
   virtualisation.libvirtd.enable = true;
-
-  services.flatpak.enable = true;
 
   i18n.inputMethod = {
     type = "fcitx5";
@@ -73,10 +77,6 @@
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.displayManager.sddm.theme = "catppuccin-mocha";
 
   # Wayland を優先 (Plasma 6 は Wayland がデフォルト)
   wayland.windowManager.plasma6.enable = true;
