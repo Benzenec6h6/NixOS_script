@@ -20,7 +20,7 @@ read -rp 'Index: ' idx
 DISK="/dev/$(awk '{print $1}' <<<"${disks[idx-1]}")"
 echo "→ selected $DISK"
 
-if [[ "$DISK" == nvme* ]]; then
+if [[ "$DISK" == *"nvme"* ]]; then
   PART_SUFFIX="p"
 else
   PART_SUFFIX=""
@@ -54,29 +54,34 @@ for flake in system/flake.nix home/flake.nix; do
   fi
 done
 
-# lspci で GPU の BusID を取得
-INTEL_ID=$(lspci | grep -i 'VGA.*Intel'   | awk '{print $1}')
-NVIDIA_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}')
+# --- laptop の場合だけ GPU BusID を設定 ---
+if [[ "$HOST" == "laptop" ]]; then
+  # lspci で GPU の BusID を取得
+  INTEL_ID=$(lspci | grep -i 'VGA.*Intel'      | awk '{print $1}' || true)
+  NVIDIA_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
 
-# lspci の出力は 00:02.0 のような形式 → NixOS は PCI:0:2:0 に変換する必要あり
-to_nix_busid() {
-  local id="$1"
-  IFS=':.' read -r bus slot func <<< "$id"
-  printf "PCI:%d:%d:%d" "0x$bus" "0x$slot" "0x$func"
-}
+  # lspci の出力は 00:02.0 のような形式 → NixOS は PCI:0:2:0 に変換
+  to_nix_busid() {
+    local id="$1"
+    IFS=':.' read -r bus slot func <<< "$id"
+    printf "PCI:%d:%d:%d" "$((16#$bus))" "$((16#$slot))" "$func"
+  }
 
-INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
-NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
+  if [[ -n "$INTEL_ID" ]]; then
+    INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
+    echo "Intel BusID:  $INTEL_BUSID"
+    sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" ./system/hosts/laptop.nix
+  fi
 
-echo "Intel BusID:  $INTEL_BUSID"
-echo "NVIDIA BusID: $NVIDIA_BUSID"
-
-# laptop.nix を置換
-sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" ./system/hosts/laptop.nix
-sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" ./system/hosts/laptop.nix
+  if [[ -n "$NVIDIA_ID" ]]; then
+    NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
+    echo "NVIDIA BusID: $NVIDIA_BUSID"
+    sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" ./system/hosts/laptop.nix
+  fi
+fi
 
 # --- パーティション作成・フォーマット例 ---
-echo "=== ディスクをパーティション・フォーマットします (/dev/$DISK) ==="
+echo "=== ディスクをパーティション・フォーマットします ($DISK) ==="
 echo "注意: 既存のデータはすべて消去されます！続行するには yes と入力してください。"
 read -rp "Confirm (yes/no): " CONFIRM
 
@@ -85,23 +90,23 @@ if [ "$CONFIRM" != "yes" ]; then
   exit 1
 fi
 
-parted /dev/$DISK -- mklabel gpt
-parted /dev/$DISK -- mkpart ESP fat32 1MiB 512MiB
-parted /dev/$DISK -- set 1 esp on
-parted /dev/$DISK -- mkpart primary 512MiB 100%
+parted "$DISK" -- mklabel gpt
+parted "$DISK" -- mkpart ESP fat32 1MiB 512MiB
+parted "$DISK" -- set 1 esp on
+parted "$DISK" -- mkpart primary 512MiB 100%
 
-mkfs.fat -F32 /dev/${DISK}1
-mkfs.ext4 /dev/${DISK}2
+mkfs.fat -F32 "${DISK}${PART_SUFFIX}1"
+mkfs.ext4     "${DISK}${PART_SUFFIX}2"
 
-mount /dev/${DISK}2 /mnt
+mount "${DISK}${PART_SUFFIX}2" /mnt
 mkdir -p /mnt/boot
-mount /dev/${DISK}1 /mnt/boot
+mount "${DISK}${PART_SUFFIX}1" /mnt/boot
 
 # --- NixOS インストール ---
 echo "=== NixOS をインストールします ==="
-nixos-install --flake ./system#$HOST --no-root-passwd
+nixos-install --flake ./system#"$HOST" --no-root-passwd
 
 echo "=== インストール完了！ ==="
-echo "インストール先: /dev/$DISK"
+echo "インストール先: $DISK"
 echo "ホスト: $HOST"
 echo "ユーザー: $USERNAME"
