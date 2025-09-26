@@ -104,6 +104,9 @@ mount "${DISK}${PART_SUFFIX}1" /mnt/boot
 
 # --- NixOS インストール ---
 echo "=== NixOS をインストールします ==="
+cp /mnt/etc/nixos/hardware-configuration.nix \
+   /mnt/etc/nixos/NixOS_script/system/hosts/hardware.nix
+
 nixos-install --flake ./system#"$HOST" --no-root-passwd
 
 echo "=== インストール完了！ ==="
