@@ -8,7 +8,7 @@
     pciutils usbutils
     git fastfetch
     wget curl
-    tar gzip unzip zip
+    gnutar gzip unzip zip
     htop btop
     gcc gnumake pkg-config
     dnsutils inetutils iproute2 netcat
