@@ -5,9 +5,6 @@
     # 時刻同期
     timesyncd.enable = true;
 
-    # ssh サーバ（必要なら）
-    openssh.enable = false;
-
     # CUPS（プリンタ使う場合）
     printing.enable = false;
 
