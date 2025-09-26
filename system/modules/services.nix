@@ -25,6 +25,8 @@
     displayManager.sddm.wayland.enable = true;
     displayManager.sddm.theme = "catppuccin-mocha";
 
+    desktopManager.plasma6.enable = true;
+
     # サウンド (PipeWire + WirePlumber)
     pipewire = {
       enable = true;
@@ -77,7 +79,4 @@
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
-
-  # Wayland を優先 (Plasma 6 は Wayland がデフォルト)
-  wayland.windowManager.plasma6.enable = true;
 }
