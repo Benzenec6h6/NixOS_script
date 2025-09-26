@@ -72,7 +72,7 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ kdePackages.xdg-desktop-portal-kde ];
+  xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
 
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
