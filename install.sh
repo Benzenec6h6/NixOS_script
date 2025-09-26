@@ -102,6 +102,9 @@ mount "${DISK}${PART_SUFFIX}2" /mnt
 mkdir -p /mnt/boot
 mount "${DISK}${PART_SUFFIX}1" /mnt/boot
 
+# hardware-configuration.nix生成
+nixos-generate-config --root /mnt
+
 # --- NixOS インストール ---
 echo "=== NixOS をインストールします ==="
 cp /mnt/etc/nixos/hardware-configuration.nix \
