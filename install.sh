@@ -107,7 +107,7 @@ nixos-generate-config --root /mnt
 
 # --- NixOS インストール ---
 echo "=== NixOS をインストールします ==="
-cp /home/nixos/NixOS_script \
+cp -r /home/nixos/NixOS_script \
    /mnt/etc/nixos/NixOS_script
 
 cp /mnt/etc/nixos/hardware-configuration.nix \
