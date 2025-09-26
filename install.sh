@@ -112,7 +112,7 @@ cp -r /home/nixos/NixOS_script /mnt/etc/nixos/
 cp /mnt/etc/nixos/hardware-configuration.nix \
    /mnt/etc/nixos/NixOS_script/system/hosts/hardware.nix
 
-nixos-install --flake ./system#"$HOST" --no-root-passwd
+nixos-install --flake /mnt/etc/nixos/NixOS_script/system#"$HOST" --no-root-passwd
 
 echo "=== インストール完了！ ==="
 echo "インストール先: $DISK"
