@@ -3,7 +3,7 @@
 {
   users.users = {
     # メインユーザ
-    "${userName}" = {
+    "${username}" = {
       isNormalUser = true;
       description = "Main user";
       extraGroups = [ "networkmanager" "wheel" "libvirtd" "scanner" "lp" "video" "input"  "audio" "docker" "libvirtd" "kvm" ];
