@@ -1,6 +1,8 @@
 { config, pkgs, username, ... }:
 
 {
+  programs.zsh.enable = true;
+
   users.users = {
     # メインユーザ
     "${username}" = {
