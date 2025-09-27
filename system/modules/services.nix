@@ -19,10 +19,11 @@
     flatpak.enable = true;
 
     displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-    displayManager.sddm.theme = "catppuccin-mocha";
+    #displayManager.sddm.wayland.enable = true;
+    #displayManager.sddm.theme = "catppuccin-mocha";
 
     desktopManager.plasma6.enable = true;
+    displayManager.defaultSession = "plasma"; 
 
     # サウンド (PipeWire + WirePlumber)
     pipewire = {
@@ -33,10 +34,10 @@
       wireplumber.enable = true;
     };
 
-    xserver = {
-      enable = true;
+    xserver.enable = true;
+    xserver.xkb = {
       layout = "jp";
-      xkbVariant = "";
+      variant = "";
     };
   };
   
