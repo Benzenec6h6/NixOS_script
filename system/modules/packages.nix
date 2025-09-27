@@ -14,9 +14,10 @@
     dnsutils inetutils iproute2 netcat
     mesa vulkan-tools
     networkmanager bluez #networkmanagerapplet bluemanはユーザ側
-    kdePackages.sddm kdePackages.sddm-kcm
-    catppuccin-sddm
+    #kdePackages.sddm 
+    kdePackages.sddm-kcm
     /*
+    catppuccin-sddm
     sddm-astronaut
     sddm-sugar-dark
     sddm-chili-theme
