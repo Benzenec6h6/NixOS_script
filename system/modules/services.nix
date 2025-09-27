@@ -39,6 +39,8 @@
       xkbVariant = "";
     };
   };
+  
+  programs.xwayland.enable = true;
 
   #bluetooth
   hardware.bluetooth.enable = true;
