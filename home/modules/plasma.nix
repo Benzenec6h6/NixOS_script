@@ -3,7 +3,7 @@
 {
   # パッケージ: Plasma 6 デスクトップ
   home.packages = with pkgs.kdePackages; [
-    kdeconnect
+    kdeconnect-kde
     plasma-browser-integration
   ];
 
