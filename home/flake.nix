@@ -15,8 +15,7 @@
       homeDirectory = "/home/${username}";
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit system;
-        pkgs = import nixpkgs { inherit system; };
+        inherit pkgs;
         modules = [
           ./home.nix
           {
