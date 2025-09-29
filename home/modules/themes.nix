@@ -2,7 +2,16 @@
 
 {
   home.packages = with pkgs; [
-    kvantum
+    kdePackages.qtstyleplugin-kvantum
+    #libsForQt5.qtstyleplugin-kvantum 
+    /*
+    gruvbox-kvantum 
+    kvmarwaita 
+    catppuccin-kvantum 
+    rose-pine-kvantum 
+    ayu-theme-gtk 
+    themechanger 
+    */
 
     # GTK/Qt テーマ
     catppuccin-gtk
