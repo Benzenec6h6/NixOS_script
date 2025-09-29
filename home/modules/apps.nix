@@ -22,12 +22,12 @@
 
     # ユーティリティ
     steam
-    Celluloid
+    celluloid
     qbittorrent
     gparted
 
     # Virtualization
-    qemu-full libvirt virt-viewer OVMF virt-manager
-    dnsmasq swtpm libosinfo tuned ntfs-3g
+    qemu_full libvirt virt-viewer OVMF virt-manager
+    dnsmasq swtpm libosinfo tuned ntfs3g
   ];
 }
