@@ -11,6 +11,7 @@
   outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
       username = "teto";
       homeDirectory = "/home/${username}";
     in {
