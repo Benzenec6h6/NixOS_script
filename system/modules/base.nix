@@ -6,4 +6,11 @@
   i18n.extraLocales = [ "ja_JP.UTF-8/UTF-8" ];
   
   console.keyMap = "jp106";
+
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
 }
