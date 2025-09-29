@@ -69,7 +69,7 @@
   qt = {
     enable = true;
     style.name = "kvantum";
-    platformTheme = "gtk"; # GTK と統一
+    platformTheme.name = "gtk"; # GTK と統一
   };
 
   # Kvantum 設定を XDG に書き込み（Catppuccinをデフォルトに）
