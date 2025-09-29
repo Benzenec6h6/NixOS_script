@@ -9,6 +9,7 @@
   ];
 
   home.stateVersion = "25.05";
+  programs.home-manager.enable = true;
 
   programs.git = {
     enable = true;
@@ -17,5 +18,27 @@
   };
 
   # シェル設定例 (zsh を使う場合)
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+
+    # 補完を有効化
+    enableCompletion = true;
+
+    # 履歴管理
+    history = {
+      size = 10000;
+      save = 10000;
+      path = "${config.home.homeDirectory}/.zsh_history";
+    };
+
+    # 初期化スクリプト
+    initExtra = ''
+      # 独自 PATH
+      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+      # デフォルトエディタ
+      export EDITOR=nvim
+      # 必要なら alias もここで定義
+      alias ll="ls -la"
+    '';
+  };
 }
