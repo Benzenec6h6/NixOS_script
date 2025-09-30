@@ -22,8 +22,8 @@
     #displayManager.sddm.wayland.enable = true;
     #displayManager.sddm.theme = "catppuccin-mocha";
 
-    desktopManager.plasma6.enable = true;
-    displayManager.defaultSession = "plasma"; 
+    #desktopManager.plasma6.enable = true;
+    #displayManager.defaultSession = "plasma"; 
 
     # サウンド (PipeWire + WirePlumber)
     pipewire = {

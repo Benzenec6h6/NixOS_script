@@ -4,7 +4,6 @@
   imports = [
     ./modules/apps.nix
     ./modules/themes.nix
-    ./modules/plasma.nix
     #./modules/wm
   ];
 
@@ -32,7 +31,7 @@
     };
 
     # 初期化スクリプト
-    initExtra = ''
+    initContent = ''
       # 独自 PATH
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
       # デフォルトエディタ
