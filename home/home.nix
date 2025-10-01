@@ -4,7 +4,7 @@
   imports = [
     ./modules/apps.nix
     ./modules/themes.nix
-    #./modules/wm
+    ./modules/wm/hyprland.nix
   ];
 
   home.stateVersion = "25.05";
