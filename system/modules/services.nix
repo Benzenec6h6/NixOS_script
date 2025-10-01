@@ -14,16 +14,11 @@
     # Avahi (mDNS, AirPrint/AirPlay)
     avahi.enable = false;
 
-    tuned.enable = true;
-
     flatpak.enable = true;
 
     displayManager.sddm.enable = true;
     #displayManager.sddm.wayland.enable = true;
     #displayManager.sddm.theme = "catppuccin-mocha";
-
-    #desktopManager.plasma6.enable = true;
-    #displayManager.defaultSession = "plasma"; 
 
     # サウンド (PipeWire + WirePlumber)
     pipewire = {
@@ -34,14 +29,28 @@
       wireplumber.enable = true;
     };
 
-    xserver.enable = true;
+    xserver.enable = false;
     xserver.xkb = {
       layout = "jp";
       variant = "";
     };
+    xserver.windowManager.xmonad.enable = false;
   };
   
+  programs.hyprland.enable = true;
   programs.xwayland.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      exo
+      thunar-archive-plugin
+      thunar-volman
+      tumbler
+    ];
+  };
+
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
 
   #bluetooth
   hardware.bluetooth.enable = true;
@@ -78,5 +87,5 @@
   };
 
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
 }
