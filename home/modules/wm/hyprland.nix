@@ -44,7 +44,6 @@
   # 便利ツール
   home.packages = with pkgs; [
     waybar ags eww
-    kitty
     celluloid
     blueman
     swww mpvpaper
