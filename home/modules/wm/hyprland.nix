@@ -84,7 +84,7 @@
     };
   };
 
-  programs.playerctl.enable = true;
   programs.cava.enable = true;
   services.swaync.enable = true;
+  services.playerctld.enable = true;
 }
