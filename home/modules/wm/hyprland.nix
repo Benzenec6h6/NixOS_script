@@ -6,7 +6,8 @@
     settings = {
       # モニタ設定
       monitor = [
-        "eDP-1,1920x1080,0x0,1"
+        #"eDP-1,1920x1080,0x0,1"
+        "Virtual-1, 1280x720@60, 0x0, 1"
       ];
 
       # 起動時に実行するコマンド
@@ -23,6 +24,16 @@
         "SUPER,F,fullscreen,"
         "SUPER,Space,exec,rofi --show drun"
       ];
+
+      # キーボードレイアウトの設定
+      input = {
+        kb_layout = "jp";        # JISキーボード
+        kb_variant = "";
+        kb_model = "";
+        kb_options = "caps:ctrl_modifier"; # CapsをCtrlに割り当て例
+        follow_mouse = 1;
+        sensitivity = 0;
+      };
 
       general = {
         gaps_in = 5;
