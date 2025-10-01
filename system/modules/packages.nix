@@ -15,6 +15,7 @@
     mesa vulkan-tools
 
     hyprland hyprlock hypridle
+    kitty
     polkit_gnome
     udiskie
     networkmanagerapplet
