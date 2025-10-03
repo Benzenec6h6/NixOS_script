@@ -28,8 +28,8 @@
 
         ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioRaiseVolume,SHIFT,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
-        ",XF86AudioLowerVolume,SHIFT,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+        "SHIFT,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
+        "SHIFT,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
 
         ",XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
         ",XF86AudioPlay,exec,playerctl play-pause"
@@ -39,8 +39,8 @@
 
         ",XF86MonBrightnessDown,exec,brightnessctl set 5%-"
         ",XF86MonBrightnessUp,exec,brightnessctl set +5%"
-        ",XF86MonBrightnessDown,SHIFT,exec,brightnessctl set 1%-"
-        ",XF86MonBrightnessUp,SHIFT,exec,brightnessctl set +1%"
+        "SHIFT,XF86MonBrightnessDown,exec,brightnessctl set 1%-"
+        "SHIFT,XF86MonBrightnessUp,exec,brightnessctl set +1%"
 
         "SUPER,1,workspace,1"
         "SUPER,2,workspace,2"
