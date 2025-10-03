@@ -24,7 +24,7 @@
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
         "SUPER,H,exec,~/.config/hypr/help_shortcuts.sh"
-        "SUPER,Space,exec,rofi --show drun"
+        "SUPER,D,exec,rofi -show drun"
 
         ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
