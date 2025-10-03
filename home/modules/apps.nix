@@ -2,11 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    # KDE アプリ群（Plasma-meta に含まれない or 強化したいもの）
-    kdePackages.okular      # PDF/ドキュメントビューア
-    kdePackages.gwenview    # 画像ビューア
-    kdePackages.kate        # エディタ
-
+    
     wineWowPackages.waylandFull winetricks
 
     docker
