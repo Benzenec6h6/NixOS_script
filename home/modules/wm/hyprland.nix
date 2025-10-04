@@ -5,9 +5,13 @@
     enable = true;
     settings = {
       # モニタ設定
-      monitor = [
-        #"eDP-1,1920x1080,0x0,1"
-        #"Virtual-1, 1280x720@60, 0x0, 1"
+      monitor = if host == "laptop" then [
+        "eDP-1,1920x1080,0x0,1"
+      ] else if host == "vm" then [
+        "Virtual-1,1280x720@60,0x0,1"
+      ] else [
+        # fallback
+        "Virtual-1,1024x768@60,0x0,1"
       ];
 
       # 起動時に実行するコマンド
@@ -141,4 +145,9 @@
   programs.wlogout.enable = true;
   services.swaync.enable = true;
   services.playerctld.enable = true;
+
+  home.file.".config/hypr" = {
+    source = ./../../config/hypr;
+    recursive = true;
+  };
 }
