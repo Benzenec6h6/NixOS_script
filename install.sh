@@ -40,14 +40,11 @@ if [[ -f "$HYP_FILE" ]]; then
   echo "Updating monitor setting in $HYP_FILE for host: $HOST"
 
   if [[ "$HOST" == "laptop" ]]; then
-    # eDP-1をアンコメント、Virtual-1をコメント化
+    # eDP-1をアンコメント
     sed -i -E 's|^(\s*)#\"eDP-1|\1\"eDP-1|' "$HYP_FILE"
-    sed -i -E 's|^(\s*)\"Virtual-1|\1#\"Virtual-1|' "$HYP_FILE"
-
   elif [[ "$HOST" == "vm" ]]; then
-    # Virtual-1をアンコメント、eDP-1をコメント化
+    # Virtual-1をアンコメント
     sed -i -E 's|^(\s*)#\"Virtual-1|\1\"Virtual-1|' "$HYP_FILE"
-    sed -i -E 's|^(\s*)\"eDP-1|\1#\"eDP-1|' "$HYP_FILE"
   fi
 
   echo "✅ Monitor setting updated for $HOST"
