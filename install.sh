@@ -33,25 +33,6 @@ if [[ "$HOST" != "laptop" && "$HOST" != "vm" ]]; then
   exit 1
 fi
 
-# --- Hyprland モニター設定切り替え ---
-HYP_FILE="./home/modules/wm/hyprland.nix"
-
-if [[ -f "$HYP_FILE" ]]; then
-  echo "Updating monitor setting in $HYP_FILE for host: $HOST"
-
-  if [[ "$HOST" == "laptop" ]]; then
-    # eDP-1をアンコメント
-    sed -i -E 's|^(\s*)#\"eDP-1|\1\"eDP-1|' "$HYP_FILE"
-  elif [[ "$HOST" == "vm" ]]; then
-    # Virtual-1をアンコメント
-    sed -i -E 's|^(\s*)#\"Virtual-1|\1\"Virtual-1|' "$HYP_FILE"
-  fi
-
-  echo "✅ Monitor setting updated for $HOST"
-else
-  echo "⚠️ 警告: $HYP_FILE が見つかりません"
-fi
-
 # --- ユーザー名入力 ---
 echo "=== 作成するユーザー名を入力してください ==="
 read -rp "Username: " USERNAME
