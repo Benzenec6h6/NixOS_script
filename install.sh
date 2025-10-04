@@ -40,14 +40,19 @@ if [[ -f "$HYP_FILE" ]]; then
   echo "Updating monitor setting in $HYP_FILE for host: $HOST"
 
   if [[ "$HOST" == "laptop" ]]; then
-    sed -i 's|^#\(.*eDP-1.*\)|\1|' "$HYP_FILE"
-    sed -i 's|^\(.*Virtual-1.*\)|#\1|' "$HYP_FILE"
+    # eDP-1をアンコメント、Virtual-1をコメント化
+    sed -i -E 's|^(\s*)#\"eDP-1|\1\"eDP-1|' "$HYP_FILE"
+    sed -i -E 's|^(\s*)\"Virtual-1|\1#\"Virtual-1|' "$HYP_FILE"
+
   elif [[ "$HOST" == "vm" ]]; then
-    sed -i 's|^#\(.*Virtual-1.*\)|\1|' "$HYP_FILE"
-    sed -i 's|^\(.*eDP-1.*\)|#\1|' "$HYP_FILE"
+    # Virtual-1をアンコメント、eDP-1をコメント化
+    sed -i -E 's|^(\s*)#\"Virtual-1|\1\"Virtual-1|' "$HYP_FILE"
+    sed -i -E 's|^(\s*)\"eDP-1|\1#\"eDP-1|' "$HYP_FILE"
   fi
+
+  echo "✅ Monitor setting updated for $HOST"
 else
-  echo "警告: $HYP_FILE が見つかりません"
+  echo "⚠️ 警告: $HYP_FILE が見つかりません"
 fi
 
 # --- ユーザー名入力 ---
