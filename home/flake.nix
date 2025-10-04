@@ -15,6 +15,7 @@
         inherit system;
         config.allowUnfree = true; 
       };
+      host = builtins.getEnv "HOST"; # ← install.sh で設定された値を取得
       username = "teto";
       homeDirectory = "/home/${username}";
     in {
@@ -30,6 +31,7 @@
             ];
           }
         ];
+        extraSpecialArgs = { inherit host; }; # ← hyprland.nix に引き渡す
       };
     };
 }
