@@ -32,6 +32,7 @@ if [[ "$HOST" != "laptop" && "$HOST" != "vm" ]]; then
   echo "エラー: laptop か vm を入力してください"
   exit 1
 fi
+export HOST="$HOST"
 
 # --- ユーザー名入力 ---
 echo "=== 作成するユーザー名を入力してください ==="
