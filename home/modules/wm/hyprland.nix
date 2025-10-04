@@ -43,10 +43,10 @@
         "SHIFT,XF86MonBrightnessDown,exec,brightnessctl set 1%-"
         "SHIFT,XF86MonBrightnessUp,exec,brightnessctl set +1%"
 
-        "SUPER, left, swapwindow,l"
-        "SUPER, right, swapwindow,r"
-        "SUPER, up, swapwindow,u"
-        "SUPER, down, swapwindow,d"
+        "SUPER,left,movefocus,l"
+        "SUPER,right,movefocus,r"
+        "SUPER,up,movefocus,u"
+        "SUPER,down,movefocus,d"
 
         "SUPER,1,workspace,1"
         "SUPER,2,workspace,2"
