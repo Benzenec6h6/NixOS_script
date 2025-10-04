@@ -23,6 +23,7 @@
         "SUPER,Q,killactive"
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
+        "SUPER SHIFT,F,togglefloating,"
         "SUPER,H,exec,~/.config/hypr/help_shortcuts.sh"
         "SUPER,D,exec,rofi -show drun"
 
@@ -41,6 +42,11 @@
         ",XF86MonBrightnessUp,exec,brightnessctl set +5%"
         "SHIFT,XF86MonBrightnessDown,exec,brightnessctl set 1%-"
         "SHIFT,XF86MonBrightnessUp,exec,brightnessctl set +1%"
+
+        "SUPER, left, swapwindow,l"
+        "SUPER, right, swapwindow,r"
+        "SUPER, up, swapwindow,u"
+        "SUPER, down, swapwindow,d"
 
         "SUPER,1,workspace,1"
         "SUPER,2,workspace,2"
