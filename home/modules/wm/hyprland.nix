@@ -48,6 +48,11 @@
         "SUPER,up,movefocus,u"
         "SUPER,down,movefocus,d"
 
+        "SUPER ALT, left, swapwindow,l"
+        "SUPER ALT, right, swapwindow,r"
+        "SUPER ALT, up, swapwindow,u"
+        "SUPER ALT, down, swapwindow,d"
+
         "SUPER,1,workspace,1"
         "SUPER,2,workspace,2"
         "SUPER,3,workspace,3"
