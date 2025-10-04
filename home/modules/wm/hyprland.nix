@@ -5,13 +5,9 @@
     enable = true;
     settings = {
       # モニタ設定
-      monitor = if host == "laptop" then [
-        "eDP-1,1920x1080,0x0,1"
-      ] else if host == "vm" then [
+      monitor = [
+        #"eDP-1,1920x1080,0x0,1"
         "Virtual-1,1280x720@60,0x0,1"
-      ] else [
-        # fallback
-        "Virtual-1,1024x768@60,0x0,1"
       ];
 
       # 起動時に実行するコマンド
