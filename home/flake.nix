@@ -12,7 +12,7 @@
     zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
 
-  outputs = { self, nixpkgs, home-manager, zen-browser, ... }:
+  outputs = { self, nixpkgs, home-manager, zen-browser, stylix, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { 
@@ -25,7 +25,9 @@
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = [
+          stylix.homeManagerModules.stylix
           ./home.nix
+          ./modules/stylix.nix
           {
             home.username = username;
             home.homeDirectory = homeDirectory;

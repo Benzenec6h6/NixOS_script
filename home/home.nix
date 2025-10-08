@@ -8,11 +8,9 @@
     ./modules/cava.nix
     ./modules/rofi.nix
     ./modules/apps.nix
-    ./modules/stylix.nix
     ./modules/fonts.nix
     #./modules/themes.nix
     ./modules/wm/hyprland.nix
-    inputs.stylix.homeManagerModules.stylix
   ];
 
   home.stateVersion = "25.05";
