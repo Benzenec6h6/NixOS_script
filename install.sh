@@ -27,23 +27,23 @@ else
 fi
 
 # --- ホスト選択 ---
-read -rp "ホストを選択してください (laptop/vm): " HOST
+read -rp "Select host (laptop/vm): " HOST
 if [[ "$HOST" != "laptop" && "$HOST" != "vm" ]]; then
-  echo "エラー: laptop か vm を入力してください"
+  echo "Error: please enter either 'laptop' or 'vm'"
   exit 1
 fi
 export HOST="$HOST"
 
 # --- ユーザー名入力 ---
-echo "=== 作成するユーザー名を入力してください ==="
+echo "=== Enter username to create ==="
 read -rp "Username: " USERNAME
 
 if [[ -z "$USERNAME" ]]; then
-  echo "エラー: ユーザー名が空です"
+  echo "Error: username cannot be empty"
   exit 1
 fi
 
-echo "入力されたユーザー名: $USERNAME"
+echo "Entered username: $USERNAME"
 
 # --- flake.nix の username を置換 ---
 for flake in system/flake.nix home/flake.nix; do
@@ -51,7 +51,7 @@ for flake in system/flake.nix home/flake.nix; do
     echo "Updating $flake..."
     sed -i "s/username = \".*\";/username = \"$USERNAME\";/" "$flake"
   else
-    echo "警告: $flake が見つかりません"
+    echo "Warning: $flake not found"
   fi
 done
 
@@ -82,12 +82,12 @@ if [[ "$HOST" == "laptop" ]]; then
 fi
 
 # --- パーティション作成・フォーマット例 ---
-echo "=== ディスクをパーティション・フォーマットします ($DISK) ==="
-echo "注意: 既存のデータはすべて消去されます！続行するには yes と入力してください。"
+echo "=== Partitioning and formatting disk ($DISK) ==="
+echo "WARNING: All existing data will be erased! Type 'yes' to continue."
 read -rp "Confirm (yes/no): " CONFIRM
 
 if [ "$CONFIRM" != "yes" ]; then
-  echo "中止しました。"
+  echo "Aborted."
   exit 1
 fi
 
@@ -107,7 +107,7 @@ mount "${DISK}${PART_SUFFIX}1" /mnt/boot
 nixos-generate-config --root /mnt
 
 # --- NixOS インストール ---
-echo "=== NixOS をインストールします ==="
+echo "=== Installing NixOS ==="
 cp -r /home/nixos/NixOS_script /mnt/etc/nixos/
 
 cp /mnt/etc/nixos/hardware-configuration.nix \
@@ -115,7 +115,7 @@ cp /mnt/etc/nixos/hardware-configuration.nix \
 
 nixos-install --flake /mnt/etc/nixos/NixOS_script/system#"$HOST" --no-root-passwd
 
-echo "=== インストール完了！ ==="
-echo "インストール先: $DISK"
-echo "ホスト: $HOST"
-echo "ユーザー: $USERNAME"
+echo "=== Installation complete! ==="
+echo "Target disk: $DISK"
+echo "Host: $HOST"
+echo "User: $USERNAME"
