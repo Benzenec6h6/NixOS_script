@@ -19,6 +19,7 @@
     polkit_gnome
     udiskie
     networkmanagerapplet
+    ffmpegthumbnailer
 
     /*
     catppuccin-sddm
