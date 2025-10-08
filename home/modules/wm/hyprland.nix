@@ -21,6 +21,7 @@
         "SUPER,Return,exec,kitty"
         "SUPER,B,exec,zen"  
         "SUPER,Q,killactive"
+        "SUPER,P,exec,wlogout -p layer-shell"
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
         "SUPER SHIFT,F,togglefloating,"
@@ -126,24 +127,6 @@
     #swaynotificationcenter #swaync
   ];
 
-  programs.waybar = {
-    enable = true;
-    package = pkgs.waybar;
-    # ここでは config/style を特に書かずデフォルトに任せる
-  };
-
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland; 
-    theme = "Arc-Dark";          # デフォルトテーマを指定
-    extraConfig = {
-      modi = "drun,run,window";
-      show-icons = true;
-    };
-  };
-
-  programs.cava.enable = true;
-  programs.wlogout.enable = true;
   services.swaync.enable = true;
   services.playerctld.enable = true;
 
