@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   fonts = {
+    fontconfig.enable = true;
     packages = with pkgs; [
       dejavu_fonts
       fira-code
