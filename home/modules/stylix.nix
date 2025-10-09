@@ -9,6 +9,9 @@
     # テーマの基本方向（dark / light）
     polarity = "dark";
 
+    #テーマ設定
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+
     # 透明度設定（ターミナルなどで有効）
     opacity.terminal = 1.0;
 
