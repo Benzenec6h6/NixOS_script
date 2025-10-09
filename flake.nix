@@ -1,5 +1,5 @@
 {
-  description = "NixOS system + Home Manager configuration (integrated)";
+  description = "NixOS system + Home Manager integrated configuration";
 
   inputs = {
     # 🧱 ベース: 安定版チャンネル
@@ -24,74 +24,68 @@
     let
       system = "x86_64-linux";
       username = "teto";
+      zenPkg = zen-browser.packages.${system}.default;
     in {
       nixosConfigurations = {
-        # 💻 実機用
+        # 💻 実機用（laptop）
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit username; };
           modules = [
-            # ---- NixOS 側 ----
-            ./hosts/laptop.nix
-            ({ ... }: { _module.args.username = username; })
+            ./system/hosts/laptop.nix
 
-            # ---- Home Manager 統合 ----
+            # ---- Home Manager統合 ----
             home-manager.nixosModules.home-manager
 
-            # Stylix テーマをHome Manager側で使用
+            # ---- Stylixテーマ ----
             stylix.nixosModules.stylix
 
-            # ---- Home設定の適用 ----
+            # ---- Home設定 ----
             {
-              _module.args.username = username;
-
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
               home-manager.users.${username} = {
                 imports = [
-                  ./home.nix
-                  ./modules/stylix.nix
+                  ./home/home.nix
                 ];
 
-                # Zen Browser を Home 環境に追加
-                home.packages = [
-                  zen-browser.packages.${system}.default
-                ];
-
-                # Home環境情報
                 home.username = username;
                 home.homeDirectory = "/home/${username}";
+
+                home.packages = [
+                  zenPkg
+                ];
               };
             }
           ];
         };
 
-        # 🧪 仮想マシン用
+        # 🧪 仮想マシン用（vm）
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
+          specialArgs = { inherit username; };
           modules = [
-            ./hosts/vm.nix
-            ({ ... }: { _module.args.username = username; })
+            ./system/hosts/vm.nix
 
             home-manager.nixosModules.home-manager
             stylix.nixosModules.stylix
 
             {
-              _module.args.username = username;
-
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
               home-manager.users.${username} = {
                 imports = [
-                  ./home.nix
-                  ./modules/stylix.nix
+                  ./home/home.nix
                 ];
-                home.packages = [
-                  zen-browser.packages.${system}.default
-                ];
+
                 home.username = username;
                 home.homeDirectory = "/home/${username}";
+
+                home.packages = [
+                  zenPkg
+                ];
               };
             }
           ];
