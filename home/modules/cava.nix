@@ -22,14 +22,14 @@
         gradient = 1;
 
         # Stylix の Base16 カラーパレットを自動参照
-        gradient_color_1 = config.stylix.colors.base00;
-        gradient_color_2 = config.stylix.colors.base01;
-        gradient_color_3 = config.stylix.colors.base02;
-        gradient_color_4 = config.stylix.colors.base03;
-        gradient_color_5 = config.stylix.colors.base04;
-        gradient_color_6 = config.stylix.colors.base05;
-        gradient_color_7 = config.stylix.colors.base06;
-        gradient_color_8 = config.stylix.colors.base07;
+        gradient_color_1 = config.lib.stylix.colors.base00;
+        gradient_color_2 = config.lib.stylix.colors.base01;
+        gradient_color_3 = config.lib.stylix.colors.base02;
+        gradient_color_4 = config.lib.stylix.colors.base03;
+        gradient_color_5 = config.lib.stylix.colors.base04;
+        gradient_color_6 = config.lib.stylix.colors.base05;
+        gradient_color_7 = config.lib.stylix.colors.base06;
+        gradient_color_8 = config.lib.stylix.colors.base07;
       };
 
       output = {
