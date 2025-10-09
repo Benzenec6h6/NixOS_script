@@ -1,9 +1,5 @@
 { pkgs, config, ... }:
 
-let
-  # wlogout のアイコン配置ディレクトリ（例: ~/.config/wlogout/icons）
-  iconDir = "${config.home.homeDirectory}/.config/wlogout/icons";
-in
 {
   programs.waybar = {
     enable = true;
@@ -120,53 +116,6 @@ in
       #custom-wlogout {
         color: ${config.lib.stylix.colors.red};
         margin-left: 10px;
-      }
-    '';
-  };
-
-  # wlogout も同時に導入
-  programs.wlogout = {
-    enable = true;
-    layout = [
-      {
-        label = "shutdown";
-        action = "systemctl poweroff";
-        text = "⏻";
-        keybind = "s";
-      }
-      {
-        label = "reboot";
-        action = "systemctl reboot";
-        text = "";
-        keybind = "r";
-      }
-      {
-        label = "logout";
-        action = "hyprctl dispatch exit";
-        text = "󰍃";
-        keybind = "l";
-      }
-      {
-        label = "lock";
-        action = "swaylock";
-        text = "";
-        keybind = "k";
-      }
-    ];
-    style = ''
-      window {
-        background-color: rgba(0, 0, 0, 0.6);
-      }
-
-      button {
-        font-size: 36px;
-        background-color: transparent;
-        border: none;
-        color: ${config.stylix.colors.base05};
-      }
-
-      button:hover {
-        color: ${config.stylix.colors.red};
       }
     '';
   };
