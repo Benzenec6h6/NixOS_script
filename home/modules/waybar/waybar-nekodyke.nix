@@ -98,11 +98,11 @@ in
         font-family: ${config.stylix.fonts.monospace.name};
         font-size: 12pt;
         border: none;
-        color: ${config.stylix.colors.base05};
+        color: ${config.lib.stylix.colors.base05};
       }
 
       window#waybar {
-        background: ${config.stylix.colors.base00};
+        background: ${config.lib.stylix.colors.base00};
         border-radius: 12px;
         padding: 6px 10px;
       }
@@ -114,11 +114,11 @@ in
       }
 
       #workspaces button.active {
-        background: ${config.stylix.colors.base02};
+        background: ${config.lib.stylix.colors.base02};
       }
 
       #custom-wlogout {
-        color: ${config.stylix.colors.red};
+        color: ${config.lib.stylix.colors.red};
         margin-left: 10px;
       }
     '';
