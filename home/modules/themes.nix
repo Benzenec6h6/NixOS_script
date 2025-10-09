@@ -40,6 +40,4 @@
     catppuccin-cursors
     capitaine-cursors-themed
   ];
-
-  fonts.fontconfig.enable = true;
 }
