@@ -4,13 +4,14 @@
     enable = true;
 
     # 壁紙など Stylix に任せたくないなら image は指定しない
-    # image = null; ← 書かなくてもOK
+    image = null; #← 書かなくてもOK
 
     # テーマの基本方向（dark / light）
     polarity = "dark";
 
     #テーマ設定
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    base16Scheme = import "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
 
     # 透明度設定（ターミナルなどで有効）
     opacity.terminal = 1.0;
