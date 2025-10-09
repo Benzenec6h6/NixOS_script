@@ -10,7 +10,10 @@
     polarity = "dark";
 
     #テーマ設定
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    base16Scheme = stylix.lib.base16.schemeFromYAML {
+      path = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    };
 
     # カーソルテーマ
     cursor = {
