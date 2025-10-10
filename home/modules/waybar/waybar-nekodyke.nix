@@ -115,7 +115,7 @@
 
       #custom-wlogout {
         color: #${config.lib.stylix.colors.red};
-        margin-left: 10px;
+        margin-left: 5px;
       }
     '';
   };
