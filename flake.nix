@@ -34,6 +34,8 @@
           inherit system;
           specialArgs = { inherit username stylix; };
           modules = [
+            stylix.nixosModules.stylix
+            ./system/modules/stylix.nix
             ./system/hosts/laptop.nix
 
             # ---- Home Manager統合 ----
@@ -65,6 +67,8 @@
           inherit system;
           specialArgs = { inherit username stylix; };
           modules = [
+            stylix.nixosModules.stylix
+            ./system/modules/stylix.nix
             ./system/hosts/vm.nix
 
             home-manager.nixosModules.home-manager
