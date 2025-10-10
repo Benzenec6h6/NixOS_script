@@ -1,4 +1,4 @@
-{ config, pkgs, lib, stylix, inputs, ... }:
+{ config, pkgs, lib, stylix, ... }:
 
 {
   imports = [
@@ -10,7 +10,7 @@
     ../modules/security.nix
     ../modules/packages.nix
     ../modules/stylix.nix
-    inputs.stylix.nixosModules.stylix
+    stylix.nixosModules.stylix
   ];
 
   services.xserver.videoDrivers = [ "nvidia" "intel" ];
