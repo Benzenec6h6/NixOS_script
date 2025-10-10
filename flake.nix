@@ -32,7 +32,7 @@
         # 💻 実機用（laptop）
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username stylix inputs; };
+          specialArgs = { inherit username stylix; };
           modules = [
             ./system/hosts/laptop.nix
 
@@ -63,7 +63,7 @@
         # 🧪 仮想マシン用（vm）
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username stylix inputs; };
+          specialArgs = { inherit username stylix; };
           modules = [
             ./system/hosts/vm.nix
 
