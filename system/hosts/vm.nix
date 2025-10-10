@@ -9,8 +9,6 @@
     ../modules/services.nix
     ../modules/security.nix
     ../modules/packages.nix
-    ../modules/stylix.nix
-    stylix.nixosModules.stylix
   ];
 
   services.xserver.videoDrivers = [ "virtio" ];
