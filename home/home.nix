@@ -3,7 +3,8 @@
 {
   imports = [
     #./modules/waybar/waybar-curved.nix
-    ./modules/waybar/waybar-nekodyke.nix
+    #./modules/waybar/waybar-nekodyke.nix
+    ./modules/waybar/waybar-JaKooLit.nix
     ./modules/wlogout/wlogout.nix
     ./modules/cava.nix
     ./modules/rofi.nix
