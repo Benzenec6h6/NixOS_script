@@ -1,4 +1,4 @@
-{ config, pkgs, lib, stylix, ... }:
+{ config, pkgs, lib, stylix, inputs, ... }:
 
 {
   imports = [
