@@ -7,8 +7,10 @@
     #flake-utils.url = "github:numtide/flake-utils";
 
     # 🏠 Home Manager 統合
-    home-manager.url = "github:nix-community/home-manager/release-25.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # 🎨 Stylix (テーマ管理)
     stylix = {
@@ -30,7 +32,7 @@
         # 💻 実機用（laptop）
         laptop = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username; };
+          specialArgs = { inherit username stylix; };
           modules = [
             ./system/hosts/laptop.nix
 
@@ -64,7 +66,7 @@
         # 🧪 仮想マシン用（vm）
         vm = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username; };
+          specialArgs = { inherit username stylix; };
           modules = [
             ./system/hosts/vm.nix
 
