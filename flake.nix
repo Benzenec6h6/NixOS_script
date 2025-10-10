@@ -34,13 +34,12 @@
           inherit system;
           specialArgs = { inherit username stylix; };
           modules = [
+            # ---- Stylixテーマ ----
+            stylix.nixosModules.stylix
             ./system/hosts/laptop.nix
 
             # ---- Home Manager統合 ----
             home-manager.nixosModules.home-manager
-
-            # ---- Stylixテーマ ----
-            stylix.nixosModules.stylix
 
             # ---- Home設定 ----
             {
@@ -68,10 +67,10 @@
           inherit system;
           specialArgs = { inherit username stylix; };
           modules = [
+            stylix.nixosModules.stylix
             ./system/hosts/vm.nix
 
             home-manager.nixosModules.home-manager
-            stylix.nixosModules.stylix
 
             {
               home-manager.useGlobalPkgs = true;
