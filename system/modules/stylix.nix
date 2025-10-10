@@ -10,8 +10,8 @@
     polarity = "dark";
 
     #テーマ設定
-    #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+    /*
     base16Scheme = {
       base00 = "282936";
       base01 = "3a3c4e";
@@ -30,7 +30,7 @@
       base0E = "b45bcf";
       base0F = "00f769";
     };
-    
+    */
     # カーソルテーマ
     cursor = {
       package = pkgs.bibata-cursors;
