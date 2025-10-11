@@ -46,14 +46,12 @@ fi
 echo "Entered username: $USERNAME"
 
 # --- flake.nix の username を置換 ---
-for flake in system/flake.nix home/flake.nix; do
-  if [ -f "$flake" ]; then
-    echo "Updating $flake..."
-    sed -i "s/username = \".*\";/username = \"$USERNAME\";/" "$flake"
-  else
-    echo "Warning: $flake not found"
-  fi
-done
+if [ -f ./flake.nix ]; then
+  echo "Updating ./flake.nix..."
+  sed -i "s/username = \".*\";/username = \"$USERNAME\";/" ./flake.nix
+else
+  echo "Warning: ./flake.nix not found"
+fi
 
 # --- laptop の場合だけ GPU BusID を設定 ---
 if [[ "$HOST" == "laptop" ]]; then
@@ -71,13 +69,13 @@ if [[ "$HOST" == "laptop" ]]; then
   if [[ -n "$INTEL_ID" ]]; then
     INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
     echo "Intel BusID:  $INTEL_BUSID"
-    sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" ./system/hosts/laptop.nix
+    sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" ./hosts/laptop.nix
   fi
 
   if [[ -n "$NVIDIA_ID" ]]; then
     NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
     echo "NVIDIA BusID: $NVIDIA_BUSID"
-    sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" ./system/hosts/laptop.nix
+    sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" ./hosts/laptop.nix
   fi
 fi
 
@@ -111,9 +109,9 @@ echo "=== Installing NixOS ==="
 cp -r /home/nixos/NixOS_script /mnt/etc/nixos/
 
 cp /mnt/etc/nixos/hardware-configuration.nix \
-   /mnt/etc/nixos/NixOS_script/system/hosts/hardware.nix
+   /mnt/etc/nixos/NixOS_script/hosts/hardware.nix
 
-nixos-install --flake /mnt/etc/nixos/NixOS_script/system#"$HOST" --no-root-passwd
+nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST" --no-root-passwd
 
 echo "=== Installation complete! ==="
 echo "Target disk: $DISK"
