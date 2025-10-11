@@ -16,7 +16,7 @@
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs username; };
     users.${username} = {
-      imports = [ ../../../home/default.nix ];
+      imports = [ ../../../home/home.nix ];
       home.username = username;
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";
