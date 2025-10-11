@@ -1,17 +1,17 @@
 { inputs, username, ... }:
 {
   imports = [
-    #./modules/waybar/waybar-curved.nix
-    #./modules/waybar/waybar-nekodyke.nix
-    ./modules/waybar/waybar-JaKooLit.nix
-    ./modules/wlogout/wlogout.nix
-    ./modules/cava.nix
-    ./modules/rofi.nix
-    ./modules/apps.nix
-    ./modules/fonts.nix
-    #./modules/themes.nix
-    ./modules/wm/hyprland.nix
-    ./modules/stylix.nix
+    #./waybar/waybar-curved.nix
+    #./waybar/waybar-nekodyke.nix
+    ./waybar/waybar-JaKooLit.nix
+    ./wlogout/wlogout.nix
+    ./cava.nix
+    ./rofi.nix
+    ./apps.nix
+    ./fonts.nix
+    #./themes.nix
+    ./wm/hyprland.nix
+    ./stylix.nix
   ];
 
   home.stateVersion = "25.05";

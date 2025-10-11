@@ -3,13 +3,13 @@
 {
   imports = [
     ./hardware.nix
-    ../modules/base.nix
-    ../modules/networking.nix
-    ../modules/users.nix
-    ../modules/services.nix
-    ../modules/security.nix
-    ../modules/packages.nix
-    ../modules/stylix.nix
+    ../modules/core/base.nix
+    ../modules/core/networking.nix
+    ../modules/core/users.nix
+    ../modules/core/services.nix
+    ../modules/core/security.nix
+    ../modules/core/packages.nix
+    ../modules/core/stylix.nix
     inputs.stylix.nixosModules.stylix
   ];
 
