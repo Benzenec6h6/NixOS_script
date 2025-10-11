@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ inputs, username, profile, ... }:
 
 {
   imports = [
@@ -9,6 +9,8 @@
     ../modules/services.nix
     ../modules/security.nix
     ../modules/packages.nix
+    ../modules/stylix.nix
+    inputs.stylix.nixosModules.stylix
   ];
 
   services.xserver.videoDrivers = [ "virtio" ];
