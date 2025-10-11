@@ -29,7 +29,6 @@
     history = {
       size = 10000;
       save = 10000;
-      path = "${config.home.homeDirectory}/.zsh_history";
     };
     initExtra = ''
       export EDITOR=nvim
