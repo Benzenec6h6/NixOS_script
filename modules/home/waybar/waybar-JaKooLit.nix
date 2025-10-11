@@ -84,24 +84,24 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: "JetBrainsMono Nerd Font", monospace;
+        font-family: ${config.stylix.fonts.monospace.name}, monospace;
         font-size: 12px;
         min-height: 0;
       }
 
       window#waybar {
-        background: #${colors.base00};
-        color: #${colors.base05};
+        background: #${config.lib.stylix.colors.base00};
+        color: #${config.lib.stylix.colors.base05};
       }
 
       #workspaces button {
         padding: 0 5px;
-        color: #${colors.base05};
+        color: #${config.lib.stylix.colors.base05};
       }
 
       #workspaces button.active {
-        background: #${colors.base02};
-        color: #${colors.base0A};
+        background: #${config.lib.stylix.colors.base02};
+        color: #${config.lib.stylix.colors.base0A};
         border-radius: 6px;
       }
 
@@ -110,11 +110,11 @@
         padding-right: 6px;
         margin-left: 3px;
         margin-right: 6px;
-        color: #${colors.base08};
+        color: #${config.lib.stylix.colors.base08};
       }
 
       #clock {
-        color: #${colors.base09};
+        color: #${config.lib.stylix.colors.base09};
       }
     '';
   };
