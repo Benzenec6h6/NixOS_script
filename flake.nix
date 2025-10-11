@@ -28,7 +28,7 @@
           inherit inputs username profile;
         };
         modules = [
-          ./system/hosts/${profile}
+          ./system/hosts/${profile}.nix
         ];
       };
     in {
