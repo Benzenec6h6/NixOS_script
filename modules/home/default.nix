@@ -1,4 +1,4 @@
-{ inputs, username, ... }:
+{ config, pkgs, inputs, username, ... }:
 {
   imports = [
     #./waybar/waybar-curved.nix
