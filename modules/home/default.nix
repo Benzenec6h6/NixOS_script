@@ -30,7 +30,7 @@
       size = 10000;
       save = 10000;
     };
-    initExtra = ''
+    initContent = ''
       export EDITOR=nvim
       alias ll="ls -la"
     '';
