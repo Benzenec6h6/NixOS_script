@@ -131,7 +131,7 @@
   services.playerctld.enable = true;
 
   home.file.".config/hypr" = {
-    source = ./../../config/hypr;
+    source = ./../config/hypr;
     recursive = true;
   };
 }
