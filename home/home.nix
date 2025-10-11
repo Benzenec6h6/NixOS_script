@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-
+{ inputs, username, ... }:
 {
   imports = [
     #./modules/waybar/waybar-curved.nix
@@ -12,6 +11,7 @@
     ./modules/fonts.nix
     #./modules/themes.nix
     ./modules/wm/hyprland.nix
+    ./modules/stylix.nix
   ];
 
   home.stateVersion = "25.05";
@@ -23,28 +23,21 @@
     userEmail = "aconitinec34h47no11@gmail.com";
   };
 
-  # シェル設定例 (zsh を使う場合)
   programs.zsh = {
     enable = true;
-
-    # 補完を有効化
     enableCompletion = true;
-
-    # 履歴管理
     history = {
       size = 10000;
       save = 10000;
       path = "${config.home.homeDirectory}/.zsh_history";
     };
-
-    # 初期化スクリプト
-    initContent = ''
-      # 独自 PATH
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-      # デフォルトエディタ
+    initExtra = ''
       export EDITOR=nvim
-      # 必要なら alias もここで定義
       alias ll="ls -la"
     '';
   };
+
+  home.packages = [
+    inputs.zen-browser.packages.${pkgs.system}.default
+  ];
 }
