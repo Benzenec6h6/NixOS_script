@@ -16,10 +16,6 @@
 
     flatpak.enable = true;
 
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = true;
-    #displayManager.sddm.theme = "catppuccin-mocha";
-
     # サウンド (PipeWire + WirePlumber)
     pipewire = {
       enable = true;
