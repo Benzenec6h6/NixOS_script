@@ -6,8 +6,8 @@
     sddm ={
       enable = true;
       wayland.enable = true;
+      extraPackages = [pkgs.sddm-astronaut];
       theme = "sddm-astronaut";
-      package = pkgs.sddm-astronaut;
     };
   };
 }
