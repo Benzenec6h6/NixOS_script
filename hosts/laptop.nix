@@ -4,12 +4,14 @@
   imports = [
     ./hardware.nix
     ../modules/core/base.nix
+    ../modules/core/greetd.nix
     ../modules/core/networking.nix
-    ../modules/core/users.nix
-    ../modules/core/services.nix
-    ../modules/core/security.nix
     ../modules/core/packages.nix
+    ../modules/core/sddm.nix
+    ../modules/core/security.nix
+    ../modules/core/services.nix
     ../modules/core/stylix.nix
+    ../modules/core/users.nix
     inputs.stylix.nixosModules.stylix
   ];
 
