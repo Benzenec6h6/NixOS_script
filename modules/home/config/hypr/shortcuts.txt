@@ -1,24 +1,24 @@
-🐧 = SUPER
+  = SUPER
 
-🐧 + Enter       → Open terminal (kitty)
-🐧 + B           → Open Zen browser
-🐧 + Q           → Close active window
-🐧 + E           → Open Thunar file manager
-🐧 + F           → Toggle fullscreen
-🐧 + H           → Open Help menu
-🐧 + Space       → Launch rofi (app launcher)
+  + Enter       → Open terminal (kitty)
+  + B           → Open Zen browser
+  + Q           → Close active window
+  + E           → Open Thunar file manager
+  + F           → Toggle fullscreen
+  + H           → Open Help menu
+  + Space       → Launch rofi (app launcher)
 
-🐧 + [1-9,0]     → Switch to workspace 1–10
-🐧 + Shift+[1-9,0] → Send window to workspace 1–10
+  + [1-9,0]     → Switch to workspace 1–10
+  + Shift+[1-9,0] → Send window to workspace 1–10
 
 Ctrl + Alt + →   → Switch to next workspace
 Ctrl + Alt + ←   → Switch to previous workspace
 
-🐧 + Mouse wheel down → Switch to next workspace
-🐧 + Mouse wheel up   → Switch to previous workspace
+  + Mouse wheel down → Switch to next workspace
+  + Mouse wheel up   → Switch to previous workspace
 
-🐧 + Shift + Space → Send window to special workspace
-🐧 + Space          → Toggle special workspace
+  + Shift + Space → Send window to special workspace
+  + Space          → Toggle special workspace
 
 Audio keys:
 Volume Up/Down (5%)     → Adjust volume
