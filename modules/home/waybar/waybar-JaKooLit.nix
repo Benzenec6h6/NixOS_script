@@ -582,7 +582,6 @@
         "window-rewrite-default"= " ";
         "window-rewrite"= {
             "title<.*amazon.*>"= " ";
-            "title<.*reddit.*>"= " ";
             "class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>"= " ";
             "class<zen>"= "󰰷 ";
             "class<waterfox|waterfox-bin>"= " ";
