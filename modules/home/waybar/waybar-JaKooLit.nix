@@ -554,7 +554,7 @@
         "drawer"= {
             "transition-duration"= 500;
             "children-class"= "cpu";
-            "transition-left-to-right"= true
+            "transition-left-to-right"= true;
         };
         "modules"= [
             "temperature"
@@ -651,7 +651,7 @@
             "class<org.pipewire.Helvum>"= "󰓃";
             "class<localsend>"= "";
             "class<PrusaSlicer|UltiMaker-Cura|OrcaSlicer>"= "󰹛";
-        }
+        };
       };
     }];
 
