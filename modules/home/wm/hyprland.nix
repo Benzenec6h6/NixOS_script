@@ -24,8 +24,9 @@
         "SUPER,P,exec,wlogout -p layer-shell"
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
+        "SUPER,CTRL,ALT,B,exec, ~/.config/hypr/scripts/toggle-waybar.sh"
         "SUPER SHIFT,F,togglefloating,"
-        "SUPER,H,exec,~/.config/hypr/help_shortcuts.sh"
+        "SUPER,H,exec,~/.config/hypr/scripts/KeyBind.sh"
         "SUPER,D,exec,rofi -show drun"
 
         ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
