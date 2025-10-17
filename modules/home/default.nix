@@ -9,9 +9,12 @@
     ./rofi
     ./apps.nix
     ./fonts.nix
-    #./themes.nix
+    ./kitty.nix
+    ./starship.nix
     ./wm/hyprland.nix
     ./stylix.nix
+    #./themes.nix
+    ./zsh.nix
   ];
 
   home.stateVersion = "25.05";
@@ -23,18 +26,23 @@
     userEmail = "aconitinec34h47no11@gmail.com";
   };
 
-  programs.zsh = {
+  programs.fzf = {
     enable = true;
-    enableCompletion = true;
-    history = {
-      size = 10000;
-      save = 10000;
-    };
-    initContent = ''
-      export EDITOR=nvim
-      alias ll="ls -la"
-    '';
+    enableZshIntegration = true;
   };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
+  programs.bat.enable = true;
+  programs.fd.enable = true;
 
   home.packages = [
     inputs.zen-browser.packages.${pkgs.system}.default
