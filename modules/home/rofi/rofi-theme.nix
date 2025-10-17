@@ -7,12 +7,13 @@
     }
     mainbox {
       orientation: vertical;
-      children: [ "inputbar", "listbox" ];
+      children: [ "inputbar", "message", "listbox" ];
+      spacing: 10px;
+      background-color: transparent;
     }
     inputbar {
-      padding: 75px 40px;
+      padding: 30px 40px;
       background-color: transparent;
-      background-image: url("~/Pictures/Wallpapers/Rainnight.jpg", width);
       text-color: @foreground;
       children: [ "textbox-prompt-colon", "entry" ];
     }
