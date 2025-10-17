@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 🧭 Hyprland keybind viewer for rofi
 # Extracts all "bind" entries from your hyprland.nix and displays them with explanations via rofi
 

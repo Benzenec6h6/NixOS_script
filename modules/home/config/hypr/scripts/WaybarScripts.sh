@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 term="kitty"      # Default terminal emulator
 files="thunar"    # Default file manager

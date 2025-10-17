@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 🎧 Simplified Volume Control Script
 
 STEP_NORMAL=5

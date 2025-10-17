@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # weather info from wttr. https://github.com/chubin/wttr.in
  
 #city=

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # 💡 Brightness control script with fine (Shift) adjustment
 # Dependencies: brightnessctl, notify-send
 
