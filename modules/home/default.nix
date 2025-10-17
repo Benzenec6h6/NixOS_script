@@ -6,7 +6,7 @@
     ./waybar/waybar-JaKooLit.nix
     ./wlogout/wlogout.nix
     ./cava.nix
-    ./rofi.nix
+    ./rofi
     ./apps.nix
     ./fonts.nix
     #./themes.nix
