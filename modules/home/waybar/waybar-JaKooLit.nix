@@ -657,7 +657,7 @@
     # CSS（Arch時代のものを適用）
     style = ''
       * {
-          font-family: "${config.stylix.fonts.monospace.name}, monospace;
+          font-family: "JetBrainsMono Nerd Font Mono";
           font-weight: bold;
           min-height: 0;
           font-size: 97%;
