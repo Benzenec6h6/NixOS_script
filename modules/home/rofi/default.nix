@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./config-long.nix
+    ./rofi-theme.nix
     ./rofi.nix
   ];
 }
