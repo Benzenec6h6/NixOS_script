@@ -13,6 +13,7 @@
     ./kitty.nix
     ./starship.nix
     ./stylix.nix
+    ./swaync.nix
     #./themes.nix
     ./zsh.nix
   ];
