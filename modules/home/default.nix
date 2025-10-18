@@ -7,11 +7,11 @@
     ./wlogout/wlogout.nix
     ./cava.nix
     ./rofi
+    ./wm/hyprland.nix
     ./apps.nix
     ./fonts.nix
     ./kitty.nix
     ./starship.nix
-    ./wm/hyprland.nix
     ./stylix.nix
     #./themes.nix
     ./zsh.nix
