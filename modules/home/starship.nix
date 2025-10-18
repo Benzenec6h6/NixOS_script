@@ -7,34 +7,41 @@
       add_newline = false;
       format = "$all$character";
 
-      [character]
-      success_symbol = "[❯](bold green)";
-      error_symbol = "[❯](bold red)";
+      character = {
+        success_symbol = "[❯](bold green)";
+        error_symbol = "[❯](bold red)";
+      };
+      
+      git_branch = {
+        symbol = "🌱 ";
+        truncation_length = 24;
+      };
 
-      [git_branch]
-      symbol = "🌱 ";
-      truncation_length = 24;
+      nix_shell = {
+        symbol = " ";
+        format = "[$symbol$state( $name)]($style) ";
+      };
 
-      [nix_shell]
-      symbol = " ";
-      format = "[$symbol$state( $name)]($style) ";
+      directory = {
+        truncation_length = 3;
+        style = "bold blue";
+      };
 
-      [directory]
-      truncation_length = 3;
-      style = "bold blue";
+      time = {
+        disabled = false;
+        format = "[$time]($style) ";
+        time_format = "%H:%M";
+      };
 
-      [time]
-      disabled = false;
-      format = "[$time]($style) ";
-      time_format = "%H:%M";
-
-      [cmd_duration]
-      disabled = false;
-      format = "took [$duration]($style) ";
-
-      [python]
-      symbol = " ";
-      format = "[$symbol$version]($style) ";
+      cmd_duration = {
+        disabled = false;
+        format = "took [$duration]($style) ";
+      };
+      
+      python = {
+        symbol = " ";
+        format = "[$symbol$version]($style) ";
+      };
     };
   };
 }
