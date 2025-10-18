@@ -3,6 +3,7 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
+    package = pkgs.starship;
     settings = {
       add_newline = false;
       format = "$all$character";
