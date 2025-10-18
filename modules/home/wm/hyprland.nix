@@ -24,7 +24,7 @@
         "SUPER,P,exec,wlogout -p layer-shell"
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
-        "SUPER,CTRL,ALT,B,exec,~/.config/hypr/scripts/toggle-waybar.sh"
+        "SUPER CTRL ALT,B,exec,~/.config/hypr/scripts/toggle-waybar.sh"
         "SUPER SHIFT,F,togglefloating,"
         "SUPER,H,exec,~/.config/hypr/scripts/KeyBinds.sh"
         "SUPER,D,exec,rofi -show drun"
