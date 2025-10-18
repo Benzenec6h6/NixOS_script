@@ -59,6 +59,10 @@
         dir=$(zoxide query -l | fzf --prompt='Jump to dir> ') && cd "$dir"
       }
       alias cdf="fzf_cd"
+
+      if command -v starship &> /dev/null; then
+        eval "$(starship init zsh)"
+      fi
     '';
   };
 }
