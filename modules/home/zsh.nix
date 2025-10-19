@@ -60,9 +60,6 @@
       }
       alias cdf="fzf_cd"
 
-      if command -v starship &> /dev/null; then
-        eval "$(starship init zsh)"
-      fi
     '';
   };
 }
