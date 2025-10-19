@@ -28,12 +28,6 @@
         style = "bold blue";
       };
 
-      time = {
-        disabled = false;
-        format = "[$time]($style) ";
-        time_format = "%H:%M";
-      };
-
       cmd_duration = {
         disabled = false;
         format = "took [$duration]($style) ";
