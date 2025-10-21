@@ -6,6 +6,7 @@
     ./waybar/waybar-JaKooLit.nix
     ./wlogout/wlogout.nix
     ./cava.nix
+    ./quickshell/theme.nix
     ./rofi
     ./wm/hyprland.nix
     ./apps.nix
@@ -48,4 +49,6 @@
   home.packages = [
     inputs.zen-browser.packages.${pkgs.system}.default
   ];
+
+  home.file.".config/quickshell/overview.qml".source = ./quickshell/overview.qml;
 }
