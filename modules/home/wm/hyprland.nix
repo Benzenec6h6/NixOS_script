@@ -24,10 +24,11 @@
         "SUPER,P,exec,wlogout -p layer-shell"
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
-        "SUPER CTRL ALT,B,exec,~/.config/hypr/scripts/toggle-waybar.sh"
         "SUPER SHIFT,F,togglefloating,"
-        "SUPER,H,exec,~/.config/hypr/scripts/KeyBinds.sh"
+        "SUPER CTRL ALT,B,exec,toggle-waybar"
+        "SUPER,H,exec,KeyBinds"
         "SUPER,D,exec,rofi -show drun"
+        "SUPER, A, exec, pgrep -f "overview.qml" >/dev/null && pkill -f "overview.qml" || quickshell ~/.config/quickshell/overview.qml"
 
         ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
@@ -130,9 +131,10 @@
 
   services.swaync.enable = true;
   services.playerctld.enable = true;
-
+  /*
   home.file.".config/hypr" = {
     source = ./../config/hypr;
     recursive = true;
   };
+  */
 }
