@@ -8,6 +8,7 @@
     ./cava.nix
     ./quickshell/theme.nix
     ./rofi
+    ./scripts
     ./wm/hyprland.nix
     ./apps.nix
     ./fonts.nix
