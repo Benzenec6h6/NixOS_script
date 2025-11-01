@@ -89,8 +89,8 @@
           "on-click-middle" = "";
           "on-click-right" = "";
           "on-update" = "";
-          "on-scroll-up" = "$HOME/.config/hypr/scripts/Brightness.sh --inc";
-          "on-scroll-down" = "$HOME/.config/hypr/scripts/Brightness.sh --dec";
+          "on-scroll-up" = "Brightness --inc";
+          "on-scroll-down" = "Brightness --dec";
           "smooth-scrolling-threshold" = 1;
       };
       "backlight#2" = {
@@ -274,8 +274,8 @@
           "on-click"= "playerctl previous";
           "on-click-right"= "playerctl next";
           "scroll-step"= 5.0;
-          "on-scroll-up"= "$HOME/.config/hypr/scripts/Volume.sh --inc";
-          "on-scroll-down"= "$HOME/.config/hypr/scripts/Volume.sh --dec";
+          "on-scroll-up"= "Volume --inc";
+          "on-scroll-down"= "Volume --dec";
           "smooth-scrolling-threshold"= 1;
           "tooltip"= true;
           "tooltip-format"= "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next";
@@ -315,7 +315,7 @@
               "󰤥"
               "󰤨"
           ];
-          "on-click-right"= "$HOME/.config/hypr/scripts/WaybarScripts.sh --nmtui";
+          "on-click-right"= "WaybarScripts --nmtui";
       };
       "network#speed"= {
           "interval"= 1;
@@ -371,10 +371,10 @@
               ];
           };
           "scroll-step"= 5.0;
-          "on-click"= "$HOME/.config/hypr/scripts/Volume.sh --toggle";
+          "on-click"= "Volume --toggle";
           "on-click-right"= "pavucontrol -t 3";
-          "on-scroll-up"= "$HOME/.config/hypr/scripts/Volume.sh --inc";
-          "on-scroll-down"= "$HOME/.config/hypr/scripts/Volume.sh --dec";
+          "on-scroll-up"= "Volume --inc";
+          "on-scroll-down"= "Volume --dec";
           "tooltip-format"= "{icon} {desc} | {volume}%";
           "smooth-scrolling-threshold"= 1;
       };
@@ -405,10 +405,10 @@
           "format"= "{format_source}";
           "format-source"= " {volume}%";
           "format-source-muted"= "";
-          "on-click"= "$HOME/.config/hypr/scripts/Volume.sh --toggle-mic";
+          "on-click"= "Volume --toggle-mic";
           "on-click-right"= "pavucontrol -t 4";
-          "on-scroll-up"= "$HOME/.config/hypr/scripts/Volume.sh --mic-inc";
-          "on-scroll-down"= "$HOME/.config/hypr/scripts/Volume.sh --mic-dec";
+          "on-scroll-up"= "Volume --mic-inc";
+          "on-scroll-down"= "Volume --mic-dec";
           "tooltip-format"= "{source_desc} | {source_volume}%";
           "scroll-step"= 5;
       };
@@ -419,10 +419,10 @@
       "wireplumber"= {
           "format"= "{icon} {volume} %";
           "format-muted"= " Mute";
-          "on-click"= "$HOME/.config/hypr/scripts/Volume.sh --toggle";
+          "on-click"= "Volume --toggle";
           "on-click-right"= "pavucontrol -t 3";
-          "on-scroll-up"= "$HOME/.config/hypr/scripts/Volume.sh --inc";
-          "on-scroll-down"= "$HOME/.config/hypr/scripts/Volume.sh --dec";
+          "on-scroll-up"= "Volume --inc";
+          "on-scroll-down"= "Volume --dec";
           "format-icons"= [
               ""
               ""
@@ -458,7 +458,7 @@
           "interval" = 600;
           "return-type" = "json";
           #"exec" = "$HOME/.config/hypr/UserScripts/Weather.py";
-          "exec" = "$HOME/.config/hypr/UserScripts/Weather.sh";
+          "exec" = "Weather";
           #"exec-if" = "ping wttr.in -c1";
           "tooltip" = true;
       };
@@ -470,13 +470,13 @@
       };
       "custom/hint" = {
           "format" = "󰺁 HINT!";
-          "on-click" = "$HOME/.config/hypr/scripts/KeyBinds.sh";
+          "on-click" = "KeyBinds";
           "tooltip" = true;
           "tooltip-format" = "Left Click: Keybinds";
       };
       # This is a custom cava visualizer
       "custom/cava_mviz" = {
-          "exec" = "$HOME/.config/hypr/scripts/WaybarCava.sh";
+          "exec" = "WaybarCava";
           "format" = "{}";
       };
 
@@ -489,8 +489,8 @@
         "on-click" = "playerctl previous";
         "on-click-right" = "playerctl next";
         "scroll-step" = 5.0;
-        "on-scroll-up" = "$HOME/.config/hypr/scripts/Volume.sh --inc";
-        "on-scroll-down" = "$HOME/.config/hypr/scripts/Volume.sh --dec";
+        "on-scroll-up" = "Volume --inc";
+        "on-scroll-down" = "Volume --dec";
         "smooth-scrolling-threshold" = 1;
       };
       "custom/swaync" = {
