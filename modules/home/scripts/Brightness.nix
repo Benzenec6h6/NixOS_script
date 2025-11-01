@@ -18,7 +18,7 @@ pkgs.writeShellScriptBin "brightness" ''
           -h string:x-canonical-private-synchronous:brightness_notif \
           -h int:value:"$brightness" \
           -u low \
-          "Brightness: ${brightness}%"
+          "Brightness: \${brightness}%"
   }
 
   change_brightness() {
