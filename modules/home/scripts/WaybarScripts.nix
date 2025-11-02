@@ -34,7 +34,7 @@ pkgs.writeShellScriptBin "waybar-scripts" ''
       ${pkgs.kitty}/bin/kitty &
       ;;
     "--files")
-      ${pkgs.thunar}/bin/thunar &
+      ${pkgs.xfce.thunar}/bin/thunar &
       ;;
     *)
       echo "Usage: $0 [--btop | --nvtop | --nmtui | --term | --files]"
