@@ -16,8 +16,7 @@ pkgs.writeShellScriptBin "waybar-cava" ''
   # 0..7 → ▁▂▃▄▅▆▇█
   bar="▁▂▃▄▅▆▇█"
   dict="s/;//g"
-  bar_length=${#bar}
-  for ((i = 0; i < bar_length; i++)); do
+  for i in {0..7}; do
     dict+=";s/$i/${bar:$i:1}/g"
   done
 
