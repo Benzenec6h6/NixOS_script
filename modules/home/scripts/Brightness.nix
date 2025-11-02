@@ -31,7 +31,7 @@ pkgs.writeShellScriptBin "brightness" ''
       (( new < 0 )) && new=0
       (( new > 100 )) && new=100
 
-      ${pkgs.brightnessctl}/bin/brightnessctl set "${new}%"
+      ${pkgs.brightnessctl}/bin/brightnessctl set "''${new}%"
       send_notification "$new"
   }
 
