@@ -26,7 +26,7 @@
         "SUPER,F,fullscreen"
         "SUPER SHIFT,F,togglefloating,"
         "SUPER CTRL ALT,B,exec,toggle-waybar"
-        "SUPER,H,exec,KeyBinds"
+        "SUPER,H,exec,keybinds"
         "SUPER,D,exec,rofi -show drun"
         "SUPER,A,exec,overview"
 
