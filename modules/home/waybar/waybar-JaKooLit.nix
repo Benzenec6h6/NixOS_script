@@ -89,8 +89,8 @@
           "on-click-middle" = "";
           "on-click-right" = "";
           "on-update" = "";
-          "on-scroll-up" = "Brightness --inc";
-          "on-scroll-down" = "Brightness --dec";
+          "on-scroll-up" = "brightness --inc";
+          "on-scroll-down" = "brightness --dec";
           "smooth-scrolling-threshold" = 1;
       };
       "backlight#2" = {
