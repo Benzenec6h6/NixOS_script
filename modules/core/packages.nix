@@ -16,7 +16,7 @@
 
     hyprland hyprlock hypridle
     kitty
-    polkit_gnome
+    polkit_gnome libsecret
     udiskie
     networkmanagerapplet
     ffmpegthumbnailer
