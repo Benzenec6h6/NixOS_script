@@ -21,7 +21,7 @@ pkgs.writeShellScriptBin "volume" ''
       if [ "$(is_muted)" = "true" ]; then
           ${pkgs.libnotify}/bin/notify-send -e -u low "Volume: Muted"
       else
-          ${pkgs.libnotify}/bin/notify-send -e -u low -h int:value:"$volume" "Volume: ${volume}%"
+          ${pkgs.libnotify}/bin/notify-send -e -u low -h int:value:"$volume" "Volume: ''${volume}%"
       fi
   }
 
