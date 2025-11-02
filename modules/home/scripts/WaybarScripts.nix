@@ -25,7 +25,7 @@ pkgs.writeShellScriptBin "waybar-scripts" ''
       ${pkgs.kitty}/bin/kitty --title btop sh -c '${pkgs.btop}/bin/btop'
       ;;
     "--nvtop")
-      ${pkgs.kitty}/bin/kitty --title nvtop sh -c '${pkgs.nvtop}/bin/nvtop'
+      ${pkgs.kitty}/bin/kitty --title nvtop sh -c '${pkgs.nvtopPackages.full}/bin/nvtop'
       ;;
     "--nmtui")
       ${pkgs.kitty}/bin/kitty ${pkgs.networkmanager}/bin/nmtui
