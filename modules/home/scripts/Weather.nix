@@ -1,3 +1,3 @@
 { pkgs }:
 
-pkgs.writeShellScriptBin "weather" (builtins.readFile ./weather.sh)
+pkgs.writeShellScriptBin "Weather" (builtins.readFile ./Weather.sh)
