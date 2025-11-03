@@ -133,17 +133,19 @@
   services.playerctld.enable = true;
   programs.chromium = {
     enable = true;
-
-    # Braveでも読み取られる共通引数
+    package = pkgs.brave;
     commandLineArgs = [
       "--password-store=gnome"
+      "--enable-features=UseOzonePlatform"
+      "--ozone-platform=wayland"
     ];
-
-    # 必要に応じて追加ポリシーも書ける
-    extraOpts = {
-      PasswordManagerEnabled = true;
-    };
+    nativeMessagingHosts = [
+      pkgs.keepassxc
+      pkgs.tridactyl-native
+      pkgs.passff-host
+    ];
   };
+
   /*
   home.file.".config/hypr" = {
     source = ./../config/hypr;
