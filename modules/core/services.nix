@@ -34,6 +34,7 @@
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
+    power-profiles-daemon.enable = true;
   };
   
   programs.hyprland.enable = true;
