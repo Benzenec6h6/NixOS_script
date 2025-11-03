@@ -20,6 +20,7 @@
     udiskie
     networkmanagerapplet
     ffmpegthumbnailer
+    adwaita-icon-theme-legacy
 
     /*
     catppuccin-sddm
