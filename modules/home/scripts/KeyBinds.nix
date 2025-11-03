@@ -1,6 +1,6 @@
 { pkgs }:
 
-pkgs.writeShellScriptBin "keybinds" ''
+pkgs.writeShellScriptBin "KeyBinds" ''
   #!${pkgs.bash}/bin/bash
   # 🧭 Hyprland keybind viewer for rofi
   # Dependencies: rofi, libnotify, coreutils, grep, sed
