@@ -14,7 +14,7 @@
 
     # ブラウザ（追加）
     #zen-browser 
-    brave
+    #brave
 
     # ユーティリティ
     steam
