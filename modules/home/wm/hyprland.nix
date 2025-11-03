@@ -131,6 +131,19 @@
 
   services.swaync.enable = true;
   services.playerctld.enable = true;
+  programs.chromium = {
+    enable = true;
+
+    # Braveでも読み取られる共通引数
+    commandLineArgs = [
+      "--password-store=gnome"
+    ];
+
+    # 必要に応じて追加ポリシーも書ける
+    extraOpts = {
+      PasswordManagerEnabled = true;
+    };
+  };
   /*
   home.file.".config/hypr" = {
     source = ./../config/hypr;
