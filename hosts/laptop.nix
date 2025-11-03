@@ -8,6 +8,7 @@
     #../modules/core/greetd.nix
     ../modules/core/networking.nix
     ../modules/core/packages.nix
+    ../modules/core/quickshell.nix
     ../modules/core/sddm.nix
     ../modules/core/security.nix
     ../modules/core/services.nix
