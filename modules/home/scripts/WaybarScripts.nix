@@ -1,6 +1,6 @@
 { pkgs }:
 
-pkgs.writeShellScriptBin "waybar-scripts" ''
+pkgs.writeShellScriptBin "WaybarScripts" ''
   #!${pkgs.bash}/bin/bash
   # WaybarScripts (Nix version)
   # Dependencies: kitty, thunar, notify-send, btop, nvtop, nmtui
