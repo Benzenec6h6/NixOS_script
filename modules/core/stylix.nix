@@ -59,5 +59,10 @@
         popups = 12;
       };
     };
+
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Papirus";
+    };
   };
 }
