@@ -51,5 +51,4 @@
     inputs.zen-browser.packages.${pkgs.system}.default
   ];
 
-  home.file.".config/quickshell/overview.qml".source = ./quickshell/overview.qml;
 }
