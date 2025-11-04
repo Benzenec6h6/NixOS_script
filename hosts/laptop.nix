@@ -4,7 +4,7 @@
   imports = [
     ./hardware.nix
     ../modules/core/base.nix
-    ../modules/core/fcitx5-mozc.nix
+    ../modules/core/fcitx5-mozc
     #../modules/core/greetd.nix
     ../modules/core/networking.nix
     ../modules/core/packages.nix
