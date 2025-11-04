@@ -39,4 +39,6 @@ in
         property color border: base03
     }
   '';
+
+  home.file.".config/quickshell/overview.qml".source = ./overview.qml;
 }
