@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
-import Quickshell 1.0
+import Quickshell
 import "theme.qml" as Theme
 
 Window {
