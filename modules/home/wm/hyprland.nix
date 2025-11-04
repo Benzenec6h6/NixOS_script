@@ -26,7 +26,7 @@
         "SUPER,F,fullscreen"
         "SUPER SHIFT,F,togglefloating,"
         "SUPER CTRL ALT,B,exec,toggle-waybar"
-        "SUPER,H,exec,keybinds"
+        "SUPER,H,exec,KeyBinds"
         "SUPER,D,exec,rofi -show drun"
         "SUPER,A,exec,overview"
 
@@ -112,6 +112,9 @@
       };
     };
   };
+
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
 
   # 便利ツール
   home.packages = with pkgs; [
