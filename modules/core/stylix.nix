@@ -60,7 +60,7 @@
       };
     };
 
-    iconTheme = {
+    icons = {
       package = pkgs.papirus-icon-theme;
       name = "Papirus";
     };
