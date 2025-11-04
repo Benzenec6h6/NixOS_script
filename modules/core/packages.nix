@@ -6,7 +6,7 @@
   environment.systemPackages = with pkgs; [
     vim nano
     pciutils usbutils
-    git fastfetch
+    git fastfetch jq
     wget curl
     gnutar gzip unzip zip
     htop btop
