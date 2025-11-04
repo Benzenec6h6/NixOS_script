@@ -1,4 +1,9 @@
 { pkgs }:
 pkgs.writeShellScriptBin "overview" ''
-  pgrep -f overview.qml >/dev/null && pkill -f overview.qml || quickshell ''$HOME/.config/quickshell/overview.qml
+  export HYPRLAND_INSTANCE_SIGNATURE=$(cat /tmp/hypr/$(whoami)*/.instance)
+  if pgrep -f quickshell.*overview.qml >/dev/null; then
+    pkill -f quickshell.*overview.qml
+  else
+    ${pkgs.quickshell}/bin/quickshell -p $HOME/.config/quickshell/overview.qml &
+  fi
 ''
