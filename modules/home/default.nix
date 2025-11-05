@@ -6,7 +6,7 @@
     ./waybar/waybar-JaKooLit.nix
     ./wlogout/wlogout.nix
     ./cava.nix
-    ./quickshell/theme.nix
+    #./quickshell/theme.nix
     ./rofi
     ./scripts
     ./wm/hyprland.nix
