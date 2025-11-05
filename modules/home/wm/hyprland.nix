@@ -14,6 +14,7 @@
       exec-once = [
         "waybar"
         "fcitx5"
+        "qs" # quickshell AGS Desktop Overview alternative
       ];
 
       # キーバインド例
@@ -25,10 +26,10 @@
         "SUPER,E,exec,thunar"
         "SUPER,F,fullscreen"
         "SUPER SHIFT,F,togglefloating,"
-        "SUPER CTRL ALT,B,exec,toggle-waybar"
+        "SUPER CTRL ALT, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
         "SUPER,H,exec,KeyBinds"
         "SUPER,D,exec,rofi -show drun"
-        "SUPER,A,exec,overview"
+        "SUPER, A, global, quickshell:overviewToggle" # desktop overview (if installed)
 
         ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
@@ -149,10 +150,5 @@
     ];
   };
 
-  /*
-  home.file.".config/hypr" = {
-    source = ./../config/hypr;
-    recursive = true;
-  };
-  */
+  home.file.".config/quickshell".source = ./quickshell;
 }
