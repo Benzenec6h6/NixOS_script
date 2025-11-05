@@ -47,6 +47,27 @@
   programs.bat.enable = true;
   programs.fd.enable = true;
 
+  services.swaync.enable = true;
+  services.playerctld.enable = true;
+  services.hypridle.enable = true;
+  programs.hyprlock.enable = true;
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+    commandLineArgs = [
+      "--password-store=gnome"
+      "--enable-features=UseOzonePlatform"
+      "--ozone-platform=wayland"
+    ];
+    nativeMessagingHosts = [
+      pkgs.keepassxc
+      pkgs.tridactyl-native
+      pkgs.passff-host
+    ];
+  };
+
+  home.file.".config/quickshell".source = ./quickshell;
+
   home.packages = [
     inputs.zen-browser.packages.${pkgs.system}.default
   ];
