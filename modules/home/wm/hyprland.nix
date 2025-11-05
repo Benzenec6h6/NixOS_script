@@ -114,9 +114,6 @@
     };
   };
 
-  programs.hyprlock.enable = true;
-  services.hypridle.enable = true;
-
   # 便利ツール
   home.packages = with pkgs; [
     waybar ags eww
@@ -133,22 +130,4 @@
     #swaynotificationcenter #swaync
   ];
 
-  services.swaync.enable = true;
-  services.playerctld.enable = true;
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-    commandLineArgs = [
-      "--password-store=gnome"
-      "--enable-features=UseOzonePlatform"
-      "--ozone-platform=wayland"
-    ];
-    nativeMessagingHosts = [
-      pkgs.keepassxc
-      pkgs.tridactyl-native
-      pkgs.passff-host
-    ];
-  };
-
-  home.file.".config/quickshell".source = ./quickshell;
 }
