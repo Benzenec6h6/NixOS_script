@@ -7,13 +7,13 @@
     layout = [
       {
         label = "shutdown";
-        action = "sleep 1; systemctl poweroff";
+        action = "sleep 1; loginctl poweroff";
         text = "Shutdown";
         keybind = "s";
       }
       {
         label = "reboot";
-        action = "sleep 1; systemctl reboot";
+        action = "sleep 1; loginctl reboot";
         text = "Reboot";
         keybind = "r";
       }
@@ -25,7 +25,7 @@
       }
       {
         label = "suspend";
-        action = "sleep 1; systemctl suspend";
+        action = "sleep 1; loginctl suspend";
         text = "Suspend";
         keybind = "u";
       }
@@ -37,7 +37,7 @@
       }
       {
         label = "hibernate";
-        action = "sleep 1; systemctl hibernate";
+        action = "sleep 1; loginctl hibernate";
         text = "Hibernate";
         keybind = "h";
       }
