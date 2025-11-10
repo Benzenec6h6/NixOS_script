@@ -22,7 +22,7 @@
       };
 
       # 推奨拡張機能（NUR 経由で取得）
-      packages = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         bitwarden
         darkreader
