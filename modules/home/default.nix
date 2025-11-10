@@ -1,22 +1,24 @@
 { pkgs, inputs, username, ... }:
 {
   imports = [
+    ./rofi
+    ./scripts
     #./waybar/waybar-curved.nix
     #./waybar/waybar-nekodyke.nix
     ./waybar/waybar-JaKooLit.nix
     ./wlogout/wlogout.nix
-    ./cava.nix
-    #./quickshell/theme.nix
-    ./rofi
-    ./scripts
     ./wm/hyprland.nix
     ./apps.nix
+    ./brave.nix
+    ./cava.nix
     ./fonts.nix
+    ./hypridle.nix
     ./kitty.nix
     ./starship.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
+    ./zen-browser.nix
     ./zsh.nix
   ];
 
@@ -51,25 +53,7 @@
   services.playerctld.enable = true;
   services.hypridle.enable = true;
   programs.hyprlock.enable = true;
-  programs.chromium = {
-    enable = true;
-    package = pkgs.brave;
-    commandLineArgs = [
-      "--password-store=gnome"
-      "--enable-features=UseOzonePlatform"
-      "--ozone-platform=wayland"
-    ];
-    nativeMessagingHosts = [
-      pkgs.keepassxc
-      pkgs.tridactyl-native
-      pkgs.passff-host
-    ];
-  };
 
+  home.file.".config/hypr/hyprlock".source = ./hyprlock;
   home.file.".config/quickshell".source = ./quickshell;
-
-  home.packages = [
-    inputs.zen-browser.packages.${pkgs.system}.default
-  ];
-
 }
