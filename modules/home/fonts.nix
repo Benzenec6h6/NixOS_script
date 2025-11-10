@@ -24,6 +24,7 @@
     roboto-mono
     symbola
     terminus_font
+    orbitron
   ];
   fonts.fontconfig.enable = true;
 }
