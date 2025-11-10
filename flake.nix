@@ -20,12 +20,17 @@
     };
 
     zen-browser.url = "github:MarceColl/zen-browser-flake";
+
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs, home-manager, stylix, zen-browser, ... }@inputs:
+  outputs = { nixpkgs, home-manager, stylix, zen-browser, nur, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "teto";
+      overlays = [
+        nur.overlay
+      ];
 
       mkNixosConfig = profile: nixpkgs.lib.nixosSystem {
         inherit system;
@@ -33,6 +38,9 @@
           inherit inputs username profile;
         };
         modules = [
+          {
+            nixpkgs.overlays = overlays;
+          }
           ./hosts/${profile}.nix
         ];
       };
