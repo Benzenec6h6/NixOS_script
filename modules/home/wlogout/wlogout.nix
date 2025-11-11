@@ -19,25 +19,25 @@
       }
       {
         label = "logout";
-        action = "sleep 1; hyprctl dispatch exit";
+        action = "hyprctl dispatch exit";
         text = "Logout";
         keybind = "e";
       }
       {
         label = "suspend";
-        action = "sleep 1; loginctl suspend";
+        action = "loginctl suspend";
         text = "Suspend";
         keybind = "u";
       }
       {
         label = "lock";
-        action = "sleep 1; hyprlock";
+        action = "hyprlock";
         text = "Lock";
         keybind = "l";
       }
       {
         label = "hibernate";
-        action = "sleep 1; loginctl hibernate";
+        action = "loginctl hibernate";
         text = "Hibernate";
         keybind = "h";
       }
