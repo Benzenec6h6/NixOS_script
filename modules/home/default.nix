@@ -1,6 +1,7 @@
 { pkgs, inputs, username, ... }:
 {
   imports = [
+    ./fastfetch
     ./rofi
     ./scripts
     #./waybar/waybar-curved.nix
