@@ -31,7 +31,7 @@
       }
       {
         label = "lock";
-        action = "hyprlock";
+        action = "hyprlock --config ~/.config/hypr/hyprlock/hyprlock.conf";
         text = "Lock";
         keybind = "l";
       }
