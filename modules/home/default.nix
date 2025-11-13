@@ -4,6 +4,7 @@
     ./fastfetch
     ./rofi
     ./scripts
+    ./starship
     #./waybar/waybar-curved.nix
     #./waybar/waybar-nekodyke.nix
     ./waybar/waybar-JaKooLit.nix
@@ -15,7 +16,6 @@
     ./fonts.nix
     ./hypridle.nix
     ./kitty.nix
-    ./starship.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
