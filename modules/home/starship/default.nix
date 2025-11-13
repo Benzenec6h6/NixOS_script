@@ -4,8 +4,6 @@
     programs.starship = {
         enable = true;
 
-        # Stylix の base16 を無効化して自分のテーマを強制
-        settings.palette = lib.mkForce "myth-orange-dark";
         # 外部 TOML ファイルを読み込む
         settings = builtins.fromTOML (builtins.readFile ./starship.toml);
 
