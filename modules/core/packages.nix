@@ -9,7 +9,7 @@
     git jq
     wget curl
     gnutar gzip unzip zip
-    htop btop
+    htop btop nvtopPackages.full
     gcc gnumake pkg-config
     dnsutils inetutils iproute2 netcat
     mesa vulkan-tools
