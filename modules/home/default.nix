@@ -25,6 +25,18 @@
   home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true;
+
+    desktop   = "${config.home.homeDirectory}/Desktop";
+    documents = "${config.home.homeDirectory}/Documents";
+    download  = "${config.home.homeDirectory}/Downloads";
+    music     = "${config.home.homeDirectory}/Music";
+    pictures  = "${config.home.homeDirectory}/Pictures";
+    videos    = "${config.home.homeDirectory}/Videos";
+  };
+
   programs.git = {
     enable = true;
     userName = "Benzenec6h6";
