@@ -6,9 +6,9 @@
     sddm ={
       enable = true;
       wayland.enable = true;
-      package = pkgs.kdePackages.sddm;   # ← これは「SDDM本体」
+      package = pkgs.kdePackages.sddm;
 
-      theme = "sddm-astronaut-theme";    # ← テーマ名
+      theme = "sddm-astronaut-theme";
       extraPackages = with pkgs.kdePackages; [
         qtmultimedia
         qtvirtualkeyboard
@@ -19,6 +19,6 @@
 
   environment.systemPackages = with pkgs; [
     kdePackages.qtbase 
-    sddm-astronaut                # ← これは「テーマ」
+    #sddm-astronaut
   ];
 }
