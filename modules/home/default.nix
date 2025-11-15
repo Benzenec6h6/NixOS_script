@@ -5,6 +5,7 @@
     ./mpv
     ./rofi
     ./scripts
+    ./sddm
     ./starship
     #./waybar/waybar-curved.nix
     #./waybar/waybar-nekodyke.nix
