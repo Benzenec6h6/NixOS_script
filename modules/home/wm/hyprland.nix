@@ -117,7 +117,7 @@
   # 便利ツール
   home.packages = with pkgs; [
     waybar eww ags
-    blueman
+    blueman mpv
     swww mpvpaper
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
