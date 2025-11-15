@@ -2,6 +2,7 @@
 {
   imports = [
     ./fastfetch
+    ./mpv
     ./rofi
     ./scripts
     ./starship
