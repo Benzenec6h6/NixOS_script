@@ -116,8 +116,7 @@
 
   # 便利ツール
   home.packages = with pkgs; [
-    waybar ags eww
-    celluloid
+    waybar eww ags
     blueman
     swww mpvpaper
     pavucontrol #playerctl
