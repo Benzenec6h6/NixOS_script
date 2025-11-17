@@ -81,15 +81,15 @@
     scripts = with pkgs.mpvScripts;
       [
         mpris
-        # autoload
+        autoload
         youtube-upnext
         memo
         uosc
         webtorrent-mpv-hook
-        # thumbfast
+        thumbfast
         sponsorblock
         quality-menu
       ]
-      ++ (with pkgs; [mpv-youtube-search]);
+      ++[(pkgs.callPackage ./mpv-youtube-search.nix {})];
   };
 }
