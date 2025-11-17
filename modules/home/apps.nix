@@ -18,7 +18,6 @@
 
     # ユーティリティ
     steam
-    mpv
     qbittorrent
     gparted
 
