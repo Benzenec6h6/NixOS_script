@@ -7,7 +7,7 @@
     vim nano
     pciutils usbutils
     git jq
-    wget curl
+    wget curl yt-dlp
     gnutar gzip unzip zip
     htop btop nvtopPackages.full
     gcc gnumake pkg-config
