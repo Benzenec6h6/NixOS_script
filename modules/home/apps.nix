@@ -18,7 +18,7 @@
 
     # ユーティリティ
     steam
-    celluloid
+    mpv
     qbittorrent
     gparted
 
