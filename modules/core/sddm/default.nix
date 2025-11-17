@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  astronautTheme = pkgs.callPackage ./build.nix {};
+in
 {
   services.displayManager = {
     defaultSession = "hyprland";
@@ -18,7 +21,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    kdePackages.qtbase 
+    kdePackages.qtbase
+    astronautTheme 
     #sddm-astronaut
   ];
 }
