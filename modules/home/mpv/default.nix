@@ -89,7 +89,7 @@
         thumbfast
         sponsorblock
         quality-menu
+        (pkgs.mpvScripts.callPackage ./mpv-youtube-search.nix {})
       ]
-      ++[(pkgs.callPackage ./mpv-youtube-search.nix {})];
   };
 }
