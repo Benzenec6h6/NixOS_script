@@ -90,6 +90,6 @@
         sponsorblock
         quality-menu
         (pkgs.mpvScripts.callPackage ./mpv-youtube-search.nix {})
-      ]
+      ];
   };
 }
