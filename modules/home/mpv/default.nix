@@ -3,7 +3,6 @@
   config,
   ...
 }: {
-  imports =[./mpv-youtube-search.nix];
   
   programs.mpv = {
     enable = true;
