@@ -10,7 +10,7 @@
       };
       listener = [
         { timeout = 1800; on-timeout = "hyprlock"; }
-        { timeout = 2100; on-timeout = "loginctl suspend"; }
+        { timeout = 2700; on-timeout = "systemctl suspend"; }
       ];
     };
   };
