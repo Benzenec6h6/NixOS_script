@@ -4,9 +4,11 @@
   imports = [
     ./hardware.nix
     ../modules/core/fcitx5-mozc
+    ../modules/core/scripts
     ../modules/core/sddm
     ../modules/core/base.nix
     #../modules/core/greetd.nix
+    ../modules/core/hibernate.nix
     ../modules/core/networking.nix
     ../modules/core/packages.nix
     ../modules/core/quickshell.nix
