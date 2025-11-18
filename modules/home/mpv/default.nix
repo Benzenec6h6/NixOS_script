@@ -81,6 +81,7 @@
     };
     scripts = with pkgs.mpvScripts;
       [
+        mpv-cheatsheet
         mpris
         autoload
         youtube-upnext
