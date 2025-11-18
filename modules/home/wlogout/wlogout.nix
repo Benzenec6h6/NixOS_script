@@ -37,7 +37,7 @@
       }
       {
         label = "hibernate";
-        action = "systemctl hibernate";
+        action = "hibernate-dynamic";
         text = "Hibernate";
         keybind = "h";
       }
