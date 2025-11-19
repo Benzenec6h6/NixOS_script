@@ -51,7 +51,8 @@
       }
 
       window {
-        background-color: rgba(12, 12, 12, 0.15);
+        background-color: rgba(0, 0, 0, 0.40);  /* ←視認性向上の黒オーバーレイ */
+        backdrop-filter: blur(6px);             /* ←背景ぼかしで見える */
       }
 
       button {
@@ -61,18 +62,21 @@
         background-position: center;
         background-size: 25%;
         border-style: solid;
-        background-color: rgba(12, 12, 12, 0.3);
+        background-color: rgba(0, 0, 0, 0.35);  /* ←アイコンが沈まないよう少し暗め */
         border: 3px solid #${config.lib.stylix.colors.base05};
         border-radius: 20px;
         margin: 10px;
         padding: 30px;
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+
+        /* ←アイコンの視認性UP (白背景でも黒背景でもOK) */
+        filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.80));
       }
 
       button:hover {
         color: #${config.lib.stylix.colors.base0B};
-        background-color: rgba(12, 12, 12, 0.5);
+        background-color: rgba(0, 0, 0, 0.55); /* ←hoverで濃くしてさらに見やすく */
         border: 3px solid #${config.lib.stylix.colors.base0B};
+        filter: drop-shadow(0px 0px 6px rgba(0,0,0,1));
       }
 
       #shutdown {
