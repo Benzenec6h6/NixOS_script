@@ -2,6 +2,7 @@
 
 let
   resumeDynamic = pkgs.callPackage ./scripts/resume-dynamic.nix {};
+  hibernateDynamic = pkgs.callPackage ./scripts/hibernate-dynamic.nix {};
 in
 {
   boot.initrd.systemd.enable = true;
@@ -17,4 +18,12 @@ in
   };
 
   swapDevices = [];
+
+  systemd.services."hibernate-dynamic" = {
+    description = "Dynamic Hibernate (swapfile auto-allocate)";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${hibernateDynamic}/bin/hibernate-dynamic";
+    };
+  };
 }
