@@ -16,7 +16,6 @@
 
   # ---------- Realtek NIC ----------
   networking.usePredictableInterfaceNames = true;
-  hardware.realtek.r8169.enable = true;
 
   # ---------- USB autosuspend ----------
   services.udev.extraRules = ''
