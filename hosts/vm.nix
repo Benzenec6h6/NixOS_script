@@ -11,6 +11,7 @@
     ../modules/core/hibernate.nix
     ../modules/core/networking.nix
     ../modules/core/packages.nix
+    ../modules/core/power-management.nix
     ../modules/core/quickshell.nix
     ../modules/core/security.nix
     ../modules/core/services.nix

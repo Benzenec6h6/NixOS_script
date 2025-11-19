@@ -11,6 +11,7 @@
     ../modules/core/hibernate.nix
     ../modules/core/networking.nix
     ../modules/core/packages.nix
+    ../modules/core/power-management.nix
     ../modules/core/quickshell.nix
     ../modules/core/security.nix
     ../modules/core/services.nix
@@ -24,6 +25,7 @@
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
+    powerManagement.finegrained = true;
     prime = {
       intelBusId = ""; #"PCI:0:2:0"は固有の番号なのでpciutilsで調べる
       nvidiaBusId = ""; #ここも同様
