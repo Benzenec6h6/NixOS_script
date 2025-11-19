@@ -338,17 +338,7 @@
               "󰤨"
           ];
       };
-      "power-profiles-daemon"= {
-          "format"= "{icon} ";
-          "tooltip-format"= "Power profile: {profile}\nDriver: {driver}";
-          "tooltip"= true;
-          "format-icons"= {
-              "default"= "";
-              "performance"= "";
-              "balanced"= "";
-              "power-saver"= "";
-          };
-      };
+      
       "pulseaudio"= {
           "format"= "{icon} {volume}%";
           "format-bluetooth"= "{icon} 󰂰 {volume}%";
@@ -443,6 +433,14 @@
               "kitty"
               "kitty-dropterm"
           ];
+      };
+
+      "custom/tlp" = {
+        "interval" = 10;
+        "exec" = "tlp-stat -p | grep 'Mode' | awk '{print $3}'";
+        "format" = "{} ";
+        "tooltip" = true;
+        "tooltip-format" = "TLP power mode: {}";
       };
 
       "custom/wlogout" = {
@@ -559,7 +557,7 @@
         "modules"= [
             "temperature"
             "cpu"
-            "power-profiles-daemon"
+            "custom/tlp"
             "memory"
             "disk"
         ];
