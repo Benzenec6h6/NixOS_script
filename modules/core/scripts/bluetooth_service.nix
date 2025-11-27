@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   systemd.services.bluetooth-notify = {
     wantedBy = [ "multi-user.target" ];
