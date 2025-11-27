@@ -18,7 +18,7 @@
     kitty
     polkit_gnome libsecret
     udiskie
-    networkmanagerapplet
+    networkmanager_dmenu
     ffmpegthumbnailer
 
     /*
