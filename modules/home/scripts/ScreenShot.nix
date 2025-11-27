@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 pkgs.writeShellScriptBin "screenshot" ''
   #!${pkgs.bash}/bin/bash
