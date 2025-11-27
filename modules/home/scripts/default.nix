@@ -2,8 +2,13 @@
 {
   home.packages = [
     (import ./Brightness.nix { inherit pkgs; })
+    (import ./ClipManager.nix { inherit pkgs; })
+    (import ./Dropterminal.nix { inherit pkgs; })
     (import ./KeyBinds.nix { inherit pkgs; })
+    (import ./KillActive.nix { inherit pkgs; })
     #(import ./overview.nix { inherit pkgs inputs; })
+    (import ./recorder.nix { inherit pkgs inputs; })
+    (import ./ScreenShot.nix { inherit pkgs inputs; })
     #(import ./toggle-waybar.nix { inherit pkgs; })
     (import ./Volume.nix { inherit pkgs; })
     (import ./WaybarCava.nix { inherit pkgs; })

@@ -2,11 +2,12 @@
 
 pkgs.writeShellScriptBin "brightness" ''
   #!${pkgs.bash}/bin/bash
-  # 💡 Brightness control script with fine (Shift) adjustment
-  # Dependencies: brightnessctl, notify-send
 
   STEP_NORMAL=5
   STEP_FINE=1
+
+  ICON_DIR="/run/current-system/sw/share/icons/Papirus-Dark/24x24/symbolic/status"
+  ICON="$ICON_DIR/display-brightness-high-symbolic.svg"
 
   get_brightness() {
       ${pkgs.brightnessctl}/bin/brightnessctl -m | cut -d, -f4 | tr -d '%'
@@ -14,7 +15,9 @@ pkgs.writeShellScriptBin "brightness" ''
 
   send_notification() {
       local brightness=$1
-      ${pkgs.libnotify}/bin/notify-send -e \
+      ${pkgs.libnotify}/bin/notify-send \
+          --icon="$ICON" \
+          -e \
           -h string:x-canonical-private-synchronous:brightness_notif \
           -h int:value:"$brightness" \
           -u low \
@@ -56,4 +59,3 @@ pkgs.writeShellScriptBin "brightness" ''
           ;;
   esac
 ''
-
