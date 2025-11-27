@@ -3,7 +3,6 @@
 {
   networking.networkmanager.dispatcherScripts = [
     {
-      name = "networkNotify";
       source = pkgs.writeShellScript "nm-notify" ''
         #!/usr/bin/env bash
 
