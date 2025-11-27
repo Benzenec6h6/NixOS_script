@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 pkgs.writeShellScriptBin "recorder" ''
   #!${pkgs.bash}/bin/bash
