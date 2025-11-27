@@ -9,8 +9,8 @@
         beforeSleepCmd = "hyprlock";
       };
       listener = [
-        { timeout = 1800; on-timeout = "hyprlock"; }
-        { timeout = 2700; on-timeout = "systemctl suspend"; }
+        { timeout = 1800; on-timeout = "hyprlock"; inhibit_idle = true; }
+        { timeout = 2700; on-timeout = "systemctl suspend"; inhibit_idle = true; }
       ];
     };
   };
