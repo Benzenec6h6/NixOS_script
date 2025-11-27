@@ -121,7 +121,7 @@
     swww mpvpaper
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
-    swappy
+    swappy sound-theme-freedesktop
     #rofi-wayland #rofi
     #xdg-desktop-portal-hyprland
     #cava
