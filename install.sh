@@ -26,12 +26,19 @@ else
   PART_SUFFIX=""
 fi
 
-# --- ホスト選択 ---
-read -rp "Select host (laptop/vm): " HOST
-if [[ "$HOST" != "laptop" && "$HOST" != "vm" ]]; then
-  echo "Error: please enter either 'laptop' or 'vm'"
-  exit 1
-fi
+# --- ホスト選択（数字入力に変更） ---
+echo "=== Select host ==="
+echo "1) laptop"
+echo "2) vm"
+read -rp "Enter number (1 or 2): " HOST_ID
+
+case "$HOST_ID" in
+  1) HOST="laptop" ;;
+  2) HOST="vm" ;;
+  *) echo "Error: invalid host selection"; exit 1 ;;
+esac
+
+echo "Selected host: $HOST"
 export HOST="$HOST"
 
 # --- ユーザー名入力 ---
@@ -53,13 +60,33 @@ else
   echo "Warning: ./flake.nix not found"
 fi
 
+# --- パスワード入力 ---
+echo "=== Enter password for $USERNAME ==="
+read -rsp "Password: " PASSWORD
+echo
+read -rsp "Confirm Password: " PASSWORD2
+echo
+
+if [[ "$PASSWORD" != "$PASSWORD2" ]]; then
+  echo "Error: passwords do not match"
+  exit 1
+fi
+
+HASH=$(mkpasswd -m sha-512 "$PASSWORD")
+echo "Generated hashed password."
+
+if [ -f ./users.nix ]; then
+  echo "Updating hashedPassword in users.nix..."
+  sed -i "s|hashedPassword = \".*\";|hashedPassword = \"$HASH\";|" ./users.nix
+else
+  echo "Warning: users.nix not found!"
+fi
+
 # --- laptop の場合だけ GPU BusID を設定 ---
 if [[ "$HOST" == "laptop" ]]; then
-  # lspci で GPU の BusID を取得
-  INTEL_ID=$(lspci | grep -i 'VGA.*Intel'      | awk '{print $1}' || true)
+  INTEL_ID=$(lspci | grep -i 'VGA.*Intel' | awk '{print $1}' || true)
   NVIDIA_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
 
-  # lspci の出力は 00:02.0 のような形式 → NixOS は PCI:0:2:0 に変換
   to_nix_busid() {
     local id="$1"
     IFS=':.' read -r bus slot func <<< "$id"
@@ -68,26 +95,25 @@ if [[ "$HOST" == "laptop" ]]; then
 
   if [[ -n "$INTEL_ID" ]]; then
     INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
-    echo "Intel BusID:  $INTEL_BUSID"
     sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" ./hosts/laptop.nix
   fi
 
   if [[ -n "$NVIDIA_ID" ]]; then
     NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
-    echo "NVIDIA BusID: $NVIDIA_BUSID"
     sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" ./hosts/laptop.nix
   fi
 fi
 
-# --- パーティション作成・フォーマット例 ---
+# --- パーティション作成・フォーマット ---
 echo "=== Partitioning and formatting disk ($DISK) ==="
-echo "WARNING: All existing data will be erased! Type 'yes' to continue."
-read -rp "Confirm (yes/no): " CONFIRM
+echo "WARNING: All existing data will be erased! Continue? (y/n)"
+read -rp "Confirm: " CONFIRM
 
-if [ "$CONFIRM" != "yes" ]; then
-  echo "Aborted."
-  exit 1
-fi
+case "$CONFIRM" in
+  y|Y) echo "Proceeding..." ;;
+  n|N) echo "Aborted."; exit 1 ;;
+  *) echo "Invalid input"; exit 1 ;;
+esac
 
 parted "$DISK" -- mklabel gpt
 parted "$DISK" -- mkpart ESP fat32 1MiB 512MiB
