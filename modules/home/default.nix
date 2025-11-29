@@ -9,7 +9,7 @@
     #./waybar/waybar-curved.nix
     #./waybar/waybar-nekodyke.nix
     ./waybar/waybar-JaKooLit.nix
-    ./wlogout/wlogout.nix
+    ./wlogout
     ./wm/hyprland.nix
     ./apps.nix
     ./brave.nix
