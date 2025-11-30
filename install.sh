@@ -74,13 +74,12 @@ fi
 
 HASH=$(mkpasswd -m sha-512 "$PASSWORD")
 echo "Generated hashed password."
-USER_FILE="./modules/core/users.nix"
 
-if [ -f "$USER_FILE" ]; then
-  echo "Updating hashedPassword in users.nix..."
-  sed -i "s|hashedPassword = \".*\";|hashedPassword = \"$HASH\";|" ./users.nix
+if [ -f ./flake.nix ]; then
+  echo "Updating hashedPassword in flake.nix..."
+  sed -i "s|userPassword = \".*\";|userPassword = \"$HASH\";|" ./flake.nix
 else
-  echo "Warning: users.nix not found!"
+  echo "Warning: flake.nix not found!"
 fi
 
 # --- laptop の場合だけ GPU BusID を設定 ---

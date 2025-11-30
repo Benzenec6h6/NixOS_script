@@ -28,6 +28,7 @@
     let
       system = "x86_64-linux";
       username = "teto";
+      userPassword = "$6$qPo6ahBPqNC7mMim$WupFSLamdZfSEoafxSoE1ODgtaHS8gmUayQ2dTiW4vDBAVVJDcuj1yMYAHq.tz5mmZW7aqb44KnMacSq12xpO1";
       overlays = [
         nur.overlay
       ];
@@ -35,7 +36,7 @@
       mkNixosConfig = profile: nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = {
-          inherit inputs username profile;
+          inherit inputs username profile userPassword;
         };
         modules = [
           {
