@@ -47,11 +47,11 @@
       * {
         font-family: "JetBrainsMono NF", FontAwesome, sans-serif;
         background-image: none;
+        transition: 20ms;
       }
 
       window {
-        background-color: rgba(0, 0, 0, 0.40);
-        backdrop-filter: blur(6px);
+        background-color: rgba(12, 12, 12, 0.15);
       }
 
       button {
@@ -61,27 +61,43 @@
         background-position: center;
         background-size: 25%;
         border-style: solid;
-        background-color: rgba(255, 255, 255, 0.18);  /*← ここ重要：暗幕の上で見やすく */
+        background-color: rgba(12, 12, 12, 0.3);
         border: 3px solid #${config.lib.stylix.colors.base05};
         border-radius: 20px;
         margin: 10px;
         padding: 30px;
-
-        /* ←アイコン白化 + 黒影 */
-        filter: brightness(3) drop-shadow(0px 0px 4px rgba(0,0,0,0.9));
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
       }
 
       button:hover {
-        background-color: rgba(255, 255, 255, 0.28);
-        filter: brightness(3) drop-shadow(0px 0px 6px rgba(0,0,0,1));
+        color: #${config.lib.stylix.colors.base0B};
+        background-color: rgba(12, 12, 12, 0.5);
+        border: 3px solid #${config.lib.stylix.colors.base0B};
       }
 
-      #shutdown { background-image: image(url("icons/shutdown.png")); }
-      #reboot { background-image: image(url("icons/reboot.png")); }
-      #logout { background-image: image(url("icons/logout.png")); }
-      #suspend { background-image: image(url("icons/suspend.png")); }
-      #lock { background-image: image(url("icons/lock.png")); }
-      #hibernate { background-image: image(url("icons/hibernate.png")); }
+      #shutdown {
+        background-image: image(url("icons/shutdown.png"));
+      }
+
+      #reboot {
+        background-image: image(url("icons/reboot.png"));
+      }
+
+      #logout {
+        background-image: image(url("icons/logout.png"));
+      }
+
+      #suspend {
+        background-image: image(url("icons/suspend.png"));
+      }
+
+      #lock {
+        background-image: image(url("icons/lock.png"));
+      }
+
+      #hibernate {
+        background-image: image(url("icons/hibernate.png"));
+      }
     '';
   };
 
