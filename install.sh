@@ -42,6 +42,7 @@ echo "Selected host: $HOST"
 export HOST="$HOST"
 
 # --- ユーザー名入力 ---
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 echo "=== Enter username to create ==="
 read -rp "Username: " USERNAME
 
@@ -53,9 +54,9 @@ fi
 echo "Entered username: $USERNAME"
 
 # --- flake.nix の username を置換 ---
-if [ -f ./flake.nix ]; then
+if [ -f "$SCRIPT_DIR/flake.nix" ]; then
   echo "Updating ./flake.nix..."
-  sed -i "s/username = \".*\";/username = \"$USERNAME\";/" ./flake.nix
+  sed -i "s/username = \".*\";/username = \"$USERNAME\";/" "$SCRIPT_DIR/flake.nix"
 else
   echo "Warning: ./flake.nix not found"
 fi
@@ -75,9 +76,9 @@ fi
 HASH=$(mkpasswd -m sha-512 "$PASSWORD")
 echo "Generated hashed password."
 
-if [ -f ./flake.nix ]; then
+if [ -f "$SCRIPT_DIR/flake.nix" ]; then
   echo "Updating hashedPassword in flake.nix..."
-  sed -i "s|userPassword = \".*\";|userPassword = \"$HASH\";|" ./flake.nix
+  sed -i "s|userPassword = \".*\";|userPassword = \"$HASH\";|" "$SCRIPT_DIR/flake.nix"
 else
   echo "Warning: flake.nix not found!"
 fi
