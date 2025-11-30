@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, ... }:
+{ pkgs, inputs, username, userPassword, ... }:
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
@@ -19,7 +19,7 @@
     isNormalUser = true;
     description = "Main user";
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "scanner" "lp" "video" "input"  "audio" "docker" "libvirtd" "kvm" ];
-    hashedPassword = "$6$qPo6ahBPqNC7mMim$WupFSLamdZfSEoafxSoE1ODgtaHS8gmUayQ2dTiW4vDBAVVJDcuj1yMYAHq.tz5mmZW7aqb44KnMacSq12xpO1";
+    hashedPassword = userPassword;
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
   };
