@@ -74,8 +74,9 @@ fi
 
 HASH=$(mkpasswd -m sha-512 "$PASSWORD")
 echo "Generated hashed password."
+USER_FILE="./modules/core/users.nix"
 
-if [ -f ./users.nix ]; then
+if [ -f "$USER_FILE" ]; then
   echo "Updating hashedPassword in users.nix..."
   sed -i "s|hashedPassword = \".*\";|hashedPassword = \"$HASH\";|" ./users.nix
 else
