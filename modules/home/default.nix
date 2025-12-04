@@ -33,10 +33,14 @@
 
   programs.git = {
     enable = true;
+    userName = "Benzenec6h6";
+    userEmail = "aconitinec34h47no11@gmail.com";
+    /*
     settings.user = {
       name = "Benzenec6h6";
       email = "aconitinec34h47no11@gmail.com";
     };
+    */
   };
 
   programs.fzf = {
