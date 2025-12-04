@@ -23,6 +23,7 @@
   services.xserver.videoDrivers = [ "nvidia" "intel" ];
   hardware.opengl.enable = true;
   hardware.nvidia = {
+    open = true;
     modesetting.enable = true;
     powerManagement.enable = true;
     powerManagement.finegrained = true;
