@@ -20,7 +20,7 @@
     inputs.stylix.nixosModules.stylix
   ];
 
-  services.xserver.videoDrivers = [ "nvidia" "intel" ];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.opengl.enable = true;
   hardware.nvidia = {
     open = true;
