@@ -96,12 +96,14 @@ if [[ "$HOST" == "laptop" ]]; then
 
   if [[ -n "$INTEL_ID" ]]; then
     INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
-    sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" ./hosts/laptop.nix
+    sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" \
+      "$SCRIPT_DIR/hosts/laptop.nix"
   fi
 
   if [[ -n "$NVIDIA_ID" ]]; then
     NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
-    sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" ./hosts/laptop.nix
+    sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" \
+      "$SCRIPT_DIR/hosts/laptop.nix"
   fi
 fi
 
