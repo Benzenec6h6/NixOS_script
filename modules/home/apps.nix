@@ -7,7 +7,7 @@
 
     docker
 
-    vscode neovim
+    vscodium neovim
 
     # 通信用
     discord
