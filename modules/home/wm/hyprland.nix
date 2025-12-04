@@ -122,7 +122,7 @@
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
-    #rofi-wayland #rofi
+    #rofi
     #xdg-desktop-portal-hyprland
     #cava
     #xfce.thunar
