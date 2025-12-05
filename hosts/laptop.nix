@@ -1,4 +1,4 @@
-{ inputs, username, profile, ... }:
+{ config, inputs, username, profile, ... }:
 
 {
   imports = [
