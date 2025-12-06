@@ -28,6 +28,7 @@
   
   hardware.nvidia = {
     open = false;
+    cudaSupport = false;
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
@@ -40,7 +41,7 @@
   };
 
   # 実機特有の設定
-  boot.kernelPackages = pkgs.linuxPackages_6_6;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 }
