@@ -23,7 +23,7 @@
     ./zsh.nix
   ];
 
-  home.stateVersion = "25.11";
+  home.stateVersion = "25.05";
   programs.home-manager.enable = true;
 
   xdg.userDirs = {
@@ -33,12 +33,14 @@
 
   programs.git = {
     enable = true;
-    #userName = "Benzenec6h6";
-    #userEmail = "aconitinec34h47no11@gmail.com";
+    userName = "Benzenec6h6";
+    userEmail = "aconitinec34h47no11@gmail.com";
+    /*
     settings.user = {
       name = "Benzenec6h6";
       email = "aconitinec34h47no11@gmail.com";
     };
+    */
   };
 
   programs.fzf = {
