@@ -31,7 +31,7 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
     prime = {
       intelBusId = ""; #"PCI:0:2:0"は固有の番号なのでpciutilsで調べる
       nvidiaBusId = ""; #ここも同様
@@ -40,7 +40,7 @@
   };
 
   # 実機特有の設定
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 }
