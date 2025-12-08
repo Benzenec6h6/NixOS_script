@@ -12,6 +12,7 @@
 
       # 起動時に実行するコマンド
       exec-once = [
+        "gnome-keyring-daemon --daemonize --components=pkcs11,secrets,ssh"
         "waybar"
         "fcitx5"
         "qs" # quickshell AGS Desktop Overview alternative
