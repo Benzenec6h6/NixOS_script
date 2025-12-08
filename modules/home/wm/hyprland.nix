@@ -13,6 +13,7 @@
       # 起動時に実行するコマンド
       exec-once = [
         "gnome-keyring-daemon --daemonize --components=pkcs11,secrets,ssh"
+        "swaync"
         "waybar"
         "fcitx5"
         "qs" # quickshell AGS Desktop Overview alternative
@@ -25,28 +26,31 @@
         "SUPER,Q,killactive"
         "SUPER,P,exec,wlogout -p layer-shell"
         "SUPER,E,exec,thunar"
-        "SUPER,F,fullscreen"
-        "SUPER SHIFT,F,togglefloating,"
+        "SUPER SHIFT, F, fullscreen" # whole full screen
+        "SUPER CTRL, F, fullscreen, 1" # fake full screen
+        "SUPER, SPACE, togglefloating," #Float Mode
+        "SUPER ALT, SPACE, exec, hyprctl dispatch workspaceopt allfloat" #All Float Mode
+        "SUPER SHIFT, Return, exec, Dropterminal $term" # Dropdown terminal
         "SUPER CTRL ALT, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
         "SUPER,H,exec,KeyBinds"
         "SUPER,D,exec,rofi -show drun"
         "SUPER, A, global, quickshell:overviewToggle" # desktop overview (if installed)
 
-        ",XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        "SHIFT,XF86AudioRaiseVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+"
-        "SHIFT,XF86AudioLowerVolume,exec,wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
+        ",XF86AudioRaiseVolume,exec,volume --inc"
+        ",XF86AudioLowerVolume,exec,volume --dec"
+        "SHIFT,XF86AudioRaiseVolume,exec,volume --inc-fine"
+        "SHIFT,XF86AudioLowerVolume,exec,volume --dec-fine"
 
-        ",XF86AudioMute,exec,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        ",XF86AudioMute,exec,volume --toggle"
         ",XF86AudioPlay,exec,playerctl play-pause"
         ",XF86AudioPause,exec,playerctl play-pause"
         ",XF86AudioNext,exec,playerctl next"
         ",XF86AudioPrev,exec,playerctl previous"
 
-        ",XF86MonBrightnessDown,exec,brightnessctl set 5%-"
-        ",XF86MonBrightnessUp,exec,brightnessctl set +5%"
-        "SHIFT,XF86MonBrightnessDown,exec,brightnessctl set 1%-"
-        "SHIFT,XF86MonBrightnessUp,exec,brightnessctl set +1%"
+        ",XF86MonBrightnessDown,exec,brightness --dec"
+        ",XF86MonBrightnessUp,exec,brightness --inc"
+        "SHIFT,XF86MonBrightnessDown,exec,brightness --dec-fine"
+        "SHIFT,XF86MonBrightnessUp,exec,brightness --inc-fine"
 
         "SUPER,left,movefocus,l"
         "SUPER,right,movefocus,r"
@@ -96,6 +100,11 @@
         kb_options = "caps:ctrl_modifier"; # CapsをCtrlに割り当て例
         follow_mouse = 1;
         sensitivity = 0;
+
+        touchpad = {
+          natural_scroll = true;
+          scroll_factor = 1.0;
+        };
       };
 
       general = {
@@ -117,17 +126,12 @@
 
   # 便利ツール
   home.packages = with pkgs; [
-    waybar eww ags
+    waybar eww #ags
     blueman
     swww mpvpaper
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
-    #rofi
-    #xdg-desktop-portal-hyprland
-    #cava
-    #xfce.thunar
-    #swaynotificationcenter #swaync
   ];
 
 }
