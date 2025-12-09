@@ -1,0 +1,97 @@
+configuration {
+    modi: "drun,run,window";
+    show-icons: true;
+    icon-theme: "Papirus";   /* あなたの好きなテーマに変更可 */
+    font: "JetBrainsMono Nerd Font 12";
+}
+
+* {
+    bg: #1e1e2e;
+    fg: #cdd6f4;
+    selected: #313244;
+    accent: #89b4fa;
+
+    background-color: @bg;
+    text-color: @fg;
+    border-radius: 6px;
+
+    padding: 4px;
+}
+
+/* ========================= */
+/*         Window             */
+/* ========================= */
+window {
+    width: 700px;
+    border: 2px solid @accent;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+/* ========================= */
+/*       Search/Input         */
+/* ========================= */
+inputbar {
+    children: [prompt, entry];
+    spacing: 8px;
+    padding: 8px;
+}
+
+prompt {
+    text: "Search:";
+    background-color: transparent;
+    padding: 6px;
+    font-size: 14px;
+    text-color: @accent;
+}
+
+entry {
+    background-color: @selected;
+    padding: 8px;
+    border-radius: 8px;
+    placeholder: "Type to search…";
+    placeholder-color: #6c7086;
+}
+
+/* ========================= */
+/*          List              */
+/* ========================= */
+listview {
+    spacing: 8px;
+    lines: 12;
+    fixed-height: false;
+    dynamic: true;
+}
+
+/* ========================= */
+/*       Item layout          */
+/* ========================= */
+element {
+    orientation: horizontal;      /* ← 横並び */
+    spacing: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+element-icon {
+    size: 32px;                   /* ← アイコン大きさ */
+    border-radius: 4px;
+}
+
+element-text {
+    font-size: 13px;
+    text-color: @fg;
+}
+
+/* ========================= */
+/*        Selected item       */
+/* ========================= */
+element selected {
+    background-color: @selected;
+    border: 1px solid @accent;
+    text-color: @accent;
+}
+
+element-text selected {
+    text-color: @accent;
+}
