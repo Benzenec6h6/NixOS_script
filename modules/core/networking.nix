@@ -14,8 +14,8 @@
     settings = {
       connectivity = {
         enabled = true;
+        uri = "http://nmcheck.gnome.org/check";
         #uri = "http://nmcheck.gnome.org/check_network_status.txt";
-        uri = "https://nixos.org/";
         response = "OK";
         interval = 5;
       };
