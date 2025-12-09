@@ -16,6 +16,7 @@
     ./cava.nix
     ./fonts.nix
     ./hypridle.nix
+    ./imv.nix
     ./kitty.nix
     ./stylix.nix
     ./swaync.nix
@@ -58,7 +59,6 @@
 
   programs.bat.enable = true;
   programs.fd.enable = true;
-  programs.imv.enable = true;
 
   services.swaync.enable = true;
   services.playerctld.enable = true;
