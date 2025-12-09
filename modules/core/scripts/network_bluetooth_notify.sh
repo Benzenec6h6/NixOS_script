@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ICON_DIR="/run/current-system/sw/share/icons/Papirus-Dark/24x24/symbolic/status/"
+ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status/"
 
 notify_event() {
     local icon="$1"

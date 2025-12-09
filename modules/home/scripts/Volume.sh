@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # volume.sh – swaync + Papirusアイコン + pamixer の統合音量制御
 
-ICON_DIR="/run/current-system/sw/share/icons/Papirus-Dark/24x24/symbolic/status"
+ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status"
 
 STEP_NORMAL=5
 STEP_FINE=1

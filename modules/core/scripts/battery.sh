@@ -7,7 +7,7 @@ AC="/sys/class/power_supply/AC"
 capacity=$(cat "$BATTERY/capacity")
 ac_online=$(cat "$AC/online")
 
-ICON_DIR="/run/current-system/sw/share/icons/Papirus-Dark/24x24/symbolic/status"
+ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status"
 
 # Low battery
 if [ "$capacity" -le 20 ] && [ "$ac_online" -eq 0 ]; then
