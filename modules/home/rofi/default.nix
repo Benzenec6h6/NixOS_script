@@ -15,7 +15,7 @@
         ];
 
         extraConfig = {
-            modi = "drun,run,window,calc,bluetooth";
+            modi = "drun,run,window,calc";
             show-icons = true;
         };
 
