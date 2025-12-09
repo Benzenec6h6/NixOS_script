@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 # === ディスク選択 ===
 mapfile -t disks < <(lsblk -ndo NAME,SIZE,TYPE | awk '$3=="disk" && $1!~/^loop/ {print $1, $2}')
 
@@ -41,8 +42,20 @@ esac
 echo "Selected host: $HOST"
 export HOST="$HOST"
 
+# --- Hyprland モニタ設定の切り替え ---
+HYPRLAND_NIX="$SCRIPT_DIR/modules/home/wm/hyprland.nix"
+
+if [[ "$HOST" == "vm" ]]; then
+  echo "Configuring Hyprland for VM display..."
+  sed -i '/eDP-1,1920x1080/ s/^/# /' "$HYPRLAND_NIX"
+  sed -i '/Virtual-1,1280x720/ s/^# *//' "$HYPRLAND_NIX"
+else
+  echo "Configuring Hyprland for Laptop display..."
+  sed -i '/eDP-1,1920x1080/ s/^# *//' "$HYPRLAND_NIX"
+  sed -i '/Virtual-1,1280x720/ s/^/# /' "$HYPRLAND_NIX"
+fi
+
 # --- ユーザー名入力 ---
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 echo "=== Enter username to create ==="
 read -rp "Username: " USERNAME
 
