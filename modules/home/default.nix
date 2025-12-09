@@ -58,7 +58,7 @@
 
   programs.bat.enable = true;
   programs.fd.enable = true;
-  programs.feh.enable = true;
+  programs.imv.enable = true;
 
   services.swaync.enable = true;
   services.playerctld.enable = true;
