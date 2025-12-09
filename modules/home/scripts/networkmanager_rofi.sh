@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-COMMON_THEME="$HOME/.config/rofi/common.rasi"
-PW_THEME="$HOME/.config/rofi/password_prompt.rasi"
+ROFI_DIR="$HOME/.config/rofi/myconf"
+
+COMMON_THEME="$ROFI_DIR/common.rasi"
+PW_THEME="$ROFI_DIR/password_prompt.rasi"
 
 # --- SSID List ---
 SSID=$(nmcli -t -f SSID dev wifi | sed '/^$/d' \
