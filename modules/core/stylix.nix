@@ -63,7 +63,7 @@
     icons = {
       enable = true;
       package = pkgs.papirus-icon-theme;
-      dark = "Papirus-Dark";
+      dark = "Papirus-Light";
     };
   };
 }
