@@ -6,6 +6,7 @@
     (import ./Dropterminal.nix { inherit pkgs; })
     (import ./KeyBinds.nix { inherit pkgs; })
     (import ./KillActive.nix { inherit pkgs; })
+    (import ./networkmanager_rofi.nix { inherit pkgs; })
     #(import ./overview.nix { inherit pkgs inputs; })
     (import ./recorder.nix { inherit pkgs inputs; })
     (import ./ScreenShot.nix { inherit pkgs inputs; })
