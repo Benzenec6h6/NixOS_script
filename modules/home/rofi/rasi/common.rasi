@@ -1,15 +1,10 @@
-configuration {
-    modi: "drun,run,window";
-    show-icons: true;
-    icon-theme: "Papirus";   /* あなたの好きなテーマに変更可 */
-    font: "JetBrainsMono Nerd Font 12";
-}
+@import "~/.config/rofi/theme.rasi"
 
 * {
-    bg: #1e1e2e;
-    fg: #cdd6f4;
-    selected: #313244;
-    accent: #89b4fa;
+    bg: @base00;
+    fg: @base06;
+    selected: @base01;
+    accent: @base0D;
 
     background-color: @bg;
     text-color: @fg;
@@ -18,9 +13,6 @@ configuration {
     padding: 4px;
 }
 
-/* ========================= */
-/*         Window             */
-/* ========================= */
 window {
     width: 700px;
     border: 2px solid @accent;
@@ -28,9 +20,6 @@ window {
     border-radius: 12px;
 }
 
-/* ========================= */
-/*       Search/Input         */
-/* ========================= */
 inputbar {
     children: [prompt, entry];
     spacing: 8px;
@@ -50,12 +39,9 @@ entry {
     padding: 8px;
     border-radius: 8px;
     placeholder: "Type to search…";
-    placeholder-color: #6c7086;
+    placeholder-color: @base03;
 }
 
-/* ========================= */
-/*          List              */
-/* ========================= */
 listview {
     spacing: 8px;
     lines: 12;
@@ -63,18 +49,15 @@ listview {
     dynamic: true;
 }
 
-/* ========================= */
-/*       Item layout          */
-/* ========================= */
 element {
-    orientation: horizontal;      /* ← 横並び */
+    orientation: horizontal;
     spacing: 10px;
     padding: 10px;
     border-radius: 8px;
 }
 
 element-icon {
-    size: 32px;                   /* ← アイコン大きさ */
+    size: 32px;
     border-radius: 4px;
 }
 
@@ -83,9 +66,6 @@ element-text {
     text-color: @fg;
 }
 
-/* ========================= */
-/*        Selected item       */
-/* ========================= */
 element selected {
     background-color: @selected;
     border: 1px solid @accent;

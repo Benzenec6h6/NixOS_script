@@ -21,5 +21,5 @@
 
     };
 
-    home.file.".config/rofi".source = ./rasi;
+    home.file.".config/rofi/myconf".source = ./rasi;
 }
