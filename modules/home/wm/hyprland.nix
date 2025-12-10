@@ -33,7 +33,8 @@
         "SUPER SHIFT, Return, exec, Dropterminal $term" # Dropdown terminal
         "SUPER CTRL ALT, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
         "SUPER,H,exec,KeyBinds"
-        "SUPER,D,exec,rofi -show drun"
+        #"SUPER,D,exec,rofi -show drun"
+        "SUPER,D,exec,rofi -show drun -theme ~/.config/rofi/myconf/common.rasi"
         "SUPER, A, global, quickshell:overviewToggle" # desktop overview (if installed)
 
         ",XF86AudioRaiseVolume,exec,volume --inc"
