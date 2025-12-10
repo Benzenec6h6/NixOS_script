@@ -1,13 +1,8 @@
-{ config, pkgs, lib, ... }:
-
-{
+_: {
   stylix.targets = {
     gtk.enable = true;
     waybar.enable = false;
-    rofi ={
-      enable = true;
-      package = pkgs.rofi;
-    };
+    rofi.enable = true;
     hyprland.enable = false;
     hyprlock.enable = false;
     starship.enable = false;
