@@ -16,7 +16,11 @@
 
 window {
     width: 700px;
-    border: 2px solid @accent;
+
+    border: 2px;
+    border-color: @accent;
+    border-style: solid;
+
     padding: 12px;
     border-radius: 12px;
 }
@@ -67,12 +71,14 @@ element-text {
     text-color: @fg;
 }
 
-element selected {
+element:selected {
     background-color: @selected;
-    border: 1px solid @accent;
+    border: 1px;
+    border-style: solid;
+    border-color: @accent;
     text-color: @accent;
 }
 
-element-text selected {
+element-text:selected {
     text-color: @accent;
 }
