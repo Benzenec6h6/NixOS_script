@@ -17,9 +17,8 @@
 window {
     width: 700px;
 
-    border: 2px;
+    border: 2;
     border-color: @accent;
-    border-style: solid;
 
     padding: 12px;
     border-radius: 12px;
@@ -73,8 +72,7 @@ element-text {
 
 element:selected {
     background-color: @selected;
-    border: 1px;
-    border-style: solid;
+    border: 1;
     border-color: @accent;
     text-color: @accent;
 }
