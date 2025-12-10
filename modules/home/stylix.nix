@@ -1,4 +1,6 @@
-_: {
+{ config, pkgs, lib, ... }:
+
+{
   stylix.targets = {
     gtk.enable = true;
     waybar.enable = false;
