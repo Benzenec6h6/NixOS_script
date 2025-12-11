@@ -10,9 +10,7 @@
     polarity = "dark";
 
     #テーマ設定
-    base16Scheme = {
-      scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
-    };
+    base16Scheme = pkgs.base16-schemes.tokyo-night-dark;
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
     /*
     base16Scheme = {
