@@ -17,8 +17,8 @@
         extraConfig = {
             modi = "drun,run,window,calc";
             show-icons = true;
+            theme = "${config.home.homeDirectory}/.config/rofi/myconf/common.rasi"; 
         };
-
     };
 
     home.file.".config/rofi/myconf".source = ./rasi;
