@@ -5,7 +5,7 @@
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit pkgs inputs username; };
+    extraSpecialArgs = { inherit inputs username; }; #delete pkgs
     users.${username} = {
       imports = [ ./../home ];
       home.username = username;

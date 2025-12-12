@@ -12,8 +12,6 @@
 
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
-      #url = "github:danth/stylix/release-25.11";
-      #url = "github:danth/stylix"; #unstableだとうまく設定が適応される。
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
