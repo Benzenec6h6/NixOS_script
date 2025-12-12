@@ -9,15 +9,14 @@
             pkgs.rofi-calc
             pkgs.rofi-mpd
             pkgs.rofi-screenshot
-            pkgs.rofi-network-manager
+            #pkgs.rofi-network-manager
             pkgs.rofi-bluetooth
             pkgs.todofi-sh
         ];
 
         extraConfig = {
             modi = "drun,run,window,calc";
-            show-icons = true;
-            theme = "${config.home.homeDirectory}/.config/rofi/myconf/common.rasi"; 
+            show-icons = true; 
         };
     };
 
