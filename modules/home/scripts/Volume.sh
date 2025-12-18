@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # volume.sh – swaync + Papirusアイコン + pamixer の統合音量制御
 
-ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status"
+#ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status"
 
 STEP_NORMAL=5
 STEP_FINE=1
@@ -27,17 +27,17 @@ is_muted() {
 get_volume_icon() {
     if is_muted; then
         if is_headphones_connected; then
-            echo "$ICON_DIR/audio-volume-muted-headphones-symbolic.svg"
+            echo "audio-volume-muted-headphones-symbolic"
         else
-            echo "$ICON_DIR/audio-volume-muted-symbolic.svg"
+            echo "audio-volume-muted-symbolic"
         fi
         return
     fi
 
     if is_headphones_connected; then
-        echo "$ICON_DIR/audio-volume-headphones-symbolic.svg"
+        echo "audio-volume-headphones-symbolic"
     else
-        echo "$ICON_DIR/audio-volume-high-symbolic.svg"
+        echo "audio-volume-high-symbolic"
     fi
 }
 
@@ -103,9 +103,9 @@ mic_get_volume() {
 
 mic_get_icon() {
     if mic_is_muted; then
-        echo "$ICON_DIR/audio-input-microphone-muted-symbolic.svg"
+        echo "audio-input-microphone-muted-symbolic"
     else
-        echo "$ICON_DIR/audio-input-microphone-high-symbolic.svg"
+        echo "audio-input-microphone-high-symbolic"
     fi
 }
 
