@@ -122,6 +122,16 @@
           passes = 2;
         };
       };
+
+      windowrulev2 = [
+        # 動画壁紙用 mpv だけを対象にする
+        "float, class:^(mpv-wallpaper)$"
+        "fullscreen, class:^(mpv-wallpaper)$"
+        "nofocus, class:^(mpv-wallpaper)$"
+        "noinitialfocus, class:^(mpv-wallpaper)$"
+        "noblur, class:^(mpv-wallpaper)$"
+        "opacity 1.0 1.0, class:^(mpv-wallpaper)$"
+      ];
     };
   };
 
@@ -133,6 +143,7 @@
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
+    libnotify libnotify-tools
   ];
 
 }
