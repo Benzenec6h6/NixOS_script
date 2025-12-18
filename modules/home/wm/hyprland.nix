@@ -143,7 +143,7 @@
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
-    libnotify libnotify-tools
+    notify-desktop
   ];
 
 }
