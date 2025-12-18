@@ -7,12 +7,10 @@ AC="/sys/class/power_supply/AC"
 capacity=$(cat "$BATTERY/capacity")
 ac_online=$(cat "$AC/online")
 
-ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status"
-
 # Low battery
 if [ "$capacity" -le 20 ] && [ "$ac_online" -eq 0 ]; then
     notify-send \
-        --icon="$ICON_DIR/battery-caution-symbolic.svg" \
+        --icon="battery-caution-symbolic" \
         "Battery Low" \
         "Remaining: ${capacity}%"
     exit 0
@@ -21,7 +19,7 @@ fi
 # AC connected
 if [ "$ac_online" -eq 1 ]; then
     notify-send \
-        --icon="$ICON_DIR/battery-full-charged-symbolic.svg" \
+        --icon="battery-full-charged-symbolic" \
         "AC Connected" \
         "Charging / AC online"
     exit 0
@@ -30,7 +28,7 @@ fi
 # Battery mode
 if [ "$ac_online" -eq 0 ]; then
     notify-send \
-        --icon="$ICON_DIR/battery-full-symbolic.svg" \
+        --icon="battery-full-symbolic" \
         "Running on Battery" \
         "Remaining: ${capacity}%"
     exit 0

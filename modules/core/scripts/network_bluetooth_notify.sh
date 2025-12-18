@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-ICON_DIR="/run/current-system/sw/share/icons/Papirus-Light/24x24/symbolic/status/"
-
 notify_event() {
     local icon="$1"
     local title="$2"
@@ -11,18 +9,18 @@ notify_event() {
         -e \
         -u low \
         -h boolean:SWAYNC_BYPASS_DND:true \
-        -i "$ICON_DIR/$icon" \
+        -i "$icon" \
         "$title" "$message"
 }
 
 if [[ "$1" == "network" ]]; then
     case "$2" in
         connected)
-            notify_event "network-transmit-receive-symbolic.svg" \
+            notify_event "network-transmit-receive-symbolic" \
                 "Network" "Connected: $3"
             ;;
         disconnected)
-            notify_event "network-offline-symbolic.svg" \
+            notify_event "network-offline-symbolic" \
                 "Network" "Disconnected"
             ;;
     esac
@@ -31,11 +29,11 @@ fi
 if [[ "$1" == "bluetooth" ]]; then
     case "$2" in
         connected)
-            notify_event "bluetooth-active-symbolic.svg" \
+            notify_event "bluetooth-active-symbolic" \
                 "Bluetooth" "Connected: $3"
             ;;
         disconnected)
-            notify_event "bluetooth-disabled-symbolic.svg" \
+            notify_event "bluetooth-disabled-symbolic" \
                 "Bluetooth" "Disconnected"
             ;;
     esac
