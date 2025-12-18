@@ -31,7 +31,6 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
     prime = {
       intelBusId = ""; #"PCI:0:2:0"は固有の番号なのでpciutilsで調べる
       nvidiaBusId = ""; #ここも同様
