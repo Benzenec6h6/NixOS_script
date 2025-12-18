@@ -10,6 +10,7 @@
       };
       listener = [
         { timeout = 1800; on-timeout = "lock"; inhibit_idle = false; }
+        { timeout = 2100; on-timeout = "hyprctl dispatch dpms off"; inhibit_idle = false;}
         { timeout = 2700; on-timeout = "systemctl suspend"; inhibit_idle = true; }
       ];
     };
