@@ -32,6 +32,7 @@
   };
 
   # 画像 MIME をすべて imv に関連づけ
+  xdg.configFile."mimeapps.list".force = true;
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
