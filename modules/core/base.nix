@@ -20,7 +20,7 @@
     auto-optimise-store = false; # optimiseと二重にしない
   };
 
-  services.tmpfiles.clean.enable = true;
+  boot.tmp.cleanOnBoot = true;
 
   services.journald.extraConfig = ''
     SystemMaxUse=512M
@@ -28,6 +28,9 @@
     MaxRetentionSec=14day
   '';
 
-  services.fstrim.enable = true;
+  services.fstrim = {
+    enable = true;
+    interval = "weekly";
+  };
 
 }
