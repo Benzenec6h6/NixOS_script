@@ -6,7 +6,7 @@
     settings = {
       general = {
         lockCmd = "${pkgs.hyprlock}/bin/hyprlock --config %h/.config/hypr/hyprlock/hyprlock.conf";
-        beforeSleepCmd = "${pkgs.hyprlock}/bin/hyprlock --config %h/.config/hypr/hyprlock/hyprlock.conf";
+        #beforeSleepCmd = "${pkgs.hyprlock}/bin/hyprlock --config %h/.config/hypr/hyprlock/hyprlock.conf";
       };
       listener = [
         { timeout = 1800; on-timeout = "lock"; inhibit_idle = false; }
