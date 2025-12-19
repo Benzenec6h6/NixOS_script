@@ -33,4 +33,7 @@
     interval = "weekly";
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 }
