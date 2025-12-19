@@ -16,7 +16,6 @@
     ./cava.nix
     ./fonts.nix
     ./hypridle.nix
-    ./imv.nix
     ./kitty.nix
     ./stylix.nix
     ./swaync.nix
