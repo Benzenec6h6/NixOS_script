@@ -1,55 +1,40 @@
 #!/usr/bin/env bash
 
-  STEP_NORMAL=5
-  STEP_FINE=1
+STEP_NORMAL=5
+STEP_FINE=1
+ICON="display-brightness-high-symbolic"
 
-  ICON="display-brightness-high-symbolic"
+get_brightness() {
+    brightnessctl -m | awk -F',' '{gsub(/%/,"",$4); print $4}'
+}
 
-  get_brightness() {
-      brightnessctl -m | cut -d, -f4 | tr -d '%'
-  }
+send_notification() {
+    local brightness=$1
+    notify-send \
+        --icon="$ICON" \
+        -h string:x-canonical-private-synchronous:brightness_notif \
+        -u low \
+        "Brightness: ${brightness}%"
+}
 
-  send_notification() {
-      local brightness=$1
-      notify-send -e \
-          --icon="$ICON" \
-          -h string:x-canonical-private-synchronous:brightness_notif \
-          -h int:value:"$brightness" \
-          -u low \
-          "Brightness: ''${brightness}%"
-  }
+change_brightness() {
+    local step=$1
+    local mode=$2
 
-  change_brightness() {
-      local delta=$1
-      local current new
+    # brightnessctl 内部stepに任せる
+    brightnessctl set "${step}%${mode}" > /dev/null
 
-      current=$(get_brightness)
-      new=$((current + delta))
+    sleep 0.05  # 反映待ち（重要）
+    send_notification "$(get_brightness)"
+}
 
-      (( new < 0 )) && new=0
-      (( new > 100 )) && new=100
-
-      brightnessctl set "''${new}%"
-      send_notification "$new"
-  }
-
-  case "$1" in
-      "--get")
-          get_brightness
-          ;;
-      "--inc")
-          change_brightness "$STEP_NORMAL"
-          ;;
-      "--dec")
-          change_brightness "-$STEP_NORMAL"
-          ;;
-      "--inc-fine")
-          change_brightness "$STEP_FINE"
-          ;;
-      "--dec-fine")
-          change_brightness "-$STEP_FINE"
-          ;;
-      *)
-          echo "Usage: $0 [--inc|--dec|--inc-fine|--dec-fine|--get]"
-          ;;
-  esac
+case "$1" in
+    --inc) change_brightness "$STEP_NORMAL" "+" ;;
+    --dec) change_brightness "$STEP_NORMAL" "-" ;;
+    --inc-fine) change_brightness "$STEP_FINE" "+" ;;
+    --dec-fine) change_brightness "$STEP_FINE" "-" ;;
+    --get) get_brightness ;;
+    *)
+        echo "Usage: $0 [--inc|--dec|--inc-fine|--dec-fine|--get]"
+        ;;
+esac
