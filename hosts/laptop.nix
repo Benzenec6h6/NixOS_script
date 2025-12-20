@@ -24,4 +24,6 @@
     };
   };
 
+  networking.hostName = "laptop";
+
 }

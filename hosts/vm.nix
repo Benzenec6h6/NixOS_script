@@ -13,4 +13,6 @@
 
   # QEMU の guest agent を使う場合など
   services.qemuGuest.enable = true;
+
+  networking.hostName = "vm";
 }
