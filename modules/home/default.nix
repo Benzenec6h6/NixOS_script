@@ -17,6 +17,7 @@
     ./fonts.nix
     ./hypridle.nix
     ./kitty.nix
+    ./neovim.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
