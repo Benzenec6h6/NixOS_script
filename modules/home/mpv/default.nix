@@ -11,8 +11,9 @@
       osd-bar = "no";
       profile = "gpu-hq";
       vo = "gpu";
-      loop-file = "inf";
-      hwdec = "vaapi";
+      #loop-file = "inf";
+      #hwdec = "vaapi";
+      hwdec = "nvdec";
       scale = "ewa_lanczossharp";
       cscale = "ewa_lanczossharp";
       save-position-on-quit = "yes";
