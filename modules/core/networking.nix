@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  networking.hostName = "nixos"; # hosts/*.nix で上書きしても良い
-
   # NetworkManager を有効化
   networking.networkmanager = {
     enable = true;
