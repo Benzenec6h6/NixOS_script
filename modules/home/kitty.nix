@@ -21,4 +21,8 @@
         "ctrl+shift+w" = "close_tab";
     };
   };
+
+  home.sessionVariables = {
+    TERMINAL = "kitty";
+  };
 }
