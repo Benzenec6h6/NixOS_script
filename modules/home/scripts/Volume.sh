@@ -6,8 +6,8 @@ STEP_FINE=1
 
 # ヘッドホンの接続判定 (WirePlumber / PipeWire)
 is_headphones_connected() {
-    wpctl status | grep -q "Headphones" && return 0
-    return 1
+    wpctl inspect @DEFAULT_AUDIO_SINK@ 2>/dev/null \
+      | grep -q 'node.description = ".*Headphones"'
 }
 
 # --- Volume helpers ---------------------------------------------------------
