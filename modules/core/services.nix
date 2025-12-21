@@ -16,15 +16,6 @@
 
     flatpak.enable = true;
 
-    # サウンド (PipeWire + WirePlumber)
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      wireplumber.enable = true;
-    };
-
     xserver.enable = false;
     xserver.xkb = {
       layout = "jp";
