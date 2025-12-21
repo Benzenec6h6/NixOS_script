@@ -5,6 +5,7 @@
     ./fcitx5-mozc
     ./scripts
     ./sddm
+    ./audio.nix
     ./base.nix
     #./greetd.nix
     ./hibernate.nix
