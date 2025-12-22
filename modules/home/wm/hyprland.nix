@@ -144,6 +144,7 @@
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
     notify-desktop qimgv
+    Playwright
   ];
 
 }
