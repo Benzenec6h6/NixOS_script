@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # weather info from wttr. https://github.com/chubin/wttr.in
  
-#city=
-city=$(curl -s https://ipinfo.io | jq -r '.city')
+city="Kakogawa"
+#city=$(curl -s https://ipinfo.io | jq -r '.city')
 cachedir="$HOME/.cache/rbn"
 cachefile=${0##*/}-$1
 
@@ -79,7 +79,9 @@ esac
 
 #echo $temp $condition
 
-echo -e "{\"text\":\""$temperature $condition"\", \"alt\":\""${weather[0]}"\", \"tooltip\":\""${weather[0]}: $temperature ${weather[1]}"\"}"
+echo -e "{\"text\":\""$city: $temperature $condition"\", \
+\"alt\":\""${weather[0]}"\", \
+\"tooltip\":\""$city: $temperature ${weather[1]}"\"}"
 
 cached_weather=" $temperature  \n$condition ${weather[1]}"
 
