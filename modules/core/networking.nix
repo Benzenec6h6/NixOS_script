@@ -11,11 +11,9 @@
     # 接続性チェック（キャプティブポータル検知）
     settings = {
       connectivity = {
-        enabled = true;
-        uri = "http://nmcheck.gnome.org/check";
-        #uri = "http://nmcheck.gnome.org/check_network_status.txt";
-        response = "OK";
-        interval = 5;
+        enable = true;
+        uri = "http://connectivity-check.ubuntu.com";
+        interval = 300;
       };
     };
   };
