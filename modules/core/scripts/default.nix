@@ -6,6 +6,7 @@
     ./bluetooth_service.nix
     ./network_bluetooth_notify.nix
     ./network_service.nix
+    ./portal-monitor.nix
   ];
 
   environment.systemPackages = [
