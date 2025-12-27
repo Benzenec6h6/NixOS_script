@@ -1,5 +1,10 @@
 { pkgs, username, profile, inputs, ...}:
 {
+  imports = [
+    ./battery-monitor.nix
+    ./portal-monitor.nix
+  ];
+
   home.packages = [
     (import ./Brightness.nix { inherit pkgs; })
     (import ./ClipManager.nix { inherit pkgs; })
