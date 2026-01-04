@@ -21,7 +21,6 @@
     };
 
     zen-browser.url = "github:Benzenec6h6/zen-browser-flake";
-    #zen-browser.url = "git+https://codeberg.org/ktanchev/zen-browser-nix";
   };
 
   outputs = { nixpkgs, home-manager, stylix, zen-browser, ... }@inputs:
