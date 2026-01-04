@@ -12,7 +12,7 @@
 
         # Floorp Vertical Tab
         "floorp.browser.sidebar.enable" = true;
-        "floorp.browser.sidebar.position" = "left";
+        "floorp.browser.sidebar.position" = "right";
         "floorp.browser.verticalTab.enabled" = true;
       };
 
@@ -30,9 +30,6 @@
         ];
 
       userChrome = ''
-        #TabsToolbar {
-          visibility: collapse;
-        }
         /* サイドバーをタブ用に最適化 */
         #sidebar-box {
             min-width: 200px;
@@ -40,12 +37,6 @@
         }
         #nav-bar {
           min-height: 24px !important;
-        }
-      '';
-
-      userContent = ''
-        body {
-          background-color: #111 !important;
         }
       '';
     };
