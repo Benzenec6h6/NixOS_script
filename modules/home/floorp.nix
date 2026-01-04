@@ -21,9 +21,12 @@
           ublock-origin
           tridactyl
           darkreader
-          deepl
+          simple-translate
           multi-account-containers
-          pockettube
+          #cookies-txt 一応保留,yt-dlpと相性が良さそう
+          #enhancer-for-youtube
+          #improved-tube
+          #pockettube 検索でヒットしない。
         ];
 
       userChrome = ''
