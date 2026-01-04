@@ -14,6 +14,7 @@
     ./apps.nix
     ./brave.nix
     ./cava.nix
+    ./floorp.nix
     ./fonts.nix
     ./hypridle.nix
     ./kitty.nix
