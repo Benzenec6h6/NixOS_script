@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +28,7 @@
     zen-browser.url = "github:Benzenec6h6/zen-browser-flake";
   };
 
-  outputs = { nixpkgs, home-manager, stylix, zen-browser, ... }@inputs:
+  outputs = { nixpkgs, home-manager, stylix, zen-browser, nur, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "teto";
@@ -35,6 +40,12 @@
           inherit inputs username profile userPassword;
         };
         modules = [
+          ({ pkgs, ... }: {
+            nixpkgs.overlays = [
+              nur.overlay
+            ];
+          })
+          
           ./hosts/${profile}.nix
         ];
       };
