@@ -2,7 +2,7 @@
 
 {
     programs.firefox ={
-        enable=ture;
+        enable=true;
 
         profiles.main = {
             isDefault = true;
@@ -20,5 +20,5 @@
                     #pockettube 検索でヒットしない。
                 ];
         };
-    }
+    };
 }
