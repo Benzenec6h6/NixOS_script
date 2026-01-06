@@ -86,7 +86,7 @@ if [[ "$PASSWORD" != "$PASSWORD2" ]]; then
   exit 1
 fi
 
-HASH=$(mkpasswd -m sha-512 "$PASSWORD")
+HASH=$(mkpasswd -m yescrypt "$PASSWORD")
 echo "Generated hashed password."
 
 if [ -f "$SCRIPT_DIR/flake.nix" ]; then
