@@ -45,16 +45,14 @@
       "image/bmp"  = [ "qimgv.desktop" ];
 
       # Web / URL は zen
-      "text/html" = [ "zen.desktop" ];
-      "x-scheme-handler/http"  = [ "zen.desktop" ];
-      "x-scheme-handler/https" = [ "zen.desktop" ];
+      "text/html" = [ "firefox.desktop" ];
+      "x-scheme-handler/http"  = [ "firefox.desktop" ];
+      "x-scheme-handler/https" = [ "firefox.desktop" ];
     };
   };
 
   programs.git = {
     enable = true;
-    #userName = "Benzenec6h6";
-    #userEmail = "aconitinec34h47no11@gmail.com";
     settings.user = {
       name = "Benzenec6h6";
       email = "aconitinec34h47no11@gmail.com";
@@ -83,6 +81,7 @@
   services.playerctld.enable = true;
   services.hypridle.enable = true;
   programs.hyprlock.enable = true;
+  programs.distrobox.enable = true;
 
   home.file.".config/hypr/hyprlock".source = ./hyprlock;
   home.file.".config/quickshell".source = ./quickshell;
