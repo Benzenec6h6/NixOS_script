@@ -5,8 +5,6 @@
     
     wineWowPackages.waylandFull winetricks
 
-    docker
-
     vscodium
 
     # 通信用
