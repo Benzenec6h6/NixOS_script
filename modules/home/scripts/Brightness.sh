@@ -19,12 +19,24 @@ send_notification() {
 
 change_brightness() {
     local step=$1
-    local mode=$2
+    local op=$2 # "+" または "-"
 
-    # brightnessctl 内部stepに任せる
-    brightnessctl set "${step}%${mode}" > /dev/null
+    if [ "$op" == "-" ]; then
+        # 現在の輝度（raw値）と最大値を取得
+        local current=$(brightnessctl get)
+        local max=$(brightnessctl max)
+        # ステップ分を引いたあとの期待値を計算（1%あたりのraw値を考慮）
+        # 1を下回らないように制御
+        brightnessctl set "${step}%-"
+        local new=$(brightnessctl get)
+        if [ "$new" -eq 0 ]; then
+            brightnessctl set 1
+        fi
+    else
+        brightnessctl set "${step}%+"
+    fi
 
-    sleep 0.05  # 反映待ち（重要）
+    sleep 0.05
     send_notification "$(get_brightness)"
 }
 
