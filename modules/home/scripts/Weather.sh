@@ -47,15 +47,33 @@ if [[ -n "$data" ]]; then
     temp="${info[2]:-?°C}"
 
     case "${cond_text,,}" in
-        *sunny*|*clear*)   condition="" ;;
-        *partly cloudy*)   condition="󰖕" ;;
-        *cloudy*)          condition="" ;;
-        *overcast*)        condition="" ;;
-        *mist*|*fog*)      condition="" ;;
-        *rain*|*drizzle*)  condition="󰼳" ;;
-        *thunder*)         condition="" ;;
-        *snow*)            condition="" ;;
-        *)                 condition="" ;;
+    *sunny*|*clear*)
+        condition=""
+        ;;
+    *partly cloudy*)
+        condition="󰖕"
+        ;;
+    *cloudy*)
+        condition=""
+        ;;
+    *overcast*)
+        condition=""
+        ;;
+    *mist*|*fog*)
+        condition=""
+        ;;
+    *rain*|*drizzle*)
+        condition="󰼳"
+        ;;
+    *thunder*)
+        condition=""
+        ;;
+    *snow*)
+        condition=""
+        ;;
+    *)
+        condition=""
+        ;;
     esac
 
     output_json=$(printf '{"text":"%s %s %s", "tooltip":"%s: %s %s"}\n' \
