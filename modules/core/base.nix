@@ -7,17 +7,23 @@
   
   console.keyMap = "jp106";
 
-  boot.loader.grub.configurationLimit = 5;
-
   nix = {
     package = pkgs.nixVersions.stable;
     settings.experimental-features = [ "nix-command" "flakes" ];
-  };
-
-  nix.settings = {
-    max-jobs = "auto";
-    cores = 0;
-    auto-optimise-store = false; # optimiseと二重にしない
+    gc = {
+      automatic = true;
+      dates = "monthly";
+      options = "--delete-older-than 30d";
+    };
+    settings = {
+      max-jobs = "auto";
+      cores = 0;
+      auto-optimise-store = true;
+    };
+    optimise ={
+      automatic = true;
+      dates = [ "monthly" ];
+    };
   };
 
   boot.tmp.cleanOnBoot = true;
@@ -34,6 +40,9 @@
   };
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    systemd-boot.configurationLimit = 5; # ここに移動
+    efi.canTouchEfiVariables = true;
+  };
 }
