@@ -19,7 +19,7 @@
   };
 
   services.resolved.enable = true;
-  services.resolved.dnssec = false;
+  services.resolved.dnssec = "false";
   networking.enableIPv6 = false;
 
   # Firewall 設定 (ufw or nftables のどちらか)
