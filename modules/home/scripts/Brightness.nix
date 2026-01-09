@@ -1,10 +1,7 @@
 { pkgs, ... }:
 
-pkgs.writeShellScriptBin "brightness" ''
-  #!${pkgs.bash}/bin/bash
-
-  # 依存コマンドを PATH に追加
-  export PATH=${pkgs.brightnessctl}/bin:${pkgs.libnotify}/bin:$PATH
-
-  ${builtins.readFile ./Brightness.sh}
-''
+pkgs.writeShellApplication {
+  name = "brightness";
+  runtimeInputs = [ pkgs.brightnessctl pkgs.libnotify pkgs.gawk pkgs.coreutils ];
+  text = builtins.readFile ./Brightness.sh;
+}

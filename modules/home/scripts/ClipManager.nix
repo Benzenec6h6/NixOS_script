@@ -1,7 +1,13 @@
-{ pkgs }:
+{ pkgs, ... }:
 
-pkgs.writeShellScriptBin "clipmanager" ''
-  #!${pkgs.bash}/bin/bash
-  export PATH=${pkgs.rofi}/bin:${pkgs.cliphist}/bin:${pkgs.wl-clipboard}/bin:$PATH
-  ${builtins.readFile ./ClipManager.sh}
-''
+pkgs.writeShellApplication {
+  name = "clipmanager";
+  runtimeInputs = [ 
+    pkgs.rofi 
+    pkgs.cliphist 
+    pkgs.wl-clipboard 
+    pkgs.procps    # pidof, pkill 用
+    pkgs.coreutils 
+  ];
+  text = builtins.readFile ./ClipManager.sh;
+}

@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# デバイス名は環境によって「BAT1」や「ADP1」の場合があるため、存在確認を挟むとより安全です
 BATTERY="/sys/class/power_supply/BAT0"
 AC="/sys/class/power_supply/AC"
 
-STATE_DIR="/run/user/$(id -u)/battery-monitor"
+# 存在しない場合は静かに終了
+[ -d "$BATTERY" ] || exit 0
+[ -d "$AC" ] || exit 0
+
+# XDG_RUNTIME_DIRが取れない場合のフォールバック
+STATE_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/battery-monitor"
 STATE_FILE="$STATE_DIR/state"
 
 mkdir -p "$STATE_DIR"
@@ -23,7 +29,6 @@ fi
 PREV_STATE=""
 [ -f "$STATE_FILE" ] && PREV_STATE="$(cat "$STATE_FILE")"
 
-# 状態が変わったときだけ通知
 if [ "$CURRENT_STATE" != "$PREV_STATE" ]; then
   case "$CURRENT_STATE" in
     low)

@@ -30,7 +30,7 @@ if [ "$1" = "-d" ]; then
     shift
 fi
 
-TERMINAL_CMD="$1"
+TERMINAL_CMD="${1:-kitty}"
 
 # Debug echo function
 debug_echo() {

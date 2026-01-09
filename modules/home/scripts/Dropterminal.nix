@@ -1,10 +1,23 @@
 { pkgs }:
 
-pkgs.writeShellScriptBin "Dropterminal" ''
-  #!${pkgs.bash}/bin/bash
-
-  # 必要な依存を PATH に追加
-  export PATH=${pkgs.hyprland}/bin:${pkgs.jq}/bin:${pkgs.bc}/bin:$PATH
-
-  ${builtins.readFile ./Dropterminal.sh}
-''
+pkgs.writeShellApplication {
+  name = "Dropterminal";
+  runtimeInputs = [ 
+    pkgs.hyprland 
+    pkgs.jq 
+    pkgs.bc 
+    pkgs.procps 
+    pkgs.coreutils 
+    pkgs.gnused
+    pkgs.kitty # ← あなたが使っているターミナルをここに追加してください
+  ];
+  # スクリプトを呼び出す際、引数がなければ "kitty" を使うようにラップ
+  text = ''
+    # もし引数が空なら、デフォルトのターミナルを指定する
+    if [ $# -eq 0 ]; then
+        ${builtins.readFile ./Dropterminal.sh} "kitty"
+    else
+        ${builtins.readFile ./Dropterminal.sh} "$@"
+    fi
+  '';
+}

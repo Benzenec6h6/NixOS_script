@@ -1,22 +1,30 @@
-{ pkgs, username, profile, inputs, ...}:
+{ pkgs, ... }:
+
+let
+  # 共通の引数(pkgs)を渡してインポートする関数
+  importScript = path: import path { inherit pkgs; };
+in
 {
   imports = [
     ./battery-monitor.nix
-    ./portal-monitor.nix
+    ./storage-monitor.nix
+    ./wifi-portal-manager.nix
   ];
 
   home.packages = [
-    (import ./Brightness.nix { inherit pkgs; })
-    (import ./ClipManager.nix { inherit pkgs; })
-    (import ./Dropterminal.nix { inherit pkgs; })
-    (import ./KeyBinds.nix { inherit pkgs; })
-    (import ./KillActive.nix { inherit pkgs; })
-    (import ./networkmanager_rofi.nix { inherit pkgs; })
-    (import ./recorder.nix { inherit pkgs inputs; })
-    (import ./ScreenShot.nix { inherit pkgs inputs; })
-    (import ./Volume.nix { inherit pkgs; })
-    (import ./WaybarCava.nix { inherit pkgs; })
-    (import ./WaybarScripts.nix { inherit pkgs; })
-    (import ./Weather.nix { inherit pkgs; })
+    (importScript ./Brightness.nix)
+    (importScript ./ClipManager.nix)
+    (importScript ./Dropterminal.nix)
+    (importScript ./KeyBinds.nix)
+    (importScript ./Volume.nix)
+    (importScript ./WaybarCava.nix)
+    (importScript ./WaybarScripts.nix)
+    (importScript ./Weather.nix)
+    (importScript ./recorder.nix)
+    (importScript ./ScreenShot.nix)
+
+    # 開発用・無効化中のものはコメントアウトで管理
+    # (importScript ./KillActive.nix)
+    # (importScript ./networkmanager_rofi.nix)
   ];
 }
