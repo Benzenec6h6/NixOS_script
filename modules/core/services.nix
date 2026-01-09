@@ -47,21 +47,8 @@
   hardware.cpu.intel.updateMicrocode = true;
 
   virtualisation.podman.enable = true;
-
   virtualisation.libvirtd.enable = true;
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
-
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "monthly";
-      options = "--delete-older-than 30d";
-    };
-    settings.auto-optimise-store = true; # 書き込み時に自動で最適化
-    # または定期的に最適化したい場合
-    optimise.automatic = true;
-    optimise.dates = [ "monthly" ];
-  };
 }
