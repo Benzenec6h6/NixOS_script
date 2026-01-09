@@ -1,52 +1,48 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd /etc/nixos/NixOS_script # or flake path
-
-#echo "=== flake update ==="
-#nix flake update
+# パスをフルパスで指定、または flake の場所へ
+cd /etc/nixos/NixOS_script
 
 echo "=== system rebuild ==="
+OLD_SYSTEM=$(readlink -f /run/current-system)
+OLD_KERNEL=$(uname -a) # kernelバージョンはuname全体で見るのが確実
 
-OLD_SYSTEM="$(readlink -f /run/current-system)"
-OLD_KERNEL="$(uname -r)"
+# 再構築の実行
+nixos-rebuild switch --flake .
 
-nixos-rebuild switch --flake .#$(hostname)
+NEW_SYSTEM=$(readlink -f /run/current-system)
+NEW_KERNEL=$(uname -a)
 
-NEW_SYSTEM="$(readlink -f /run/current-system)"
-NEW_KERNEL_LINK="$(readlink -f /run/current-system/kernel)"
-NEW_KERNEL="$(basename "$NEW_KERNEL_LINK")"
+# 簡易的な systemd 比較（パスの比較）
+OLD_SYSTEMD=$(readlink -f /run/current-system/sw/bin/systemctl)
+NEW_SYSTEMD=$(readlink -f /run/current-system/sw/bin/systemctl)
 
 REBOOT_REQUIRED=0
 REASONS=()
 
-# 1. system generation が変わったか
 if [[ "$OLD_SYSTEM" != "$NEW_SYSTEM" ]]; then
   REBOOT_REQUIRED=1
-  REASONS+=("system generation updated")
+  REASONS+=("System generation changed")
 fi
-
-# 2. kernel が変わったか
 if [[ "$OLD_KERNEL" != "$NEW_KERNEL" ]]; then
   REBOOT_REQUIRED=1
-  REASONS+=("kernel updated")
+  REASONS+=("Kernel updated")
 fi
-
-# 3. systemd が更新されたか
 if [[ "$OLD_SYSTEMD" != "$NEW_SYSTEMD" ]]; then
   REBOOT_REQUIRED=1
-  REASONS+=("systemd updated")
+  REASONS+=("Systemd updated")
 fi
 
-# 通知
+# メッセージ作成
 if [[ "$REBOOT_REQUIRED" -eq 1 ]]; then
-  notify-send \
-    "NixOS rebuild completed" \
-    "⚠ Reboot recommended:\n- $(printf '%s\n- ' "${REASONS[@]}")" \
-    -u critical
+  MSG="Reboot recommended: ${REASONS[*]}"
+  LEVEL="critical"
 else
-  notify-send \
-    "NixOS rebuild completed" \
-    "No reboot required 🎉" \
-    -u normal
+  MSG="Success! No reboot required."
+  LEVEL="normal"
 fi
+
+# 全ユーザーのデスクトップに通知を送る（壁）
+# 最も簡単な回避策は wall コマンドか、ユーザーを狙い撃ちした通知
+wall "$MSG"
