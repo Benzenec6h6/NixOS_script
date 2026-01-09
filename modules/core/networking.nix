@@ -12,13 +12,14 @@
     settings = {
       connectivity = {
         enable = true;
-        uri = "http://connectivity-check.ubuntu.com";
+        uri = "http://nmcheck.gnome.org/check_network_status.txt";
         interval = 300;
       };
     };
   };
 
   services.resolved.enable = true;
+  services.resolved.dnssec = false;
   networking.enableIPv6 = false;
 
   # Firewall 設定 (ufw or nftables のどちらか)
