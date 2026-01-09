@@ -42,6 +42,7 @@
 
   #bluetooth
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   hardware.cpu.intel.updateMicrocode = true;
 
@@ -51,4 +52,16 @@
 
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "monthly";
+      options = "--delete-older-than 30d";
+    };
+    settings.auto-optimise-store = true; # 書き込み時に自動で最適化
+    # または定期的に最適化したい場合
+    optimise.automatic = true;
+    optimise.dates = [ "monthly" ];
+  };
 }
