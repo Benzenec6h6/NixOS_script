@@ -77,6 +77,7 @@
   programs.bat.enable = true;
   programs.fd.enable = true;
 
+  services.blueman-applet.enable = true;
   services.swaync.enable = true;
   services.playerctld.enable = true;
   services.hypridle.enable = true;
