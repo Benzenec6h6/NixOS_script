@@ -11,6 +11,8 @@ pkgs.writeShellApplication {
   ];
   # スクリプト内で使うデータの場所を環境変数で渡すと管理しやすいです
   text = ''
+    export LANG="en_US.UTF-8"
+    export LC_ALL="en_US.UTF-8"
     export HYPRLAND_NIX="/etc/nixos/NixOS_script/modules/home/wm/hyprland.nix"
     ${builtins.readFile ./KeyBinds.sh}
   '';
