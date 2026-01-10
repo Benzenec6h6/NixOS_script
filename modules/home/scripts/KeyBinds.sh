@@ -42,7 +42,7 @@ if [[ -z "$(echo "$all_binds" | tr -d '[:space:]')" ]]; then
 fi
 
 # アイコン置換とフォーマット
-display_list=$(echo "$all_binds" | sed "s/SUPER/${SUPER_ICON}/g")
+display_list="${all_binds//SUPER/${SUPER_ICON}}"
 final_menu="$HEADER\n───────────────────────────────\n$display_list"
 
 # Rofi で表示
