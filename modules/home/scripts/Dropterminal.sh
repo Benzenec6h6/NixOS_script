@@ -349,10 +349,10 @@ if terminal_exists; then
         # Get current geometry for animation
         geometry=$(get_window_geometry "$TERMINAL_ADDR")
         if [ -n "$geometry" ]; then
-            curr_x=$(echo $geometry | cut -d' ' -f1)
-            curr_y=$(echo $geometry | cut -d' ' -f2)
-            curr_width=$(echo $geometry | cut -d' ' -f3)
-            curr_height=$(echo $geometry | cut -d' ' -f4)
+            curr_x=$(echo "$geometry" | cut -d' ' -f1)
+            curr_y=$(echo "$geometry" | cut -d' ' -f2)
+            curr_width=$(echo "$geometry" | cut -d' ' -f3)
+            curr_height=$(echo "$geometry" | cut -d' ' -f4)
             
             debug_echo "Current geometry: ${curr_x},${curr_y} ${curr_width}x${curr_height}"
             
