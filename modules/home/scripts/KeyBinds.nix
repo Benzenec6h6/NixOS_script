@@ -14,6 +14,7 @@ pkgs.writeShellApplication {
     export LANG="en_US.UTF-8"
     export LC_ALL="en_US.UTF-8"
     export HYPRLAND_NIX="/etc/nixos/NixOS_script/modules/home/wm/hyprland.nix"
+    export SUPER_ICON=""
     ${builtins.readFile ./KeyBinds.sh}
   '';
 }
