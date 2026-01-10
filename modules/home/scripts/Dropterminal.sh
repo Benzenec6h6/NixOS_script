@@ -1,8 +1,6 @@
-#!/bin/bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-#
-# Made and brought to by Kiran George
-# /* -- ✨ https://github.com/SherLock707 ✨ -- */  ##
+#!/usr/bin/env bash
+set -euo pipefail
+
 # Dropdown Terminal 
 # Usage: ./Dropdown.sh [-d] <terminal_command>
 # Example: ./Dropdown.sh foot
