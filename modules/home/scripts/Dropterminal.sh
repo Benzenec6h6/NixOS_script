@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
 
 # Dropdown Terminal 
 # Usage: ./Dropdown.sh [-d] <terminal_command>
