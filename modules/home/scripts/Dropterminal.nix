@@ -12,5 +12,11 @@ pkgs.writeShellApplication {
     pkgs.kitty # ← あなたが使っているターミナルをここに追加してください
   ];
   checkPhase = "true";
-  text = builtins.readFile ./Dropterminal.sh;
+  text = ''
+    if [ $# -eq 0 ]; then
+      echo "Usage: dropterminal <terminal>" >&2
+      exit 1
+    fi
+    ${builtins.readFile ./Dropterminal.sh} "$@"
+  '';
 }
