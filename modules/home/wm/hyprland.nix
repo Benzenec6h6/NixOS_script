@@ -30,7 +30,7 @@
         "SUPER CTRL, F, fullscreen, 1" # fake full screen
         "SUPER, SPACE, togglefloating," #Float Mode
         "SUPER ALT, SPACE, exec, hyprctl dispatch workspaceopt allfloat" #All Float Mode
-        "SUPER SHIFT, Return, exec, Dropterminal $term" # Dropdown terminal
+        "SUPER SHIFT, Return, exec, Dropterminal kitty" # Dropdown terminal
         "SUPER CTRL ALT, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
         "SUPER,H,exec,KeyBinds"
         "SUPER,D,exec,rofi -show drun"
