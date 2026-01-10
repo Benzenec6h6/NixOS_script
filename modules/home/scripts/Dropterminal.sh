@@ -253,8 +253,10 @@ spawn_terminal() {
     debug_echo "Target position: ${target_x},${target_y}, size: ${width}x${height}"
     
     # Get window count before spawning
-    local windows_before=$(hyprctl clients -j)
-    local count_before=$(echo "$windows_before" | jq 'length')
+    local windows_before
+    windows_before=$(hyprctl clients -j)
+    local count_before
+    count_before=$(echo "$windows_before" | jq 'length')
     
     # Launch terminal directly in special workspace to avoid visible spawn
     hyprctl dispatch exec "[float; size $width $height; workspace special:scratchpad silent] $TERMINAL_CMD"
@@ -263,8 +265,10 @@ spawn_terminal() {
     sleep 0.1
     
     # Get windows after spawning
-    local windows_after=$(hyprctl clients -j)
-    local count_after=$(echo "$windows_after" | jq 'length')
+    local windows_after
+    windows_after=$(hyprctl clients -j)
+    local count_after
+    count_after=$(echo "$windows_after" | jq 'length')
     
     local new_addr=""
     
