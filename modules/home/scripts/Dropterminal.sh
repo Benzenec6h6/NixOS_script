@@ -244,11 +244,11 @@ spawn_terminal() {
         debug_echo "Warning: Using fallback positioning"
     fi
     
-    local target_x=$(echo $pos_info | cut -d' ' -f1)
-    local target_y=$(echo $pos_info | cut -d' ' -f2)
-    local width=$(echo $pos_info | cut -d' ' -f3)
-    local height=$(echo $pos_info | cut -d' ' -f4)
-    local monitor_name=$(echo $pos_info | cut -d' ' -f5)
+    local target_x=$(echo "$pos_info" | cut -d' ' -f1)
+    local target_y=$(echo "$pos_info" | cut -d' ' -f2)
+    local width=$(echo "$pos_info" | cut -d' ' -f3)
+    local height=$(echo "$pos_info" | cut -d' ' -f4)
+    local monitor_name=$(echo "$pos_info" | cut -d' ' -f5)
     
     debug_echo "Target position: ${target_x},${target_y}, size: ${width}x${height}"
     
@@ -312,11 +312,11 @@ if terminal_exists; then
         debug_echo "Monitor focus changed: moving dropdown to $focused_monitor"
         # Calculate new position for focused monitor
         pos_info=$(calculate_dropdown_position)
-        target_x=$(echo $pos_info | cut -d' ' -f1)
-        target_y=$(echo $pos_info | cut -d' ' -f2)
-        width=$(echo $pos_info | cut -d' ' -f3)
-        height=$(echo $pos_info | cut -d' ' -f4)
-        monitor_name=$(echo $pos_info | cut -d' ' -f5)
+        target_x=$(echo "$pos_info" | cut -d' ' -f1)
+        target_y=$(echo "$pos_info" | cut -d' ' -f2)
+        width=$(echo "$pos_info" | cut -d' ' -f3)
+        height=$(echo "$pos_info" | cut -d' ' -f4)
+        monitor_name=$(echo "$pos_info" | cut -d' ' -f5)
         # Move and resize window
         hyprctl dispatch movewindowpixel "exact $target_x $target_y,address:$TERMINAL_ADDR"
         hyprctl dispatch resizewindowpixel "exact $width $height,address:$TERMINAL_ADDR"
@@ -329,10 +329,10 @@ if terminal_exists; then
         
         # Calculate target position
         pos_info=$(calculate_dropdown_position)
-        target_x=$(echo $pos_info | cut -d' ' -f1)
-        target_y=$(echo $pos_info | cut -d' ' -f2)
-        width=$(echo $pos_info | cut -d' ' -f3)
-        height=$(echo $pos_info | cut -d' ' -f4)
+        target_x=$(echo "$pos_info" | cut -d' ' -f1)
+        target_y=$(echo "$pos_info" | cut -d' ' -f2)
+        width=$(echo "$pos_info" | cut -d' ' -f3)
+        height=$(echo "$pos_info" | cut -d' ' -f4)
         
         # Use movetoworkspacesilent to avoid affecting workspace history
         hyprctl dispatch movetoworkspacesilent "$CURRENT_WS,address:$TERMINAL_ADDR"
