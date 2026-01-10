@@ -10,7 +10,7 @@ path="${dir}/${file}"
 # アイコン名の設定 (Papirusテーマ内の名前)
 ICON_SHOT="image-x-generic"
 ICON_TIMER="alarm-clock"
-ICON_EDIT="swappy"
+#ICON_EDIT="swappy"
 ICON_ERROR="dialog-error"
 
 # 音声ファイルの定義 (より安全なパス、または依存に含める)
