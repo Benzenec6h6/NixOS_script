@@ -1,37 +1,56 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 STEP_NORMAL=5
 STEP_FINE=1
 
-# カード番号に依存せず、名前でヘッドホン状態を判定する
+# -------------------------------------------------------------------
+# Headphone detection (card-number independent)
+# -------------------------------------------------------------------
 is_headphones_connected() {
-    # 'Headphone' という名前を含むコントロールの値をチェック
-    # カード番号を指定せず、全てのオーディオデバイスから検索
-    amixer contents 2>/dev/null | grep -A 2 "Headphone" | grep -q "values=on"
+    amixer contents 2>/dev/null \
+        | grep -A 2 -i "headphone" \
+        | grep -q "values=on"
 }
 
-# --- Volume helpers ---
-get_volume() { pamixer --get-volume; }
-is_muted() { [ "$(pamixer --get-mute)" = "true" ]; }
+# -------------------------------------------------------------------
+# Volume helpers (sink)
+# -------------------------------------------------------------------
+get_volume() {
+    pamixer --get-volume
+}
 
-# --- Icon selection ---
+is_muted() {
+    [ "$(pamixer --get-mute)" = "true" ]
+}
+
 get_volume_icon() {
     if is_muted; then
-        is_headphones_connected && echo "audio-volume-muted-headphones-symbolic" || echo "audio-volume-muted-symbolic"
+        if is_headphones_connected; then
+            echo "audio-volume-muted-headphones-symbolic"
+        else
+            echo "audio-volume-muted-symbolic"
+        fi
     else
-        is_headphones_connected && echo "audio-volume-headphones-symbolic" || echo "audio-volume-high-symbolic"
+        if is_headphones_connected; then
+            echo "audio-volume-headphones-symbolic"
+        else
+            echo "audio-volume-high-symbolic"
+        fi
     fi
 }
 
-# --- Notification ---
 notify_volume() {
-    local vol
+    local vol icon label
     vol=$(get_volume)
-    local icon
     icon=$(get_volume_icon)
-    local label="Volume"
-    
-    [ "$vol" -eq 0 ] || is_muted && label="Volume: Muted" || label="Volume: ${vol}%"
+
+    if is_muted || [ "$vol" -eq 0 ]; then
+        label="Volume: Muted"
+        vol=0
+    else
+        label="Volume: ${vol}%"
+    fi
 
     notify-send -e \
         -a "System" \
@@ -43,28 +62,57 @@ notify_volume() {
         "$label"
 }
 
-# --- Volume adjust ---
 change_volume() {
     local delta=$1
-    if is_muted; then pamixer -u; fi
 
-    if [[ $delta -gt 0 ]]; then
-        pamixer -i "$delta" --allow-boost # 100%以上を許可する場合はこれ
-    else
-        pamixer -d "${delta#-}" # 負の記号を除去
+    if is_muted; then
+        pamixer -u
     fi
+
+    if [ "$delta" -gt 0 ]; then
+        pamixer -i "$delta" --allow-boost
+    else
+        pamixer -d "${delta#-}"
+    fi
+
     notify_volume
 }
 
-# --- Microphone helpers ---
-mic_is_muted() { [ "$(pamixer --default-source --get-mute)" = "true" ]; }
-mic_get_volume() { pamixer --default-source --get-volume; }
+toggle_volume_mute() {
+    pamixer -t
+    notify_volume
+}
+
+# -------------------------------------------------------------------
+# Microphone helpers (source)
+# -------------------------------------------------------------------
+mic_get_volume() {
+    pamixer --default-source --get-volume
+}
+
+mic_is_muted() {
+    [ "$(pamixer --default-source --get-mute)" = "true" ]
+}
+
+mic_get_icon() {
+    if mic_is_muted; then
+        echo "audio-input-microphone-muted-symbolic"
+    else
+        echo "audio-input-microphone-high-symbolic"
+    fi
+}
 
 notify_mic() {
-    local vol
+    local vol icon label
     vol=$(mic_get_volume)
-    local label="Microphone: ${vol}%"
-    mic_is_muted && label="Microphone: Muted"
+    icon=$(mic_get_icon)
+
+    if mic_is_muted || [ "$vol" -eq 0 ]; then
+        label="Microphone: Muted"
+        vol=0
+    else
+        label="Microphone: ${vol}%"
+    fi
 
     notify-send -e \
         -a "System" \
@@ -72,9 +120,59 @@ notify_mic() {
         -h string:x-canonical-private-synchronous:mic_notif \
         -h "int:value:${vol}" \
         -u low \
-        --icon="$(mic_is_muted && echo "audio-input-microphone-muted-symbolic" || echo "audio-input-microphone-high-symbolic")" \
+        --icon="$icon" \
         "$label"
 }
 
-# (中略: micのロジックは基本同様に整理)
-# case文での呼び出しも同様
+change_mic_volume() {
+    local delta=$1
+
+    if mic_is_muted; then
+        pamixer --default-source -u
+    fi
+
+    if [ "$delta" -gt 0 ]; then
+        pamixer --default-source -i "$delta"
+    else
+        pamixer --default-source -d "${delta#-}"
+    fi
+
+    notify_mic
+}
+
+toggle_mic_mute() {
+    pamixer --default-source -t
+    notify_mic
+}
+
+# -------------------------------------------------------------------
+# Dispatcher
+# -------------------------------------------------------------------
+case "${1:-}" in
+    --inc)            change_volume "$STEP_NORMAL" ;;
+    --dec)            change_volume "-$STEP_NORMAL" ;;
+    --inc-fine)       change_volume "$STEP_FINE" ;;
+    --dec-fine)       change_volume "-$STEP_FINE" ;;
+    --toggle)         toggle_volume_mute ;;
+
+    --mic-inc)        change_mic_volume "$STEP_NORMAL" ;;
+    --mic-dec)        change_mic_volume "-$STEP_NORMAL" ;;
+    --mic-inc-fine)   change_mic_volume "$STEP_FINE" ;;
+    --mic-dec-fine)   change_mic_volume "-$STEP_FINE" ;;
+    --toggle-mic)     toggle_mic_mute ;;
+
+    --get)            get_volume ;;
+    --get-mic)        mic_get_volume ;;
+    *)
+        cat <<EOF
+Usage:
+  --inc / --dec
+  --inc-fine / --dec-fine
+  --toggle
+  --mic-inc / --mic-dec
+  --mic-inc-fine / --mic-dec-fine
+  --toggle-mic
+  --get / --get-mic
+EOF
+        ;;
+esac
