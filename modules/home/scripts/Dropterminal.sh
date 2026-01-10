@@ -139,12 +139,12 @@ calculate_dropdown_position() {
         return 1
     fi
     
-    local mon_x=$(echo $monitor_info | cut -d' ' -f1)
-    local mon_y=$(echo $monitor_info | cut -d' ' -f2)
-    local mon_width=$(echo $monitor_info | cut -d' ' -f3)
-    local mon_height=$(echo $monitor_info | cut -d' ' -f4)
-    local mon_scale=$(echo $monitor_info | cut -d' ' -f5)
-    local mon_name=$(echo $monitor_info | cut -d' ' -f6)
+    local mon_x=$(echo "$monitor_info" | cut -d' ' -f1)
+    local mon_y=$(echo "$monitor_info" | cut -d' ' -f2)
+    local mon_width=$(echo "$monitor_info" | cut -d' ' -f3)
+    local mon_height=$(echo "$monitor_info" | cut -d' ' -f4)
+    local mon_scale=$(echo "$monitor_info" | cut -d' ' -f5)
+    local mon_name=$(echo "$monitor_info" | cut -d' ' -f6)
     
     debug_echo "Monitor info: x=$mon_x, y=$mon_y, width=$mon_width, height=$mon_height, scale=$mon_scale"
     
