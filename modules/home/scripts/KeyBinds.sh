@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 表示設定
-HEADER=" = SUPER (Win Key)"
+HEADER="${SUPER_ICON} = SUPER (Win Key)"
 MSG='🔍 Search or scroll to view your keybinds (Press Esc to exit)'
 
 # --- 1. データ抽出用関数（ソースが増えたらここに追加） ---
@@ -42,7 +42,7 @@ if [[ -z "$(echo "$all_binds" | tr -d '[:space:]')" ]]; then
 fi
 
 # アイコン置換とフォーマット
-display_list=$(echo "$all_binds" | sed 's/SUPER//g')
+display_list=$(echo "$all_binds" | sed "s/SUPER/${SUPER_ICON}/g")
 final_menu="$HEADER\n───────────────────────────────\n$display_list"
 
 # Rofi で表示
