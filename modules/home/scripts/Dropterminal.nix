@@ -11,6 +11,7 @@ pkgs.writeShellApplication {
     pkgs.gnused
     pkgs.kitty # ← あなたが使っているターミナルをここに追加してください
   ];
+  checkPhase = "true";
   # スクリプトを呼び出す際、引数がなければ "kitty" を使うようにラップ
   text = ''
     # もし引数が空なら、デフォルトのターミナルを指定する
