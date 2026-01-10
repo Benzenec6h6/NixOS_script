@@ -30,7 +30,11 @@ if [ "$1" = "-d" ]; then
     shift
 fi
 
-TERMINAL_CMD="${1:-kitty}"
+ if [ "$#" -eq 0 ]; then
+     TERMINAL_CMD=(kitty)
+ else
+     TERMINAL_CMD=("$@")
+ fi
 
 # Debug echo function
 debug_echo() {
@@ -257,7 +261,7 @@ spawn_terminal() {
     local count_before=$(echo "$windows_before" | jq 'length')
     
     # Launch terminal directly in special workspace to avoid visible spawn
-    hyprctl dispatch exec "[float; size $width $height; workspace special:scratchpad silent] $TERMINAL_CMD"
+    hyprctl dispatch exec "[float; size $width $height; workspace special:scratchpad silent] ${TERMINAL_CMD[@]}"
     
     # Wait for window to appear
     sleep 0.1
