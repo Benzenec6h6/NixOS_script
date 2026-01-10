@@ -12,13 +12,5 @@ pkgs.writeShellApplication {
     pkgs.kitty # ← あなたが使っているターミナルをここに追加してください
   ];
   checkPhase = "true";
-  # スクリプトを呼び出す際、引数がなければ "kitty" を使うようにラップ
-  text = ''
-    # もし引数が空なら、デフォルトのターミナルを指定する
-    if [ $# -eq 0 ]; then
-        ${builtins.readFile ./Dropterminal.sh} "kitty"
-    else
-        ${builtins.readFile ./Dropterminal.sh} "$@"
-    fi
-  '';
+  text = builtins.readFile ./Dropterminal.sh;
 }
