@@ -1,9 +1,12 @@
 { config, pkgs, ... }:
-
+let
+  terminal = "kitty";
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      "$term" = "${terminal}";
       # モニタ設定
       monitor = [
         "eDP-1,1920x1080,0x0,1"
@@ -21,7 +24,7 @@
 
       # キーバインド例
       bind = [
-        "SUPER,Return,exec,kitty"
+        "SUPER, Return, exec, $term"
         "SUPER,B,exec,zen"  
         "SUPER,Q,killactive"
         "SUPER,P,exec,wlogout -p layer-shell"
@@ -30,7 +33,7 @@
         "SUPER CTRL, F, fullscreen, 1" # fake full screen
         "SUPER, SPACE, togglefloating," #Float Mode
         "SUPER ALT, SPACE, exec, hyprctl dispatch workspaceopt allfloat" #All Float Mode
-        "SUPER SHIFT, Return, exec, Dropterminal kitty" # Dropdown terminal
+        "SUPER SHIFT, Return, exec, Dropterminal $term" # Dropdown terminal
         "SUPER CTRL ALT, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
         "SUPER,H,exec,KeyBinds"
         "SUPER,D,exec,rofi -show drun"
@@ -85,8 +88,8 @@
         "SUPER SHIFT,9,movetoworkspace,9"
         "SUPER SHIFT,0,movetoworkspace,10"
 
-        "CTRL ALT,right,workspace,e+1"
-        "CTRL ALT,left,workspace,e-1"
+        "SUPER CTRL,right,workspace,e+1"
+        "SUPER CTRL,left,workspace,e-1"
         "SUPER,mouse_down,workspace,e+1"
         "SUPER,mouse_up,workspace,e-1"
         "SUPER SHIFT,SPACE,movetoworkspace,special"
@@ -125,8 +128,6 @@
 
       windowrulev2 = [
         "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm)$"
-        "float, tag:terminal*"
-        "size 80% 40%, tag:terminal*"
 
         # 動画壁紙用 mpv だけを対象にする
         "float, class:^(mpv-wallpaper)$"
