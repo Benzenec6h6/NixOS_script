@@ -124,6 +124,15 @@
       };
 
       windowrulev2 = [
+        # タグの付与：kitty や dropterminal クラスに "terminal" タグを付ける
+        "tag +terminal, class:^(Alacritty|kitty|dropterminal)$"
+
+        # タグに基づいた共通ルール（例：不透明度など）
+        "opacity 0.9 0.8, tag:terminal"
+
+        # ドロップダウン専用の個別ルール
+        "float, class:^(dropterminal)$"
+        "workspace special:scratchpad, class:^(dropterminal)$"
         # 動画壁紙用 mpv だけを対象にする
         "float, class:^(mpv-wallpaper)$"
         "fullscreen, class:^(mpv-wallpaper)$"
