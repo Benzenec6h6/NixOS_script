@@ -124,14 +124,10 @@
       };
 
       windowrulev2 = [
-        "tag +terminal, class:^(kitty|Alacritty)$"
-        "tag +dropdown, class:^(kitty-dropterm)$"
+        "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm)$"
+        "float, tag:terminal*"
+        "size 80% 40%, tag:terminal*"
 
-        "float, tag:dropdown"
-        "size 80% 40%, tag:dropdown"
-        "move 10% 5%, tag:dropdown"
-        "pin, tag:dropdown"
-        "noblur, tag:dropdown"
         # 動画壁紙用 mpv だけを対象にする
         "float, class:^(mpv-wallpaper)$"
         "fullscreen, class:^(mpv-wallpaper)$"
