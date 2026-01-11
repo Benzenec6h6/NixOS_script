@@ -136,12 +136,12 @@ calculate_dropdown_position() {
         return 1
     fi
     
-    local mon_x=$(echo "$monitor_info" | cut -d' ' -f1)
-    local mon_y=$(echo "$monitor_info" | cut -d' ' -f2)
-    local mon_width=$(echo "$monitor_info" | cut -d' ' -f3)
-    local mon_height=$(echo "$monitor_info" | cut -d' ' -f4)
-    local mon_scale=$(echo "$monitor_info" | cut -d' ' -f5)
-    local mon_name=$(echo "$monitor_info" | cut -d' ' -f6)
+    local mon_x=$(echo $monitor_info | cut -d' ' -f1)
+    local mon_y=$(echo $monitor_info | cut -d' ' -f2)
+    local mon_width=$(echo $monitor_info | cut -d' ' -f3)
+    local mon_height=$(echo $monitor_info | cut -d' ' -f4)
+    local mon_scale=$(echo $monitor_info | cut -d' ' -f5)
+    local mon_name=$(echo $monitor_info | cut -d' ' -f6)
     
     debug_echo "Monitor info: x=$mon_x, y=$mon_y, width=$mon_width, height=$mon_height, scale=$mon_scale"
     
@@ -241,32 +241,27 @@ spawn_terminal() {
         debug_echo "Warning: Using fallback positioning"
     fi
     
-    local target_x=$(echo "$pos_info" | cut -d' ' -f1)
-    local target_y=$(echo "$pos_info" | cut -d' ' -f2)
-    local width=$(echo "$pos_info" | cut -d' ' -f3)
-    local height=$(echo "$pos_info" | cut -d' ' -f4)
-    local monitor_name=$(echo "$pos_info" | cut -d' ' -f5)
+    local target_x=$(echo $pos_info | cut -d' ' -f1)
+    local target_y=$(echo $pos_info | cut -d' ' -f2)
+    local width=$(echo $pos_info | cut -d' ' -f3)
+    local height=$(echo $pos_info | cut -d' ' -f4)
+    local monitor_name=$(echo $pos_info | cut -d' ' -f5)
     
     debug_echo "Target position: ${target_x},${target_y}, size: ${width}x${height}"
     
     # Get window count before spawning
-    local windows_before
-    windows_before=$(hyprctl clients -j)
-    local count_before
-    count_before=$(echo "$windows_before" | jq 'length')
+    local windows_before=$(hyprctl clients -j)
+    local count_before=$(echo "$windows_before" | jq 'length')
     
     # Launch terminal directly in special workspace to avoid visible spawn
-    #hyprctl dispatch exec "[float; size $width $height; workspace special:scratchpad silent] $TERMINAL_CMD"
-    hyprctl dispatch exec "[float; size $width $height; workspace special:scratchpad silent] $TERMINAL_CMD --class dropterminal"
+    hyprctl dispatch exec "[float; size $width $height; workspace special:scratchpad silent] $TERMINAL_CMD"
     
     # Wait for window to appear
     sleep 0.1
     
     # Get windows after spawning
-    local windows_after
-    windows_after=$(hyprctl clients -j)
-    local count_after
-    count_after=$(echo "$windows_after" | jq 'length')
+    local windows_after=$(hyprctl clients -j)
+    local count_after=$(echo "$windows_after" | jq 'length')
     
     local new_addr=""
     
@@ -314,11 +309,11 @@ if terminal_exists; then
         debug_echo "Monitor focus changed: moving dropdown to $focused_monitor"
         # Calculate new position for focused monitor
         pos_info=$(calculate_dropdown_position)
-        target_x=$(echo "$pos_info" | cut -d' ' -f1)
-        target_y=$(echo "$pos_info" | cut -d' ' -f2)
-        width=$(echo "$pos_info" | cut -d' ' -f3)
-        height=$(echo "$pos_info" | cut -d' ' -f4)
-        monitor_name=$(echo "$pos_info" | cut -d' ' -f5)
+        target_x=$(echo $pos_info | cut -d' ' -f1)
+        target_y=$(echo $pos_info | cut -d' ' -f2)
+        width=$(echo $pos_info | cut -d' ' -f3)
+        height=$(echo $pos_info | cut -d' ' -f4)
+        monitor_name=$(echo $pos_info | cut -d' ' -f5)
         # Move and resize window
         hyprctl dispatch movewindowpixel "exact $target_x $target_y,address:$TERMINAL_ADDR"
         hyprctl dispatch resizewindowpixel "exact $width $height,address:$TERMINAL_ADDR"
@@ -331,10 +326,10 @@ if terminal_exists; then
         
         # Calculate target position
         pos_info=$(calculate_dropdown_position)
-        target_x=$(echo "$pos_info" | cut -d' ' -f1)
-        target_y=$(echo "$pos_info" | cut -d' ' -f2)
-        width=$(echo "$pos_info" | cut -d' ' -f3)
-        height=$(echo "$pos_info" | cut -d' ' -f4)
+        target_x=$(echo $pos_info | cut -d' ' -f1)
+        target_y=$(echo $pos_info | cut -d' ' -f2)
+        width=$(echo $pos_info | cut -d' ' -f3)
+        height=$(echo $pos_info | cut -d' ' -f4)
         
         # Use movetoworkspacesilent to avoid affecting workspace history
         hyprctl dispatch movetoworkspacesilent "$CURRENT_WS,address:$TERMINAL_ADDR"
@@ -351,10 +346,10 @@ if terminal_exists; then
         # Get current geometry for animation
         geometry=$(get_window_geometry "$TERMINAL_ADDR")
         if [ -n "$geometry" ]; then
-            curr_x=$(echo "$geometry" | cut -d' ' -f1)
-            curr_y=$(echo "$geometry" | cut -d' ' -f2)
-            curr_width=$(echo "$geometry" | cut -d' ' -f3)
-            curr_height=$(echo "$geometry" | cut -d' ' -f4)
+            curr_x=$(echo $geometry | cut -d' ' -f1)
+            curr_y=$(echo $geometry | cut -d' ' -f2)
+            curr_width=$(echo $geometry | cut -d' ' -f3)
+            curr_height=$(echo $geometry | cut -d' ' -f4)
             
             debug_echo "Current geometry: ${curr_x},${curr_y} ${curr_width}x${curr_height}"
             
