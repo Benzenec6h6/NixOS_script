@@ -124,15 +124,14 @@
       };
 
       windowrulev2 = [
-        # タグの付与：kitty や dropterminal クラスに "terminal" タグを付ける
-        "tag +terminal, class:^(Alacritty|kitty|dropterminal)$"
+        "tag +terminal, class:^(kitty|Alacritty)$"
+        "tag +dropdown, class:^(kitty-dropterm)$"
 
-        # タグに基づいた共通ルール（例：不透明度など）
-        "opacity 0.9 0.8, tag:terminal"
-
-        # ドロップダウン専用の個別ルール
-        "float, class:^(dropterminal)$"
-        "workspace special:scratchpad, class:^(dropterminal)$"
+        "float, tag:dropdown"
+        "size 80% 40%, tag:dropdown"
+        "move 10% 5%, tag:dropdown"
+        "pin, tag:dropdown"
+        "noblur, tag:dropdown"
         # 動画壁紙用 mpv だけを対象にする
         "float, class:^(mpv-wallpaper)$"
         "fullscreen, class:^(mpv-wallpaper)$"
