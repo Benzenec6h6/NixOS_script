@@ -3,13 +3,14 @@
 let
   # 自前スクリプトのパッケージ。適宜インポートパスを合わせてください
   brightness = pkgs.callPackage ./scripts/Brightness.nix {}; 
+  hyprlockConf = "${config.home.homeDirectory}/.config/hypr/hyprlock/hyprlock.conf";
 in
 {
   services.hypridle = {
     enable = true;
     settings = {
       general = {
-        lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock --config %h/.config/hypr/hyprlock/hyprlock.conf";
+        lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock --config ${hyprlockConf}";
         before_sleep_cmd = "loginctl lock-session";
         after_sleep_cmd = "hyprctl dispatch dpms on";
       };
