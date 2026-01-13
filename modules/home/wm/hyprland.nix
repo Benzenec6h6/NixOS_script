@@ -1,12 +1,17 @@
 { config, pkgs, ... }:
 let
-  terminal = "kitty";
+  directions = [
+    { key = "left";  dir = "l"; }
+    { key = "right"; dir = "r"; }
+    { key = "up";    dir = "u"; }
+    { key = "down";  dir = "d"; }
+  ];
 in
 {
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      "$term" = "${terminal}";
+      "$term" = "kitty";
       # モニタ設定
       monitor = [
         "eDP-1,1920x1080,0x0,1"
@@ -24,76 +29,61 @@ in
 
       # キーバインド例
       bind = [
-        "SUPER, Return, exec, $term"
-        "SUPER,B,exec,zen"  
-        "SUPER,Q,killactive"
-        "SUPER,P,exec,wlogout -p layer-shell"
-        "SUPER,E,exec,thunar"
+        "SUPER, Return, exec, $term" # Open terminal
+        "SUPER,B,exec,zen"  # Open default browser
+        "SUPER,Q,killactive" # kill freeze window
+        "SUPER,P,exec,wlogout -p layer-shell" # Power / session menu
+        "SUPER,E,exec,thunar" # open file manager
         "SUPER SHIFT, F, fullscreen" # whole full screen
         "SUPER CTRL, F, fullscreen, 1" # fake full screen
         "SUPER, SPACE, togglefloating," #Float Mode
         "SUPER ALT, SPACE, exec, hyprctl dispatch workspaceopt allfloat" #All Float Mode
         "SUPER SHIFT, Return, exec, Dropterminal $term" # Dropdown terminal
         "SUPER CTRL ALT, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
-        "SUPER,H,exec,KeyBinds"
-        "SUPER,D,exec,rofi -show drun"
-        #"SUPER,D,exec,rofi -show drun -theme ~/.config/rofi/myconf/common.rasi"
-        "SUPER, A, global, quickshell:overviewToggle" # desktop overview (if installed)
+        "SUPER,H,exec,KeyBinds" # KeyBinds help
+        "SUPER,D,exec,rofi -show drun" # App launcher
+        "SUPER, A, global, quickshell:overviewToggle" # desktop overview
+      ]
+        # --- Directional focus / swap ---
+        ++ (builtins.concatMap (d: [
+          "SUPER,${d.key},movefocus,${d.dir}"
+          "SUPER ALT,${d.key},swapwindow,${d.dir}"
+        ]) directions)
 
+        # --- Numeric workspaces ---
+        ++ (builtins.concatMap (n: 
+          let
+            ws = toString n;
+            key = if n == 10 then "0" else toString n;
+          in [
+            "SUPER, ${key}, workspace, ${ws}"
+            "SUPER SHIFT, ${key}, movetoworkspace, ${ws}"
+          ]
+        ) (lib.range 1 10)) 
+      ++ [
+      # --- Workspace cycling / special ---
+        "SUPER CTRL,right,workspace,e+1"
+        "SUPER CTRL,left,workspace,e-1"
+        "SUPER SHIFT,SPACE,movetoworkspace,special"
+        "SUPER,SPACE,togglespecialworkspace"
+      ];
+
+      bindl =[
         ",XF86AudioRaiseVolume,exec,volume --inc"
         ",XF86AudioLowerVolume,exec,volume --dec"
         "SHIFT,XF86AudioRaiseVolume,exec,volume --inc-fine"
         "SHIFT,XF86AudioLowerVolume,exec,volume --dec-fine"
 
+        ",XF86MonBrightnessDown,exec,brightness --dec"
+        ",XF86MonBrightnessUp,exec,brightness --inc"
+        "SHIFT,XF86MonBrightnessDown,exec,brightness --dec-fine"
+        "SHIFT,XF86MonBrightnessUp,exec,brightness --inc-fine"
+        
         ",XF86AudioMute,exec,volume --toggle"
         ",XF86AudioPlay,exec,playerctl play-pause"
         ",XF86AudioPause,exec,playerctl play-pause"
         ",XF86AudioNext,exec,playerctl next"
         ",XF86AudioPrev,exec,playerctl previous"
-
-        ",XF86MonBrightnessDown,exec,brightness --dec"
-        ",XF86MonBrightnessUp,exec,brightness --inc"
-        "SHIFT,XF86MonBrightnessDown,exec,brightness --dec-fine"
-        "SHIFT,XF86MonBrightnessUp,exec,brightness --inc-fine"
-
-        "SUPER,left,movefocus,l"
-        "SUPER,right,movefocus,r"
-        "SUPER,up,movefocus,u"
-        "SUPER,down,movefocus,d"
-
-        "SUPER ALT, left, swapwindow,l"
-        "SUPER ALT, right, swapwindow,r"
-        "SUPER ALT, up, swapwindow,u"
-        "SUPER ALT, down, swapwindow,d"
-
-        "SUPER,1,workspace,1"
-        "SUPER,2,workspace,2"
-        "SUPER,3,workspace,3"
-        "SUPER,4,workspace,4"
-        "SUPER,5,workspace,5"
-        "SUPER,6,workspace,6"
-        "SUPER,7,workspace,7"
-        "SUPER,8,workspace,8"
-        "SUPER,9,workspace,9"
-        "SUPER,0,workspace,10"
-
-        "SUPER SHIFT,1,movetoworkspace,1"
-        "SUPER SHIFT,2,movetoworkspace,2"
-        "SUPER SHIFT,3,movetoworkspace,3"
-        "SUPER SHIFT,4,movetoworkspace,4"
-        "SUPER SHIFT,5,movetoworkspace,5"
-        "SUPER SHIFT,6,movetoworkspace,6"
-        "SUPER SHIFT,7,movetoworkspace,7"
-        "SUPER SHIFT,8,movetoworkspace,8"
-        "SUPER SHIFT,9,movetoworkspace,9"
-        "SUPER SHIFT,0,movetoworkspace,10"
-
-        "SUPER CTRL,right,workspace,e+1"
-        "SUPER CTRL,left,workspace,e-1"
-        "SUPER,mouse_down,workspace,e+1"
-        "SUPER,mouse_up,workspace,e-1"
-        "SUPER SHIFT,SPACE,movetoworkspace,special"
-        "SUPER,SPACE,togglespecialworkspace"
       ];
 
       # キーボードレイアウトの設定
@@ -147,7 +137,7 @@ in
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
-    notify-desktop qimgv
+    qimgv Kicad #notify-desktop
   ];
 
 }
