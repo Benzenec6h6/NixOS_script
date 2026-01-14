@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # --- 設定 ---
-#city="Kakogawa"
+city="Kakogawa"
 latitude="34.765"
 longitude="134.829"
 api_key="${OWM_KEY:-}" # <--- home managerから渡すhome managerはgitignoreが必用か？
