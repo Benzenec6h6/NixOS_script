@@ -3,6 +3,7 @@
 let
   # 共通の引数(pkgs)を渡してインポートする関数
   importScript = path: import path { inherit pkgs; };
+  api = import ./api.nix;
 in
 {
   imports = [
@@ -10,6 +11,10 @@ in
     ./storage-monitor.nix
     ./wifi-portal-manager.nix
   ];
+
+  home.sessionVariables = {
+    OWM_KEY = api.OWM_KEY;
+  };
 
   home.packages = [
     (importScript ./Brightness.nix)
