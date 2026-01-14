@@ -9,6 +9,7 @@
     git jq
     wget curl yt-dlp animdl
     gnutar gzip unzip zip
+    ripgrep du-dust tree
     htop btop nvtopPackages.full
     gcc gnumake pkg-config
     dnsutils inetutils iproute2 netcat
