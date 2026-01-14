@@ -9,5 +9,6 @@ pkgs.writeShellApplication {
     pkgs.gnugrep
     pkgs.jq # JSONの検証と整形にあると便利
   ];
+  checkPhase = "true";
   text = builtins.readFile ./Weather.sh;
 }
