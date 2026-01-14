@@ -6,6 +6,7 @@ _: {
     hyprland.enable = false;
     hyprlock.enable = false;
     starship.enable = false;
+    firefox.profileNames = [ "main" ];
     qt = {
       enable = true;
       platform = "qtct";
