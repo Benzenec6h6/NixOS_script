@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   directions = [
     { key = "left";  dir = "l"; }
@@ -137,7 +137,7 @@ in
     pavucontrol #playerctl
     grim slurp wf-recorder wl-clipboard
     swappy sound-theme-freedesktop
-    qimgv Kicad #notify-desktop
+    qimgv kicad #notify-desktop
   ];
 
 }
