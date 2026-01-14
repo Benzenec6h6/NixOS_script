@@ -18,7 +18,7 @@ in
       listener = [
         # --- 1. 暗転（Dimming） ---
         {
-          timeout = 150;
+          timeout = 1500;
           # 復帰のために現在の輝度を保存し、10%まで下げる
           on-timeout = "brightnessctl --save && brightnessctl set 10%";
           # 復帰時に保存した輝度に戻す
@@ -27,20 +27,20 @@ in
 
         # --- 2. ロック（Lock） ---
         {
-          timeout = 300;
+          timeout = 1800;
           on-timeout = "loginctl lock-session";
         }
 
         # --- 3. 画面OFF（DPMS） ---
         {
-          timeout = 330;
+          timeout = 1830;
           on-timeout = "hyprctl dispatch dpms off";
           on-resume = "hyprctl dispatch dpms on";
         }
 
         # --- 4. サスペンド（Suspend） ---
         {
-          timeout = 1800;
+          timeout = 1860;
           on-timeout = "systemctl suspend";
         }
       ];
