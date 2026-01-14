@@ -12,7 +12,7 @@
     ./wlogout
     ./wm/hyprland.nix
     ./apps.nix
-    ./brave.nix
+    #./brave.nix
     ./cava.nix
     ./firefox.nix
     ./fonts.nix
