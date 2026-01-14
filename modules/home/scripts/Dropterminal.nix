@@ -11,5 +11,5 @@ pkgs.writeShellApplication {
     pkgs.gnused
   ];
   checkPhase = "true";
-  text = ${builtins.readFile ./Dropterminal.sh};
+  text = builtins.readFile ./Dropterminal.sh;
 }
