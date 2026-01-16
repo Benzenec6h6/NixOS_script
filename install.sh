@@ -110,18 +110,18 @@ if [[ "$HOST" == "laptop" ]]; then
   if [[ -n "$INTEL_ID" ]]; then
     INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
     sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" \
-      "$SCRIPT_DIR/hosts/laptop.nix"
+      "$SCRIPT_DIR/hosts/laptop/default.nix"
   fi
 
   if [[ -n "$NVIDIA_ID" ]]; then
     NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
     sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" \
-      "$SCRIPT_DIR/hosts/laptop.nix"
+      "$SCRIPT_DIR/hosts/laptop/default.nix"
   fi
 fi
 
 # --- パーティション作成・フォーマット ---
-echo "=== Partitioning and formatting disk ($DISK) ==="
+echo "=== disk ($DISK) ==="
 echo "WARNING: All existing data will be erased! Continue? (y/n)"
 read -rp "Confirm: " CONFIRM
 
@@ -131,17 +131,22 @@ case "$CONFIRM" in
   *) echo "Invalid input"; exit 1 ;;
 esac
 
-parted "$DISK" -- mklabel gpt
-parted "$DISK" -- mkpart ESP fat32 1MiB 512MiB
-parted "$DISK" -- set 1 esp on
-parted "$DISK" -- mkpart primary 512MiB 100%
+# --- disko.nix のデバイス名を書き換え ---
+DISKO_FILE="$SCRIPT_DIR/hosts/$HOST/disko.nix"
+if [ -f "$DISKO_FILE" ]; then
+  echo "Updating device in $DISKO_FILE to $DISK..."
+  # device = "/dev/..."; という行を探して置換します
+  sed -i "s|device = \".*\";|device = \"$DISK\";|" "$DISKO_FILE"
+else
+  echo "Error: $DISKO_FILE not found!"
+  exit 1
+fi
 
-mkfs.fat -F32 "${DISK}${PART_SUFFIX}1"
-mkfs.ext4     "${DISK}${PART_SUFFIX}2"
-
-mount "${DISK}${PART_SUFFIX}2" /mnt
-mkdir -p /mnt/boot
-mount "${DISK}${PART_SUFFIX}1" /mnt/boot
+# --- Diskoの実行 (パーティション作成 & マウント) ---
+echo "=== Running Disko ==="
+# --mode disko は、フォーマットからマウントまで一気に行います
+nix run github:nix-community/disko -- \
+  --mode disko --mount-point /mnt "$DISKO_FILE"
 
 # hardware-configuration.nix生成
 nixos-generate-config --root /mnt
@@ -151,7 +156,7 @@ echo "=== Installing NixOS ==="
 cp -r /home/nixos/NixOS_script /mnt/etc/nixos/
 
 cp /mnt/etc/nixos/hardware-configuration.nix \
-   /mnt/etc/nixos/NixOS_script/hosts/hardware.nix
+    /mnt/etc/nixos/NixOS_script/hosts/${HOST}/hardware.nix
 
 nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST" --no-root-passwd
 
