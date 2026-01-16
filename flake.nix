@@ -35,18 +35,20 @@
       userPassword = "$6$qPo6ahBPqNC7mMim$WupFSLamdZfSEoafxSoE1ODgtaHS8gmUayQ2dTiW4vDBAVVJDcuj1yMYAHq.tz5mmZW7aqb44KnMacSq12xpO1";
 
       mkNixosConfig = profile: nixpkgs.lib.nixosSystem {
-        inherit system;
+        pkgs = import nixpkgs {
+          hostPlatform = system;
+          config.allowUnfree = true;
+          overlays = [
+            nur.overlays.default
+          ];
+        };
+
         specialArgs = {
           inherit inputs username profile userPassword;
         };
+
         modules = [
-          ({ pkgs, ... }: {
-            nixpkgs.overlays = [
-              nur.overlays.default
-            ];
-          })
-          
-          ./hosts/${profile}.nix
+          ./hosts/${profile}
         ];
       };
     in {
