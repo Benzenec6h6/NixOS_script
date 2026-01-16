@@ -76,13 +76,16 @@
 
   programs.bat.enable = true;
   programs.fd.enable = true;
-
+  programs.distrobox.enable = true;
+  programs.hyprlock.enable = true;
+  services.hypridle.enable = true;
   services.blueman-applet.enable = true;
   services.swaync.enable = true;
   services.playerctld.enable = true;
-  services.hypridle.enable = true;
-  programs.hyprlock.enable = true;
-  programs.distrobox.enable = true;
+  services.megasync = {
+    enable = true;
+    forceWayland = true;
+  };
 
   home.file.".config/hypr/hyprlock".source = ./hyprlock;
   home.file.".config/quickshell".source = ./quickshell;
