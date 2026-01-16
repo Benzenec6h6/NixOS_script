@@ -39,10 +39,16 @@
     interval = "weekly";
   };
 
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "monthly";
+    fileSystems = [ "/" ];
+  };
+
   boot.kernelPackages = pkgs.linuxPackages_6_12;
   boot.loader = {
     systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 5; # ここに移動
+    systemd-boot.configurationLimit = 5;
     efi.canTouchEfiVariables = true;
   };
 }
