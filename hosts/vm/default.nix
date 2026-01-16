@@ -2,6 +2,7 @@
 
 {
   imports = [
+    inputs.disko.nixosModules.disko
     ./hardware.nix
     ./disko.nix
     ../modules/core
