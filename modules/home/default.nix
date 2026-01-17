@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, config, ... }:
+{ pkgs, inputs, vars, config, ... }:
 {
   imports = [
     ./fastfetch
@@ -25,7 +25,6 @@
     ./zsh.nix
   ];
 
-  home.stateVersion = "25.11";
   programs.home-manager.enable = true;
 
   xdg.userDirs = {
@@ -54,8 +53,8 @@
   programs.git = {
     enable = true;
     settings.user = {
-      name = "Benzenec6h6";
-      email = "aconitinec34h47no11@gmail.com";
+      name = vars.user.gitName;
+      email = vars.user.gitEmail;
     };
   };
 
