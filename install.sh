@@ -142,11 +142,13 @@ else
   exit 1
 fi
 
-# --- Diskoの実行 (パーティション作成 & マウント) ---
+# --- Diskoの実行 ---
 echo "=== Running Disko ==="
-# --mode disko は、フォーマットからマウントまで一気に行います
 nix run github:nix-community/disko -- \
-  --mode disko --mount-point /mnt "$DISKO_FILE"
+  --mode disko \
+  --mount-point /mnt \
+  --argstr device "$DISK" \
+  "$DISKO_FILE"
 
 # hardware-configuration.nix生成
 nixos-generate-config --root /mnt
