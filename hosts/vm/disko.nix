@@ -1,4 +1,3 @@
-# hosts/vm/disko.nix
 { ... }:
 
 {
