@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vars, ... }:
 
 {
   services = {
@@ -18,7 +18,7 @@
 
     xserver.enable = false;
     xserver.xkb = {
-      layout = "jp";
+      layout = vars.locale.kbLayout;
       variant = "";
     };
     xserver.windowManager.xmonad.enable = false;
