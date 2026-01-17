@@ -35,11 +35,10 @@
 
   outputs = { nixpkgs, home-manager, stylix, zen-browser, nur, ... }@inputs:
     let
-      system = "x86_64-linux";
-      username = "teto";
-      userPassword = "$6$qPo6ahBPqNC7mMim$WupFSLamdZfSEoafxSoE1ODgtaHS8gmUayQ2dTiW4vDBAVVJDcuj1yMYAHq.tz5mmZW7aqb44KnMacSq12xpO1";
+      vars = import ./vars.nix;
+      system = vars.system;
 
-      mkNixosConfig = profile: nixpkgs.lib.nixosSystem {
+      mkNixosConfig = host: nixpkgs.lib.nixosSystem {
         pkgs = import nixpkgs {
           hostPlatform = system;
           config.allowUnfree = true;
@@ -49,17 +48,23 @@
         };
 
         specialArgs = {
-          inherit inputs username profile userPassword;
+          inherit inputs vars host;
         };
 
         modules = [
-          ./hosts/${profile}
+          disko.nixosModules.disko
+          ./hosts/${host}
         ];
       };
     in {
       nixosConfigurations = {
         laptop = mkNixosConfig "laptop";
         vm = mkNixosConfig "vm";
+      };
+
+      diskoConfigurations = {
+        laptop = import ./hosts/laptop/disko.nix;
+        vm     = import ./hosts/vm/disko.nix;
       };
     };
 }
