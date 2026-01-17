@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # --- 設定 ---
-city="Kakogawa"
-latitude="34.765"
-longitude="134.829"
-api_key="${OWM_KEY:-}" # <--- home managerから渡すhome managerはgitignoreが必用か？
+city="${city}"
+latitude="${latitude}"
+longitude="${longitude}"
+api_key="${OWM_KEY}"
 cachedir="$HOME/.cache/rbn"
 cache_path="$cachedir/weather_cache.json"
 mkdir -p "$cachedir"
