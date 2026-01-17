@@ -1,4 +1,4 @@
-{ inputs, username, host, ... }:
+{ inputs, vars, host, ... }:
 
 {
   imports = [
