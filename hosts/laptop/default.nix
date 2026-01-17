@@ -1,8 +1,7 @@
-{ config, pkgs, inputs, username, profile, ... }:
+{ config, pkgs, inputs, username, host, ... }:
 
 {
   imports = [
-    inputs.disko.nixosModules.disko
     ./hardware.nix
     ./disko.nix
     ../modules/core
@@ -27,6 +26,6 @@
   };
 
   boot.initrd.postDeviceCommands = lib.mkAfter (builtins.readFile ./rollback.sh);
-  networking.hostName = "laptop";
+  networking.hostName = host;
   system.stateVersion = "25.11";
 }

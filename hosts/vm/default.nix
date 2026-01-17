@@ -1,8 +1,7 @@
-{ inputs, username, profile, ... }:
+{ inputs, username, host, ... }:
 
 {
   imports = [
-    inputs.disko.nixosModules.disko
     ./hardware.nix
     ./disko.nix
     ../modules/core
@@ -16,6 +15,6 @@
   # QEMU の guest agent を使う場合など
   services.qemuGuest.enable = true;
 
-  networking.hostName = "vm";
+  networking.hostName = host;
   system.stateVersion = "25.11";
 }
