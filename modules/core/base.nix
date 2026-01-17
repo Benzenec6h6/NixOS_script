@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, vars, ... }:
 
 {
-  time.timeZone = "Asia/Tokyo";
-  i18n.defaultLocale = "en_US.UTF-8";
-  i18n.extraLocales = [ "ja_JP.UTF-8/UTF-8" ];
+  time.timeZone = vars.locale.timeZone;
+  i18n.defaultLocale = vars.locale.default;
+  i18n.extraLocales = vars.locale.extra;
   
-  console.keyMap = "jp106";
+  console.keyMap = vars.locale.keyMap;
 
   nix = {
     package = pkgs.nixVersions.stable;
