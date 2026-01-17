@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, host, ... }:
 let
   directions = [
     { key = "left";  dir = "l"; }
@@ -6,6 +6,11 @@ let
     { key = "up";    dir = "u"; }
     { key = "down";  dir = "d"; }
   ];
+
+  hostConfig = {
+    laptop.monitor = [ "eDP-1,1920x1080,0x0,1" ];
+    vm.monitor     = [ "Virtual-1,1280x720@60,0x0,1" ];
+  };
 in
 {
   wayland.windowManager.hyprland = {
@@ -13,10 +18,7 @@ in
     settings = {
       "$term" = "kitty";
       # モニタ設定
-      monitor = [
-        "eDP-1,1920x1080,0x0,1"
-        "Virtual-1,1280x720@60,0x0,1"
-      ];
+      monitor = hostConfig.${host}.monitor;
 
       # 起動時に実行するコマンド
       exec-once = [
@@ -139,5 +141,4 @@ in
     swappy sound-theme-freedesktop
     qimgv kicad #notify-desktop
   ];
-
 }
