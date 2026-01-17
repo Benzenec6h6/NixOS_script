@@ -1,3 +1,5 @@
+{ vars, ... }:
+
 {
   # システム全体の永続化
   environment.persistence."/persist" = {
@@ -11,14 +13,15 @@
   };
 
   # ユーザーデータの永続化 (Home Manager側)
-  home-manager.users.${username} = {
+  home-manager.users.${vars.user.name} = {
     imports = [ inputs.impermanence.homeManagerModules.impermanence ];
-    home.persistence."/persist/home/${username}" = {
+    home.persistence."/persist/home/${vars.user.name}" = {
       directories = [
         "Downloads"
+        "Desktop"
+        "Documents"
         "Music"
         "Pictures"
-        "Documents"
         "Videos"
         ".ssh"
         ".local/share/direnv"
