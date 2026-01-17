@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, vars, ... }:
 
 pkgs.writeShellApplication {
   name = "Weather";
@@ -10,5 +10,13 @@ pkgs.writeShellApplication {
     pkgs.jq # JSONの検証と整形にあると便利
   ];
   checkPhase = "true";
-  text = builtins.readFile ./Weather.sh;
+  text = ''
+    city="${vars.locale.location.city}"
+    latitude="${vars.locale.location.lat}"
+    longitude="${vars.locale.location.lon}"
+    OWM_KEY="${vars.apiKeys.owm}"
+    
+    # 元のシェルスクリプトを読み込む
+    ${builtins.readFile ./Weather.sh}
+  '';
 }
