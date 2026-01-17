@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, username, host, ... }:
+{ config, pkgs, lib, inputs, vars, host, ... }: 
 
 {
   imports = [
@@ -19,8 +19,8 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     prime = {
-      intelBusId = ""; #"PCI:0:2:0"は固有の番号なのでpciutilsで調べる
-      nvidiaBusId = ""; #ここも同様
+      intelBusId = vars.busId.intel;
+      nvidiaBusId = vars.busId.nvidia;
       offload.enable = true;
     };
   };
