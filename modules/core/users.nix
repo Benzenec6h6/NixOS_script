@@ -1,27 +1,28 @@
-{ pkgs, inputs, username, userPassword, ... }:
+{ pkgs, inputs, vars, ... }:
+
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = { inherit inputs username; }; #delete pkgs
-    users.${username} = {
+    extraSpecialArgs = { inherit inputs vars; }; #delete pkgs
+    users.${vars.user.name} = {
       imports = [ ./../home ];
-      home.username = username;
-      home.homeDirectory = "/home/${username}";
+      home.username = vars.user.name;
+      home.homeDirectory = "/home/${vars.user.name}";
       home.stateVersion = "25.11";
     };
   };
 
   users.mutableUsers = true;
-  users.users.${username} = {
+  users.users.${vars.user.name} = {
     isNormalUser = true;
     description = "Main user";
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "scanner" "lp" "video" "input"  "audio" "docker" "libvirtd" "kvm" ];
-    hashedPassword = userPassword;
+    hashedPassword = vars.user.password;
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
   };
-  nix.settings.allowed-users = [ "${username}" ];
+  nix.settings.allowed-users = [ "${vars.user.name}" ];
 }
