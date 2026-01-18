@@ -91,6 +91,6 @@
   home.file.".config/quickshell".source = ./quickshell;
 
   home.packages = [
-    inputs.zen-browser.packages.${pkgs.system}.default
+    inputs.zen-browser.packages.${vars.system}.default
   ];
 }
