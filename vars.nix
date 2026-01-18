@@ -1,37 +1,40 @@
 {
-  # システム基本情報
-  host = ;
-  disk = ; # install.shで取得
+  # 基本インフラ設定
+  system = "";
+  host = "";
+  disk = ""; 
   
   # ユーザー情報
   user = {
-    name = ;
-    password = ; # ハッシュ化したものを入れる
+    name = "";
+    password = "";
+    gitName = "";
+    gitEmail = "";
   };
 
-  # 地域・言語設定
+  # 地域・言語・入力設定
   locale = {
-    timeZone = ;
-    default = ;
-    extra = [  ];
-    keyMap = ;
-    kbLayout = ;  # X11/Wayland (Hyprland) 用 ★追加
-    # 天気予報用
+    timeZone = "";
+    default = "";
+    extra = [ "" ];
+    keyMap = "";
+    kbLayout = "";
+    
     location = {
-      city = ;
-      lat = ;
-      lon = ;
+      city = "";
+      lat = "";
+      lon = "";
     };
   };
 
-  # ハードウェア固有設定
+  # GPU BusID
   busId = {
-    intel = ;
-    nvidia = ;
+    intel = "";
+    nvidia = "";
   };
 
-  # 外部APIキー（取り扱いに注意）
+  # 秘密鍵・APIキー
   apiKeys = {
-    owm = ""; # OpenWeatherMap Key
+    owm = ""; 
   };
 }
