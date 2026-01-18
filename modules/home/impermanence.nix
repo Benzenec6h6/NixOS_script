@@ -1,8 +1,6 @@
 { vars, ... }:
 
 {
-  imports = [ inputs.impermanence.homeManagerModules.impermanence ];
-
   home.persistence."/persist/home/${vars.user.name}" = {
     directories = [
       "Downloads"
