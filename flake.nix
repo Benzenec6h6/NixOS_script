@@ -54,6 +54,7 @@
         };
 
         modules = [
+          impermanence.nixosModules.impermanence
           disko.nixosModules.disko
           ./hosts/${host}
         ];
