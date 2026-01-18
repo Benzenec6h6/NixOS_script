@@ -37,7 +37,7 @@ echo "Selected host: $HOST"
 export HOST="$HOST"
 
 # --- パスワード入力 ---
-echo "=== Enter password for $USERNAME ==="
+echo "=== Enter password ==="
 read -rsp "Password: " PASSWORD
 echo
 read -rsp "Confirm Password: " PASSWORD2
