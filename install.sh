@@ -64,6 +64,10 @@ if [[ "$HOST" == "laptop" ]]; then
   N_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
   [[ -n "$I_ID" ]] && INTEL_BUS=$(to_nix_busid "$I_ID")
   [[ -n "$N_ID" ]] && NVIDIA_BUS=$(to_nix_busid "$N_ID")
+else
+  mkdir -p /tmp/host_share
+  mount -t 9p -o trans=virtio shared_vars /tmp/host_share
+  cp /tmp/host_share/vars.nix NixOS_script/vars.nix
 fi
 
 # --- パーティション作成・フォーマット ---
