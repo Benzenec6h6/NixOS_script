@@ -17,12 +17,14 @@
     ./firefox.nix
     ./fonts.nix
     ./hypridle.nix
+    ./impermanence.nix
     ./kitty.nix
     ./neovim.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
     ./zsh.nix
+    inputs.impermanence.homeManagerModules.impermanence
   ];
 
   programs.home-manager.enable = true;
