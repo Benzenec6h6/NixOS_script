@@ -104,7 +104,7 @@ echo "Done. vars.nix has been updated."
 
 # --- Diskoの実行 ---
 echo "=== Running Disko ==="
-disko --mode disko --flake "$SCRIPT_DIR#$HOST" --argstr device "$DISK"
+disko --mode disko --flake "$SCRIPT_DIR#$HOST"
 
 # hardware-configuration.nix生成
 nixos-generate-config --root /mnt
