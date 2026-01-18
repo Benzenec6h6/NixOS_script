@@ -24,7 +24,6 @@
     ./swaync.nix
     #./themes.nix
     ./zsh.nix
-    inputs.impermanence.homeManagerModules.impermanence
   ];
 
   programs.home-manager.enable = true;
