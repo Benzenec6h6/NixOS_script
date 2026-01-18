@@ -66,8 +66,8 @@
       };
 
       diskoConfigurations = {
-        laptop = import ./hosts/laptop/disko.nix { device = vars.disk; };
-        vm     = import ./hosts/vm/disko.nix { device = vars.disk; };
+        laptop = import ./hosts/laptop/disko.nix { inherit vars; };
+        vm     = import ./hosts/vm/disko.nix { inherit vars; };
       };
     };
 }
