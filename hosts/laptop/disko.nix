@@ -1,9 +1,9 @@
-{ device, ... }:
+{ vars, ... }:
 
 {
   disko.devices.disk.main = {
     type = "disk";
-    device = device;
+    device = vars.disk;
 
     content = {
       type = "gpt";
