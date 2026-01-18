@@ -33,7 +33,7 @@
     zen-browser.url = "github:Benzenec6h6/zen-browser-flake";
   };
 
-  outputs = { nixpkgs, home-manager, stylix, zen-browser, nur, ... }@inputs:
+  outputs = { nixpkgs, disko, home-manager, stylix, zen-browser, nur, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
