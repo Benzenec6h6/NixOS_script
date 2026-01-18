@@ -21,12 +21,6 @@ read -rp 'Index: ' idx
 DISK="/dev/$(awk '{print $1}' <<<"${disks[idx-1]}")"
 echo "→ selected $DISK"
 
-if [[ "$DISK" == *"nvme"* ]]; then
-  PART_SUFFIX="p"
-else
-  PART_SUFFIX=""
-fi
-
 # --- ホスト選択（数字入力に変更） ---
 echo "=== Select host ==="
 echo "1) laptop"
@@ -41,38 +35,6 @@ esac
 
 echo "Selected host: $HOST"
 export HOST="$HOST"
-
-# --- Hyprland モニタ設定の切り替え ---
-HYPRLAND_NIX="$SCRIPT_DIR/modules/home/wm/hyprland.nix"
-
-if [[ "$HOST" == "vm" ]]; then
-  echo "Configuring Hyprland for VM display..."
-  sed -i '/eDP-1,1920x1080/ s/^/# /' "$HYPRLAND_NIX"
-  sed -i '/Virtual-1,1280x720/ s/^# *//' "$HYPRLAND_NIX"
-else
-  echo "Configuring Hyprland for Laptop display..."
-  sed -i '/eDP-1,1920x1080/ s/^# *//' "$HYPRLAND_NIX"
-  sed -i '/Virtual-1,1280x720/ s/^/# /' "$HYPRLAND_NIX"
-fi
-
-# --- ユーザー名入力 ---
-echo "=== Enter username to create ==="
-read -rp "Username: " USERNAME
-
-if [[ -z "$USERNAME" ]]; then
-  echo "Error: username cannot be empty"
-  exit 1
-fi
-
-echo "Entered username: $USERNAME"
-
-# --- flake.nix の username を置換 ---
-if [ -f "$SCRIPT_DIR/flake.nix" ]; then
-  echo "Updating ./flake.nix..."
-  sed -i "s/username = \".*\";/username = \"$USERNAME\";/" "$SCRIPT_DIR/flake.nix"
-else
-  echo "Warning: ./flake.nix not found"
-fi
 
 # --- パスワード入力 ---
 echo "=== Enter password for $USERNAME ==="
@@ -89,39 +51,22 @@ fi
 HASH=$(mkpasswd -m yescrypt "$PASSWORD")
 echo "Generated hashed password."
 
-if [ -f "$SCRIPT_DIR/flake.nix" ]; then
-  echo "Updating hashedPassword in flake.nix..."
-  sed -i "s|userPassword = \".*\";|userPassword = \"$HASH\";|" "$SCRIPT_DIR/flake.nix"
-else
-  echo "Warning: flake.nix not found!"
-fi
-
-# --- laptop の場合だけ GPU BusID を設定 ---
+# --- 4. BusIDの自動取得 (pciutilsのlspciを使用) ---
+INTEL_BUS=""
+NVIDIA_BUS=""
+to_nix_busid() {
+  local id="$1"
+  IFS=':.' read -r bus slot func <<< "$id"
+  printf "PCI:%d:%d:%d" "$((16#$bus))" "$((16#$slot))" "$func"
+}
 if [[ "$HOST" == "laptop" ]]; then
-  INTEL_ID=$(lspci | grep -i 'VGA.*Intel' | awk '{print $1}' || true)
-  NVIDIA_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
-
-  to_nix_busid() {
-    local id="$1"
-    IFS=':.' read -r bus slot func <<< "$id"
-    printf "PCI:%d:%d:%d" "$((16#$bus))" "$((16#$slot))" "$func"
-  }
-
-  if [[ -n "$INTEL_ID" ]]; then
-    INTEL_BUSID=$(to_nix_busid "$INTEL_ID")
-    sed -i "s|intelBusId = \".*\";|intelBusId = \"$INTEL_BUSID\";|" \
-      "$SCRIPT_DIR/hosts/laptop/default.nix"
-  fi
-
-  if [[ -n "$NVIDIA_ID" ]]; then
-    NVIDIA_BUSID=$(to_nix_busid "$NVIDIA_ID")
-    sed -i "s|nvidiaBusId = \".*\";|nvidiaBusId = \"$NVIDIA_BUSID\";|" \
-      "$SCRIPT_DIR/hosts/laptop/default.nix"
-  fi
+  I_ID=$(lspci | grep -i 'VGA.*Intel' | awk '{print $1}' || true)
+  N_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
+  [[ -n "$I_ID" ]] && INTEL_BUS=$(to_nix_busid "$I_ID")
+  [[ -n "$N_ID" ]] && NVIDIA_BUS=$(to_nix_busid "$N_ID")
 fi
 
 # --- パーティション作成・フォーマット ---
-echo "=== disk ($DISK) ==="
 echo "WARNING: All existing data will be erased! Continue? (y/n)"
 read -rp "Confirm: " CONFIRM
 
@@ -131,31 +76,38 @@ case "$CONFIRM" in
   *) echo "Invalid input"; exit 1 ;;
 esac
 
-# --- disko.nix のデバイス名を書き換え ---
-DISKO_FILE="$SCRIPT_DIR/hosts/$HOST/disko.nix"
-if [ -f "$DISKO_FILE" ]; then
-  echo "Updating device in $DISKO_FILE to $DISK..."
-  # device = "/dev/..."; という行を探して置換します
-  sed -i "s|device = \".*\";|device = \"$DISK\";|" "$DISKO_FILE"
-else
-  echo "Error: $DISKO_FILE not found!"
+# --- 共有フォルダ等からコピー済みの vars.nix がある前提 ---
+VARS_FILE="$SCRIPT_DIR/vars.nix"
+
+if [[ ! -f "$VARS_FILE" ]]; then
+  echo "Error: $VARS_FILE not found. Please copy it from shared folder first."
   exit 1
 fi
 
+echo "=== Patching vars.nix with collected info ==="
+
+sed -i "s|host = \"HOST\";|host = \"$HOST\";|" "$VARS_FILE"
+sed -i "s|disk = \"DISK\";|disk = \"$DISK\";|" "$VARS_FILE"
+
+# ユーザー名とパスワードハッシュの置換
+sed -i "s|password = \"HASH\";|password = \"$HASH\";|" "$VARS_FILE"
+
+# BusIDの置換（vars.nix側もこれに合わせてキーワードにすると確実です）
+sed -i "s|intel = \"INTEL_BUS\";|intel = \"$INTEL_BUS\";|" "$VARS_FILE"
+sed -i "s|nvidia = \"NVIDIA_BUS\";|nvidia = \"$NVIDIA_BUS\";|" "$VARS_FILE"
+
+echo "Done. vars.nix has been updated."
+
 # --- Diskoの実行 ---
 echo "=== Running Disko ==="
-nix run github:nix-community/disko -- \
-  --mode disko \
-  --mount-point /mnt \
-  --argstr device "$DISK" \
-  "$DISKO_FILE"
+disko --mode disko --flake "$SCRIPT_DIR#$HOST" --argstr device "$DISK"
 
 # hardware-configuration.nix生成
 nixos-generate-config --root /mnt
 
 # --- NixOS インストール ---
 echo "=== Installing NixOS ==="
-cp -r /home/nixos/NixOS_script /mnt/etc/nixos/
+cp -r "$SCRIPT_DIR" /mnt/etc/nixos/NixOS_script
 
 cp /mnt/etc/nixos/hardware-configuration.nix \
     /mnt/etc/nixos/NixOS_script/hosts/${HOST}/hardware.nix
