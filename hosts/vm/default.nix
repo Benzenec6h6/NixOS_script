@@ -4,7 +4,7 @@
   imports = [
     ./hardware.nix
     ./disko.nix
-    ../modules/core
+    ../../modules/core
   ];
 
   services.xserver.videoDrivers = [ "virtio" ];
