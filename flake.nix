@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    impermanence.url = "github:nix-community/impermanence";
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,7 +35,7 @@
     zen-browser.url = "github:Benzenec6h6/zen-browser-flake";
   };
 
-  outputs = { nixpkgs, disko, home-manager, stylix, zen-browser, nur, ... }@inputs:
+  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, zen-browser, nur, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
