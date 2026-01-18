@@ -2,8 +2,8 @@
   description = "TetoOS - NixOS + Home Manager + Stylix";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     impermanence.url = "github:nix-community/impermanence";
 
@@ -32,7 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser.url = "github:Benzenec6h6/zen-browser-flake";
+    zen-browser ={
+      url = "github:Benzenec6h6/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, disko, impermanence, home-manager, stylix, zen-browser, nur, ... }@inputs:
