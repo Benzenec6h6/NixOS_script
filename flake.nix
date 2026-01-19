@@ -47,19 +47,15 @@
       system = vars.system;
 
       mkNixosConfig = host: nixpkgs.lib.nixosSystem {
-        pkgs = import nixpkgs {
-          hostPlatform = system;
-          config.allowUnfree = true;
-          overlays = [
-            nur.overlays.default
-          ];
-        };
-
         specialArgs = {
           inherit inputs vars host;
         };
-
         modules = [
+          {
+            nixpkgs.hostPlatform = system;
+            nixpkgs.config.allowUnfree = true;
+            nixpkgs.overlays = [ nur.overlays.default ];
+          }
           impermanence.nixosModules.impermanence
           disko.nixosModules.disko
           ./hosts/${host}
