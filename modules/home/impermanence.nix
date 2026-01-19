@@ -11,7 +11,7 @@
       "Videos"
       ".ssh"
       ".local/share/direnv"
-      ".config/zen-browser"
+      #".config/zen-browser"
       ".mozilla/firefox"
     ];
     allowOther = true;
