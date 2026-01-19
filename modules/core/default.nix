@@ -9,6 +9,7 @@
     ./base.nix
     #./greetd.nix
     ./hibernate.nix
+    ./impermanence.nix
     ./networking.nix
     ./packages.nix
     ./power-management.nix
