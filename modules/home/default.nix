@@ -90,7 +90,7 @@
   home.file.".config/hypr/hyprlock".source = ./hyprlock;
   home.file.".config/quickshell".source = ./quickshell;
 
-  #home.packages = [
-  #  inputs.zen-browser.packages.${vars.system}.default
-  #];
+  home.packages = [
+    inputs.zen-browser.packages.${vars.system}.default
+  ];
 }
