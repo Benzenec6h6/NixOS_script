@@ -48,7 +48,7 @@
 
       mkNixosConfig = host: nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit inputs vars host;
+          inherit inputs vars;
         };
         modules = [
           {
