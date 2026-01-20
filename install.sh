@@ -112,10 +112,13 @@ mkdir -p /mnt/etc/nixos
 nixos-generate-config --root /mnt
 cp /mnt/etc/nixos/hardware-configuration.nix "$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
 
-if [ ! -s "$SCRIPT_DIR/hosts/${HOST}/hardware.nix" ]; then
-  echo "Error: hardware.nix is empty or not found!"
-  exit 1
-fi
+HW_FILE="$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
+
+# fileSystems ブロック削除
+sed -i '/^[[:space:]]*fileSystems\./,/^[[:space:]]*};/d' "$HW_FILE"
+
+# swapDevices 行削除
+sed -i '/^[[:space:]]*swapDevices[[:space:]]*=/d' "$HW_FILE"
 
 # --- NixOS インストール ---
 echo "=== Installing NixOS ==="
