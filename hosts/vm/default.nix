@@ -1,4 +1,4 @@
-{ inputs, vars, host ? "vm", ... }:
+{ inputs, vars, ... }:
 
 {
   imports = [
@@ -15,6 +15,6 @@
   # QEMU の guest agent を使う場合など
   services.qemuGuest.enable = true;
 
-  networking.hostName = host;
+  networking.hostName = vars.host;
   system.stateVersion = "25.11";
 }

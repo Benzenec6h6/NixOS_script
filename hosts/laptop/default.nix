@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, vars, host ? "laptop", ... }:
+{ config, pkgs, lib, inputs, vars, ... }:
 
 {
   imports = [
@@ -26,6 +26,6 @@
   };
 
   boot.initrd.postDeviceCommands = lib.mkAfter (builtins.readFile ./rollback.sh);
-  networking.hostName = host;
+  networking.hostName = vars.host;
   system.stateVersion = "25.11";
 }
