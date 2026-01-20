@@ -35,13 +35,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #zen-browser ={
-    #  url = "github:Benzenec6h6/zen-browser-flake";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
+    zen-browser ={
+      url = "github:Benzenec6h6/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, ... }@inputs:
+  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
