@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, vars, host, ... }: 
+{ config, pkgs, lib, inputs, vars, host ? "laptop", ... }:
 
 {
   imports = [

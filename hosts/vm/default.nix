@@ -1,4 +1,4 @@
-{ inputs, vars, host, ... }:
+{ inputs, vars, host ? "vm", ... }:
 
 {
   imports = [
