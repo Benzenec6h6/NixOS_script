@@ -1,13 +1,13 @@
 {
   # 基本インフラ設定
   system = "";
-  host = "";
-  disk = ""; 
+  host = "HOST";
+  disk = "DISK"; 
   
   # ユーザー情報
   user = {
     name = "";
-    password = "";
+    password = "HASH";
     gitName = "";
     gitEmail = "";
   };
@@ -29,8 +29,8 @@
 
   # GPU BusID
   busId = {
-    intel = "";
-    nvidia = "";
+    intel = "INTEL_BUS";
+    nvidia = "NVIDIA_BUS";
   };
 
   # 秘密鍵・APIキー
