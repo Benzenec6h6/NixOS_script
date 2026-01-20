@@ -16,12 +16,12 @@ in
     (importScript ./ClipManager.nix)
     (importScript ./Dropterminal.nix)
     (importScript ./KeyBinds.nix)
+    (importScript ./recorder.nix)
+    (importScript ./ScreenShot.nix)
     (importScript ./Volume.nix)
     (importScript ./WaybarCava.nix)
     (importScript ./WaybarScripts.nix)
     (importScript ./Weather.nix)
-    (importScript ./recorder.nix)
-    (importScript ./ScreenShot.nix)
 
     # 開発用・無効化中のものはコメントアウトで管理
     # (importScript ./KillActive.nix)
