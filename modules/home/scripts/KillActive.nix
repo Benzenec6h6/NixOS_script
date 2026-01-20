@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 
 pkgs.writeShellScriptBin "killactive" ''
   #!${pkgs.bash}/bin/bash

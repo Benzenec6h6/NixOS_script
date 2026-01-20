@@ -1,4 +1,3 @@
-# storage-monitor.nix
 { pkgs, ... }:
 
 let
