@@ -66,10 +66,5 @@
         laptop = mkNixosConfig "laptop";
         vm = mkNixosConfig "vm";
       };
-
-      diskoConfigurations = {
-        laptop = import ./hosts/laptop/disko.nix { inherit vars; };
-        vm     = import ./hosts/vm/disko.nix { inherit vars; };
-      };
     };
 }
