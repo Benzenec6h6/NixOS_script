@@ -1,4 +1,4 @@
-{ config, pkgs, lib, host, ... }:
+{ config, pkgs, lib, vars, ... }:
 let
   directions = [
     { key = "left";  dir = "l"; }
@@ -18,7 +18,7 @@ in
     settings = {
       "$term" = "kitty";
       # モニタ設定
-      monitor = hostConfig.${host}.monitor;
+      monitor = hostConfig.${vars.host}.monitor;
 
       # 起動時に実行するコマンド
       exec-once = [
