@@ -1,4 +1,4 @@
-{ inputs, vars, ... }:
+{ inputs, vars, pkgs, ... }:
 
 {
   imports = [
@@ -7,6 +7,7 @@
     ../../modules/core
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   services.xserver.videoDrivers = [ "virtio" ];
 
   # VM特有の設定
