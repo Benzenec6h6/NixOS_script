@@ -1,7 +1,7 @@
 { vars, ... }:
 
 {
-  home.persistence."/persist/home/${vars.user.name}" = {
+  home.persistence."/persist" = {
     directories = [
       "Downloads"
       "Desktop"
@@ -14,6 +14,5 @@
       #".config/zen-browser"
       ".mozilla/firefox"
     ];
-    allowOther = true;
   };
 }
