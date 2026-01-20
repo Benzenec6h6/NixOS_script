@@ -131,14 +131,4 @@ in
       ];
     };
   };
-
-  # 便利ツール
-  home.packages = with pkgs; [
-    waybar eww #ags
-    swww mpvpaper
-    pavucontrol #playerctl
-    grim slurp wf-recorder wl-clipboard
-    swappy sound-theme-freedesktop
-    qimgv #kicad notify-desktop
-  ];
 }
