@@ -129,4 +129,3 @@ nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST" --no-root-passwd
 echo "=== Installation complete! ==="
 echo "Target disk: $DISK"
 echo "Host: $HOST"
-echo "User: $USERNAME"
