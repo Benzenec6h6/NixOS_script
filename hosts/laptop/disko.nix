@@ -42,6 +42,7 @@
               "@persist" = {
                 mountpoint = "/persist";
                 mountOptions = [ "compress=zstd" "noatime" ];
+                neededForBoot = true;
               };
 
               "@swap" = {
