@@ -108,13 +108,16 @@ disko --mode disko --flake "$SCRIPT_DIR#$HOST"
 
 # hardware-configuration.nix生成
 nixos-generate-config --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix "$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
+
+if [ ! -s "$SCRIPT_DIR/hosts/${HOST}/hardware.nix" ]; then
+  echo "Error: hardware.nix is empty or not found!"
+  exit 1
+fi
 
 # --- NixOS インストール ---
 echo "=== Installing NixOS ==="
 cp -r "$SCRIPT_DIR" /mnt/etc/nixos/NixOS_script
-
-cp /mnt/etc/nixos/hardware-configuration.nix \
-    /mnt/etc/nixos/NixOS_script/hosts/${HOST}/hardware.nix
 
 nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST" --no-root-passwd
 
