@@ -7,7 +7,8 @@
     ../../modules/core
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  #boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   services.xserver.videoDrivers = [ "virtio" ];
 
   # VM特有の設定
