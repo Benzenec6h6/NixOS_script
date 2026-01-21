@@ -18,6 +18,7 @@ in
     (importScript ./KeyBinds.nix)
     (importScript ./recorder.nix)
     (importScript ./ScreenShot.nix)
+    (importScript ./Thaw.nix)
     (importScript ./Volume.nix)
     (importScript ./WaybarCava.nix)
     (importScript ./WaybarScripts.nix)
