@@ -6,7 +6,7 @@ pkgs.writeShellApplication {
   runtimeInputs = with pkgs; [
     bash
     coreutils   # test, echo など
-    tar         # .tar, .tar.gz, .tar.xz, .tar.bz2 用
+    gnutar         # .tar, .tar.gz, .tar.xz, .tar.bz2 用
     gzip        # .gz 用
     xz          # .xz 用
     bzip2       # .bz2 用
