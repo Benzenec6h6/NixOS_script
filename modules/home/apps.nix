@@ -6,7 +6,7 @@ in
 {
   home.packages = with pkgs; [
     
-    wineWowPackages.waylandFull winetricks
+    #wineWowPackages.waylandFull winetricks
 
     vscodium
 
