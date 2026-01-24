@@ -114,7 +114,7 @@
       mkdir -p ~/.local/share/applications ~/.local/share/icons && \
       cp $MOOMOO_PKG_PATH/share/applications/moomoo.desktop ~/.local/share/applications/ && \
       # コンテナ内からアイコンを抜き出してホストに置く
-      distrobox enter moomoo -- cp /opt/moomoo/app.png /home/${vars.user}/.local/share/icons/moomoo-icon.png
+      distrobox enter moomoo -- cp /opt/moomoo/app.png /home/${vars.user.name}/.local/share/icons/moomoo-icon.png
     '';
   };
 }
