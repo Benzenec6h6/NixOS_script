@@ -14,8 +14,6 @@
     # Avahi (mDNS, AirPrint/AirPlay)
     avahi.enable = false;
 
-    flatpak.enable = true;
-
     xserver.enable = false;
     xserver.xkb = {
       layout = vars.locale.kbLayout;
@@ -49,6 +47,9 @@
   virtualisation.podman.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+    configPackages = [ pkgs.hyprland ];
+  };
 }
