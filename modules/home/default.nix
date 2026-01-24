@@ -92,21 +92,29 @@
 
   home.packages = [
     inputs.zen-browser.packages.${vars.system}.default
-    inputs.moomoo.packages.${pkgs.system}.default
+    inputs.moomoo.packages.${vars.system}.default
   ];
 
   home.sessionVariables = {
-    # 修正後のflakeの構造に合わせて、ファイルまでのフルパスを指定する
-    MOOMOO_DEB_PATH = "${inputs.moomoo.packages.${pkgs.system}.default}/share/moomoo/moomoo.deb";
+    MOOMOO_PKG_PATH = "${inputs.moomoo.packages.${vars.system}.default}";
+    MOOMOO_DEB_PATH = "${inputs.moomoo.packages.${vars.system}.default}/share/moomoo/moomoo.deb";
   };
 
   home.shellAliases = {
     moomoo-install = ''
+      # 1. コンテナの作成と基本ツールのインストール
       distrobox create --name moomoo --image docker.io/library/ubuntu:24.04 --yes && \
       distrobox enter moomoo -- sudo apt update && \
       distrobox enter moomoo -- sudo apt install -y desktop-file-utils libglib2.0-bin && \
+      
+      # 2. アプリ本体のインストール
       distrobox enter moomoo -- sudo apt install -y $MOOMOO_DEB_PATH && \
-      distrobox enter moomoo -- distrobox-export --app moomoo
+      
+      # 3. デスクトップファイルとアイコンをホスト側（NixOS）に配置
+      mkdir -p ~/.local/share/applications ~/.local/share/icons && \
+      cp $MOOMOO_PKG_PATH/share/applications/moomoo.desktop ~/.local/share/applications/ && \
+      # コンテナ内からアイコンを抜き出してホストに置く
+      distrobox enter moomoo -- cp /opt/moomoo/app.png /home/${vars.user}/.local/share/icons/moomoo-icon.png
     '';
   };
 }
