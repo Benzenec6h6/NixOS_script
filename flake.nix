@@ -39,9 +39,14 @@
       url = "github:Benzenec6h6/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    moomoo = {
+      url = "github:Benzenec6h6/moomoo_flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, ... }@inputs:
+  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;

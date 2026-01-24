@@ -92,5 +92,17 @@
 
   home.packages = [
     inputs.zen-browser.packages.${vars.system}.default
+    inputs.moomoo.packages.${pkgs.system}.default
   ];
+
+  home.sessionVariables = {
+    MOOMOO_DEB_PATH = "${inputs.moomoo.packages.${pkgs.system}.default}";
+  };
+
+  home.shellAliases = {
+    moomoo-install = ''
+      distrobox enter moomoo -- sudo apt install -y $MOOMOO_DEB_PATH && \
+      distrobox enter moomoo -- distrobox-export --app /opt/moomoo/moomoo
+    '';
+  };
 }
