@@ -102,6 +102,8 @@
 
   home.shellAliases = {
     moomoo-install = ''
+      distrobox create --name moomoo --image docker.io/library/ubuntu:24.04 --yes && \
+      distrobox enter moomoo -- sudo apt update && \
       distrobox enter moomoo -- sudo apt install -y $MOOMOO_DEB_PATH && \
       distrobox enter moomoo -- distrobox-export --app moomoo
     '';
