@@ -10,6 +10,7 @@
       "/var/log"       # ログを残しておくとトラブルシューティングに役立ちます
       "/var/lib/bluetooth"
       "/var/lib/nixos"
+      "/var/lib/flatpak"
       "/etc/NetworkManager/system-connections" # Wi-Fi設定など
     ];
   };
