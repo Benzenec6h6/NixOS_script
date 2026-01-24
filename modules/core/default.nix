@@ -7,6 +7,7 @@
     ./sddm
     ./audio.nix
     ./base.nix
+    ./flatpak.nix
     #./greetd.nix
     ./hibernate.nix
     ./impermanence.nix
