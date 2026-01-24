@@ -48,7 +48,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
-  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, ... }@inputs:
+  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, nix-flatpak, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
