@@ -96,13 +96,14 @@
   ];
 
   home.sessionVariables = {
-    MOOMOO_DEB_PATH = "${inputs.moomoo.packages.${pkgs.system}.default}";
+    # 修正後のflakeの構造に合わせて、ファイルまでのフルパスを指定する
+    MOOMOO_DEB_PATH = "${inputs.moomoo.packages.${pkgs.system}.default}/share/moomoo/moomoo.deb";
   };
 
   home.shellAliases = {
     moomoo-install = ''
       distrobox enter moomoo -- sudo apt install -y $MOOMOO_DEB_PATH && \
-      distrobox enter moomoo -- distrobox-export --app /opt/moomoo/moomoo
+      distrobox enter moomoo -- distrobox-export --app moomoo
     '';
   };
 }
