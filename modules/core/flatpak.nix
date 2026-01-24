@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ pkgs, ... }:
 
 {
   services.flatpak = {
