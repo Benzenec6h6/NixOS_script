@@ -44,6 +44,8 @@
       url = "github:Benzenec6h6/moomoo_flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
   outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, ... }@inputs:
@@ -61,6 +63,7 @@
             nixpkgs.config.allowUnfree = true;
             nixpkgs.overlays = [ nur.overlays.default ];
           }
+          nix-flatpak.nixosModules.nix-flatpak
           impermanence.nixosModules.impermanence
           disko.nixosModules.disko
           ./hosts/${host}
