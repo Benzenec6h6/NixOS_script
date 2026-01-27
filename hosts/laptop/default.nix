@@ -7,6 +7,7 @@
     ../../modules/core
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics = {
     enable = true;
