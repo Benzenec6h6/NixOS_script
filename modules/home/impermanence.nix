@@ -9,6 +9,7 @@
       "Music"
       "Pictures"
       "Videos"
+      "MEGA"
       ".ssh"
       ".local/share/direnv"
       ".config/zen-browser"
