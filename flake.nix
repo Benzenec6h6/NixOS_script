@@ -40,15 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    moomoo = {
-      url = "github:Benzenec6h6/moomoo_flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
-  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, nix-flatpak, ... }@inputs:
+  outputs = { nixpkgs, disko, impermanence, home-manager, stylix, nur, zen-browser, nix-flatpak, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
