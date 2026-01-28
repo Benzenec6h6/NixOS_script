@@ -2,7 +2,7 @@
 
 {
   programs.fuse.userAllowOther = true;
-  fileSystems."/persist".neededForBoot = true;
+  #fileSystems."/persist".neededForBoot = true;
   # システム全体の永続化
   environment.persistence."/persist" = {
     hideMounts = true; # マウントを隠してディレクトリを綺麗に保つ
