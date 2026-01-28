@@ -2,6 +2,7 @@
 
 {
   programs.fuse.userAllowOther = true;
+  fileSystems."/home".neededForBoot = true;
   fileSystems."/persist".neededForBoot = true;
   # システム全体の永続化
   environment.persistence."/persist" = {
