@@ -34,11 +34,11 @@
               };
               "@home" = { 
                 mountpoint = "/home";
-                mountOptions = [ "compress=zstd" "noatime" "neededForBoot" ];
+                mountOptions = [ "compress=zstd" "noatime" ];
               };
               "@persist" = { 
                 mountpoint = "/persist";
-                mountOptions = [ "compress=zstd" "noatime" "neededForBoot" ];
+                mountOptions = [ "compress=zstd" "noatime" ];
               };
               "@swap" = {
                 mountpoint = "/.swapvol";

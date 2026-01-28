@@ -36,13 +36,13 @@
 
               "@home" = {
                 mountpoint = "/home";
-                mountOptions = [ "compress=zstd" "noatime" "neededForBoot" ];
+                mountOptions = [ "compress=zstd" "noatime" ];
                 neededForBoot = true;
               };
 
               "@persist" = {
                 mountpoint = "/persist";
-                mountOptions = [ "compress=zstd" "noatime" "neededForBoot" ];
+                mountOptions = [ "compress=zstd" "noatime" ];
               };
 
               "@swap" = {
