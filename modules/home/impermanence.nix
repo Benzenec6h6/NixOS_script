@@ -1,6 +1,7 @@
 { vars, ... }:
 
 {
+  fileSystems."/persist".neededForBoot = true;
   home.persistence."/persist" = {
     directories = [
       "Downloads"
