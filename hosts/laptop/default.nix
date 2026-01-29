@@ -12,6 +12,10 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      libvdpau-va-gl
+    ];
   };
   
   hardware.nvidia = {
@@ -26,6 +30,10 @@
     };
   };
 
+  environment.variables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
+  
   boot.initrd.postDeviceCommands = lib.mkAfter (builtins.readFile ./rollback.sh);
   networking.hostName = vars.host;
   system.stateVersion = "25.11";
