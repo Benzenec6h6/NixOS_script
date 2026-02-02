@@ -26,6 +26,7 @@
     };
   };
 
+  boot.initrd.systemd.enable = true;
   boot.tmp.cleanOnBoot = true;
 
   services.journald.extraConfig = ''
