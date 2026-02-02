@@ -96,20 +96,6 @@
   ];
 
   home.shellAliases = {
-    moomoo-install = ''
-      nix build github:Benzenec6h6/moomoo_flake
-      
-      distrobox create --name moomoo --image ubuntu:24.04 --yes
-      
-      distrobox enter moomoo -- bash -c "
-        sudo apt update && \
-        sudo apt install -y libnss3 libasound2t64 libxss1 libgbm1 libgtk-3-0t64 libsecret-1-0 \
-        libxcb-render-util0 libxcb-xinerama0 libxcb-cursor0 libxcb-icccm4 \
-        libxcb-image0 libxcb-keysyms1 libxcb-shape0 libxkbcommon-x11-0 desktop-file-utils && \
-        sudo apt install -y ./result/share/moomoo/moomoo.deb
-      "
-    '';
-
     moomoo = "distrobox enter moomoo -- /opt/moomoo/moomoo --no-sandbox";
   };
 }
