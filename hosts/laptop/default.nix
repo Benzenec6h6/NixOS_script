@@ -34,7 +34,22 @@
     LIBVA_DRIVER_NAME = "iHD";
   };
   
-  boot.initrd.postDeviceCommands = lib.mkAfter (builtins.readFile ./rollback.sh);
+  boot.initrd.systemd.services.rollback = {
+    description = "Rollback Btrfs root subvolume to a pristine state";
+    wantedBy = [ "initrd.target" ];
+    # rootパーティションが出現した後、かつマウントされる前に実行
+    after = [ "dev-disk-by\x2dpartlabel-root.device" ];
+    before = [ "sysroot.mount" ];
+    unitConfig.DefaultDependencies = "no";
+    serviceConfig = {
+      Type = "oneshot";
+      # 必要なバイナリ(bash, btrfs-progs, coreutils)を確実にパスに通して実行
+      ExecStart = let
+        script = pkgs.writeShellScript "rollback" (builtins.readFile ./rollback.sh);
+      in "${script}";
+    };
+  };
+
   networking.hostName = vars.host;
   system.stateVersion = "25.11";
 }

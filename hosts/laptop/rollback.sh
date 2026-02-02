@@ -1,20 +1,22 @@
 #!/bin/sh
+set -e # エラーが発生したら中断
 
-mkdir /btrfs_tmp
-  mount /dev/disk/by-partlabel/root /btrfs_tmp # パーティション名は環境に合わせて
-  if [ -e /btrfs_tmp/@root ]; then
-      mkdir -p /btrfs_tmp/old_roots
-      timestamp=$(date --date="@$(stat -c %Y /btrfs_tmp/@root)" "+%Y-%m-%d_%H:%M:%S")
-      mv /btrfs_tmp/@root "/btrfs_tmp/old_roots/$timestamp"
-  fi
+mkdir -p /mnt-root
+# パーティションラベルでマウント（Diskoの設定に合わせる）
+mount /dev/disk/by-partlabel/root /mnt-root
 
-  delete_old_roots() {
-    usage=$(df -h /btrfs_tmp | tail -n1 | awk '{print $5}' | sed 's/%//')
-    if [ "$usage" -gt 80 ]; then
-        ls -1tr /btrfs_tmp/old_roots | head -n 1 | xargs -I{} btrfs subvolume delete "/btrfs_tmp/old_roots/{}"
-    fi
-  }
+if [ -e /mnt-root/@root ]; then
+    mkdir -p /mnt-root/old_roots
+    timestamp=$(date "+%Y-%m-%d_%H:%M:%S")
+    mv /mnt-root/@root "/mnt-root/old_roots/$timestamp"
+fi
 
-  delete_old_roots
-  btrfs subvolume create /btrfs_tmp/@root
-  umount /btrfs_tmp
+# 容量チェックと古いログの削除ロジック
+usage=$(df /mnt-root | tail -n1 | awk '{print $5}' | sed 's/%//')
+if [ "$usage" -gt 80 ]; then
+    echo "Disk usage high ($usage%), cleaning up old roots..."
+    ls -1tr /mnt-root/old_roots | head -n 1 | xargs -I{} btrfs subvolume delete "/mnt-root/old_roots/{}"
+fi
+
+btrfs subvolume create /mnt-root/@root
+umount /mnt-root
