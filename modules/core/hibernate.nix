@@ -5,8 +5,6 @@ let
   hibernateDynamic = pkgs.callPackage ./scripts/hibernate-dynamic.nix {};
 in
 {
-  boot.initrd.systemd.enable = true;
-
   boot.initrd.systemd.services.resume-file = {
     description = "Dynamic resume from swapfile";
     wantedBy = [ "initrd.target" ];
