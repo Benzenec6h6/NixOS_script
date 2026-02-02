@@ -6,7 +6,6 @@
     pciutils usbutils
     git jq
     wget curl yt-dlp animdl
-    gnutar gzip unzip zip
     ripgrep dust tree
     htop btop nvtopPackages.full
     gcc gnumake pkg-config
