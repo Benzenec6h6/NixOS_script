@@ -1,8 +1,8 @@
-{ pkgs, vars, ... }:
+{ pkgs, inputs, vars, ... }:
 
 let
   # 共通の引数(pkgs)を渡してインポートする関数
-  importScript = path: import path { inherit pkgs vars; };
+  importScript = path: import path { inherit pkgs inputs vars; };
 in
 {
   imports = [
@@ -15,6 +15,7 @@ in
     (importScript ./Brightness.nix)
     (importScript ./ClipManager.nix)
     (importScript ./Dropterminal.nix)
+    (importScript ./install-moomoo.nix)
     (importScript ./KeyBinds.nix)
     (importScript ./recorder.nix)
     (importScript ./ScreenShot.nix)
