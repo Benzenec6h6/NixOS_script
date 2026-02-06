@@ -22,12 +22,12 @@ in
     gparted
 
     # 便利ツール
-    waybar eww #ags
+    eww #ags
     swww mpvpaper
     pavucontrol #playerctl
-    grim slurp wf-recorder wl-clipboard
-    swappy sound-theme-freedesktop
+    sound-theme-freedesktop
     qimgv notify-desktop
+    qalculate-gtk
   ]
   ++ lib.optionals isLaptop [
       # Virtualization

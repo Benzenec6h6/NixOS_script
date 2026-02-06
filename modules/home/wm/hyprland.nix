@@ -45,6 +45,7 @@ in
         "SUPER,H,exec,KeyBinds" # KeyBinds help
         "SUPER,D,exec,rofi -show drun" # App launcher
         "SUPER, A, global, quickshell:overviewToggle" # desktop overview
+        ", XF86Calculator, exec, qalculate-gtk" # Open calculator
       ]
         # --- Directional focus / swap ---
         ++ (builtins.concatMap (d: [
@@ -120,6 +121,10 @@ in
 
       windowrulev2 = [
         "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm)$"
+        #電卓用
+        "float, class:^(.*[Cc]alc.*|speedcrunch)$"
+        "size 400 600, class:^(.*[Cc]alc.*|speedcrunch)$"
+        "center, class:^(.*[Cc]alc.*|speedcrunch)$"
 
         # 動画壁紙用 mpv だけを対象にする
         "float, class:^(mpv-wallpaper)$"
