@@ -5,8 +5,8 @@ let
 in
 {
   home.packages = with pkgs; [
-    
-    #wineWowPackages.waylandFull winetricks
+ 
+    transmission_4-gtk
 
     vscodium
 
