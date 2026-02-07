@@ -38,6 +38,7 @@
           type = "packages";
           key = " ├ 󰏖 ";
           keyColor = "31";
+          format = "{1}";
         }
         {
           type = "shell";
@@ -107,16 +108,6 @@
         {
           type = "monitor";
           key = " ├  ";
-          keyColor = "33";
-        }
-        {
-          type = "player";
-          key = " ├ 󰥠 ";
-          keyColor = "33";
-        }
-        {
-          type = "media";
-          key = " └ 󰝚 ";
           keyColor = "33";
         }
         "break"
