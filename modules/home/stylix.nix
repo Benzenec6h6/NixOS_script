@@ -1,6 +1,6 @@
 _: {
   stylix.targets = {
-    gtk.enable = true;
+    #gtk.enable = true;
     gtk = {
       enable = true;
       # Stylixの設定と喧嘩しないよう、強制的にダークテーマを優先させる
