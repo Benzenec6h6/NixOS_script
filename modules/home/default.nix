@@ -23,6 +23,7 @@
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
+    ./yazi.nix
     ./zsh.nix
   ];
 
@@ -45,9 +46,12 @@
       "image/bmp"  = [ "qimgv.desktop" ];
 
       # Web / URL は zen
-      "text/html" = [ "firefox.desktop" ];
-      "x-scheme-handler/http"  = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
+      "text/html" = [ "zen.desktop" ];
+      "x-scheme-handler/http"  = [ "zen.desktop" ];
+      "x-scheme-handler/https" = [ "zen.desktop" ];
+
+      "x-scheme-handler/magnet" = [ "transmission-gtk.desktop" ];
+      "application/x-bittorrent" = [ "transmission-gtk.desktop" ];
     };
   };
 
