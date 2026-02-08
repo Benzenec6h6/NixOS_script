@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   services.flatpak = {
@@ -9,5 +9,17 @@
       "io.github.dvlv.boxbuddyrs"
     ];
     update.onActivation = true;
+  };
+
+  # nix-flatpak が生成するサービスの設定を補強
+  systemd.services.flatpak-managed-install = {
+    # ネットワークが完全にオンラインになるのを待つ
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    serviceConfig = {
+      # 失敗しても10秒おきにリトライ（これでリビルドエラーを防ぐ）
+      Restart = "on-failure";
+      RestartSec = "10";
+    };
   };
 }
