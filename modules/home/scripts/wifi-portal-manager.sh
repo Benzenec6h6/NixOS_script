@@ -8,7 +8,7 @@ echo "Starting Wi-Fi Portal Manager..."
 while true; do
     # 現在の接続状況を確認
     # nmcli connectivity check は実際に外部通信を試みるため、正確なポータル判定が可能です
-    connectivity=$(nmcli -t -f CONNECTIVITY connectivity check)
+    connectivity=$(nmcli networking connectivity check)
     ssid=$(nmcli -t -f NAME connection show --active | head -n1 || echo "")
 
     # 1. 接続先が変わった、または切断された場合
