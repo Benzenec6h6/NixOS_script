@@ -1,12 +1,6 @@
 _: {
   stylix.targets = {
-    #gtk.enable = true;
-    gtk = {
-      enable = true;
-      # Stylixの設定と喧嘩しないよう、強制的にダークテーマを優先させる
-      gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-      gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-    };
+    gtk.enable = true;
     waybar.enable = false;
     rofi.enable = true;
     hyprland.enable = false;
@@ -16,6 +10,16 @@ _: {
     qt = {
       enable = true;
       platform = "qtct";
+    };
+  };
+  
+  gtk = {
+    enable = true;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
     };
   };
 }
