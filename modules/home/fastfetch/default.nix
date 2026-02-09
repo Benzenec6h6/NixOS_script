@@ -38,7 +38,7 @@
           type = "packages";
           key = " ├ 󰏖 ";
           keyColor = "31";
-          format = "{1}";
+          text = builtins.readFile ./pkg-detect.sh;
         }
         {
           type = "shell";
@@ -107,7 +107,7 @@
         }
         {
           type = "monitor";
-          key = " ├  ";
+          key = " └  ";
           keyColor = "33";
         }
         "break"
