@@ -10,6 +10,7 @@
   nix = {
     package = pkgs.nixVersions.stable;
     settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.download-buffer-size = 1000000000;
     gc = {
       automatic = true;
       dates = "monthly";
