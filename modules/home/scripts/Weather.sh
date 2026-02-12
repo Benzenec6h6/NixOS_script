@@ -10,7 +10,7 @@ cachedir="$HOME/.cache/rbn"
 cache_path="$cachedir/weather_cache.json"
 mkdir -p "$cachedir"
 
-# 1. キャッシュの有効期限チェック（30分）
+# 1. キャッシュチェック（30分）
 if [[ -f "$cache_path" ]]; then
     last_mod=$(stat -c '%Y' "$cache_path")
     if (( $(date +%s) - last_mod < 1800 )); then
@@ -19,97 +19,61 @@ if [[ -f "$cache_path" ]]; then
     fi
 fi
 
-# 2. データ取得の試行
-data=""
-cond_text=""
-temp=""
+# 2. OpenWeatherMap からデータ取得
+owm_url="https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=metric&lang=ja"
 
-# --- Source 1: OpenWeatherMap (New) ---
-echo "Trying source: OpenWeatherMap" >&2
-# units=metric で摂氏度を取得
-owm_url="https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=metric"
+if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
+    # 各種データの抽出
+    temp=$(echo "$response" | jq -r '.main.temp | round')
+    feels_like=$(echo "$response" | jq -r '.main.feels_like | round')
+    temp_min=$(echo "$response" | jq -r '.main.temp_min | round')
+    temp_max=$(echo "$response" | jq -r '.main.temp_max | round')
+    humidity=$(echo "$response" | jq -r '.main.humidity')
+    wind_speed=$(echo "$response" | jq -r '.wind.speed')
+    description=$(echo "$response" | jq -r '.weather[0].description')
+    icon_code=$(echo "$response" | jq -r '.weather[0].icon')
+    
+    # 日の出・日の入（UNIX時間を時刻形式に変換）
+    sunrise_unix=$(echo "$response" | jq -r '.sys.sunrise')
+    sunset_unix=$(echo "$response" | jq -r '.sys.sunset')
+    sunrise=$(date -d "@$sunrise_unix" +%H:%M)
+    sunset=$(date -d "@$sunset_unix" +%H:%M)
 
-if owm_json=$(curl -sSf --connect-timeout 4 "$owm_url"); then
-    # jq を使って天気名と気温を抽出
-    cond_text=$(echo "$owm_json" | jq -r '.weather[0].description')
-    temp_val=$(echo "$owm_json" | jq -r '.main.temp')
-    if [[ "$cond_text" == "null" || "$temp_val" == "null" ]]; then
-        cond_text=""
-    else
-        temp="${temp_val%.*}°C"
-        echo "Successfully fetched data from OpenWeatherMap" >&2
-    fi
-fi
-
-# --- Source 2 & 3: wttr.in (Fallback) ---
-if [[ -z "$cond_text" ]]; then
-    SOURCES=(
-        "https://wttr.in/${latitude},${longitude}?format=%C\n%t"
-        "https://v2.wttr.in/${latitude},${longitude}?format=%C\n%t"
-    )
-
-    for source in "${SOURCES[@]}"; do
-        echo "Trying source: $source" >&2
-        if raw_data=$(curl -sSf --connect-timeout 4 "$source"); then
-            if [[ -n "$raw_data" && "$raw_data" != *"Unknown location"* ]]; then
-                mapfile -t info <<< "$raw_data"
-                cond_text="${info[0]:-}"
-                temp="${info[1]:-}"
-                echo "Successfully fetched data from $source" >&2
-                break
-            fi
-        fi
-    done
-fi
-
-# 3. 取得できた場合のアイコン変換処理
-if [[ -n "$cond_text" ]]; then
-    # OWMとwttr.inの両方のキーワードに対応できるよう小文字化
-    case "${cond_text,,}" in
-    "clear" | "sunny")
-        condition=""
-        ;;
-    "clouds" | "partly cloudy" | "scattered clouds" | "broken clouds")
-        condition="󰖕"
-        ;;
-    "cloudy" | "overcast clouds")
-        condition=""
-        ;;
-    "overcast")
-        condition=""
-        ;;
-    "fog" | "mist" | "haze" | "freezing fog")
-        condition=""
-        ;;
-    "patchy rain possible" | "patchy light drizzle" | "light drizzle" | "patchy light rain" | "light rain" | "light rain shower" | "rain" | "drizzle")
-        condition="󰼳"
-        ;;
-    "moderate rain at times" | "moderate rain" | "heavy rain at times" | "heavy rain" | "moderate or heavy rain shower" | "torrential rain shower" | "rain shower")
-        condition=""
-        ;;
-    "snow")
-        condition="󰙿"
-        ;;
-    "thunderstorm")
-        condition=""
-        ;;
-    *)
-        condition="" # 判定不能な場合
-        ;;
+    # 3. Icon ID によるマッピング
+    case "$icon_code" in
+        01d) icon=""; class="sunny" ;;
+        01n) icon=""; class="clear-night" ;;
+        02d) icon=""; class="cloudy" ;;
+        02n) icon=""; class="cloudy" ;;
+        03*) icon=""; class="cloudy" ;;
+        04*) icon=""; class="cloudy" ;;
+        09*) icon=""; class="rain" ;;
+        10d) icon=""; class="rain" ;;
+        10n) icon=""; class="rain" ;;
+        11*) icon=""; class="thunder" ;;
+        13*) icon="󰙿"; class="snow" ;;
+        50*) icon=""; class="mist" ;;
+        *)   icon=""; class="unknown" ;;
     esac
 
-    output_json=$(printf '{"text":"%s %s %s", "tooltip":"%s: %s %s"}\n' \
-        "$city" "$temp" "$condition" "$city" "$temp" "$cond_text")
-    
-    echo "$output_json" > "$cache_path"
-    echo "$output_json"
-    exit 0
-fi
+    # 4. ツールチップ用テキスト（日の出・日の入を追加）
+    tooltip_text=$(printf "地点: %s\n天気: %s\n気温: %d°C (体感: %d°C)\n最高: %d°C / 最低: %d°C\n湿度: %d%%\n風速: %.1fm/s\n\n🌅 日の出: %s\n🌇 日の入り: %s" \
+                   "$city" "$description" "$temp" "$feels_like" "$temp_max" "$temp_min" "$humidity" "$wind_speed" "$sunrise" "$sunset")
 
-# 4. 全てのソースが失敗した場合
-if [[ -f "$cache_path" ]]; then
-    cat "$cache_path"
-    # notify-send -u low "Weather" "All sources failed. Showing cached data."
+    # 5. JSON の生成
+    output=$(jq -n \
+        --arg text "$icon $temp°C" \
+        --arg alt "$city" \
+        --arg tooltip "$tooltip_text" \
+        --arg class "$class" \
+        '{"text": $text, "alt": $alt, "tooltip": $tooltip, "class": $class}')
+
+    echo "$output" > "$cache_path"
+    echo "$output"
 else
-    echo '{"text":"N/A", "tooltip":"Check internet connection"}'
+    if [[ -f "$cache_path" ]]; then
+        cat "$cache_path"
+    else
+        echo '{"text":"󰤭 ", "tooltip":"取得失敗"}'
+    fi
 fi
