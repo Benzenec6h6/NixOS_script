@@ -6,9 +6,8 @@
     ./rofi
     ./scripts
     ./starship
-    #./waybar/waybar-curved.nix
-    #./waybar/waybar-nekodyke.nix
-    ./waybar/waybar-JaKooLit.nix
+    ./waybar
+    #./waybar/waybar-JaKooLit.nix
     ./wlogout
     ./wm/hyprland.nix
     ./apps.nix
@@ -80,6 +79,7 @@
 
   programs.bat.enable = true;
   programs.fd.enable = true;
+  programs.gh.enable = true;
   programs.distrobox.enable = true;
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
