@@ -453,11 +453,9 @@
           "format" = "{}";
           "format-alt"  = "{alt}: {}";
           "format-alt-click" = "click";
-          "interval" = 600;
+          "interval" = 1800;
           "return-type" = "json";
-          #"exec" = "$HOME/.config/hypr/UserScripts/Weather.py";
           "exec" = "Weather";
-          #"exec-if" = "ping wttr.in -c1";
           "tooltip" = true;
       };
       "custom/hyprpicker" = {
@@ -652,10 +650,10 @@
       };
     }];
 
-    # CSS（Arch時代のものを適用）
     style = ''
+      /* 全体設定：Stylixのフォント設定を反映 */
       * {
-          font-family: "JetBrainsMono Nerd Font Mono";
+          font-family: "${config.stylix.fonts.monospace.name}";
           font-weight: bold;
           min-height: 0;
           font-size: 97%;
@@ -664,122 +662,88 @@
 
       window#waybar {
           background-color: transparent;
-          border-radius: 6px;
-          padding-top: 2px;
-          padding-bottom: 0px;
-          padding-right: 4px;
-          padding-left: 4px;
       }
 
+      /* ツールチップ：Stylixカラーを活用 */
       tooltip {
           background: #${config.lib.stylix.colors.base01};
           border-radius: 12px;
-          border-width: 1px;
-          border-style: solid;
-          border-color: #${config.lib.stylix.colors.base03};
+          border: 1px solid #${config.lib.stylix.colors.base03};
           color: #${config.lib.stylix.colors.base07};
       }
 
-      #taskbar button,
-      #workspaces button {
-        padding: 0px 3px;
+      /* センターモジュールのカプセル状デザイン */
+      .modules-center {
+          background-color: #${config.lib.stylix.colors.base00};
+          border-radius: 0px 0px 45px 45px;
+          padding: 8px 6px 8px 10px;
+      }
+
+      /* 各種モジュールの共通テキスト色 */
+      #custom-cava_mviz, #custom-playerctl, #window, #hyprland-window, 
+      #custom-swaync, #workspaces, #hyprland-workspaces, #clock, 
+      #custom-weather, #idle_inhibitor, #custom-hint, #tray, 
+      #network.speed, #network, #group-audio, #group-mobo_drawer, #custom-wlogout {
+          color: #${config.lib.stylix.colors.base06};
+          padding: 0 6px;
+      }
+
+      /* --- 個別カラー設定（アクセント） --- */
+
+      #clock {
+          color: #${config.lib.stylix.colors.base0D}; /* Sapphire */
+      }
+
+      #idle_inhibitor {
+          color: #${config.lib.stylix.colors.base0B}; /* Teal */
+      }
+
+      #custom-hint {
+          color: #${config.lib.stylix.colors.base09}; /* Peach */
+      }
+
+      #custom-swaync {
+          color: #${config.lib.stylix.colors.base0A}; /* Gold */
+      }
+
+      /* 天気モジュール：動的な色変化 */
+      #custom-weather {
+          color: #${config.lib.stylix.colors.base0C}; /* デフォルト：Lavender */
+      }
+
+      #custom-weather.sunny {
+          color: #${config.lib.stylix.colors.base0A}; /* 晴れ：Gold */
+      }
+
+      #custom-weather.rain {
+          color: #${config.lib.stylix.colors.base0D}; /* 雨：Sapphire */
+      }
+
+      #custom-weather.clear-night {
+          color: #${config.lib.stylix.colors.base0E}; /* 夜：Purple */
+      }
+
+      /* タスクバー & ワークスペース（アニメーション維持） */
+      #taskbar button, #workspaces button {
+        padding: 0 3px;
         margin: 3px 2px;
         border-radius: 4px;
         color: #${config.lib.stylix.colors.base05};
         background-color: #${config.lib.stylix.colors.base01};
-        transition: all 0.1s linear;
+        transition: all 0.2s ease;
         opacity: 0.4;
       }
 
-      #taskbar button.active,
-      #workspaces button.active {
-        color: #${config.lib.stylix.colors.base05};
+      #taskbar button.active, #workspaces button.active {
         background: #${config.lib.stylix.colors.base02};
-        border-radius: 4px;
-        min-width: 30px;
-        animation: gradient_f 20s ease-in infinite;
-        transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
         opacity: 1.0;
+        min-width: 30px;
       }
 
-      #taskbar button:hover,
-      #workspaces button:hover {
+      #taskbar button:hover, #workspaces button:hover {
         color: #${config.lib.stylix.colors.base08};
         background: #${config.lib.stylix.colors.base02};
-        border-radius: 3px;
-        opacity: 0.6;
-        animation: gradient_f 20s ease-in infinite;
-        transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
-      }
-
-      #workspaces button.focused {
-        color: #${config.lib.stylix.colors.base06};
-      }
-
-      #workspaces button.urgent {
-        color: #${config.lib.stylix.colors.base00};
-        border-radius: 10px;
-        background: #${config.lib.stylix.colors.base08};
-      }
-
-      /*-----module groups----*/
-      .modules-left,
-      .modules-right {
-          background-color: transparent;
-      }
-
-      .modules-center {
-          background-color: #${config.lib.stylix.colors.base00};
-          border-radius: 0px 0px 45px 45px;
-          padding-top: 8px;
-          padding-bottom: 8px;
-          padding-left: 10px;
-          padding-right: 6px;
-      }
-
-      #custom-cava_mviz,
-      #custom-playerctl,
-      #window,
-      #hyprland-window,
-      #custom-swaync,
-      #workspaces,
-      #hyprland-workspaces,
-      #clock,
-      #custom-weather,
-      #custom-weather.default,
-      #idle_inhibitor,
-      #custom-hint,
-      #tray,
-      #network.speed,
-      #network,
-      #group-audio,
-      #group-mobo_drawer,
-      #custom-wlogout {
-          color: #${config.lib.stylix.colors.base06};
-          padding-right: 6px;
-          padding-left: 6px;
-      }
-
-      #clock {
-          color: #${config.lib.stylix.colors.base0D}; /* sapphire */
-          border-radius: 15px;
-      }
-
-      #custom-weather,
-      #custom-weather.default {
-          color: #${config.lib.stylix.colors.base0C}; /* lavender */
-      }
-
-      #idle_inhibitor {
-          color: #${config.lib.stylix.colors.base0B}; /* teal */
-      }
-
-      #custom-hint {
-          color: #${config.lib.stylix.colors.base09}; /* peach/orange */
-      }
-
-      #custom-swaync {
-          color: #${config.lib.stylix.colors.base0A}; /* yellow/gold */
+        opacity: 0.7;
       }
     '';
   };
