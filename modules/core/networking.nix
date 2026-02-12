@@ -7,7 +7,15 @@
 
     # DNS を systemd-resolved に任せる（最も安定）
     dns = "systemd-resolved";
-
+    #macアドレスランダム化
+    wifi.macAddress = "random";
+    wifi.scanRandMacAddress = true;
+    #全般的な接続設定
+    connectionConfig = {
+      "ipv4.dhcp-send-hostname" = false;
+      "ipv6.dhcp-send-hostname" = false;
+      "ipv6.ip6-privacy" = 2; # ついでに IPv6 のプライバシーも強化
+    };
     # 接続性チェック（キャプティブポータル検知）
     settings = {
       connectivity = {
