@@ -18,8 +18,8 @@
     wants = [ "network-online.target" ];
     serviceConfig = {
       # 失敗しても10秒おきにリトライ（これでリビルドエラーを防ぐ）
-      Restart = "on-failure";
-      RestartSec = "10";
+      Restart = lib.mkForce "on-failure";
+      RestartSec = lib.mkForce "10s";
     };
   };
 }
