@@ -26,8 +26,16 @@
     };
   };
 
-  services.resolved.enable = true;
-  services.resolved.dnssec = "false";
+  services.resolved = {
+    enable = true;
+    dnssec = "false";
+    fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
+    extraConfig = ''
+      DNSOverTLS=opportunistic
+    '';
+  };
+
+  #networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
   networking.enableIPv6 = false;
 
   # Firewall 設定 (ufw or nftables のどちらか)
