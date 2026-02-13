@@ -30,7 +30,7 @@
     enable = true;
     dnssec = "false";
     fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
-    dnsovertls = "opportunistic"
+    dnsovertls = "opportunistic";
   };
 
   #networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
