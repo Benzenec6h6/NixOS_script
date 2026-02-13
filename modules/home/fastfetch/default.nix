@@ -38,7 +38,7 @@
           type = "packages";
           key = " ├ 󰏖 ";
           keyColor = "31";
-          text = builtins.readFile ./pkg-detect.sh;
+          format = "{1}";
         }
         {
           type = "shell";
