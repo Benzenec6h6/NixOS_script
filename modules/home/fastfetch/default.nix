@@ -38,7 +38,6 @@
           type = "packages";
           key = " ├ 󰏖 ";
           keyColor = "31";
-          format = "{1}";
         }
         {
           type = "shell";
