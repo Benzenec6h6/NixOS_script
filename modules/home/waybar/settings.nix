@@ -54,7 +54,10 @@
             "/sys/class/thermal/thermal_zone0/temp"
         ];
         #"thermal-zone" = 0;
-        "critical-threshold" = 82;
+        "critical-threshold" = 80;
+        "states" = {
+            "warning" = 60;
+        };
         "format-critical" = "{temperatureC}°C {icon}";
         "format" = "{temperatureC}°C {icon}";
         "format-icons" = [
