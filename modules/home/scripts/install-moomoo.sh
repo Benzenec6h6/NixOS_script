@@ -10,7 +10,7 @@ echo "Copying deb from Nix store to home..."
 cp "$DEB_SRC" "$TMP_DEB"
 
 echo "Creating Distrobox container..."
-distrobox create --name moomoo --image ubuntu:24.04 --yes
+distrobox create --name moomoo --image ubuntu:22.04 --yes
 
 echo "Installing moomoo inside container..."
 distrobox enter moomoo -- bash -c "
