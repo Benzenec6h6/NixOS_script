@@ -26,7 +26,10 @@ distrobox enter moomoo -- bash -c "
 
 echo "Installing moomoo inside container..."
 distrobox enter moomoo -- bash -c "
-  sudo gdebi -n $TMP_DEB && \
+  sudo mkdir -p /tmp/dummy_journal
+  sudo mount --bind /tmp/dummy_journal /var/log/journal || true
+  sudo gdebi -n $TMP_DEB
+  sudo umount /var/log/journal || true
   distrobox-export --app moomoo
 "
 
