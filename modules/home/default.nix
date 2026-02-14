@@ -96,10 +96,5 @@
 
   home.packages = [
     inputs.zen-browser.packages.${vars.system}.default
-    inputs.moomoo.packages.${vars.system}.default
   ];
-
-  home.shellAliases = {
-    moomoo = "distrobox enter moomoo -- /opt/moomoo/moomoo --no-sandbox";
-  };
 }

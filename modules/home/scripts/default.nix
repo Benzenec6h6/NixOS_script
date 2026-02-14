@@ -15,7 +15,6 @@ in
     (importScript ./Brightness.nix)
     (importScript ./ClipManager.nix)
     (importScript ./Dropterminal.nix)
-    (importScript ./install-moomoo.nix)
     (importScript ./KeyBinds.nix)
     (importScript ./recorder.nix)
     (importScript ./ScreenShot.nix)
@@ -28,5 +27,6 @@ in
     # 開発用・無効化中のものはコメントアウトで管理
     # (importScript ./KillActive.nix)
     # (importScript ./networkmanager_rofi.nix)
+    #(importScript ./install-moomoo.nix)
   ];
 }
