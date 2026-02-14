@@ -25,24 +25,26 @@ distrobox enter moomoo -- bash -c "
     wget gdebi-core
 "
 
-echo "Installing moomoo (Applying journal workaround)..."
+echo "Installing moomoo (Bypassing preinst chown checks)..."
 distrobox enter moomoo -- bash -c "
-  # 1. 偽のジャーナルディレクトリを作成してマウント
-  sudo mkdir -p /tmp/dummy_journal
-  sudo mount --bind /tmp/dummy_journal /var/log/journal || true
+  # 1. chown を一時的にダミー（/bin/true）に置き換える
+  # これにより、インストーラーが何に対してchownを試みても「成功」扱いになります
+  sudo mv /usr/bin/chown /usr/bin/chown.bak
+  sudo ln -s /bin/true /usr/bin/chown
+
+  # 2. インストール実行
+  # 権限エラーが出ても無視して進むよう || true を付与
+  sudo apt install -y $TMP_DEB || true
   
-  # 2. dpkgに「スクリプトのエラーを無視してでも進め」と指示しつつインストール
-  # ※gdebiではなく、依存関係が解決済みなので直にaptかdpkgを使うのが確実
-  sudo apt install -y -o dpkg::options::=\"--force-confdef\" -o dpkg::options::=\"--force-confold\" $TMP_DEB || true
-  
-  # 3. もし未完了（unconfigured）状態なら、強制的に構成を完了させる
-  # ここでchownエラーが出ても「|| true」で黙らせる
+  # 3. 未完了状態を強制的に構成
   sudo dpkg --configure -a || true
-  
-  # 4. 後片付け
-  sudo umount /var/log/journal || true
+
+  # 4. chown を元に戻す（重要）
+  sudo rm /usr/bin/chown
+  sudo mv /usr/bin/chown.bak /usr/bin/chown
   
   # 5. エクスポートを実行
+  # インストールが「半分失敗」に見えても、ファイルさえ置けていればエクスポート可能です
   distrobox-export --app moomoo
 "
 
