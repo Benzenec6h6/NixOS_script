@@ -56,12 +56,12 @@ if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
         *)   icon=""; class="unknown" ;;
     esac
 
-    # 4. ツールチップ用テキスト（英語化）
-tooltip_text=$(printf "Location: %s\nCondition: %s\nTemperature: %d°C (Feels like: %d°C)\nHigh: %d°C / Low: %d°C\nHumidity: %d%%\nWind: %.1fm/s\n\n🌅 Sunrise: %s\n🌇 Sunset: %s" \
+    # 4. ツールチップ用テキスト（英語化）weather
+tooltip_text=$(printf "Location: %s\r Condition: %s\r Temperature: %d°C (Feels like: %d°C)\r High: %d°C / Low: %d°C\r Humidity: %d%%\r Wind: %.1fm/s\r\r Sunrise: %s\r Sunset: %s" \
                    "$city" "$description" "$temp" "$feels_like" "$temp_max" "$temp_min" "$humidity" "$wind_speed" "$sunrise" "$sunset")
 
     # 5. JSON の生成
-    output=$(jq -n \
+    output=$(jq -n -c \
         --arg text "$icon $temp°C" \
         --arg alt "$city" \
         --arg tooltip "$tooltip_text" \
