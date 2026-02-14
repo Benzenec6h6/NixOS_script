@@ -20,7 +20,7 @@ if [[ -f "$cache_path" ]]; then
 fi
 
 # 2. OpenWeatherMap からデータ取得
-owm_url="https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=metric&lang=ja"
+owm_url="https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${api_key}&units=metric&lang=en"
 
 if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
     # 各種データの抽出
@@ -56,8 +56,8 @@ if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
         *)   icon=""; class="unknown" ;;
     esac
 
-    # 4. ツールチップ用テキスト（日の出・日の入を追加）
-    tooltip_text=$(printf "地点: %s\n天気: %s\n気温: %d°C (体感: %d°C)\n最高: %d°C / 最低: %d°C\n湿度: %d%%\n風速: %.1fm/s\n\n🌅 日の出: %s\n🌇 日の入り: %s" \
+    # 4. ツールチップ用テキスト（英語化）
+tooltip_text=$(printf "Location: %s\nCondition: %s\nTemperature: %d°C (Feels like: %d°C)\nHigh: %d°C / Low: %d°C\nHumidity: %d%%\nWind: %.1fm/s\n\n🌅 Sunrise: %s\n🌇 Sunset: %s" \
                    "$city" "$description" "$temp" "$feels_like" "$temp_max" "$temp_min" "$humidity" "$wind_speed" "$sunrise" "$sunset")
 
     # 5. JSON の生成
