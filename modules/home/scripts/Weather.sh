@@ -28,6 +28,7 @@ if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
     feels_like=$(echo "$response" | jq -r '.main.feels_like | round')
     temp_min=$(echo "$response" | jq -r '.main.temp_min | round')
     temp_max=$(echo "$response" | jq -r '.main.temp_max | round')
+    pressure=$(echo "$response" | jq -r '.main.pressure')
     humidity=$(echo "$response" | jq -r '.main.humidity')
     wind_speed=$(echo "$response" | jq -r '.wind.speed')
     description=$(echo "$response" | jq -r '.weather[0].description')
@@ -57,8 +58,8 @@ if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
     esac
 
     # 4. ツールチップ用テキスト（英語化）weather
-    tooltip_text=$(printf "Location: %s\rCondition: %s\rTemperature: %d°C (Feels like: %d°C)\rHigh: %d°C / Low: %d°C\rHumidity: %d%%\rWind: %.1fm/s\r\rSunrise: %s\rSunset: %s" \
-                   "$city" "$description" "$temp" "$feels_like" "$temp_max" "$temp_min" "$humidity" "$wind_speed" "$sunrise" "$sunset")
+    tooltip_text=$(printf "Location: %s\rCondition: %s\rTemperature: %d°C (Feels: %d°C)\rPressure: %d hPa\rHigh/Low: %d°C / %d°C\rHumidity: %d%%\rWind: %.1fm/s\r\rSunrise: %s\rSunset: %s" \
+                   "$city" "$description" "$temp" "$feels_like" "$pressure" "$temp_max" "$temp_min" "$humidity" "$wind_speed" "$sunrise" "$sunset")
 
     # 5. JSON の生成
     output=$(jq -n -c \
