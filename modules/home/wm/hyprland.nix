@@ -45,6 +45,7 @@ in
         "SUPER,H,exec,KeyBinds" # KeyBinds help
         "SUPER,D,exec,rofi -show drun" # App launcher
         "SUPER, A, global, quickshell:overviewToggle" # desktop overview
+        ", Print, exec, screenshot --area"
         ", XF86Calculator, exec, qalculate-gtk" # Open calculator
       ]
         # --- Directional focus / swap ---
