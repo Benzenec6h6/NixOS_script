@@ -14,8 +14,8 @@ ICON_TIMER="alarm-clock"
 ICON_ERROR="dialog-error"
 
 # 音声ファイルの定義 (より安全なパス、または依存に含める)
-SND_CAPTURE="/run/current-system/sw/share/sounds/freedesktop/stereo/screen-capture.oga"
-SND_ERROR="/run/current-system/sw/share/sounds/freedesktop/stereo/dialog-error.oga"
+SND_CAPTURE="screen-capture.oga"
+SND_ERROR="dialog-error.oga"
 
 playsound() {
     if [[ -f "$1" ]]; then

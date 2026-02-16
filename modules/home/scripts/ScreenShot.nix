@@ -14,6 +14,7 @@ pkgs.writeShellApplication {
     pkgs.xdg-utils
     pkgs.coreutils
     pkgs.gnused
+    pkgs.sound-theme-freedesktop
   ];
   text = builtins.readFile ./ScreenShot.sh;
 }
