@@ -57,7 +57,7 @@ if response=$(curl -sSf --connect-timeout 5 "$owm_url"); then
     esac
 
     # 4. ツールチップ用テキスト（英語化）weather
-tooltip_text=$(printf "Location: %s\r Condition: %s\r Temperature: %d°C (Feels like: %d°C)\r High: %d°C / Low: %d°C\r Humidity: %d%%\r Wind: %.1fm/s\r\r Sunrise: %s\r Sunset: %s" \
+    tooltip_text=$(printf "Location: %s\rCondition: %s\rTemperature: %d°C (Feels like: %d°C)\rHigh: %d°C / Low: %d°C\rHumidity: %d%%\rWind: %.1fm/s\r\rSunrise: %s\rSunset: %s" \
                    "$city" "$description" "$temp" "$feels_like" "$temp_max" "$temp_min" "$humidity" "$wind_speed" "$sunrise" "$sunset")
 
     # 5. JSON の生成
