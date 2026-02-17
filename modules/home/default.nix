@@ -15,8 +15,10 @@
     ./cava.nix
     ./firefox.nix
     ./fonts.nix
+    ./gh.nix
     ./hypridle.nix
     ./impermanence.nix
+    ./keepassxc.nix
     ./kitty.nix
     ./neovim.nix
     ./stylix.nix
@@ -60,6 +62,11 @@
       name = vars.user.gitName;
       email = vars.user.gitEmail;
     };
+    config = {
+      credential.helper = "keepassxc";
+      # SSH鍵の署名を検証する場合などに備えて
+      # gpg.format = "ssh"; 
+    };
   };
 
   programs.fzf = {
@@ -79,7 +86,6 @@
 
   programs.bat.enable = true;
   programs.fd.enable = true;
-  programs.gh.enable = true;
   programs.distrobox.enable = true;
   programs.hyprlock.enable = true;
   services.hypridle.enable = true;
