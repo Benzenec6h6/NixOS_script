@@ -25,8 +25,8 @@ in
     eww #ags
     swww mpvpaper
     pavucontrol #playerctl
-    sound-theme-freedesktop
     qimgv notify-desktop
+    bottom btop nvtopPackages.full
     qalculate-gtk
   ]
   ++ lib.optionals isLaptop [
