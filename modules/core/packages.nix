@@ -7,7 +7,6 @@
     git jq
     wget curl yt-dlp animdl
     ripgrep dust tree
-    htop btop nvtopPackages.full
     gcc gnumake pkg-config
     dnsutils inetutils iproute2 netcat
     mesa vulkan-tools
