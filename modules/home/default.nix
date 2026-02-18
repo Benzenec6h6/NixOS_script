@@ -13,7 +13,7 @@
     ./apps.nix
     #./brave.nix
     ./cava.nix
-    ./firefox.nix
+    #./firefox.nix
     ./fonts.nix
     ./gh.nix
     ./git.nix
