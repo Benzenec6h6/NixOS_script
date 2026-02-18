@@ -1,4 +1,6 @@
 { ... }: {
+  xdg.autostart.enable = true;
+
   xdg.userDirs = {
     enable = true;
     createDirectories = true;
