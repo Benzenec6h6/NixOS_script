@@ -42,6 +42,8 @@
         "group/mobo_drawer"
         "custom/separator#line"
         "group/audio"
+        "custom/separator#line"
+        "battery"
         "custom/separator#dot-line"
         "custom/wlogout"
     ];
