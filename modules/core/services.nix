@@ -49,7 +49,19 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
-    configPackages = [ pkgs.hyprland ];
+    extraPortals = [ 
+      pkgs.xdg-desktop-portal-hyprland 
+      pkgs.xdg-desktop-portal-gtk 
+    ];
+    # configPackages = [ pkgs.hyprland ]; # これは削除してもOKです（通常Hyprland側で処理されるため）
+    
+    config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      hyprland = {
+        default = [ "hyprland" "gtk" ];
+      };
+    };
   };
 }
