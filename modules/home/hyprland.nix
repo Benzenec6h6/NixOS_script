@@ -23,7 +23,6 @@ in
       # 起動時に実行するコマンド
       exec-once = [
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-        "gnome-keyring-daemon --daemonize --components=pkcs11,secrets,ssh"
         "swaync"
         "waybar"
         "fcitx5"
