@@ -13,16 +13,11 @@
 
     # Avahi (mDNS, AirPrint/AirPlay)
     avahi.enable = false;
-
-    xserver.enable = false;
-    xserver.xkb = {
-      layout = vars.locale.kbLayout;
-      variant = "";
-    };
-    xserver.windowManager.xmonad.enable = false;
+    
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
+    tumbler.enable = true;
     #power-profiles-daemon.enable = true;
   };
   
@@ -54,8 +49,12 @@
       pkgs.xdg-desktop-portal-hyprland 
       pkgs.xdg-desktop-portal-gtk 
     ];
-    # configPackages = [ pkgs.hyprland ]; # これは削除してもOKです（通常Hyprland側で処理されるため）
-    
+
+    configPackages = [ 
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+
     config = {
       common = {
         default = [ "gtk" ];
