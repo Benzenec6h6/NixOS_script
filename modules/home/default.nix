@@ -9,7 +9,7 @@
     ./waybar
     #./waybar/waybar-JaKooLit.nix
     ./wlogout
-    ./wm/hyprland.nix
+    ./hyprland.nix
     ./apps.nix
     #./brave.nix
     ./cava.nix
@@ -55,6 +55,10 @@
   services.blueman-applet.enable = true;
   services.swaync.enable = true;
   services.playerctld.enable = true;
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
+  };
   services.megasync = {
     enable = true;
     forceWayland = true;
