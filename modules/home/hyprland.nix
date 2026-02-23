@@ -15,6 +15,10 @@ in
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd = {
+      enable = true;
+      variables = ["--all"]; 
+    };
     settings = {
       "$term" = "kitty";
       # モニタ設定
@@ -22,7 +26,6 @@ in
 
       # 起動時に実行するコマンド
       exec-once = [
-        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "swaync"
         "waybar"
         "fcitx5"
