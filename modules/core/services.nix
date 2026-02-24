@@ -58,6 +58,9 @@
         "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
         "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
         "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
+        "org.freedesktop.portal.Settings" = [ "gtk" ];
+        "org.freedesktop.portal.OpenURI" = [ "gtk" ];
+        "org.freedesktop.portal.FileChooser" = [ "gtk" ];
       };
     };
   };
