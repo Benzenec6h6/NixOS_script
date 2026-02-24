@@ -17,7 +17,13 @@ in
     enable = true;
     systemd = {
       enable = true;
-      variables = ["--all"]; 
+      variables = ["--all"];
+      extraCommands = [
+        "systemctl --user stop hyprland-session.target"
+        "systemctl --user start hyprland-session.target"
+        "systemctl --user restart xdg-desktop-portal-gtk"
+        "systemctl --user restart xdg-desktop-portal"
+      ]; 
     };
     settings = {
       "$term" = "kitty";
