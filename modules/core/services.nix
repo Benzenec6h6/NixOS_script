@@ -54,7 +54,8 @@
         default = [ "gtk" ];
       };
       hyprland = {
-        default = [ "hyprland" "gtk" ];
+        default = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
         "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
         "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
@@ -64,6 +65,4 @@
       };
     };
   };
-
-  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
 }
