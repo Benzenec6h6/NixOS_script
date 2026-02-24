@@ -1,7 +1,8 @@
 _: {
   stylix.targets = {
     gtk.enable = true;
-    waybar.enable = false;
+    waybar.enable = true;
+    xdg.enable = false;
     rofi.enable = true;
     hyprland.enable = false;
     hyprlock.enable = false;
