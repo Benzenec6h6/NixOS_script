@@ -21,7 +21,15 @@
     #power-profiles-daemon.enable = true;
   };
   
-  programs.hyprland.enable = true;
+  programs.uwsm.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+  };
+  programs.uwsm.waylandCompositors.hyprland = {
+    prettyName = "Hyprland";
+    binPath = "/run/current-system/sw/bin/Hyprland";
+  };
   programs.xwayland.enable = true;
   programs.thunar = {
     enable = true;
