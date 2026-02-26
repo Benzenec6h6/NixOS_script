@@ -59,11 +59,8 @@
     ];
 
     config = {
-      common = {
+      hyprland = {
         default = [ "gtk" ];
-      };
-      Hyprland = {
-        default = [ "hyprland" "gtk" ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
         "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
