@@ -50,25 +50,8 @@
   virtualisation.podman.enable = true;
   virtualisation.libvirtd.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    xdgOpenUsePortal = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland 
-    ];
-
-    config = {
-      hyprland = {
-        default = [ "gtk" ];
-        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
-        "org.freedesktop.impl.portal.Screenshot" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.ScreenCast" = [ "hyprland" ];
-        "org.freedesktop.impl.portal.Settings" = [ "gtk" ];
-        "org.freedesktop.portal.Settings" = [ "gtk" ];
-        "org.freedesktop.portal.OpenURI" = [ "gtk" ];
-        "org.freedesktop.portal.FileChooser" = [ "gtk" ];
-      };
-    };
-  };
+  environment.pathsToLink = [ 
+    "/share/xdg-desktop-portal" 
+    "/share/applications" 
+  ];
 }
