@@ -4,7 +4,7 @@
   environment.systemPackages = with pkgs; [
     vim nano
     pciutils usbutils
-    git jq psmisc
+    git jq psmisc glib
     wget curl yt-dlp animdl
     ripgrep dust tree
     gcc gnumake pkg-config
