@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   xdg.autostart.enable = true;
 
   xdg.userDirs = {
