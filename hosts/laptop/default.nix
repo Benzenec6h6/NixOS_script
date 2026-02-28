@@ -26,7 +26,8 @@
     prime = {
       intelBusId = vars.busId.intel;
       nvidiaBusId = vars.busId.nvidia;
-      offload.enable = true;
+      #offload.enable = true;
+      sync.enable = true;
     };
   };
 
