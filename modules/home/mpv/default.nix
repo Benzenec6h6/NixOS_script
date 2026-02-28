@@ -1,9 +1,11 @@
 {
   pkgs,
   config,
+  vars,
   ...
-}: {
-  
+}: let
+  isLaptop = vars.host == "laptop";
+in{
   programs.mpv = {
     enable = true;
     config = {
@@ -12,8 +14,9 @@
       profile = "gpu-hq";
       vo = "gpu";
       #loop-file = "inf";
-      #hwdec = "vaapi";
-      hwdec = "nvdec";
+      #hwdec = "nvdec-copy";
+      gpu-api = if isLaptop then "vulkan" else "opengl";
+      hwdec = if isLaptop then "nvdec" else "vaapi";
       scale = "ewa_lanczossharp";
       cscale = "ewa_lanczossharp";
       save-position-on-quit = "yes";
@@ -33,18 +36,11 @@
       keepaspect-window = "no";
       screenshot-directory = config.xdg.userDirs.pictures;
     };
+
     scriptOpts = {
       webtorrent.path = "${config.xdg.cacheHome}/mpv";
-      youtube-search = {
-        key_youtube_search_replace = "CTRL+SHIFT+s";
-        key_youtube_music_search_replace = "";
-        key_youtube_search_append = "";
-        key_youtube_music_search_append = "";
-        key_search_results_update = "";
-        search_results = 1;
-        osd_message_duration = 0;
-      };
     };
+
     bindings = {
       "l" = "seek 5";
       "h" = "seek -5";
@@ -92,7 +88,6 @@
         thumbfast
         sponsorblock
         quality-menu
-        (pkgs.mpvScripts.callPackage ./mpv-youtube-search.nix {})
       ];
   };
 }
