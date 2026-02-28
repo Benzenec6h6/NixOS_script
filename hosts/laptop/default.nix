@@ -13,8 +13,9 @@
     enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
-      intel-media-driver
-      libvdpau-va-gl
+      nvidia-vaapi-driver
+      #intel-media-driver
+      #libvdpau-va-gl これは色々怪しい
     ];
   };
   
@@ -32,7 +33,7 @@
   };
 
   environment.variables = {
-    LIBVA_DRIVER_NAME = "iHD";
+    LIBVA_DRIVER_NAME = "nvidia";
   };
   
   boot.initrd.systemd.services.rollback = {
