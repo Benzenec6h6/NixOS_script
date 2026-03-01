@@ -15,13 +15,13 @@
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
       #intel-media-driver
-      #libvdpau-va-gl これは色々怪しい
     ];
   };
   
   hardware.nvidia = {
     open = true;
     modesetting.enable = true;
+    dynamicBoost.enable = true;
     powerManagement.enable = true;
     powerManagement.finegrained = false;
     prime = {
@@ -34,6 +34,7 @@
 
   environment.variables = {
     LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
   };
   
   boot.initrd.systemd.services.rollback = {
