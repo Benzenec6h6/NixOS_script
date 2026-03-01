@@ -12,11 +12,10 @@ in{
       osc = "no";
       osd-bar = "no";
       profile = "gpu-hq";
-      vo = "gpu";
-      #loop-file = "inf";
-      #hwdec = "nvdec-copy";
+      vo =  if isLaptop then "gpu-next" else "gpu";
       gpu-api = if isLaptop then "vulkan" else "opengl";
-      hwdec = if isLaptop then "nvdec" else "vaapi";
+      hwdec = if isLaptop then "nvdec-copy" else "vaapi";
+      #hwdec = "nvdec";
       scale = "ewa_lanczossharp";
       cscale = "ewa_lanczossharp";
       save-position-on-quit = "yes";
