@@ -1,23 +1,35 @@
-{ config, pkgs, lib, vars, ... }:
+{ config, pkgs, inputs, lib, vars, ... }:
 let
   isVM = vars.host == "vm";
   isLaptop = vars.host == "laptop";
 in
 {
-  home.packages = with pkgs; [
- 
-    transmission_4-gtk
+  programs.hyprlock.enable = true;
+  programs.distrobox.enable = true;
+  services.hypridle.enable = true;
+  services.blueman-applet.enable = true;
+  services.swaync.enable = true;
+  services.playerctld.enable = true;
+  services.gnome-keyring = {
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
+  };
+  services.megasync = {
+    enable = true;
+    forceWayland = true;
+  };
 
+  home.packages = [
+    inputs.zen-browser.packages.${vars.system}.default
+  ] ++ (with pkgs; [
     vscodium
 
     # 通信用
     discord
 
-    # ブラウザ（追加）
-    #zen-browser 
-
     # ユーティリティ
     steam
+    transmission_4-gtk
     qbittorrent
     gparted
 
@@ -25,10 +37,10 @@ in
     eww #ags
     swww mpvpaper
     pavucontrol #playerctl
-    qimgv notify-desktop
+    qimgv #notify-desktop
     bottom btop nvtopPackages.full
     qalculate-gtk
-  ]
+  ])
   ++ lib.optionals isLaptop [
       # Virtualization
       qemu_full libvirt virt-viewer OVMF virt-manager

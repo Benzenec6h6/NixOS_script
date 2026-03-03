@@ -1,4 +1,4 @@
-{ pkgs, inputs, vars, config, ... }:
+{ pkgs, vars, config, ... }:
 {
   imports = [
     ./fastfetch
@@ -13,6 +13,7 @@
     ./apps.nix
     #./brave.nix
     ./cava.nix
+    ./cli-tools.nix
     #./firefox.nix
     ./fonts.nix
     ./gh.nix
@@ -32,42 +33,6 @@
 
   programs.home-manager.enable = true;
 
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.bat.enable = true;
-  programs.fd.enable = true;
-  programs.distrobox.enable = true;
-  programs.hyprlock.enable = true;
-  services.hypridle.enable = true;
-  services.blueman-applet.enable = true;
-  services.swaync.enable = true;
-  services.playerctld.enable = true;
-  services.gnome-keyring = {
-    enable = true;
-    components = [ "pkcs11" "secrets" "ssh" ];
-  };
-  services.megasync = {
-    enable = true;
-    forceWayland = true;
-  };
-
   home.file.".config/hypr/hyprlock".source = ./hyprlock;
   home.file.".config/quickshell".source = ./quickshell;
-
-  home.packages = [
-    inputs.zen-browser.packages.${vars.system}.default
-  ];
 }
