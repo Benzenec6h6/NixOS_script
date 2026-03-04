@@ -23,6 +23,7 @@
     ./impermanence.nix
     ./keepassxc.nix
     ./kitty.nix
+    ./ollama.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix

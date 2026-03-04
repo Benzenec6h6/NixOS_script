@@ -2,7 +2,7 @@
   description = "TetoOS - NixOS + Home Manager + Stylix";
 
   inputs = {
-    #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     impermanence = {
@@ -56,7 +56,15 @@
           {
             nixpkgs.hostPlatform = system;
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [ nur.overlays.default ];
+            nixpkgs.overlays = [ 
+              nur.overlays.default
+              (final: prev: {
+                unstable = import inputs.nixpkgs-unstable {
+                  system = prev.system;
+                  config.allowUnfree = true;
+                };
+              }) 
+            ];
           }
           nix-flatpak.nixosModules.nix-flatpak
           impermanence.nixosModules.impermanence
