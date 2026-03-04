@@ -40,12 +40,12 @@ in
     qimgv #notify-desktop
     bottom btop nvtopPackages.full
     qalculate-gtk
-  ])
+  ]
   ++ lib.optionals isLaptop [
       # Virtualization
       qemu_full libvirt virt-viewer OVMF virt-manager
       dnsmasq swtpm libosinfo tuned ntfs3g
 
       kicad
-  ];
+  ]);
 }
