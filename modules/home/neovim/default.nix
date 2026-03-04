@@ -51,22 +51,8 @@
 
     # 2. Luaによるプラグインの設定
     extraLuaConfig = ''
-      -- nvim-treeの初期化
-      require("nvim-tree").setup({
-        sort_by = "case_sensitive",
-        view = {
-          width = 30,
-        },
-        renderer = {
-          group_empty = true,
-        },
-        filters = {
-          dotfiles = false,
-        },
-      })
-
-      -- キーマッピング (例: Ctrl+n でツリーを開閉)
-      vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { silent = true })
+      vim.g.fcitx5_remote_path = "${pkgs.fcitx5}/bin/fcitx5-remote"
+      ${builtins.readFile ./init.lua}
     '';
   };
 }
