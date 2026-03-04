@@ -45,8 +45,6 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  hardware.cpu.intel.updateMicrocode = true;
-
   virtualisation.podman.enable = true;
   virtualisation.libvirtd.enable = true;
 
