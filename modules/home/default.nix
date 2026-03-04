@@ -3,6 +3,7 @@
   imports = [
     ./fastfetch
     ./mpv
+    ./neovim
     ./rofi
     ./scripts
     ./starship
@@ -22,7 +23,6 @@
     ./impermanence.nix
     ./keepassxc.nix
     ./kitty.nix
-    ./neovim.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
