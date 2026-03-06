@@ -28,7 +28,7 @@
       ]))
 
       # --- 特定のワークフロー ---
-      orgmode-nvim          # メモ・タスク管理
+      orgmode          # メモ・タスク管理
       toggleterm-nvim       # Neovim内で端末を浮遊表示
 
       # --- [提案] 操作を覚えるための補助 ---
