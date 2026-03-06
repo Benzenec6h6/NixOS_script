@@ -5,9 +5,8 @@ let
   # ヘルパー関数: 定義リストをHyprlandの形式 "MOD, KEY, DISPATCHER, ARG" に変換
   mkBind = list: map (b: 
     let 
-      modPart = if b.mod == "" then "" else "${b.mod}, ";
       cmdPart = if b.arg == "" then b.dispatcher else "${b.dispatcher}, ${b.arg}";
-    in "${modPart}${b.key}, ${cmdPart}"
+    in "${b.mod}, ${b.key}, ${cmdPart}"
   ) list;
 
   # (オプション) ヘルパー用にJSON等を出力する仕組みを作っておくと後が楽です
