@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 JSON_PATH="${KEYBINDS_JSON}"
-ICON="󰘳" # SUPERのアイコン
+ICON="" # SUPERのアイコン
 
 # データの整形ロジック
 # [カテゴリ] MOD + KEY -> 説明
