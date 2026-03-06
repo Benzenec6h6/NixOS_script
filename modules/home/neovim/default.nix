@@ -7,36 +7,32 @@
     viAlias = true;
     vimAlias = true;
 
-    # 1. プラグインの追加
     plugins = with pkgs.vimPlugins; [
-      nvim-tree-lua
-      nvim-web-devicons # アイコンを表示するために推奨
+      # --- UI / 情報表示 ---
+      lualine-nvim          # 下部のステータスライン
+      nvim-web-devicons     # 各種アイコン表示用
+      gitsigns-nvim         # [解決済] 行番号横の差分表示
+      nvim-lspconfig        #lsp設定を動かす
+      
+      # --- ファイル管理・検索 ---
+      nvim-tree-lua         # サイドバー (C-n)
+      telescope-nvim        # [重要] あらゆる検索の窓口
+      plenary-nvim          # telescope等の動作に必須
+      yazi-nvim             # ファイルマネージャーyaziとの連携
+
+      # --- 構文解析・編集補助 ---
       (nvim-treesitter.withPlugins (p: with p; [
-        # 必須・基本
-        nix
-        lua
-        vim
-        vimdoc
-        query # Treesitter自体のデバッグ用
-
-        # Web / 設定ファイル (よく遭遇するもの)
-        html
-        css
-        javascript
-        typescript
-        json
-        yaml
-        toml
-        markdown
-        markdown_inline
-
-        # 自分がいつか書くかもしれない言語 (お好みで)
-        python
-        bash
-        rust
-        go
-        dockerfile
+        nix lua vim vimdoc bash
+        json yaml toml
+        markdown markdown_inline
       ]))
+
+      # --- 特定のワークフロー ---
+      orgmode-nvim          # メモ・タスク管理
+      toggleterm-nvim       # Neovim内で端末を浮遊表示
+
+      # --- [提案] 操作を覚えるための補助 ---
+      which-key-nvim        # Spaceを押した時にガイドを出す (ストイック期の味方)
     ];
 
     extraConfig = ''
@@ -47,9 +43,9 @@
       set tabstop=2
       set smartindent
       set clipboard=unnamedplus
+      set mouse=a
     '';
 
-    # 2. Luaによるプラグインの設定
     extraLuaConfig = ''
       vim.g.fcitx5_remote_path = "${pkgs.fcitx5}/bin/fcitx5-remote"
       ${builtins.readFile ./init.lua}
