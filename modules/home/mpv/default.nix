@@ -14,8 +14,8 @@ in{
       profile = "gpu-hq";
       vo =  if isLaptop then "gpu-next" else "gpu";
       gpu-api = if isLaptop then "vulkan" else "opengl";
-      hwdec = if isLaptop then "nvdec-copy" else "vaapi";
-      #hwdec = "nvdec";
+      hwdec = if isLaptop then "nvdec" else "vaapi";
+      #hwdec = "nvdec-copy";
       scale = "ewa_lanczossharp";
       cscale = "ewa_lanczossharp";
       save-position-on-quit = "yes";
