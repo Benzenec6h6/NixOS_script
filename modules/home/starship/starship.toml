@@ -191,12 +191,12 @@ vimcmd_replace_one_symbol = "[](bg:color_background_base fg:color_base_orange
 format = "$symbol "
 
 [line_break]
-disabled = true
+disabled = false
 
 ### Module configurations
 ###  General section
 [os]
-# disabled = false
+disabled = false
 style = "bg:color_os fg:color_os_text"
 # format = '[$symbol(v$version)(  $edition)(  $codename)(  $type)]($style)'
 ## uncomment the format above for all available information and comment out the line below
@@ -510,7 +510,7 @@ style = "bg:color_sourcecontrol fg:color_foreground_dark"
 format = "[$symbol$channel]($style) "
 
 [custom.giturl]
-# disabled = true
+disabled = true
 description = "Display icon for remote Git server"
 command = """
     GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
@@ -946,7 +946,7 @@ style = "bg:color_shellix fg:color_shellix_text"
 format = '[$symbol]($style)[shell]($style)'
 
 [nix_shell]
-# disabled = true
+disabled = true
 symbol = " " # nf-linux-nixos
 style = "bg:color_shellix fg:color_shellix_text"
 impure_msg = '[](bg:color_shellix fg:color_base_red_light)' # nf-weather-gale_warning - personal setting
