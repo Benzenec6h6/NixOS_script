@@ -1,6 +1,6 @@
 { config, pkgs, lib, vars, ... }:
 let
-  keybindData = import ./keybinddata.nix { inherit lib; };
+  keybindData = import ./keybinddata.nix { inherit lib vars; };
   
   # ヘルパー関数: 定義リストをHyprlandの形式 "MOD, KEY, DISPATCHER, ARG" に変換
   mkBind = list: map (b: 
