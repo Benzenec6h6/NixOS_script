@@ -40,6 +40,10 @@ in
     qimgv #notify-desktop
     bottom btop nvtopPackages.full
     qalculate-gtk
+
+    #LSPサーバー
+    lua-language-server
+    nixd shfmt
   ]
   ++ lib.optionals isLaptop [
       # Virtualization
