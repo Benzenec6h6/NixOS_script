@@ -1,4 +1,4 @@
-{ pkgs, vars, config, ... }:
+{ pkgs, vars, config, lib, ... }:
 {
   imports = [
     ./fastfetch
@@ -23,14 +23,15 @@
     ./impermanence.nix
     ./keepassxc.nix
     ./kitty.nix
-    ./ollama.nix
     ./stylix.nix
     ./swaync.nix
     #./themes.nix
     ./xdg.nix
     ./yazi.nix
     ./zsh.nix
-  ];
+  ] ++ (lib.optionals (vars.host == "laptop") [
+    ./ollama.nix
+  ]);
 
   programs.home-manager.enable = true;
 
