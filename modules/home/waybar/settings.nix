@@ -465,7 +465,7 @@
     };
     "custom/hint" = {
         "format" = "󰺁 HINT!";
-        "on-click" = "KeyBinds";
+        "on-click" = "keybind-menu";
         "tooltip" = true;
         "tooltip-format" = "Left Click: Keybinds";
     };
