@@ -1,8 +1,9 @@
-{ pkgs, inputs, vars, ... }:
+{ pkgs, inputs, vars, lib, ... }:
 
 let
   # 共通の引数(pkgs)を渡してインポートする関数
   importScript = path: import path { inherit pkgs inputs vars; };
+  hyprlandKeyData = import ../hyprland/keybinddata.nix { inherit lib vars; };
 in
 {
   imports = [
@@ -15,7 +16,10 @@ in
     (importScript ./Brightness.nix)
     (importScript ./ClipManager.nix)
     (importScript ./Dropterminal.nix)
-    (importScript ./KeyBinds.nix)
+    (import ./keybind-menu.nix { 
+      inherit pkgs; 
+      data = hyprlandKeyData;
+    })
     (importScript ./recorder.nix)
     (importScript ./ScreenShot.nix)
     (importScript ./Thaw.nix)
