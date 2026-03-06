@@ -40,6 +40,7 @@
       tumbler
     ];
   };
+  programs.nix-ld.enable = true;
 
   #bluetooth
   hardware.bluetooth.enable = true;
