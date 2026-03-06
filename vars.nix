@@ -8,6 +8,7 @@
   user = {
     name = "";
     password = "HASH";
+    terminal = "kitty";
     gitName = "";
     gitEmail = "";
   };
