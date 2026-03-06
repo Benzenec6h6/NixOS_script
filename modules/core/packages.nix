@@ -11,8 +11,7 @@
     dnsutils inetutils iproute2 netcat
     mesa vulkan-tools
 
-    hyprland hyprlock hypridle
-    kitty
+    #hyprland hyprlock hypridle
     polkit_gnome libsecret
     udiskie
     networkmanager_dmenu
