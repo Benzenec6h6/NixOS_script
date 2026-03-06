@@ -2,6 +2,7 @@
 {
   imports = [
     ./fastfetch
+    ./hyprland
     ./mpv
     ./neovim
     ./rofi
@@ -10,7 +11,6 @@
     ./waybar
     #./waybar/waybar-JaKooLit.nix
     ./wlogout
-    ./hyprland.nix
     ./apps.nix
     #./brave.nix
     ./cava.nix
