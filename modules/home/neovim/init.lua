@@ -64,8 +64,8 @@ require("which-key").setup()
 -- pluginsに nvim-lspconfig を追加しておくことを推奨します
 local servers = {
   nixd = {},
-  bashls = {}, -- シェルスクリプト用 (bash-language-server)
-  pyright = {}, -- Python用
+  bashls = {},       -- シェルスクリプト用 (bash-language-server)
+  basedpyright = {}, -- Python用
   lua_ls = {
     settings = {
       Lua = { diagnostics = { globals = { 'vim' } } }
@@ -77,7 +77,7 @@ local servers = {
 for lsp, config in pairs(servers) do
   -- lua_ls だけ実行ファイル名が異なるためのケア
   local bin = (lsp == 'lua_ls') and 'lua-language-server' or lsp
-  
+
   if vim.fn.executable(bin) == 1 then
     if next(config) ~= nil then
       vim.lsp.config(lsp, config)
@@ -91,7 +91,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local opts = { buffer = args.buf }
     key('n', 'gd', vim.lsp.buf.definition, opts)     -- 定義へジャンプ
-    key('n', 'K',  vim.lsp.buf.hover, opts)          -- ホバー表示
+    key('n', 'K', vim.lsp.buf.hover, opts)           -- ホバー表示
     key('n', '<leader>rn', vim.lsp.buf.rename, opts) -- リネーム
   end,
 })
@@ -102,9 +102,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
   callback = function()
-      local cmd = vim.g.fcitx5_remote_path or "fcitx5-remote"
-      local handle = io.popen(cmd .. " -c")
-      if handle then handle:close() end
+    local cmd = vim.g.fcitx5_remote_path or "fcitx5-remote"
+    local handle = io.popen(cmd .. " -c")
+    if handle then handle:close() end
   end,
 })
 
@@ -119,3 +119,4 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.lsp.buf.format({ async = false })
   end,
 })
+
