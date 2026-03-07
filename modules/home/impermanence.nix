@@ -21,5 +21,9 @@
       ".config/keepassxc"
       ".local/share/keepassxc"
     ];
+
+    files = [
+      ".config/gh/hosts.yml"
+    ];
   };
 }
