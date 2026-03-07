@@ -22,7 +22,7 @@ in
     { mod = "SUPER ALT"; key = "SPACE"; dispatcher = "exec"; arg = "hyprctl dispatch workspaceopt allfloat"; desc = "All Float Mode";}
     { mod = "SUPER SHIFT"; key = "Return"; dispatcher = "exec"; arg = "Dropterminal ${vars.user.terminal}"; desc = "Dropdown terminal";}
     { mod = "SUPER CTRL ALT"; key = "B"; dispatcher = "exec"; arg = "pkill -SIGUSR1 waybar"; desc = "Toggle hide/show waybar";}
-    { mod = "SUPER"; key = "H";      dispatcher = "exec"; arg = "KeyBinds"; desc = "Show this help"; }
+    { mod = "SUPER"; key = "H";      dispatcher = "exec"; arg = "keybind-menu"; desc = "Show this help"; }
     { mod = "SUPER"; key = "D";      dispatcher = "exec"; arg = "rofi -show drun"; desc = "App launcher"; category = "Apps"; }
     { mod = "SUPER"; key = "A";      dispatcher = "global"; arg = "quickshell:overviewToggle"; desc = "Desktop overview"; }
     { mod = "";      key = "Print";  dispatcher = "exec"; arg = "screenshot --area"; desc = "Screenshot"; }
