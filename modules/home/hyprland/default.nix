@@ -18,12 +18,9 @@ let
   };
 
   nvidiaEnv = [
-    "LIBVA_DRIVER_NAME,nvidia"
-    "XDG_SESSION_TYPE,wayland"
-    "GBM_BACKEND,nvidia-drm"
-    "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-    "AQ_DRM_DEVICES,/dev/dri/card0"
-    "NVD_BACKEND,direct"
+    "LIBVA_DRIVER_NAME,nvidia"          # ハードウェア動画再生支援用
+    "__GLX_VENDOR_LIBRARY_NAME,nvidia" # OpenGLアプリをNVIDIAで動かすため
+    "NIXOS_OZONE_WL,1"                # Electron/Chrome系をWayland対応させる
   ];
 in
 {
