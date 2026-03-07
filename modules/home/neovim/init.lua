@@ -62,21 +62,39 @@ require("which-key").setup()
 -- ========================================================================== --
 -- LSPをNeovimの機能に紐付ける設定 (lspconfig が入っている前提)
 -- pluginsに nvim-lspconfig を追加しておくことを推奨します
-local lspconfig = require('lspconfig')
-
--- Nix (nixd)
-lspconfig.nixd.setup{}
-
--- Lua (lua_ls)
-lspconfig.lua_ls.setup{
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = {'vim'}, -- vim というグローバル変数をエラーにしない
-      },
+local servers = {
+  nixd = {},
+  bashls = {}, -- シェルスクリプト用 (bash-language-server)
+  pyright = {}, -- Python用
+  lua_ls = {
+    settings = {
+      Lua = { diagnostics = { globals = { 'vim' } } }
     },
   },
 }
+
+-- 実行ファイルが存在する場合のみ LSP を有効化する
+for lsp, config in pairs(servers) do
+  -- lua_ls だけ実行ファイル名が異なるためのケア
+  local bin = (lsp == 'lua_ls') and 'lua-language-server' or lsp
+  
+  if vim.fn.executable(bin) == 1 then
+    if next(config) ~= nil then
+      vim.lsp.config(lsp, config)
+    end
+    vim.lsp.enable(lsp)
+  end
+end
+
+-- LSPが起動した時の共通キーマッピング (定義ジャンプなど)
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    key('n', 'gd', vim.lsp.buf.definition, opts)     -- 定義へジャンプ
+    key('n', 'K',  vim.lsp.buf.hover, opts)          -- ホバー表示
+    key('n', '<leader>rn', vim.lsp.buf.rename, opts) -- リネーム
+  end,
+})
 
 -- ========================================================================== --
 -- 5. オートコマンド (IME制御)
@@ -87,5 +105,17 @@ vim.api.nvim_create_autocmd("InsertLeave", {
       local cmd = vim.g.fcitx5_remote_path or "fcitx5-remote"
       local handle = io.popen(cmd .. " -c")
       if handle then handle:close() end
+  end,
+})
+
+-- ========================================================================== --
+-- 6. オートフォーマット (保存時に実行)
+-- ========================================================================== --
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function()
+    -- LSPに整列を依頼する
+    -- (フォーマッタがPATHに存在し、LSPがそれに対応している場合のみ動作)
+    vim.lsp.buf.format({ async = false })
   end,
 })
