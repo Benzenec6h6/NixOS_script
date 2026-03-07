@@ -1,2 +1,3 @@
 .vscode/
-myinstaller.sh
+vars.nix
+./hosts/laptop/hardware.nix
