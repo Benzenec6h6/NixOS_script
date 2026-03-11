@@ -30,6 +30,7 @@
 
       # --- 特定のワークフロー ---
       orgmode          # メモ・タスク管理
+      otter-nvim
       pkgs.tree-sitter-grammars.tree-sitter-org-nvim
       toggleterm-nvim       # Neovim内で端末を浮遊表示
 
