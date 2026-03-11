@@ -25,10 +25,12 @@
         nix lua vim vimdoc bash
         json yaml toml
         markdown markdown_inline
+        html css javascript typescript python
       ]))
 
       # --- 特定のワークフロー ---
       orgmode          # メモ・タスク管理
+      pkgs.tree-sitter-grammars.tree-sitter-org-nvim
       toggleterm-nvim       # Neovim内で端末を浮遊表示
 
       # --- [提案] 操作を覚えるための補助 ---
