@@ -128,3 +128,10 @@ require('orgmode').setup({
   -- TODOの状態を増やしたい場合はここをカスタマイズ
   org_todo_keywords = { 'TODO(t)', 'NEXT(n)', '|', 'DONE(d)' },
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "org",
+  callback = function()
+    require 'otter'.activate({ "nix", "lua", "bash" })
+  end
+})
