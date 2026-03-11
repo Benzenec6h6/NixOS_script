@@ -120,3 +120,11 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
+require('orgmode').setup({
+  -- あなたのTODOファイルの場所を指定（例：ホームディレクトリのorgフォルダ内すべて）
+  org_agenda_files = { '~/Documents/**/*' },
+  org_default_notes_file = '~/Documents/refile.org',
+
+  -- TODOの状態を増やしたい場合はここをカスタマイズ
+  org_todo_keywords = { 'TODO(t)', 'NEXT(n)', '|', 'DONE(d)' },
+})
