@@ -50,6 +50,6 @@ in
       qemu_full libvirt virt-viewer OVMF virt-manager
       dnsmasq swtpm libosinfo tuned ntfs3g
 
-      kicad
+      kicad-small
   ]);
 }
