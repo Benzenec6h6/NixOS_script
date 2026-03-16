@@ -16,9 +16,11 @@
       ".local/share/applications"
       ".local/share/direnv"
       ".config/zen-browser"
+      ".config/moomoo"
+      ".config/Futu-Linux"
+      ".config/keepassxc"
       ".mozilla/native-messaging-hosts"
       #".mozilla/firefox"
-      ".config/keepassxc"
       ".local/share/keepassxc"
     ];
 
