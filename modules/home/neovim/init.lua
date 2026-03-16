@@ -127,6 +127,11 @@ require('orgmode').setup({
 
   -- TODOの状態を増やしたい場合はここをカスタマイズ
   org_todo_keywords = { 'TODO(t)', 'NEXT(n)', '|', 'DONE(d)' },
+  mappings = {
+    org = {
+      org_toggle_checkbox = '<leader>x', -- Space + x でチェック！
+    },
+  },
 })
 
 vim.api.nvim_create_autocmd("FileType", {
