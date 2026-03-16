@@ -8,15 +8,15 @@
   console.keyMap = vars.locale.keyMap;
 
   nix = {
-    package = pkgs.nixVersions.stable;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    settings.download-buffer-size = 1000000000;
+    #package = pkgs.nixVersions.stable;
     gc = {
       automatic = true;
       dates = "monthly";
       options = "--delete-older-than 30d";
     };
     settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      #download-buffer-size = 1000000000;
       max-jobs = "auto";
       cores = 0;
       auto-optimise-store = true;
