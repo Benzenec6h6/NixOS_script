@@ -61,7 +61,8 @@
             "warning" = 60;
         };
         "format-critical" = "{temperatureC}°C {icon}";
-        "format" = "{temperatureC}°C {icon}";
+        "format-warning" = "{temperatureC}°C {icon}";
+        "format" = "{temperatureC}°C";
         "format-icons" = [
             "󰈸"
         ];
