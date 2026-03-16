@@ -21,6 +21,7 @@ in
 
   home.packages = [
     inputs.zen-browser.packages.${vars.system}.default
+    inputs.moomoo.packages.${vars.system}.default
   ] ++ (with pkgs; [
     vscodium
 
