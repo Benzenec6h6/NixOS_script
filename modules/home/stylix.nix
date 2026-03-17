@@ -2,7 +2,10 @@ _: {
   stylix.targets = {
     gtk.enable = true;
     gtk.flatpakSupport.enable = false;
-    waybar.enable = true;
+    waybar = {
+      enable = true;
+      addCss = false;
+    };
     rofi.enable = true;
     hyprland.enable = false;
     hyprlock.enable = false;
