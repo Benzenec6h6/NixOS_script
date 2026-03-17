@@ -38,20 +38,20 @@
     }
 
     /* --- 個別カラー設定（アクセント） --- */
-    #group-mobo_drawer #temperature.warning label {
-        color: #${config.lib.stylix.colors.base0A}; /* Gold */
-    }
-
-    #group-mobo_drawer #temperature.critical label {
-        color: #${config.lib.stylix.colors.base08}; /* Red */
-    }
-
-    #group-mobo_drawer #temperature.warning,
-    #group-mobo_drawer #temperature.critical {
+    #temperature.warning,
+    #temperature.critical {
         margin-top: 7px;
         margin-bottom: 7px;
         padding-left: 2px;
         padding-right: 2px;
+    }
+
+    #temperature.warning {
+        background-color: #${config.lib.stylix.colors.base0A};
+    }
+
+    #temperature.critical {
+        background-color: #${config.lib.stylix.colors.base08};
     }
 
     #clock {
