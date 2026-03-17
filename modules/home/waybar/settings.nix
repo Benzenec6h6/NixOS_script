@@ -51,10 +51,12 @@
     "temperature" = {
         "interval" = 10;
         "tooltip" = true;
-        "hwmon-path" = [
-            "/sys/class/hwmon/hwmon1/temp1_input"
-            "/sys/class/thermal/thermal_zone0/temp"
-        ];
+        "hwmon-path-abs" = "/sys/class/hwmon";
+        "input-filename" = "temp1_input";
+        #"hwmon-path" = [
+        #    "/sys/class/hwmon/hwmon1/temp1_input"
+        #    "/sys/class/thermal/thermal_zone0/temp"
+        #];
         #"thermal-zone" = 0;
         "critical-threshold" = 80;
         "states" = {
