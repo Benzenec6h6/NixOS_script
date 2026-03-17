@@ -84,7 +84,7 @@
     }
 
     #custom-weather.clear-night {
-        color: #${config.lib.stylix.colors.base0E}; /* 夜：Purple */
+        color: #${config.lib.stylix.colors.base0F}; /* 夜：Purple */
     }
 
     /* タスクバー & ワークスペース（アニメーション維持） */
