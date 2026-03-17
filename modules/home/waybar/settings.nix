@@ -51,12 +51,11 @@
     "temperature" = {
         "interval" = 10;
         "tooltip" = true;
-        "hwmon-path-abs" = "/sys/class/hwmon";
-        "input-filename" = "temp1_input";
-        #"hwmon-path" = [
-        #    "/sys/class/hwmon/hwmon1/temp1_input"
-        #    "/sys/class/thermal/thermal_zone0/temp"
-        #];
+        "hwmon-path" = [
+            #"/sys/class/hwmon/hwmon1/temp1_input"
+            "/run/hwmon-coretemp/temp1_input"
+            "/sys/class/thermal/thermal_zone0/temp"
+        ];
         #"thermal-zone" = 0;
         "critical-threshold" = 80;
         "states" = {
@@ -135,8 +134,6 @@
             "󰂂"
             "󰁹"
         ];
-        "format-time" = "{H}h {M}min";
-        "tooltip" = true;
         "tooltip-format" = "{timeTo} {power}w";
     };
     "bluetooth" = {
@@ -583,6 +580,8 @@
             "class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>"= " ";
             "class<zen>"= "󰰷 ";
             "class<waterfox|waterfox-bin>"= " ";
+            "class<microsoft-edge>"= " ";
+            "class<Chromium|Thorium|[Cc]hrome>"= " ";
             "class<microsoft-edge>"= " ";
             "class<Chromium|Thorium|[Cc]hrome>"= " ";
             "class<brave-browser>"= "🦁 ";
