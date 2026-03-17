@@ -58,9 +58,7 @@
         ];
         #"thermal-zone" = 0;
         "critical-threshold" = 80;
-        "states" = {
-            "warning" = 60;
-        };
+        "warning-threshold" = 60;
         "format-critical" = "{temperatureC}°C {icon}";
         "format-warning" = "{temperatureC}°C {icon}";
         "format" = "{temperatureC}°C";
@@ -134,6 +132,8 @@
             "󰂂"
             "󰁹"
         ];
+        "format-time" = "{H}h {M}min";
+        "tooltip" = true;
         "tooltip-format" = "{timeTo} {power}w";
     };
     "bluetooth" = {
@@ -548,7 +548,7 @@
         "orientation"= "inherit";
         "drawer"= {
             "transition-duration"= 500;
-            "children-class"= "cpu";
+            #"children-class"= "cpu";
             "transition-left-to-right"= true;
         };
         "modules"= [
@@ -580,8 +580,6 @@
             "class<firefox|org.mozilla.firefox|librewolf|floorp|mercury-browser|[Cc]achy-browser>"= " ";
             "class<zen>"= "󰰷 ";
             "class<waterfox|waterfox-bin>"= " ";
-            "class<microsoft-edge>"= " ";
-            "class<Chromium|Thorium|[Cc]hrome>"= " ";
             "class<microsoft-edge>"= " ";
             "class<Chromium|Thorium|[Cc]hrome>"= " ";
             "class<brave-browser>"= "🦁 ";
