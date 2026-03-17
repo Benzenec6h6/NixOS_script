@@ -16,7 +16,7 @@ in
       package = pkgs.kdePackages.sddm;
 
       # テーマ名はnixpkgsの定義に従いこれを使います
-      theme = "sddm-astronaut";
+      theme = "sddm-astronaut-theme";
       
       # 必要なQtパッケージは自動的に伝播（Propagate）されますが、
       # 明示的に追加しておく場合もこちらで大丈夫です
