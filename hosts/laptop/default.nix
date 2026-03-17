@@ -55,6 +55,10 @@
     };
   };
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="hwmon", ATTR{name}=="coretemp", RUN+="${pkgs.bash}/bin/bash -c 'ln -sfn /sys%p /run/hwmon-coretemp'"
+  '';
+
   networking.hostName = vars.host;
   system.stateVersion = "25.11";
 }
