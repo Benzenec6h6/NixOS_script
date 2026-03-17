@@ -4,7 +4,7 @@
   imports = [
     ./fcitx5-mozc
     ./scripts
-    ./sddm
+    #./sddm
     ./audio.nix
     ./base.nix
     ./flatpak.nix
@@ -15,6 +15,7 @@
     ./packages.nix
     ./power-management.nix
     ./quickshell.nix
+    ./sddm.nix
     ./security.nix
     ./services.nix
     ./stylix.nix
