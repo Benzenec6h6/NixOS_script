@@ -38,20 +38,20 @@
     }
 
     /* --- 個別カラー設定（アクセント） --- */
-    #temperature.warning,
-    #temperature.critical {
-        margin-top: 7px;
-        margin-bottom: 7px;
-        padding-left: 2px;
-        padding-right: 2px;
-    }
-
     #temperature.warning {
         background-color: #${config.lib.stylix.colors.base0A}; /* Gold */
     }
 
     #temperature.critical {
         background-color: #${config.lib.stylix.colors.base08}; /* Red */
+    }
+
+    #temperature.warning,
+    #temperature.critical {
+        margin-top: 7px;
+        margin-bottom: 7px;
+        padding-left: 2px;
+        padding-right: 2px;
     }
 
     #clock {
