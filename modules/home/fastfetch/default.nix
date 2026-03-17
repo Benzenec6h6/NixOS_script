@@ -5,7 +5,7 @@
     settings = {
       display = {
         color = {
-          keys = "35";
+          keys = "34";
           output = "95";
         };
         separator = " ➜  ";
