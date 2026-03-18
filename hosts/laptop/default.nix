@@ -8,7 +8,7 @@
   ];
 
   #boot.kernelPackages = pkgs.linuxPackages_6_18;
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-lts;
+  boot.kernelPackages = pkgs.linux-cachyos-lts-x86_64-v3;
   chaotic.nyx.cache.enable = true;
   services.ananicy = {
     enable = true;
