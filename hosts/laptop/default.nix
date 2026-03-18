@@ -8,8 +8,8 @@
   ];
 
   #boot.kernelPackages = pkgs.linuxPackages_6_18;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
-  #chaotic.nyx.cache.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  chaotic.nyx.cache.enable = true;
   services.ananicy = {
     enable = true;
     rulesProvider = pkgs.ananicy-rules-cachyos;
