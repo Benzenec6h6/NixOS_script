@@ -8,7 +8,7 @@
   ];
 
   #boot.kernelPackages = pkgs.linuxPackages_6_18;
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
   #chaotic.nyx.cache.enable = true;
   services.ananicy = {
     enable = true;
