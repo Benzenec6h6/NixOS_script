@@ -2,9 +2,9 @@
   description = "TetoOS - NixOS + Home Manager + Stylix";
 
   inputs = {
-    #nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     lix = {
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
@@ -60,7 +60,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
-  outputs = { nixpkgs, chaotic, lix-module, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, nix-flatpak, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-unstable, nix-cachyos-kernel, lix-module, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, nix-flatpak, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
@@ -75,15 +75,15 @@
             nixpkgs.config.allowUnfree = true;
             nixpkgs.overlays = [ 
               #nur.overlays.default
+              nix-cachyos-kernel.overlays.default
               (final: prev: {
-                unstable = import chaotic.inputs.nixpkgs {
+                unstable = import nixpkgs-unstable {
                   system = prev.system;
                   config.allowUnfree = true;
                 };
               }) 
             ];
           }
-          chaotic.nixosModules.default
           lix-module.nixosModules.default
           nix-flatpak.nixosModules.nix-flatpak
           impermanence.nixosModules.impermanence
