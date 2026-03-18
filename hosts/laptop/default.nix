@@ -8,8 +8,13 @@
   ];
 
   #boot.kernelPackages = pkgs.linuxPackages_6_18;
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
-  chaotic.nyx.cache.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  #chaotic.nyx.cache.enable = true;
+  services.ananicy = {
+    enable = true;
+    rulesProvider = pkgs.ananicy-rules-cachyos;
+    package = pkgs.ananicy-cpp;
+  };
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics = {
     enable = true;
