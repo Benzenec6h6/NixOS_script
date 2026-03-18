@@ -27,8 +27,9 @@
   
   hardware.nvidia = {
     open = true;
+    nvidiaSettings = true;
     modesetting.enable = true;
-    dynamicBoost.enable = true;
+    dynamicBoost.enable = false;
     powerManagement.enable = true;
     powerManagement.finegrained = false;
     prime = {
