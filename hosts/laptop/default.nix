@@ -7,7 +7,9 @@
     ../../modules/core
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  #boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  chaotic.nyx.cache.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.graphics = {
     enable = true;
