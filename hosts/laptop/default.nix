@@ -20,7 +20,7 @@
     enable32Bit = true;
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
-      #intel-media-driver
+      intel-media-driver
     ];
   };
   
