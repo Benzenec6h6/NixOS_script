@@ -16,7 +16,7 @@ extract_one() {
 
   case "$file" in
     # tar系はオプションをまとめられるので集約
-    *.tar|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar.bz2|*.tbz2)
+    *.tar|*.tar.gz|*.tgz|*.tar.xz|*.txz|*.tar.bz2|*.tbz2|*.tar.zst)
       tar -xvf "$file" ;;
     
     # ZIP, 7z, RAR は unar に任せる（文字化け・散らかり防止）
@@ -24,9 +24,10 @@ extract_one() {
       unar "$file" ;;
 
     # 単一ファイルの圧縮
-    *.gz)         gunzip -k "$file" ;; # -k で元ファイルを残す（お好みで）
-    *.xz)         unxz -k "$file" ;;
-    *.bz2)        bunzip2 -k "$file" ;;
+    *.gz)   pigz -dk "$file" ;;
+    *.xz)   pixz -d "$file" ;;
+    *.bz2)  pbzip2 -dk "$file" ;;
+    *.zst)  zstd -dk "$file" ;;
 
     *)
       # 対応外の拡張子でも unar が扱える可能性があるので試行
