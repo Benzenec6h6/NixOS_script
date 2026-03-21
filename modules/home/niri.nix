@@ -1,9 +1,17 @@
 { pkgs, vars, ... }:
 
 {
-  programs.niri = {
+  programs.niriswitcher = {
     enable = true;
     settings = {
+      keys = {
+        modifier = "Super";
+        # Tabでの切り替え設定（exampleより）
+        switch = {
+          next = "Tab";
+          prev = "Shift+Tab";
+        };
+      };
       # 入力設定（JIS配列とCaps->Ctrlは死守）
       input = {
         keyboard.xkb = {
