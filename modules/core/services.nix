@@ -21,14 +21,24 @@
     #power-profiles-daemon.enable = true;
   };
   
-  programs.uwsm.enable = true;
+  programs.niri.enable = true;
   programs.hyprland = {
     enable = true;
     withUWSM = true;
   };
-  programs.uwsm.waylandCompositors.hyprland = {
-    prettyName = "Hyprland";
-    binPath = "/run/current-system/sw/bin/Hyprland";
+  programs.uwsm = {
+    enable = true;
+    waylandCompositors = {
+      hyprland = {
+        prettyName = "Hyprland";
+        binPath = "/run/current-system/sw/bin/Hyprland";
+      };
+      niri = {
+        prettyName = "niri";
+        comment = "Scrollable-tile Wayland compositor";
+        binPath = "/run/current-system/sw/bin/niri";
+      };
+    };
   };
   programs.xwayland.enable = true;
   programs.thunar = {
