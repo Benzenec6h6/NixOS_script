@@ -45,19 +45,19 @@
         "Mod+Return".action = { spawn = [ "${vars.user.terminal}" ]; };
         "Mod+B".action = { spawn = [ "zen" ]; };
         "Mod+D".action = { spawn = [ "rofi" "-show" "drun" ]; };
-        "Mod+Q".action = { close-window = null; };
+        "Mod+Q".action = { close-window = { }; };
 
         # --- niriの基本操作：ここを指に叩き込む ---
         # 1. カラム（ウィンドウ）間の移動
-        "Mod+Left".action = { focus-column-left = null; };
-        "Mod+Right".action = { focus-column-right = null; };
+        "Mod+Left".action = { focus-column-left = { }; };
+        "Mod+Right".action = { focus-column-right = { }; };
         
         # 2. カラムの幅を変える（preset-column-widthsを回る）
-        "Mod+R".action = { switch-preset-column-width = null; };
+        "Mod+R".action = { switch-preset-column-width = { }; };
         
         # 3. ウィンドウを「一つの列」にまとめる（上下に並ぶ）
-        "Mod+Comma".action = { consume-window-into-column = null; };
-        "Mod+Period".action = { expel-window-from-column = null; };
+        "Mod+Comma".action = { consume-window-into-column = { }; };
+        "Mod+Period".action = { expel-window-from-column = { }; };
 
         # 4. ワークスペース切り替え（1〜3程度で試す）
         "Mod+1".action = { focus-workspace = 1; };
