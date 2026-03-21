@@ -21,6 +21,8 @@
     extraPackages = with pkgs; [
       nvidia-vaapi-driver
       intel-media-driver
+      libvdpau-va-gl
+      vpl-gpu-rt
     ];
   };
   
@@ -42,8 +44,8 @@
   hardware.cpu.intel.updateMicrocode = true;
 
   environment.variables = {
-    LIBVA_DRIVER_NAME = "nvidia";
-    NVD_BACKEND = "direct";
+    #LIBVA_DRIVER_NAME = "nvidia";
+    #NVD_BACKEND = "direct";
   };
   
   boot.initrd.systemd.services.rollback = {
