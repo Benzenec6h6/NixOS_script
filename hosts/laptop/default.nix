@@ -29,15 +29,21 @@
   hardware.nvidia = {
     open = true;
     nvidiaSettings = true;
+    videoAcceleration = true;
     modesetting.enable = true;
     dynamicBoost.enable = false;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
+    powerManagement = {
+      enable = true;
+      finegrained = true;
+    };
     prime = {
       intelBusId = vars.busId.intel;
       nvidiaBusId = vars.busId.nvidia;
-      #offload.enable = true;
-      sync.enable = true;
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+      #sync.enable = true;
     };
   };
 
@@ -69,5 +75,5 @@
   '';
 
   networking.hostName = vars.host;
-  system.stateVersion = "25.11";
+  system.stateVersion = vars.version;
 }

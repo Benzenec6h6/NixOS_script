@@ -18,5 +18,5 @@
   services.qemuGuest.enable = true;
 
   networking.hostName = vars.host;
-  system.stateVersion = "25.11";
+  system.stateVersion = vars.version;
 }

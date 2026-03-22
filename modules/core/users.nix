@@ -11,7 +11,7 @@
       imports = [ ./../home ];
       home.username = vars.user.name;
       home.homeDirectory = "/home/${vars.user.name}";
-      home.stateVersion = "25.11";
+      home.stateVersion = vars.version;
     };
   };
 
