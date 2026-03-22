@@ -25,7 +25,7 @@
         nix lua vim vimdoc bash
         json yaml toml
         markdown markdown_inline
-        html css javascript typescript python
+        html css javascript typescript python haskell
       ]))
 
       # --- 特定のワークフロー ---

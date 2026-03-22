@@ -66,6 +66,7 @@ local servers = {
   nixd = {},
   bashls = {},       -- シェルスクリプト用 (bash-language-server)
   basedpyright = {}, -- Python用
+  hls = {},
   lua_ls = {
     settings = {
       Lua = { diagnostics = { globals = { 'vim' } } }
@@ -75,14 +76,17 @@ local servers = {
 
 -- 実行ファイルが存在する場合のみ LSP を有効化する
 for lsp, config in pairs(servers) do
-  -- lua_ls だけ実行ファイル名が異なるためのケア
-  local bin = (lsp == 'lua_ls') and 'lua-language-server' or lsp
+  -- バイナリ名のマッピング
+  local bin_map = {
+    lua_ls = 'lua-language-server',
+    hls = 'haskell-language-server-wrapper', -- HLSのバイナリ名
+    bashls = 'bash-language-server',
+  }
+  local bin = bin_map[lsp] or lsp
 
   if vim.fn.executable(bin) == 1 then
-    if next(config) ~= nil then
-      vim.lsp.config(lsp, config)
-    end
-    vim.lsp.enable(lsp)
+    -- 設定を適用して有効化
+    require('lspconfig')[lsp].setup(config) 
   end
 end
 
