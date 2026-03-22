@@ -60,12 +60,10 @@ require("which-key").setup()
 -- ========================================================================== --
 -- 4. LSP設定 (nixd & lua_ls)
 -- ========================================================================== --
--- LSPをNeovimの機能に紐付ける設定 (lspconfig が入っている前提)
--- pluginsに nvim-lspconfig を追加しておくことを推奨します
 local servers = {
   nixd = {},
-  bashls = {},       -- シェルスクリプト用 (bash-language-server)
-  basedpyright = {}, -- Python用
+  bashls = {},
+  basedpyright = {},
   hls = {},
   lua_ls = {
     settings = {
@@ -74,29 +72,35 @@ local servers = {
   },
 }
 
--- 実行ファイルが存在する場合のみ LSP を有効化する
+-- バイナリ名のマッピング (実行ファイル名がLSP名と異なる場合)
+local bin_map = {
+  lua_ls = 'lua-language-server',
+  hls = 'haskell-language-server-wrapper',
+  bashls = 'bash-language-server',
+}
+
 for lsp, config in pairs(servers) do
-  -- バイナリ名のマッピング
-  local bin_map = {
-    lua_ls = 'lua-language-server',
-    hls = 'haskell-language-server-wrapper', -- HLSのバイナリ名
-    bashls = 'bash-language-server',
-  }
   local bin = bin_map[lsp] or lsp
 
   if vim.fn.executable(bin) == 1 then
-    -- 設定を適用して有効化
-    require('lspconfig')[lsp].setup(config) 
+    -- 新しい設定方式: vim.lsp.config を使用 (v0.11+)
+    -- もし lspconfig の拡張機能が必要な場合は、ここを vim.lsp.config(lsp, config) にします
+    vim.lsp.enable(lsp)
+
+    -- 特殊な設定（lua_ls の globals など）がある場合は config を渡す
+    if next(config) ~= nil then
+      vim.lsp.config(lsp, config)
+    end
   end
 end
 
--- LSPが起動した時の共通キーマッピング (定義ジャンプなど)
+-- LSPが起動した時の共通キーマッピング
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local opts = { buffer = args.buf }
-    key('n', 'gd', vim.lsp.buf.definition, opts)     -- 定義へジャンプ
-    key('n', 'K', vim.lsp.buf.hover, opts)           -- ホバー表示
-    key('n', '<leader>rn', vim.lsp.buf.rename, opts) -- リネーム
+    key('n', 'gd', vim.lsp.buf.definition, opts)
+    key('n', 'K', vim.lsp.buf.hover, opts)
+    key('n', '<leader>rn', vim.lsp.buf.rename, opts)
   end,
 })
 
