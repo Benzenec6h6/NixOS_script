@@ -1,6 +1,7 @@
 {
   # 基本インフラ設定
-  system = "";
+  system = "x86_64-linux";
+  version = "25.11";
   host = "HOST";
   disk = "DISK"; 
   
