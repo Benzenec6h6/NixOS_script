@@ -78,7 +78,7 @@
               nix-cachyos-kernel.overlays.default
               (final: prev: {
                 unstable = import nixpkgs-unstable {
-                  system = prev.system;
+                  system = prev.stdenv.hostPlatform.system;
                   config.allowUnfree = true;
                 };
               }) 

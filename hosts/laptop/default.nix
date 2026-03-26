@@ -58,7 +58,7 @@
     description = "Rollback Btrfs root subvolume to a pristine state";
     wantedBy = [ "initrd.target" ];
     # rootパーティションが出現した後、かつマウントされる前に実行
-    after = [ "dev-disk-by\x2dpartlabel-root.device" ];
+    after = [ "dev-disk-by\\x2dpartlabel-root.device" ];
     before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
     serviceConfig = {
