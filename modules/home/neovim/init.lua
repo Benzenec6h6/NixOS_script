@@ -60,6 +60,15 @@ require("which-key").setup()
 -- ========================================================================== --
 -- 4. LSP設定 (nixd & lua_ls)
 -- ========================================================================== --
+-- 診断表示のカスタマイズ
+vim.diagnostic.config({
+  virtual_text = true,      -- 行末にうっすらエラーを出す
+  signs = true,             -- 行番号の左側にアイコンを出す
+  underline = true,         -- エラー箇所に下線を引く
+  update_in_insert = false, -- 入力中はうるさくないように更新しない
+  severity_sort = true,     -- 重大なエラーを優先して表示
+})
+
 local servers = {
   nixd = {},
   bashls = {},
@@ -101,6 +110,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     key('n', 'gd', vim.lsp.buf.definition, opts)
     key('n', 'K', vim.lsp.buf.hover, opts)
     key('n', '<leader>rn', vim.lsp.buf.rename, opts)
+
+    -- 'gl' (Go Line diagnostics) で浮動ウィンドウにエラー理由を表示
+    key('n', 'gl', vim.diagnostic.open_float, opts)
+    -- '[d' や ']d' でエラー箇所を飛び回る
+    key('n', '[d', vim.diagnostic.goto_prev, opts)
+    key('n', ']d', vim.diagnostic.goto_next, opts)
   end,
 })
 
