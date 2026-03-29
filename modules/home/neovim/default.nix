@@ -13,10 +13,21 @@
       nvim-web-devicons     # 各種アイコン表示用
       gitsigns-nvim         # [解決済] 行番号横の差分表示
       nvim-lspconfig        #lsp設定を動かす
+
+      # --- 補完 / スニペット ---
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      luasnip 
+      cmp_luasnip
+      indent-blankline-nvim
+      nvim-surround
       
       # --- ファイル管理・検索 ---
       nvim-tree-lua         # サイドバー (C-n)
       telescope-nvim        # [重要] あらゆる検索の窓口
+      telescope-fzf-native-nvim
       plenary-nvim          # telescope等の動作に必須
       yazi-nvim             # ファイルマネージャーyaziとの連携
 

@@ -28,6 +28,10 @@ key('n', '<leader>e', ':NvimTreeFocus<CR>', { silent = true })
 -- 【検索ハイライト】Esc 2回で検索の光を消す
 key('n', '<Esc><Esc>', ':nohlsearch<CR>', { silent = true })
 
+-- Orgmode用のキーバインドをリーダーキー配下に追加
+key('n', '<leader>oa', ':OrgAgendaUI<CR>', { silent = true }) -- アジェンダ表示
+key('n', '<leader>oc', ':OrgCapture<CR>', { silent = true })  -- キャプチャ起動（j, i, tを選択）
+
 -- ========================================================================== --
 -- 3. プラグイン設定
 -- ========================================================================== --
@@ -88,12 +92,15 @@ local bin_map = {
   bashls = 'bash-language-server',
 }
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 for lsp, config in pairs(servers) do
   local bin = bin_map[lsp] or lsp
 
   if vim.fn.executable(bin) == 1 then
     -- 新しい設定方式: vim.lsp.config を使用 (v0.11+)
     -- もし lspconfig の拡張機能が必要な場合は、ここを vim.lsp.config(lsp, config) にします
+    config.capabilities = capabilities
     vim.lsp.enable(lsp)
 
     -- 特殊な設定（lua_ls の globals など）がある場合は config を渡す
@@ -145,11 +152,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 
 require('orgmode').setup({
   -- あなたのTODOファイルの場所を指定（例：ホームディレクトリのorgフォルダ内すべて）
-  org_agenda_files = { '~/Documents/**/*' },
-  org_default_notes_file = '~/Documents/refile.org',
-
-  -- TODOの状態を増やしたい場合はここをカスタマイズ
-  org_todo_keywords = { 'TODO(t)', 'NEXT(n)', '|', 'DONE(d)' },
+  org_agenda_files = { '~/Documents/org/**/*' },
+  org_default_notes_file = '~/Documents/org/refile.org',
+  org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'STARTED(s)', 'WAITING(w)', '|', 'DONE(d)' },
+  org_capture_templates = {
+    j = { description = 'Job (営業・案件)', template = '* NEXT %?\n  SCHEDULED: %t' },
+    i = { description = 'Invest (投資・分析)', template = '* TODO %?\n  :PROPERTIES:\n  :CREATED: %U\n  :END:' },
+    t = { description = 'Tech (技術検証)', template = '* TODO %?\n  :PROPERTIES:\n  :TAGS: :Research:\n  :END:' },
+  },
   mappings = {
     org = {
       org_toggle_checkbox = '<leader>x', -- Space + x でチェック！
@@ -162,4 +172,32 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function()
     require 'otter'.activate({ "nix", "lua", "bash" })
   end
+})
+
+-- ========================================================================== --
+-- 補完(cmp)の設定
+-- ========================================================================== --
+-- indent-blankline (インデントの視覚化)
+require("ibl").setup()
+-- nvim-surround (文字の囲み操作)
+require("nvim-surround").setup()
+-- telescope-fzf-native のロード
+require('telescope').load_extension('fzf')
+
+local cmp = require('cmp')
+cmp.setup({
+  snippet = { expand = function(args) require('luasnip').lsp_expand(args.body) end },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'orgmode' }, -- Orgmodeのタグなども補完対象に
+  }, {
+    { name = 'buffer' },
+    { name = 'path' },
+  })
 })
