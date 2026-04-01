@@ -31,6 +31,5 @@ in
     # 開発用・無効化中のものはコメントアウトで管理
     # (importScript ./KillActive.nix)
     # (importScript ./networkmanager_rofi.nix)
-    #(importScript ./install-moomoo.nix)
   ];
 }
