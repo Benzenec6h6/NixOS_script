@@ -13,6 +13,10 @@
       "/var/lib/nixos"
       "/var/lib/flatpak"
       "/etc/NetworkManager/system-connections" # Wi-Fi設定など
+      "/etc/ssh"
+    ];
+    files = [
+      "/etc/machine-id"
     ];
   };
 }
