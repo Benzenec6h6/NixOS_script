@@ -1,42 +1,20 @@
 {
-  # 基本インフラ設定
   system = "x86_64-linux";
   version = "25.11";
-  host = "HOST";
-  disk = "DISK"; 
-  
-  # ユーザー情報
+  host = "laptop";
+  disk = "/dev/nvme0n1";
   user = {
-    name = "";
-    password = "HASH";
+    name = "teto";
     terminal = "kitty";
-    gitName = "";
-    gitEmail = "";
+    gitName = "Benzenec6h6";
+    gitEmail = "aconitinec34h47no11@gmail.com";
   };
-
-  # 地域・言語・入力設定
   locale = {
-    timeZone = "";
-    default = "";
-    extra = [ "" ];
-    keyMap = "";
-    kbLayout = "";
-    
-    location = {
-      city = "";
-      lat = "";
-      lon = "";
-    };
+    timeZone = "Asia/Tokyo";
+    default = "en_US.UTF-8";
+    extra = [ "ja_JP.UTF-8/UTF-8" ];
+    keyMap = "jp106";
+    kbLayout = "jp";
   };
-
-  # GPU BusID
-  busId = {
-    intel = "INTEL_BUS";
-    nvidia = "NVIDIA_BUS";
-  };
-
-  # 秘密鍵・APIキー
-  apiKeys = {
-    owm = ""; 
-  };
+  busId = { intel = "PCI:0:2:0"; nvidia = "PCI:1:0:0"; };
 }
