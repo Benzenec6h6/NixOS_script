@@ -1,10 +1,7 @@
 { config, pkgs, inputs, vars, ... }:
 
 {
-  imports = [ 
-    inputs.home-manager.nixosModules.home-manager
-    inputs.sops-nix.homeManagerModules.sops
-  ];
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   sops = {
     # 秘密情報ファイルの場所（Flakeルートからの相対パスなど）
