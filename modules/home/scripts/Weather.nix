@@ -1,4 +1,4 @@
-{ pkgs, vars, ... }:
+{ pkgs, config, ... }:
 
 pkgs.writeShellApplication {
   name = "Weather";
@@ -11,10 +11,19 @@ pkgs.writeShellApplication {
   ];
   checkPhase = "true";
   text = ''
-    city="${vars.locale.location.city}"
-    latitude="${vars.locale.location.lat}"
-    longitude="${vars.locale.location.lon}"
-    OWM_KEY="${vars.apiKeys.owm}"
+    if [ -f "${config.sops.templates."weather-env".path}" ]; then
+      # shellcheck source=/dev/null
+      source "${config.sops.templates."weather-env".path}"
+    else
+      echo "Error: Weather config not found" >&2
+      exit 1
+    fi
+
+    # 変数名をスクリプト内の期待値に合わせる
+    city="$CITY_NAME"
+    latitude="$LAT"
+    longitude="$LON"
+    api_key="$OWM_KEY"
     
     # 元のシェルスクリプトを読み込む
     ${builtins.readFile ./Weather.sh}

@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # --- 設定 ---
-city="${city}"
-latitude="${latitude}"
-longitude="${longitude}"
-api_key="${OWM_KEY}"
+city="''${city:-Unknown}"
+latitude="''${latitude:-0}"
+longitude="''${longitude:-0}"
+api_key="''${api_key:-}"
 cachedir="$HOME/.cache/rbn"
 cache_path="$cachedir/weather_cache.json"
 mkdir -p "$cachedir"
