@@ -42,6 +42,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     quickshell = {
       url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,7 +65,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, nix-cachyos-kernel, lix-module, disko, impermanence, home-manager, stylix, nur, zen-browser, moomoo, nix-flatpak, ... }@inputs:
+  outputs = { nixpkgs, nixpkgs-unstable, nix-cachyos-kernel, lix-module, disko, impermanence, home-manager, stylix, nur, sops-nix, zen-browser, moomoo, nix-flatpak, ... }@inputs:
     let
       vars = import ./vars.nix;
       system = vars.system;
@@ -88,6 +93,7 @@
           nix-flatpak.nixosModules.nix-flatpak
           impermanence.nixosModules.impermanence
           disko.nixosModules.disko
+          sops-nix.nixosModules.sops
           ./hosts/${host}
         ];
       };
