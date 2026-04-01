@@ -1,5 +1,5 @@
 keys:
-  - &user_teto age13n3shnvd4s6ver43rh9n5gjw82vewvdctlxufmmpdeaql00pcudsfs4ysh
+  - &user_teto age1dxluevgdahkm8san7u05qh4jtykrmzxvk6ftrj2y5aej5te2l38s7qdvx9
 creation_rules:
   - path_regex: secrets/[^/]+\.yaml$
     key_groups:
