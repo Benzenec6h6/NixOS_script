@@ -10,7 +10,7 @@
   programs.nh = {
     enable = true;
     # OSかHome Manager、メインで使っているflakeのパスを指定（任意）
-    flake = "/home/teto/Documents/NixOS_script"; 
+    flake = "/home/teto/Documents/nixproject/NixOS_script"; 
     
     #clean = {
     #  enable = true;
