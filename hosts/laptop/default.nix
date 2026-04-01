@@ -58,15 +58,14 @@
     description = "Rollback Btrfs root subvolume to a pristine state";
     wantedBy = [ "initrd.target" ];
     # rootパーティションが出現した後、かつマウントされる前に実行
-    after = [ "dev-disk-by\\x2dpartlabel-root.device" ];
+    after = [ "dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device" ];
     before = [ "sysroot.mount" ];
     unitConfig.DefaultDependencies = "no";
+    path = with pkgs; [ btrfs-progs coreutils gawk gnused ];
     serviceConfig = {
       Type = "oneshot";
       # 必要なバイナリ(bash, btrfs-progs, coreutils)を確実にパスに通して実行
-      ExecStart = let
-        script = pkgs.writeShellScript "rollback" (builtins.readFile ./rollback.sh);
-      in "${script}";
+      ExecStart = pkgs.writeShellScript "rollback" (builtins.readFile ./rollback.sh);
     };
   };
 
