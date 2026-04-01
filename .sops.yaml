@@ -1,0 +1,7 @@
+keys:
+  - &user_teto age13n3shnvd4s6ver43rh9n5gjw82vewvdctlxufmmpdeaql00pcudsfs4ysh
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+        - *user_teto
