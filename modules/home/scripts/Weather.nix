@@ -1,4 +1,4 @@
-{ pkgs, osconfig, ... }:
+{ pkgs, osConfig, ... }:
 
 pkgs.writeShellApplication {
   name = "Weather";
@@ -11,9 +11,9 @@ pkgs.writeShellApplication {
   ];
   checkPhase = "true";
   text = ''
-    if [ -f "${osconfig.sops.templates."weather-env".path}" ]; then
+    if [ -f "${osConfig.sops.templates."weather-env".path}" ]; then
       # shellcheck source=/dev/null
-      source "${osconfig.sops.templates."weather-env".path}"
+      source "${osConfig.sops.templates."weather-env".path}"
     else
       echo "Error: Weather config not found" >&2
       exit 1
