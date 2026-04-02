@@ -11,19 +11,29 @@ pkgs.writeShellApplication {
   ];
   checkPhase = "true";
   text = ''
-    if [ -f "${osConfig.sops.templates."weather-env".path}" ]; then
+    ENV_FILE="${osConfig.sops.templates."weather-env".path}"
+  
+    if [ -f "$ENV_FILE" ]; then
       # shellcheck source=/dev/null
-      source "${osConfig.sops.templates."weather-env".path}"
+      source "$ENV_FILE"
     else
-      echo "Error: Weather config not found" >&2
+      echo "Error: Weather config file not found at $ENV_FILE" >&2
+      # ls -l /run/secrets などを実行して権限を確認するデバッグ文を入れても良い
       exit 1
     fi
 
-    # 変数名をスクリプト内の期待値に合わせる
-    city="$CITY_NAME"
-    latitude="$LAT"
-    longitude="$LON"
-    api_key="$OWM_KEY"
+    # デバッグ用：値が渡っているか確認（動作確認後は消してください）
+    # echo "Debug: City is $CITY_NAME" >&2
+
+    city="''${CITY_NAME:-}"
+    latitude="''${LAT:-}"
+    longitude="''${LON:-}"
+    api_key="''${OWM_KEY:-}"
+  
+    if [ -z "$api_key" ]; then
+      echo "Error: API Key is empty" >&2
+      exit 1
+    fi
     
     # 元のシェルスクリプトを読み込む
     ${builtins.readFile ./Weather.sh}
