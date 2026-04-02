@@ -12,13 +12,15 @@
       "password" = {
         neededForUsers = true;
       };
-      "location/city" = { };
-      "location/lat" = { };
-      "location/lon" = { };
-      "api-key" = { };
+      "location/city" = { owner = vars.user.name; };
+      "location/lat" = { owner = vars.user.name; };
+      "location/lon" = { owner = vars.user.name; };
+      "api-key" = { owner = vars.user.name; };
     };
     templates."weather-env" = {
+      path = "/run/secrets/weather-env";
       owner = vars.user.name;
+      mode = "0444";
       content = ''
         CITY_NAME="${config.sops.placeholder."location/city"}"
         LAT="${config.sops.placeholder."location/lat"}"
