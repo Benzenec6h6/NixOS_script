@@ -26,6 +26,7 @@
 
     files = [
       ".config/gh/hosts.yml"
+      ".config/sops/age/keys.txt"
     ];
   };
 }
