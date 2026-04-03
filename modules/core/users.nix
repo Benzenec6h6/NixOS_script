@@ -6,7 +6,7 @@
   sops = {
     # 秘密情報ファイルの場所（Flakeルートからの相対パスなど）
     defaultSopsFile = ../../secrets/secrets.yaml;
-    age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
     # 復号したファイルをどこに置くか
     secrets = {
       "password" = {
@@ -18,7 +18,7 @@
       "api-key" = { owner = vars.user.name; };
     };
     templates."weather-env" = {
-      path = "/run/secrets/weather-env";
+      #path = "/run/secrets/weather-env";
       owner = vars.user.name;
       mode = "0444";
       content = ''
