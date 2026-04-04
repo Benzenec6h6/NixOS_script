@@ -50,6 +50,7 @@
       tumbler
     ];
   };
+  programs.nix-index-database.comma.enable = true;
   programs.nix-ld.enable = true;
 
   #bluetooth
