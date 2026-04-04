@@ -11,6 +11,7 @@
       # --- UI / 情報表示 ---
       lualine-nvim          # 下部のステータスライン
       nvim-web-devicons     # 各種アイコン表示用
+      image-nvim            #画像の表示
       gitsigns-nvim         # [解決済] 行番号横の差分表示
       nvim-lspconfig        #lsp設定を動かす
 
