@@ -1,8 +1,8 @@
 {
   system = "x86_64-linux";
   version = "25.11";
-  host = "";
-  disk = "";
+  host = "HOST";
+  disk = "DISK";
   user = {
     name = "teto";
     terminal = "kitty";
@@ -16,5 +16,5 @@
     keyMap = "jp106";
     kbLayout = "jp";
   };
-  busId = { intel = ""; nvidia = ""; };
+  busId = { intel = "INTEL_BUS"; nvidia = "NVIDIA_BUS"; };
 }
