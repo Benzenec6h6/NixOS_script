@@ -2,6 +2,18 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+TARGET="/mnt/persist/etc/ssh"
+mkdir -p "$TARGET"
+
+# 秘密鍵をコピー（事前に用意した今のマシンの鍵）
+cp /path/to/usb/ssh_host_ed25519_key "$TARGET/ssh_host_ed25519_key"
+chmod 600 "$TARGET/ssh_host_ed25519_key"
+
+# 公開鍵もセットで置いておくと良い
+cp /path/to/usb/ssh_host_ed25519_key.pub "$TARGET/ssh_host_ed25519_key.pub"
+chmod 644 "$TARGET/ssh_host_ed25519_key.pub"
+
 # === ディスク選択 ===
 mapfile -t disks < <(lsblk -ndo NAME,SIZE,TYPE | awk '$3=="disk" && $1!~/^loop/ {print $1, $2}')
 
@@ -124,7 +136,7 @@ sed -i '/^[[:space:]]*swapDevices[[:space:]]*=/d' "$HW_FILE"
 echo "=== Installing NixOS ==="
 cp -r "$SCRIPT_DIR" /mnt/etc/nixos/NixOS_script
 
-nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST" --no-root-passwd
+nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST"
 
 echo "=== Installation complete! ==="
 echo "Target disk: $DISK"
