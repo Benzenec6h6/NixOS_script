@@ -14,12 +14,14 @@
     connectionConfig = {
       "ipv4.dhcp-send-hostname" = false;
       "ipv6.dhcp-send-hostname" = false;
-      "ipv6.ip6-privacy" = 2; # ついでに IPv6 のプライバシーも強化
+      #"ipv6.ip6-privacy" = 2; # ついでに IPv6 のプライバシーも強化
     };
     # 接続性チェック（キャプティブポータル検知）
     settings = {
+      main = {
+        "p2p.no-main-interface" = "yes";
+      };
       connectivity = {
-        enable = true;
         uri = "http://nmcheck.gnome.org/check_network_status.txt";
         interval = 300;
       };
