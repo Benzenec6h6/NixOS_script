@@ -4,7 +4,7 @@
   # NetworkManager を有効化
   networking.networkmanager = {
     enable = true;
-    wifi.backend = "iwd";
+    #wifi.backend = "iwd";
 
     # DNS を systemd-resolved に任せる（最も安定）
     dns = "systemd-resolved";
@@ -22,6 +22,9 @@
       connectivity = {
         uri = "http://nmcheck.gnome.org/check_network_status.txt";
         interval = 300;
+      };
+      device = {
+        "wifi.scan-rand-mac-address" = "yes";
       };
     };
   };
