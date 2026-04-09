@@ -28,7 +28,7 @@
       ExecStart = pkgs.writeShellScript "mount-vhdx-script" ''
         # nbdデバイスをファイルに紐付け
         # /mnt/vhd-host/ の後のパスは実際のファイル名に合わせてください
-        ${pkgs.qemu-utils}/bin/qemu-nbd -c /dev/nbd0 "/mnt/vhd-host/YOUR_FILENAME.vhdx"
+        ${pkgs.qemu-utils}/bin/qemu-nbd -c /dev/nbd0 "/mnt/vhd-host/win.vhdx"
         
         # パーティション認識を待つ
         sleep 2
