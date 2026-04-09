@@ -18,6 +18,11 @@
   # 3. VHDXをnbdデバイスとして接続・マウントするSystemdサービス
   systemd.services.mount-vhdx = {
     description = "Mount VHDX inside NTFS partition";
+    path = with pkgs; [ 
+      util-linux # mount, umount, mkdir 用
+      qemu-utils # qemu-nbd 用
+      kmod       # modprobe 等（念のため）
+    ];
     after = [ "mnt-vhd\\x2dhost.mount" ]; # NTFSがマウントされた後に実行
     requires = [ "mnt-vhd\\x2dhost.mount" ];
     wantedBy = [ "multi-user.target" ];
