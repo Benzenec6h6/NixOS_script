@@ -4,6 +4,7 @@
   imports = [
     ./hardware.nix
     ./disko.nix
+    ./vhdx-mount.nix
     ../../modules/core
   ];
 
