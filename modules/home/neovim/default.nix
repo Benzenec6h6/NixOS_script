@@ -32,9 +32,14 @@
       plenary-nvim          # telescope等の動作に必須
       yazi-nvim             # ファイルマネージャーyaziとの連携
 
+      # --- Lisp / Racket 開発環境 ---
+      conjure               # [重要] REPL駆動開発の核心
+      vim-racket            # Racket用のインデント・構文定義
+      parinfer-rust         # 括弧の自動管理 (任意ですが超強力です)
+
       # --- 構文解析・編集補助 ---
       (nvim-treesitter.withPlugins (p: with p; [
-        nix lua vim vimdoc bash
+        nix lua vim vimdoc bash racket
         json yaml toml
         markdown markdown_inline
         html css javascript typescript python haskell
