@@ -61,6 +61,11 @@ require('lualine').setup()
 -- Which-key (操作ガイド)
 require("which-key").setup()
 
+-- Conjureの設定
+-- ログ（評価結果）を右側に縦分割で表示する設定
+vim.g["conjure#log#direction"] = "vertical"
+vim.g["conjure#log#size"] = 0.3 -- 画面の30%を使用
+
 -- ========================================================================== --
 -- 4. LSP設定 (nixd & lua_ls)
 -- ========================================================================== --
@@ -74,6 +79,7 @@ vim.diagnostic.config({
 })
 
 local servers = {
+  racket_langserver = {},
   nixd = {},
   bashls = {},
   basedpyright = {},
@@ -195,9 +201,28 @@ cmp.setup({
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'conjure' },
     { name = 'orgmode' }, -- Orgmodeのタグなども補完対象に
   }, {
     { name = 'buffer' },
     { name = 'path' },
   })
+})
+
+-- 画像の表示
+require("image").setup({
+  backend = "kitty", -- ここを明示的に指定
+  integrations = {
+    markdown = {
+      enabled = true,
+      clear_in_insert_mode = false,
+      download_remote_images = true,
+      only_render_image_at_cursor = false,
+      filetypes = { "markdown", "vimwiki", "org" }, -- orgも追加しておくと便利です
+    },
+  },
+  max_width = 100,
+  max_height = 12,
+  window_overlap_clear_enabled = true, -- ウィンドウが重なった時に画像を消す
+  window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 })
