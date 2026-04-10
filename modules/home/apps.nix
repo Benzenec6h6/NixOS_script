@@ -48,8 +48,8 @@ in
   ]
   ++ lib.optionals isLaptop [
       # Virtualization
-      qemu_full libvirt virt-viewer OVMFFull swtpm
-      virt-manager dnsmasq swtpm libosinfo tuned ntfs3g
+      virt-viewer virt-manager
+      dnsmasq swtpm libosinfo tuned ntfs3g
 
       kicad-small
   ]);
