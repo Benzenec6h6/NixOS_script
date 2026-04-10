@@ -59,7 +59,17 @@
   services.blueman.enable = true;
 
   virtualisation.podman.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_full; # GUI等フル機能版のQEMU
+      swtpm.enable = true;      # TPMエミュレータを有効化
+      ovmf = {
+        enable = true;
+        packages = [ pkgs.OVMFFull.fd ]; # Windows 11に必要なセキュアブート対応版
+      };
+    };
+  };
 
   environment.pathsToLink = [ 
     "/share/xdg-desktop-portal" 
