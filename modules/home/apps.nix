@@ -38,7 +38,7 @@ in
     eww #ags
     swww mpvpaper
     pavucontrol #playerctl
-    qimgv #notify-desktop
+    imagemagick qimgv #notify-desktop
     bottom btop nvtopPackages.full
     qalculate-gtk
 
