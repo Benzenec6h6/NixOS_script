@@ -30,13 +30,13 @@
   '';
 
   # ---------- Thunderbolt / TLP ----------
-  services.tlp = {
-    enable = true;
-    settings = {
-      USB_AUTOSUSPEND = 1;
-      PCIE_ASPM_ON_BAT = "powersupersave";
-      RUNTIME_PM_ON_BAT = "auto";
-      RUNTIME_PM_DRIVER_BLACKLIST = "mei_me i2c_i801";
-    };
-  };
+  #services.tlp = {
+  #  enable = true;
+  #  settings = {
+  #    USB_AUTOSUSPEND = 1;
+  #    PCIE_ASPM_ON_BAT = "powersupersave";
+  #    RUNTIME_PM_ON_BAT = "auto";
+  #    RUNTIME_PM_DRIVER_BLACKLIST = "mei_me i2c_i801";
+  #  };
+  #};
 }
