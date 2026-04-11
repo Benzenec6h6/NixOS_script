@@ -32,9 +32,6 @@
   services.resolved = {
     enable = true;
     dnssec = "false";
-    extraConfig = ''
-      DNSStubListener=no
-    '';
     fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
     dnsovertls = "opportunistic";
   };
