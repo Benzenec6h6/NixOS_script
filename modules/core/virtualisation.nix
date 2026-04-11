@@ -19,30 +19,30 @@
     settings.dynamic_tuning = true;
   };
   
-  services.dnsmasq = {
-    enable = true;
+  #services.dnsmasq = {
+  #  enable = true;
     
     # 1. このVM自身もdnsmasqをDNSサーバーとして使うようにする
-    resolveLocalQueries = true;
+  #  resolveLocalQueries = true;
 
     # 2. 詳細な挙動をここに集約して記述する
-    settings = {
+  #  settings = {
       # 上位DNSサーバーの指定（GoogleとCloudflareの例）
-      server = [ "8.8.8.8" "1.1.1.1" ];
+  #    server = [ "8.8.8.8" "1.1.1.1" ];
 
       # キャッシュするレコード数（デフォルト150を少し増やして効率化）
-      cache-size = 1000;
+  #    cache-size = 1000;
 
       # 不正なドメイン名（ドットを含まない名前）を上位に転送しない
-      domain-needed = true;
+  #    domain-needed = true;
 
       # プライベートIPの逆引きを上位に転送しない
-      bogus-priv = true;
+  #    bogus-priv = true;
 
       # ローカルネットワーク内での名前解決（例：my-vm.local）
-      local = "/local/";
-      domain = "local";
-      expand-hosts = true;
+  #    local = "/local/";
+  #    domain = "local";
+  #    expand-hosts = true;
 
       # ログ設定（トラブルシューティング時に便利。不要ならコメントアウト）
       # log-queries = true;
