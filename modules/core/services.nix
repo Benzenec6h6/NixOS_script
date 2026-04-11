@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ pkgs, ... }:
 
 {
   services = {
@@ -57,19 +57,6 @@
   #bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
-
-  virtualisation.podman.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu = {
-      package = pkgs.qemu_full; # GUI等フル機能版のQEMU
-      swtpm.enable = true;      # TPMエミュレータを有効化
-      verbatimConfig = ''
-        user = "teto"  # あなたのUID 1000のユーザー名
-        group = "libvirtd"
-      '';
-    };
-  };
 
   environment.pathsToLink = [ 
     "/share/xdg-desktop-portal" 
