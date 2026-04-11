@@ -19,6 +19,7 @@
     ./services.nix
     ./stylix.nix
     ./users.nix
+    ./virtualisation.nix
     inputs.stylix.nixosModules.stylix
   ];
 }
