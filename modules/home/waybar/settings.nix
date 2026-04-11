@@ -434,12 +434,21 @@
         ];
     };
 
-    "custom/tlp" = {
+    #"custom/tlp" = {
+    #    "interval" = 10;
+    #    "exec" = "tlp-stat -p | grep 'Mode' | awk '{print $3}'";
+    #    "format" = "{} ";
+    #    "tooltip" = true;
+    #    "tooltip-format" = "TLP power mode: {}";
+    #};
+
+    "custom/tuned" = {
         "interval" = 10;
-        "exec" = "tlp-stat -p | grep 'Mode' | awk '{print $3}'";
+        # 'Current active profile: virtual-host' などからプロファイル名のみを抽出
+        "exec" = "tuned-adm active | grep 'Current active profile' | cut -d' ' -f4";
         "format" = "{} ";
         "tooltip" = true;
-        "tooltip-format" = "TLP power mode: {}";
+        "tooltip-format" = "Host Optimization: {}";
     };
 
     "custom/wlogout" = {
@@ -554,7 +563,7 @@
         "modules"= [
             "temperature"
             "cpu"
-            "custom/tlp"
+            "custom/tuned"
             "memory"
             "disk"
         ];
