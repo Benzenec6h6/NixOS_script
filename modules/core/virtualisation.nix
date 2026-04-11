@@ -44,8 +44,8 @@
       domain = "local";
       expand-hosts = true;
 
-      interface = [ "lo" "virbr0" ];
-      bind-interfaces = true;
+      #interface = [ "lo" "virbr0" ];
+      bind-dynamic = true;
       # ログ設定（トラブルシューティング時に便利。不要ならコメントアウト）
        log-queries = true;
        log-facility = "/var/log/dnsmasq.log";
