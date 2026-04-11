@@ -47,8 +47,8 @@
       # ログ設定（トラブルシューティング時に便利。不要ならコメントアウト）
       # log-queries = true;
       # log-facility = "/var/log/dnsmasq.log";
-    };
-  };
+  #  };
+  #};
 
   # 3. 監視も行いたい場合（Prometheus exporter）
   # services.prometheus.exporters.dnsmasq = {
