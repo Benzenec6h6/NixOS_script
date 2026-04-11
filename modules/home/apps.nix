@@ -48,8 +48,12 @@ in
   ]
   ++ lib.optionals isLaptop [
       # Virtualization
-      virt-viewer virt-manager
-      dnsmasq swtpm libosinfo tuned ntfs3g
+      #開発環境のflakeに閉じ込めた。
+      #virt-viewer virt-manager libosinfo swtpm
+      #optionを使った
+      #dnsmasq tuned 
+      #optionがない開発flakeに隔離する訳にもいかない
+      ntfs3g
 
       kicad-small
   ]);
