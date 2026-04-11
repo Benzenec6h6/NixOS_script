@@ -32,7 +32,7 @@ in
     steam
     transmission_4-gtk
     qbittorrent
-    gparted
+    #gparted
 
     # 便利ツール
     eww #ags
