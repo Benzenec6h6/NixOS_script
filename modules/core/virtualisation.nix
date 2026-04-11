@@ -29,7 +29,6 @@
     settings = {
       resolv-file = "/run/systemd/resolve/resolv.conf";
 
-      proxy-dnssec = true;
       # キャッシュするレコード数（デフォルト150を少し増やして効率化）
       cache-size = 1000;
 
