@@ -18,6 +18,7 @@
     #./firefox.nix
     ./fonts.nix
     ./gh.nix
+    ./ghostty.nix
     ./git.nix
     ./hypridle.nix
     ./impermanence.nix
