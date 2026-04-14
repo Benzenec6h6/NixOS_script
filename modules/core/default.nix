@@ -6,6 +6,7 @@
     ./scripts
     ./audio.nix
     ./base.nix
+    ./bootloader.nix
     ./flatpak.nix
     #./greetd.nix
     ./hibernate.nix

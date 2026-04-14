@@ -3,6 +3,7 @@
   version = "25.11";
   host = "laptop";
   disk = "/dev/nvme0n1";
+  bootloader = "limine";
   user = {
     name = "teto";
     terminal = "kitty";
