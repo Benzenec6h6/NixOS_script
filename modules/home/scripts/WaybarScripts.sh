@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Command handler
-TERM_EXE = "${termcmd}"
+TERM_EXE="${termcmd}"
 case "${1:-}" in
     "--btop")
         "$TERM_EXE" --title "System Monitor (btop)" -e btop
