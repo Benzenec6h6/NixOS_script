@@ -17,6 +17,7 @@ pkgs.writeShellApplication {
     pkgs.coreutils
   ];
   text = ''
+    # shellcheck disable=SC2034
     termcmd="${termCmd}"
     builtins.readFile ./WaybarScripts.sh
   '';
