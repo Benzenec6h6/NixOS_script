@@ -4,12 +4,7 @@
   boot.loader = {
     # EFI変数の操作許可（共通）
     efi.canTouchEfiVariables = true;
-
-    # --- systemd-boot の設定 ---
-    systemd-boot = {
-      enable = lib.mkIf (vars.bootloader == "systemd-boot") true;
-      configurationLimit = 5;
-    };
+    systemd-boot.enable = lib.mkForce false;
 
     # --- Limine の設定 ---
     limine = lib.mkIf (vars.bootloader == "limine") {
@@ -24,5 +19,10 @@
         sbctl = pkgs.sbctl;
       };
     };
+  };
+
+  boot.lanzaboote = lib.mkIf (vars.bootloader == "systemd-boot") {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl"; # すでに作成した鍵の場所を指定
   };
 }
