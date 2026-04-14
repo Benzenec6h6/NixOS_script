@@ -17,7 +17,7 @@ pkgs.writeShellApplication {
     pkgs.coreutils
   ];
   text = ''
-    termcmd = "''${termCmd}"
+    termcmd="''${termCmd}"
     builtins.readFile ./WaybarScripts.sh
   '';
 }
