@@ -431,6 +431,8 @@
             "rofi"
             "kitty"
             "kitty-dropterm"
+            "ghostty"
+            "ghostty-dropterm"
         ];
     };
 
@@ -595,7 +597,7 @@
             "class<tor browser>"= " ";
             "class<firefox-developer-edition>"= "🦊 ";
             "class<kitty|konsole>"= " ";
-            "class<kitty-dropterm>"= " ";
+            "class<kitty-dropterm|ghostty-dropterm>"= " ";
             "class<com.mitchellh.ghostty>"= " ";
             "class<org.wezfurlong.wezterm>"= " ";
             "class<[Tt]hunderbird|[Tt]hunderbird-esr>"= " ";

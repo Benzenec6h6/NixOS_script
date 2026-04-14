@@ -1,5 +1,10 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, vars, ... }:
+let
+  # ターミナルに応じた image.nvim のバックエンドを決定
+  image_backend = if vars.user.terminal == "kitty" then "kitty" 
+                  else if vars.user.terminal == "ghostty" then "iterm2" 
+                  else "ueberzug"; # フォールバック
+in
 {
   programs.neovim = {
     enable = true;
@@ -67,6 +72,7 @@
     '';
 
     extraLuaConfig = ''
+      vim.g.terminal_image_backend = "${image_backend}"
       vim.g.fcitx5_remote_path = "${pkgs.fcitx5}/bin/fcitx5-remote"
       ${builtins.readFile ./init.lua}
     '';

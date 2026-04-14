@@ -211,7 +211,7 @@ cmp.setup({
 
 -- 画像の表示
 require("image").setup({
-  backend = "kitty", -- ここを明示的に指定
+  backend = vim.g.terminal_image_backend,
   integrations = {
     markdown = {
       enabled = true,

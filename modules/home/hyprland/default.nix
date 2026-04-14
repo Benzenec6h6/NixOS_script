@@ -78,7 +78,7 @@ in
       };
 
       windowrulev2 = [
-        "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm)$"
+        "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm|ghostty|ghostty-dropterm)$"
         #電卓用
         "float, class:^(.*[Cc]alc.*|speedcrunch)$"
         "size 400 600, class:^(.*[Cc]alc.*|speedcrunch)$"

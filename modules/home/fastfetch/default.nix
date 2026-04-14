@@ -1,3 +1,10 @@
+{ pkgs, vars, ... }:
+let
+  # ターミナルに応じた画像プロトコルの決定
+  logoType = if vars.user.terminal == "kitty" then "kitty-direct" 
+             else if vars.user.terminal == "ghostty" then "iterm2" # Ghosttyはiterm2プロトコルが非常に安定しています
+             else "auto";
+in
 {
   programs.fastfetch = {
     enable = true;
@@ -13,7 +20,7 @@
 
       logo = {
         source = ./NixOS.png;
-        type = "kitty-direct";
+        type = logoType;
         height = 10;
         width = 20;
         padding = {

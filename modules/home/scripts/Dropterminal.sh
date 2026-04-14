@@ -43,6 +43,7 @@ if [ -z "$TERMINAL_CMD" ]; then
     echo "  $0 foot"
     echo "  $0 -d foot (with debug output)"
     echo "  $0 'kitty -e zsh'"
+    echo "  $0 'ghostty -e zsh'"
     echo "  $0 'alacritty --working-directory /home/user'"
     echo ""
     echo "Edit the script to modify size and position:"

@@ -2,18 +2,19 @@
 set -euo pipefail
 
 # Command handler
+TERM_EXE = "${termcmd}"
 case "${1:-}" in
     "--btop")
-        kitty --title "System Monitor (btop)" -e btop
+        "$TERM_EXE" --title "System Monitor (btop)" -e btop
         ;;
     "--nvtop")
-        kitty --title "GPU Monitor (nvtop)" -e nvtop
+        "$TERM_EXE" --title "GPU Monitor (nvtop)" -e nvtop
         ;;
     "--nmtui")
-        kitty --title "Network Manager" -e nmtui
+        "$TERM_EXE" --title "Network Manager" -e nmtui
         ;;
     "--term")
-        kitty &
+        "$TERM_EXE" &
         ;;
     "--files")
         thunar &

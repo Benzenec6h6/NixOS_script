@@ -18,12 +18,10 @@
     #./firefox.nix
     ./fonts.nix
     ./gh.nix
-    ./ghostty.nix
     ./git.nix
     ./hypridle.nix
     ./impermanence.nix
     ./keepassxc.nix
-    ./kitty.nix
     ./niri.nix
     ./stylix.nix
     ./swaync.nix
@@ -31,9 +29,10 @@
     ./xdg.nix
     ./yazi.nix
     ./zsh.nix
-  ] ++ (lib.optionals (vars.host == "laptop") [
-    ./ollama.nix
-  ]);
+  ] 
+  ++ (lib.optionals (vars.user.terminal == "kitty") [ ./kitty.nix ])
+  ++ (lib.optionals (vars.user.terminal == "ghostty") [ ./ghostty.nix ])
+  ++ (lib.optionals (vars.host == "laptop") [ ./ollama.nix ]);
 
   programs.home-manager.enable = true;
 
