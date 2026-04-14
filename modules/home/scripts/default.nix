@@ -2,7 +2,7 @@
 
 let
   # 共通の引数(pkgs)を渡してインポートする関数
-  importScript = path: import path { inherit pkgs inputs config osConfig; };
+  importScript = path: import path { inherit pkgs inputs vars config osConfig; };
   hyprlandKeyData = import ../hyprland/keybinddata.nix { inherit lib vars; };
 in
 {
