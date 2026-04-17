@@ -3,6 +3,7 @@
   version = "25.11";
   host = "HOST";
   disk = "DISK";
+  bootloader = "limine";
   user = {
     name = "teto";
     terminal = "kitty";
