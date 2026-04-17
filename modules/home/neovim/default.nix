@@ -42,6 +42,12 @@ in
       vim-racket            # Racket用のインデント・構文定義
       parinfer-rust         # 括弧の自動管理 (任意ですが超強力です)
 
+      # --- AI 連携 (Avante.nvim) ---
+      avante-nvim
+      dressing-nvim
+      nui-nvim
+      render-markdown-nvim
+
       # --- 構文解析・編集補助 ---
       (nvim-treesitter.withPlugins (p: with p; [
         nix lua vim vimdoc bash racket

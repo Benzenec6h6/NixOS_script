@@ -226,3 +226,40 @@ require("image").setup({
   window_overlap_clear_enabled = true, -- ウィンドウが重なった時に画像を消す
   window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
 })
+
+-- ========================================================================== --
+-- AI 連携 (Avante.nvim)
+-- ========================================================================== --
+require('avante_lib').load()
+require('avante').setup({
+  provider = "ollama",
+  vendors = {
+    ollama = {
+      ["local"] = true,
+      endpoint = "127.0.0.1:11434/v1",
+      model = "deepseek-coder-v2:16b",
+      parse_curl_args = function(opts, code_opts)
+        return {
+          url = opts.endpoint .. "/chat/completions",
+          headers = {
+            ["Accept"] = "application/json",
+            ["Content-Type"] = "application/json",
+          },
+          body = vim.tbl_deep_extend("force", {
+            model = opts.model,
+            messages = code_opts.messages,
+            stream = true,
+          }, opts.options),
+        }
+      end,
+      parse_response_data = function(data_stream, event_state, opts)
+        require("avante.providers").openai.parse_response_data(data_stream, event_state, opts)
+      end,
+    },
+  },
+})
+
+-- render-markdown (AIの回答やドキュメントを読みやすくする)
+require('render-markdown').setup({
+  file_types = { "markdown", "Avante" },
+})
