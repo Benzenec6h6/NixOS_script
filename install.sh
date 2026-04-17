@@ -1,143 +1,80 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# === 設定：バックアップ元のパス ===
+BACKUP_PATH="/run/media/nixos/Ventoy/backup" 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
-TARGET="/mnt/persist/etc/ssh"
-mkdir -p "$TARGET"
-
-# 秘密鍵をコピー（事前に用意した今のマシンの鍵）
-cp /path/to/usb/ssh_host_ed25519_key "$TARGET/ssh_host_ed25519_key"
-chmod 600 "$TARGET/ssh_host_ed25519_key"
-
-# 公開鍵もセットで置いておくと良い
-cp /path/to/usb/ssh_host_ed25519_key.pub "$TARGET/ssh_host_ed25519_key.pub"
-chmod 644 "$TARGET/ssh_host_ed25519_key.pub"
-
-# === ディスク選択 ===
+# === 1. 情報収集 ===
 mapfile -t disks < <(lsblk -ndo NAME,SIZE,TYPE | awk '$3=="disk" && $1!~/^loop/ {print $1, $2}')
-
-if ((${#disks[@]}==0)); then
-  echo "No block device found"; exit 1
-fi
-
 echo "== Select target disk =="
 for i in "${!disks[@]}"; do
-  printf "%2d) /dev/%s (%s)\n" $((i+1)) \
-    "$(awk '{print $1}' <<<"${disks[$i]}")" \
-    "$(awk '{print $2}' <<<"${disks[$i]}")"
+  printf "%2d) /dev/%s (%s)\n" $((i+1)) "$(awk '{print $1}' <<<"${disks[$i]}")" "$(awk '{print $2}' <<<"${disks[$i]}")"
 done
-
 read -rp 'Index: ' idx
-((idx>=1 && idx<=${#disks[@]})) || { echo "Invalid index"; exit 1; }
 DISK="/dev/$(awk '{print $1}' <<<"${disks[idx-1]}")"
-echo "→ selected $DISK"
 
-# --- ホスト選択（数字入力に変更） ---
-echo "=== Select host ==="
-echo "1) laptop"
-echo "2) vm"
-read -rp "Enter number (1 or 2): " HOST_ID
+echo "=== Select host (1:laptop, 2:vm) ==="
+read -rp "Index: " HOST_ID
+[[ "$HOST_ID" == "1" ]] && HOST="laptop" || HOST="vm"
 
-case "$HOST_ID" in
-  1) HOST="laptop" ;;
-  2) HOST="vm" ;;
-  *) echo "Error: invalid host selection"; exit 1 ;;
-esac
+# === 2. vars.nix の生成 ===
+echo "=== Generating vars.nix from template ==="
+cp "$SCRIPT_DIR/vars.nix.template" "$SCRIPT_DIR/vars.nix"
+sed -i "s|HOST|$HOST|g" "$SCRIPT_DIR/vars.nix"
+sed -i "s|DISK|$DISK|g" "$SCRIPT_DIR/vars.nix"
 
-echo "Selected host: $HOST"
-export HOST="$HOST"
-
-# --- パスワード入力 ---
-echo "=== Enter password ==="
-read -rsp "Password: " PASSWORD
-echo
-read -rsp "Confirm Password: " PASSWORD2
-echo
-
-if [[ "$PASSWORD" != "$PASSWORD2" ]]; then
-  echo "Error: passwords do not match"
-  exit 1
-fi
-
-HASH=$(mkpasswd -m yescrypt "$PASSWORD")
-echo "Generated hashed password."
-
-# --- 4. BusIDの自動取得 (pciutilsのlspciを使用) ---
+# GPU BusID 取得
 INTEL_BUS=""
 NVIDIA_BUS=""
-to_nix_busid() {
-  local id="$1"
-  IFS=':.' read -r bus slot func <<< "$id"
-  printf "PCI:%d:%d:%d" "$((16#$bus))" "$((16#$slot))" "$func"
-}
 if [[ "$HOST" == "laptop" ]]; then
-  I_ID=$(lspci | grep -i 'VGA.*Intel' | awk '{print $1}' || true)
-  N_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
-  [[ -n "$I_ID" ]] && INTEL_BUS=$(to_nix_busid "$I_ID")
-  [[ -n "$N_ID" ]] && NVIDIA_BUS=$(to_nix_busid "$N_ID")
-else
-  mkdir -p /tmp/host_share
-  mount -t 9p -o trans=virtio shared_vars /tmp/host_share
-  cp /tmp/host_share/vars.nix NixOS_script/vars.nix
+    to_nix_busid() {
+        local id="$1"
+        IFS=':.' read -r bus slot func <<< "$id"
+        printf "PCI:%d:%d:%d" "$((16#$bus))" "$((16#$slot))" "$func"
+    }
+    I_ID=$(lspci | grep -i 'VGA.*Intel' | awk '{print $1}' || true)
+    N_ID=$(lspci | grep -i '3D\|VGA.*NVIDIA' | awk '{print $1}' || true)
+    [[ -n "$I_ID" ]] && INTEL_BUS=$(to_nix_busid "$I_ID")
+    [[ -n "$N_ID" ]] && NVIDIA_BUS=$(to_nix_busid "$N_ID")
 fi
+sed -i "s|INTEL_BUS|$INTEL_BUS|g" "$SCRIPT_DIR/vars.nix"
+sed -i "s|NVIDIA_BUS|$NVIDIA_BUS|g" "$SCRIPT_DIR/vars.nix"
 
-# --- パーティション作成・フォーマット ---
-echo "WARNING: All existing data will be erased! Continue? (y/n)"
-read -rp "Confirm: " CONFIRM
+# === 3. Disko実行 (ディスク暗号化・マウント) ===
+echo "=== Running Disko (Enter LUKS password) ==="
+sudo nix run github:nix-community/disko -- --mode zap_create_mount --flake "$SCRIPT_DIR#$HOST"
 
-case "$CONFIRM" in
-  y|Y) echo "Proceeding..." ;;
-  n|N) echo "Aborted."; exit 1 ;;
-  *) echo "Invalid input"; exit 1 ;;
-esac
+# === 4. 鍵の復元 (sops-nix / sbctl) ===
+echo "=== Restoring identity keys ==="
 
-# --- 共有フォルダ等からコピー済みの vars.nix がある前提 ---
-VARS_FILE="$SCRIPT_DIR/vars.nix"
+# SSHホスト鍵の復元 (sops-nixがOSパスワードを復号するために不可欠)
+# disko.nix の @persist を /mnt/persist にマウントしている前提
+TARGET_SSH="/mnt/persist/etc/ssh"
+sudo mkdir -p "$TARGET_SSH"
+sudo cp "$BACKUP_PATH/ssh_host_ed25519_key" "$TARGET_SSH/"
+sudo cp "$BACKUP_PATH/ssh_host_ed25519_key.pub" "$TARGET_SSH/"
+sudo chmod 600 "$TARGET_SSH/ssh_host_ed25519_key"
 
-if [[ ! -f "$VARS_FILE" ]]; then
-  echo "Error: $VARS_FILE not found. Please copy it from shared folder first."
-  exit 1
-fi
+# sbctl (セキュアブート)
+sudo mkdir -p /mnt/var/lib/sbctl
+sudo cp -r "$BACKUP_PATH/sbctl/"* /mnt/var/lib/sbctl/
 
-echo "=== Patching vars.nix with collected info ==="
+# age keys.txt (ユーザーの編集用)
+TARGET_AGE="/mnt/home/teto/.config/sops/age"
+sudo mkdir -p "$TARGET_AGE"
+sudo cp "$BACKUP_PATH/keys.txt" "$TARGET_AGE/"
+sudo chown -R 1000:100 "/mnt/home/teto/.config"
 
-sed -i "s|host = \"HOST\";|host = \"$HOST\";|" "$VARS_FILE"
-sed -i "s|disk = \"DISK\";|disk = \"$DISK\";|" "$VARS_FILE"
-
-# ユーザー名とパスワードハッシュの置換
-sed -i "s|password = \"HASH\";|password = \"$HASH\";|" "$VARS_FILE"
-
-# BusIDの置換（vars.nix側もこれに合わせてキーワードにすると確実です）
-sed -i "s|intel = \"INTEL_BUS\";|intel = \"$INTEL_BUS\";|" "$VARS_FILE"
-sed -i "s|nvidia = \"NVIDIA_BUS\";|nvidia = \"$NVIDIA_BUS\";|" "$VARS_FILE"
-
-echo "Done. vars.nix has been updated."
-
-# --- Diskoの実行 ---
-echo "=== Running Disko ==="
-disko --mode disko --flake "$SCRIPT_DIR#$HOST"
-#diskoは/mnt/etc/nixosを作成してくれない
-mkdir -p /mnt/etc/nixos
-
-# hardware-configuration.nix生成
-nixos-generate-config --root /mnt
+# === 5. hardware.nix の生成と微調整 ===
+echo "=== Patching hardware.nix ==="
+sudo nixos-generate-config --root /mnt
+sudo sed -i '/^[[:space:]]*fileSystems\./,/^[[:space:]]*};/d' /mnt/etc/nixos/hardware-configuration.nix
+sudo sed -i '/^[[:space:]]*swapDevices[[:space:]]*=/d' /mnt/etc/nixos/hardware-configuration.nix
 cp /mnt/etc/nixos/hardware-configuration.nix "$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
 
-HW_FILE="$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
+# === 6. NixOS インストール ===
+echo "=== Starting NixOS Installation ==="
+nixos-install --flake "$SCRIPT_DIR#$HOST"
 
-# fileSystems ブロック削除
-sed -i '/^[[:space:]]*fileSystems\./,/^[[:space:]]*};/d' "$HW_FILE"
-
-# swapDevices 行削除
-sed -i '/^[[:space:]]*swapDevices[[:space:]]*=/d' "$HW_FILE"
-
-# --- NixOS インストール ---
-echo "=== Installing NixOS ==="
-cp -r "$SCRIPT_DIR" /mnt/etc/nixos/NixOS_script
-
-nixos-install --flake /mnt/etc/nixos/NixOS_script#"$HOST"
-
-echo "=== Installation complete! ==="
-echo "Target disk: $DISK"
-echo "Host: $HOST"
+echo "Installation complete. Reboot now."
