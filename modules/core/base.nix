@@ -39,8 +39,13 @@
     };
   };
 
-  boot.initrd.systemd.enable = true;
-  boot.tmp.cleanOnBoot = true;
+  boot = {
+    initrd.systemd = {
+      enable = true;
+      tpm2.enable = true ;
+    };
+    tmp.cleanOnBoot = true;
+  };
 
   services.journald.extraConfig = ''
     SystemMaxUse=512M
