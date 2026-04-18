@@ -47,7 +47,8 @@
     isNormalUser = true;
     description = "Main user";
     extraGroups = [ "wheel" "networkmanager" "libvirtd" "scanner" "lp" "video" "input"  "audio" "docker" "libvirtd" "kvm" ];
-    hashedPasswordFile = config.sops.secrets.password.path;
+    #hashedPasswordFile = config.sops.secrets.password.path;
+    initialPassword = "onetimepassword";
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
   };
