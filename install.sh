@@ -77,9 +77,11 @@ sudo chown -R 1000:100 "/mnt/home/teto/.config"
 
 # === 5. hardware.nix の生成と微調整 ===
 echo "=== Patching hardware.nix ==="
-sudo nixos-generate-config --root /mnt
+sudo nixos-generate-config --no-filesystems --root /mnt
+#sudo nixos-generate-config --root /mnt
 sudo sed -i '/^[[:space:]]*fileSystems\./,/^[[:space:]]*};/d' /mnt/etc/nixos/hardware-configuration.nix
 sudo sed -i '/^[[:space:]]*swapDevices[[:space:]]*=/d' /mnt/etc/nixos/hardware-configuration.nix
+sudo sed -i '/boot.initrd.luks.devices/,/};/d' /mnt/etc/nixos/hardware-configuration.nix
 cp /mnt/etc/nixos/hardware-configuration.nix "$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
 
 # === 6. NixOS インストール ===
