@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# === 設定：バックアップ元のパス ===
-BACKUP_PATH="/run/media/nixos/Ventoy/backup" 
+# === 設定：wifi.sh が作ったリンクを参照する ===
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+BACKUP_PATH="$SCRIPT_DIR/backup_src"
+
+if [ ! -d "$BACKUP_PATH" ]; then
+    echo "Error: Backup source link not found."
+    echo "Please run wifi.sh first or create a link at $BACKUP_PATH"
+    exit 1
+fi
 
 # === 1. 情報収集 ===
 mapfile -t disks < <(lsblk -ndo NAME,SIZE,TYPE | awk '$3=="disk" && $1!~/^loop/ {print $1, $2}')
@@ -52,9 +58,12 @@ echo "=== Restoring identity keys ==="
 # disko.nix の @persist を /mnt/persist にマウントしている前提
 TARGET_SSH="/mnt/persist/etc/ssh"
 sudo mkdir -p "$TARGET_SSH"
-sudo cp "$BACKUP_PATH/ssh_host_ed25519_key" "$TARGET_SSH/"
-sudo cp "$BACKUP_PATH/ssh_host_ed25519_key.pub" "$TARGET_SSH/"
-sudo chmod 600 "$TARGET_SSH/ssh_host_ed25519_key"
+sudo cp -r "$BACKUP_PATH/ssh" "$TARGET_SSH/"
+sudo chown -R root:root "$TARGET_SSH"
+sudo find "$TARGET_SSH" -type d -exec chmod 755 {} +
+sudo find "$TARGET_SSH" -type f -exec chmod 600 {} +
+# 公開鍵（.pub）だけは 644（誰でも読める）にしておくのが標準的
+sudo find "$TARGET_SSH" -name "*.pub" -exec chmod 644 {} +
 
 # sbctl (セキュアブート)
 sudo mkdir -p /mnt/var/lib/sbctl
