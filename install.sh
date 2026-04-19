@@ -49,7 +49,7 @@ sed -i "s|NVIDIA_BUS|$NVIDIA_BUS|g" "$SCRIPT_DIR/vars.nix"
 
 # === 3. Disko実行 (ディスク暗号化・マウント) ===
 echo "=== Running Disko (Enter LUKS password) ==="
-sudo nix run github:nix-community/disko -- --mode zap_create_mount --flake "$SCRIPT_DIR#$HOST"
+sudo disko --mode zap_create_mount --flake "$SCRIPT_DIR#$HOST"
 
 # === 4. 鍵の復元 (sops-nix / sbctl) ===
 echo "=== Restoring identity keys ==="
@@ -66,11 +66,11 @@ sudo find "$TARGET_SSH" -type f -exec chmod 600 {} +
 sudo find "$TARGET_SSH" -name "*.pub" -exec chmod 644 {} +
 
 # sbctl (セキュアブート)
-sudo mkdir -p /mnt/var/lib/sbctl
-sudo cp -r "$BACKUP_PATH/sbctl/." /mnt/var/lib/sbctl/
+sudo mkdir -p /mnt/persist/var/lib/sbctl
+sudo cp -r "$BACKUP_PATH/sbctl/." /mnt/persist/var/lib/sbctl/
 
 # age keys.txt (ユーザーの編集用)
-TARGET_AGE="/mnt/home/teto/.config/sops/age"
+TARGET_AGE="/mnt/persist/home/teto/.config/sops/age"
 sudo mkdir -p "$TARGET_AGE"
 sudo cp "$BACKUP_PATH/keys.txt" "$TARGET_AGE/"
 sudo chown -R 1000:100 "/mnt/home/teto/.config"
