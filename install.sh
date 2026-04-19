@@ -73,7 +73,7 @@ sudo cp -r "$BACKUP_PATH/sbctl/." /mnt/persist/var/lib/sbctl/
 TARGET_AGE="/mnt/persist/home/teto/.config/sops/age"
 sudo mkdir -p "$TARGET_AGE"
 sudo cp "$BACKUP_PATH/keys.txt" "$TARGET_AGE/"
-sudo chown -R 1000:100 "/mnt/home/teto/.config"
+sudo chown -R 1000:100 "/mnt/persist/home/teto"
 
 # === 5. hardware.nix の生成と微調整 ===
 echo "=== Patching hardware.nix ==="
