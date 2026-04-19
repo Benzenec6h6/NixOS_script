@@ -9,6 +9,7 @@
     hideMounts = true; # マウントを隠してディレクトリを綺麗に保つ
     directories = [
       "/var/log"       # ログを残しておくとトラブルシューティングに役立ちます
+      "/etc/nixos"
       "/var/lib/sbctl"
       "/var/lib/bluetooth"
       "/var/lib/nixos"
