@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# === 設定：wifi.sh が作ったリンクを参照する ===
+# === 設定：wifi.sh が作ったコピーを参照する ===
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BACKUP_PATH="$SCRIPT_DIR/backup_src"
+TARGET_CONFIG_DIR="/mnt/persist/etc/nixos"
 
 if [ ! -d "$BACKUP_PATH" ]; then
     echo "Error: Backup source link not found."
@@ -78,14 +79,17 @@ sudo chown -R 1000:100 "/mnt/persist/home/teto"
 # === 5. hardware.nix の生成と微調整 ===
 echo "=== Patching hardware.nix ==="
 sudo nixos-generate-config --no-filesystems --root /mnt
-#sudo nixos-generate-config --root /mnt
 sudo sed -i '/^[[:space:]]*fileSystems\./,/^[[:space:]]*};/d' /mnt/etc/nixos/hardware-configuration.nix
 sudo sed -i '/^[[:space:]]*swapDevices[[:space:]]*=/d' /mnt/etc/nixos/hardware-configuration.nix
 sudo sed -i '/boot.initrd.luks.devices/,/};/d' /mnt/etc/nixos/hardware-configuration.nix
 cp /mnt/etc/nixos/hardware-configuration.nix "$SCRIPT_DIR/hosts/${HOST}/hardware.nix"
 
+sudo mkdir -p "$TARGET_CONFIG_DIR"
+sudo cp -r "$SCRIPT_DIR" "$TARGET_CONFIG_DIR"
+
 # === 6. NixOS インストール ===
 echo "=== Starting NixOS Installation ==="
-nixos-install --flake "$SCRIPT_DIR#$HOST"
+nixos-install --flake "$TARGET_CONFIG_DIR/NixOS_script#$HOST"
+#nixos-install --flake "$SCRIPT_DIR#$HOST"
 
 echo "Installation complete. Reboot now."
