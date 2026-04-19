@@ -233,7 +233,7 @@ require("image").setup({
 require('avante_lib').load()
 require('avante').setup({
   provider = "ollama",
-  vendors = {
+  providers = {
     ollama = {
       ["local"] = true,
       endpoint = "127.0.0.1:11434/v1",
