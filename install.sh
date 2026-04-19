@@ -58,7 +58,7 @@ echo "=== Restoring identity keys ==="
 # disko.nix の @persist を /mnt/persist にマウントしている前提
 TARGET_SSH="/mnt/persist/etc/ssh"
 sudo mkdir -p "$TARGET_SSH"
-sudo cp -r "$BACKUP_PATH/ssh" "$TARGET_SSH/"
+sudo cp -r "$BACKUP_PATH/ssh/." "$TARGET_SSH/"
 sudo chown -R root:root "$TARGET_SSH"
 sudo find "$TARGET_SSH" -type d -exec chmod 755 {} +
 sudo find "$TARGET_SSH" -type f -exec chmod 600 {} +
@@ -67,7 +67,7 @@ sudo find "$TARGET_SSH" -name "*.pub" -exec chmod 644 {} +
 
 # sbctl (セキュアブート)
 sudo mkdir -p /mnt/var/lib/sbctl
-sudo cp -r "$BACKUP_PATH/sbctl/"* /mnt/var/lib/sbctl/
+sudo cp -r "$BACKUP_PATH/sbctl/." /mnt/var/lib/sbctl/
 
 # age keys.txt (ユーザーの編集用)
 TARGET_AGE="/mnt/home/teto/.config/sops/age"
