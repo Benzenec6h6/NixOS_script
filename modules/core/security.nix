@@ -18,6 +18,12 @@
       sddm.enableGnomeKeyring = true;   # SDDM を使う場合
       #greetd.enableGnomeKeyring = true; # greetd を使う場合
     };
+
+    tpm2 = {
+      enable = true;
+      pkcs11.enable = true;
+      tctiEnvironment.enable = true;
+    };
   };
 
   # 追加: AppArmor (使いたければ)
