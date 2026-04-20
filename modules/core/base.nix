@@ -28,7 +28,6 @@
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       ];
-      #download-buffer-size = 1000000000;
       max-jobs = "auto";
       cores = 0;
       auto-optimise-store = true;
