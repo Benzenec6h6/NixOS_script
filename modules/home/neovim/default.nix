@@ -44,8 +44,8 @@ in
 
       # --- AI 連携 ---
       codecompanion-nvim
-      plenary-nvim          # 必須
-      nvim-treesitter       # 必須
+      plenary-nvim          
+      nvim-treesitter       
       dressing-nvim
 
       # --- 構文解析・編集補助 ---
