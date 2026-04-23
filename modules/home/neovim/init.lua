@@ -237,7 +237,7 @@ require('avante').setup({
     ollama = {
       ["local"] = true,
       endpoint = "127.0.0.1:11434/v1",
-      model = "deepseek-coder-v2:16b",
+      model = "ollama run qwen2.5:14b",
       parse_curl_args = function(opts, code_opts)
         return {
           url = opts.endpoint .. "/chat/completions",
@@ -249,7 +249,7 @@ require('avante').setup({
             model = opts.model,
             messages = code_opts.messages,
             stream = true,
-          }, opts.options),
+          }, opts.options or {}),
         }
       end,
       parse_response_data = function(data_stream, event_state, opts)
