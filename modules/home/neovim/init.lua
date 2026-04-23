@@ -32,6 +32,10 @@ key('n', '<Esc><Esc>', ':nohlsearch<CR>', { silent = true })
 key('n', '<leader>oa', ':OrgAgendaUI<CR>', { silent = true }) -- アジェンダ表示
 key('n', '<leader>oc', ':OrgCapture<CR>', { silent = true })  -- キャプチャ起動（j, i, tを選択）
 
+key({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+key({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanion<cr>", { noremap = true, silent = true })
+key("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+
 -- ========================================================================== --
 -- 3. プラグイン設定
 -- ========================================================================== --
@@ -230,36 +234,43 @@ require("image").setup({
 -- ========================================================================== --
 -- AI 連携 (Avante.nvim)
 -- ========================================================================== --
-require('avante_lib').load()
-require('avante').setup({
-  provider = "ollama",
-  providers = {
-    ollama = {
-      ["local"] = true,
-      endpoint = "127.0.0.1:11434/v1",
-      model = "qwen2.5:14b",
-      parse_curl_args = function(opts, code_opts)
-        return {
-          url = opts.endpoint .. "/chat/completions",
-          headers = {
-            ["Accept"] = "application/json",
-            ["Content-Type"] = "application/json",
+require("codecompanion").setup({
+  adapters = {
+    ollama = function()
+      return require("codecompanion.adapters").extend("ollama", {
+        env = {
+          url = "http://127.0.0.1:11434",
+        },
+        schema = {
+          model = {
+            default = "qwen2.5:14b",
           },
-          body = vim.tbl_deep_extend("force", {
-            model = opts.model,
-            messages = code_opts.messages,
-            stream = true,
-          }, opts.options or {}),
-        }
-      end,
-      parse_response_data = function(data_stream, event_state, opts)
-        require("avante.providers").openai.parse_response_data(data_stream, event_state, opts)
-      end,
+          num_ctx = {
+            default = 8192, -- 14bモデルならこれくらいあると便利
+          },
+        },
+      })
+    end,
+  },
+  strategies = {
+    -- チャットモードの設定
+    chat = {
+      adapter = "ollama",
+    },
+    -- インライン編集（コード書き換え）モードの設定
+    inline = {
+      adapter = "ollama",
+    },
+    -- ツール（/buffer など）の設定
+    agent = {
+      adapter = "ollama",
     },
   },
 })
 
--- render-markdown (AIの回答やドキュメントを読みやすくする)
+vim.cmd([[cabbrev cc CodeCompanion]])
+
+-- render-markdown
 require('render-markdown').setup({
-  file_types = { "markdown", "Avante" },
+  file_types = { "markdown", "codecompanion" },
 })

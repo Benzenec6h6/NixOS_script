@@ -42,11 +42,11 @@ in
       vim-racket            # Racket用のインデント・構文定義
       parinfer-rust         # 括弧の自動管理 (任意ですが超強力です)
 
-      # --- AI 連携 (Avante.nvim) ---
-      avante-nvim
+      # --- AI 連携 ---
+      codecompanion-nvim
+      plenary-nvim          # 必須
+      nvim-treesitter       # 必須
       dressing-nvim
-      nui-nvim
-      render-markdown-nvim
 
       # --- 構文解析・編集補助 ---
       (nvim-treesitter.withPlugins (p: with p; [
@@ -61,6 +61,7 @@ in
       otter-nvim
       pkgs.tree-sitter-grammars.tree-sitter-org-nvim
       toggleterm-nvim       # Neovim内で端末を浮遊表示
+      render-markdown-nvim
 
       # --- [提案] 操作を覚えるための補助 ---
       which-key-nvim        # Spaceを押した時にガイドを出す (ストイック期の味方)
