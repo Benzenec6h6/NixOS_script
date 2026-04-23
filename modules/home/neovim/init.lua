@@ -236,21 +236,23 @@ require("image").setup({
 -- ========================================================================== --
 require("codecompanion").setup({
   adapters = {
-    ollama = function()
-      return require("codecompanion.adapters").extend("ollama", {
-        env = {
-          url = "http://127.0.0.1:11434",
-        },
-        schema = {
-          model = {
-            default = "qwen2.5:14b",
+    http = {
+      ollama = function()
+        return require("codecompanion.adapters").extend("ollama", {
+          env = {
+            url = "http://127.0.0.1:11434",
           },
-          num_ctx = {
-            default = 8192, -- 14bモデルならこれくらいあると便利
+          schema = {
+            model = {
+              default = "qwen2.5:14b",
+            },
+            num_ctx = {
+              default = 8192, -- 14bモデルならこれくらいあると便利
+            },
           },
-        },
-      })
-    end,
+        })
+      end,
+    },
   },
   strategies = {
     -- チャットモードの設定
