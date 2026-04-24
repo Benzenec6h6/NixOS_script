@@ -244,7 +244,12 @@ require("codecompanion").setup({
           },
           schema = {
             model = {
-              default = "qwen2.5:14b",
+              default = "qwen2.5:7b",
+              choices = {
+                "qwen2.5:7b",
+                "qwen2.5:14b",
+                "llama3.2:3b",
+              },
             },
             num_ctx = {
               default = 8192, -- 14bモデルならこれくらいあると便利
