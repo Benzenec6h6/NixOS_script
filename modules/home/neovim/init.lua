@@ -88,6 +88,7 @@ local servers = {
   bashls = {},
   basedpyright = {},
   hls = {},
+  ts_ls = {},
   lua_ls = {
     settings = {
       Lua = { diagnostics = { globals = { 'vim' } } }
@@ -100,6 +101,7 @@ local bin_map = {
   lua_ls = 'lua-language-server',
   hls = 'haskell-language-server-wrapper',
   bashls = 'bash-language-server',
+  ts_ls = 'typescript-language-server',
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
