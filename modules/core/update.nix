@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, vars, ... }:
 {
   system.autoUpgrade = {
     enable = true;
@@ -14,17 +14,25 @@
 
   # 更新完了時に通知を送る設定
   systemd.services.nixos-upgrade = {
-    script = pkgs.lib.mkAfter ''
-      # サービスが正常終了した（ExitCode=0）かつ、何らかの変更があった場合に通知
-      # (operation = "boot" の場合、成功すれば自動的にここに到達します)
+  # サービスが終了した後に実行する設定
+  postStop = ''
+    # 1. あなたのユーザー名（ここを書き換えてください）
+    TARGET_USER="${vars.user.name}" 
+    
+    # 2. サービスが正常終了（success）した時だけ通知を出す
+    if [ "$SERVICE_RESULT" = "success" ]; then
+      USER_ID=$(id -u $TARGET_USER)
       
-      # 通知を送るためのスクリプト
-      # デスクトップ通知(libnotify)を利用
-      ${pkgs.libnotify}/bin/notify-send \
-        --urgency=normal \
+      # ユーザーのデスクトップ環境に接続するための設定
+      export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$USER_ID/bus
+      
+      ${pkgs.sudo}/bin/sudo -u $TARGET_USER \
+        DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS \
+        ${pkgs.libnotify}/bin/notify-send \
         --icon=system-software-update \
-        "システム更新が完了しました" \
-        "新しいバージョンが準備できました。都合の良い時に再起動してください。"
-    '';
-  };
+        "システム更新完了" \
+        "新しいOSの準備ができました。再起動で反映されます。"
+    fi
+  '';
+};
 }
