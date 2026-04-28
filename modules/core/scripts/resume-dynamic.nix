@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ...}:
 
 pkgs.writeShellScriptBin "resume-dynamic" ''
   #!/usr/bin/env bash
