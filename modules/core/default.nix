@@ -19,6 +19,7 @@
     ./security.nix
     ./services.nix
     ./stylix.nix
+    ./update.nix
     ./users.nix
     ./virtualisation.nix
     inputs.stylix.nixosModules.stylix
