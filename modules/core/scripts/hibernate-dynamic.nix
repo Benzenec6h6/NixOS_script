@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ...}:
 
 pkgs.writeShellScriptBin "hibernate-dynamic" ''
   #!/usr/bin/env bash
