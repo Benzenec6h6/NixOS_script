@@ -31,6 +31,14 @@
     # 成功時のみ実行（postStop → ExecStartPost 相当の仕組みとして
     # nixos-upgrade の postStop を override しつつ成否を自前で判断）
     postStop = lib.mkAfter ''
+      export PATH="${lib.makeBinPath [
+        pkgs.nix
+        pkgs.gawk
+        pkgs.coreutils
+        pkgs.libnotify
+        pkgs.sudo
+        pkgs.systemd
+      ]}:$PATH"
       # サービスの終了コードを確認（失敗時はスキップ）
       if [ "$SERVICE_RESULT" != "success" ]; then
         echo "Upgrade did not succeed (result: $SERVICE_RESULT). Skipping notification."
