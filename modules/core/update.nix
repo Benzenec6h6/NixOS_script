@@ -9,45 +9,36 @@
   };
 
   systemd.services.nixos-upgrade = {
-    serviceConfig = {
-      # パッケージの /bin を PATH に追加（正しい形式）
-      ExecSearchPath = lib.makeBinPath [
-        pkgs.nix
-        pkgs.gawk
-        pkgs.coreutils
-        pkgs.libnotify
-        pkgs.sudo
-      ];
-    };
+    # path を直接指定することで、全スクリプト（pre/post）で利用可能になります
+    path = with pkgs; [
+      nix
+      gawk
+      coreutils
+      libnotify
+      sudo
+      systemd
+    ];
 
     # アップグレード前の世代番号を記録
     preStart = lib.mkAfter ''
+      # パスをフルパスで指定するか、上記の 'path' 設定に頼る
       nix-env -p /nix/var/nix/profiles/system --list-generations \
-        | tail -n 1 \
-        | awk '{print $1}' \
+        | ${pkgs.coreutils}/bin/tail -n 1 \
+        | ${pkgs.gawk}/bin/awk '{print $1}' \
         > /run/nixos-upgrade-before-gen
     '';
 
-    # 成功時のみ実行（postStop → ExecStartPost 相当の仕組みとして
-    # nixos-upgrade の postStop を override しつつ成否を自前で判断）
     postStop = lib.mkAfter ''
-      export PATH="${lib.makeBinPath [
-        pkgs.nix
-        pkgs.gawk
-        pkgs.coreutils
-        pkgs.libnotify
-        pkgs.sudo
-        pkgs.systemd
-      ]}:$PATH"
-      # サービスの終了コードを確認（失敗時はスキップ）
+      # サービスの終了コードを確認
       if [ "$SERVICE_RESULT" != "success" ]; then
         echo "Upgrade did not succeed (result: $SERVICE_RESULT). Skipping notification."
         exit 0
       fi
 
       BEFORE_GEN=$(cat /run/nixos-upgrade-before-gen 2>/dev/null || echo "0")
-      LATEST_GEN_INFO=$(nix-env -p /nix/var/nix/profiles/system --list-generations | tail -n 1)
-      AFTER_GEN=$(echo "$LATEST_GEN_INFO" | awk '{print $1}')
+      # ここもフルパス指定、または path 環境変数を利用
+      LATEST_GEN_INFO=$(nix-env -p /nix/var/nix/profiles/system --list-generations | ${pkgs.coreutils}/bin/tail -n 1)
+      AFTER_GEN=$(echo "$LATEST_GEN_INFO" | ${pkgs.gawk}/bin/awk '{print $1}')
 
       rm -f /run/nixos-upgrade-before-gen
 
@@ -59,7 +50,6 @@
       TARGET_USER="${vars.user.name}"
       USER_ID=$(id -u "$TARGET_USER")
 
-      # machinectl + systemd-run でユーザーセッションに通知（より堅牢）
       systemd-run \
         --uid="$USER_ID" \
         --property="Environment=DISPLAY=:0" \
