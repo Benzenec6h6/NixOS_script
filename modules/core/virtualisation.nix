@@ -1,6 +1,10 @@
 { pkgs, ... }:
 {
-  virtualisation.podman.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    dockerSocket.enable = true;
+  };
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
