@@ -8,8 +8,8 @@
     ../../modules/core
   ];
 
-  #boot.kernelPackages = pkgs.linuxPackages_6_18;
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-x86_64-v3;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  #boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-lts-x86_64-v3;
   services.ananicy = {
     enable = true;
     rulesProvider = pkgs.ananicy-rules-cachyos;
