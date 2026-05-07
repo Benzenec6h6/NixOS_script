@@ -27,6 +27,7 @@ in
 
     # 通信用
     discord
+    megasync
 
     # ユーティリティ
     steam
