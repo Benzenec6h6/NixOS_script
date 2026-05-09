@@ -229,20 +229,22 @@ require("codecompanion").setup({
     agent = { adapter = "ollama" },
   },
   adapters = {
-    gemini = function()
-      return require("codecompanion.adapters").extend("gemini", {
-        env = { api_key = vim.env.GEMINI_API_KEY },
-      })
-    end,
-    ollama = function()
-      return require("codecompanion.adapters").extend("ollama", {
-        env = { url = "http://127.0.0.1:11434" },
-        schema = {
-          model = { default = "qwen2.5:7b" },
-          num_ctx = { default = 8192 },
-        },
-      })
-    end,
+    http = {
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          env = { api_key = vim.env.GEMINI_API_KEY },
+        })
+      end,
+      ollama = function()
+        return require("codecompanion.adapters").extend("ollama", {
+          env = { url = "http://127.0.0.1:11434" },
+          schema = {
+            model = { default = "qwen2.5:7b" },
+            num_ctx = { default = 8192 },
+          },
+        })
+      end,
+    },
   },
 })
 vim.cmd([[cabbrev cc CodeCompanion]])
