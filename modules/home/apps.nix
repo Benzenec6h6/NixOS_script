@@ -14,8 +14,10 @@ in
     enable = true;
     components = [ "pkcs11" "secrets" "ssh" ];
   };
+  #As of May 2026, there is a bug where `QWindow` remains `NULL` when calling `QmlDialogWrapperBase::show()`.
+  #I guess we'll just have to wait for the upstream fix.
   services.megasync = {
-    enable = true;
+    enable = false;
     forceWayland = true;
   };
 
@@ -27,7 +29,6 @@ in
 
     # 通信用
     discord
-    megasync
 
     # ユーティリティ
     steam
@@ -42,6 +43,7 @@ in
     imagemagick qimgv #notify-desktop
     bottom btop nvtopPackages.full
     qalculate-gtk
+    megacmd
 
     #LSPサーバー
     lua-language-server
