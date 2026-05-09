@@ -27,7 +27,6 @@
         LAT="${config.sops.placeholder."location/lat"}"
         LON="${config.sops.placeholder."location/lon"}"
         OWM_KEY="${config.sops.placeholder."api-key"}"
-        GEMINI_API_KEY="${config.sops.placeholder."gemini-api-key"}"
       '';
     };
     templates."ai-env" = {
