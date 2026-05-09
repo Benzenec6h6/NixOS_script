@@ -90,8 +90,7 @@ in
         for line in f:lines() do
           local key, value = line:match("^([^=]+)=(.*)$")
           if key and value then
-            -- 引用符を外して環境変数にセット
-            vim.env[key] = value:gsub('^"(.*)"$', "%%1")
+            vim.env[key] = value:gsub('^"(.*)"$', "%1")
           end
         end
         f:close()
