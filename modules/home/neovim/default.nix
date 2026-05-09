@@ -1,4 +1,4 @@
-{ config, pkgs, vars, ... }:
+{ osConfig, pkgs, vars, ... }:
 let
   # ターミナルに応じた image.nvim のバックエンドを決定
   image_backend = if vars.user.terminal == "kitty" then "kitty" 
@@ -84,6 +84,7 @@ in
 
     extraLuaConfig = ''
       -- sops-nix テンプレートから環境変数を読み込むヘルパー
+      local ai_env_path = "${osConfig.sops.templates."ai-env".path}"
       local function load_env_file(path)
         local f = io.open(path, "r")
         if not f then return end
