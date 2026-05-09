@@ -85,28 +85,16 @@ in
     extraLuaConfig = ''
       -- sops-nix テンプレートから環境変数を読み込むヘルパー
       local ai_env_path = "${osConfig.sops.templates."ai-env".path}"
-      local function load_env_file(path)
-        local f = io.open(path, "r")
-        if not f then return end
+      local f = io.open(ai_env_path, "r")
+      if f then
         for line in f:lines() do
-          -- コメント行を無視し、KEY="VALUE" または KEY=VALUE の形式を抽出
-          local key, value = line:match("^([^#%s.-][^=]*)=\"?(.*)\"?$")
+          local key, value = line:match("^([^=]+)=(.*)$")
           if key and value then
-            -- 末尾の引用符を削除（matchで取りきれない場合用）
-            value = value:gsub("\"$", "")
-            vim.env[key] = value
+            -- 引用符を外して環境変数にセット
+            vim.env[key] = value:gsub('^"(.*)"$', "%%1")
           end
         end
         f:close()
-      end
-
-      -- 読み込む環境変数ファイルのリスト
-      local env_files = {
-        "/run/secrets/ai-env",
-      }
-
-      for _, path in ipairs(env_files) do
-        load_env_file(path)
       end
 
       vim.g.terminal_image_backend = "${image_backend}"
