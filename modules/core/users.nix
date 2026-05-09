@@ -16,6 +16,7 @@
       "location/lat" = { owner = vars.user.name; };
       "location/lon" = { owner = vars.user.name; };
       "api-key" = { owner = vars.user.name; };
+      "gemini-api-key" = { owner = vars.user.name; };
     };
     templates."weather-env" = {
       #path = "/run/secrets/weather-env";
@@ -26,6 +27,14 @@
         LAT="${config.sops.placeholder."location/lat"}"
         LON="${config.sops.placeholder."location/lon"}"
         OWM_KEY="${config.sops.placeholder."api-key"}"
+        GEMINI_API_KEY="${config.sops.placeholder."gemini-api-key"}"
+      '';
+    };
+    templates."ai-env" = {
+      owner = vars.user.name;
+      mode = "0444";
+      content = ''
+        GEMINI_API_KEY="${config.sops.placeholder."gemini-api-key"}"
       '';
     };
   };
