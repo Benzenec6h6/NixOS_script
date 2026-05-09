@@ -30,8 +30,9 @@ key('n', '<Esc><Esc>', ':nohlsearch<CR>', { silent = true })
 
 -- Orgmode用のキーバインドをリーダーキー配下に追加
 key('n', '<leader>oa', ':OrgAgendaUI<CR>', { silent = true }) -- アジェンダ表示
-key('n', '<leader>oc', ':OrgCapture<CR>', { silent = true })  -- キャプチャ起動（j, i, tを選択）
+key('n', '<leader>oc', ':OrgCapture<CR>', { silent = true })  -- キャプチャ起動
 
+-- CodeCompanion
 key({ "n", "v" }, "<leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
 key({ "n", "v" }, "<leader>ac", "<cmd>CodeCompanion<cr>", { noremap = true, silent = true })
 key("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
@@ -41,15 +42,7 @@ key("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true
 -- ========================================================================== --
 
 -- Gitsigns (差分表示)
-require('gitsigns').setup({
-  signs = {
-    add          = { text = '│' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '~' },
-  },
-})
+require('gitsigns').setup()
 
 -- nvim-tree
 require("nvim-tree").setup({
@@ -66,20 +59,18 @@ require('lualine').setup()
 require("which-key").setup()
 
 -- Conjureの設定
--- ログ（評価結果）を右側に縦分割で表示する設定
 vim.g["conjure#log#direction"] = "vertical"
-vim.g["conjure#log#size"] = 0.3 -- 画面の30%を使用
+vim.g["conjure#log#size"] = 0.3
 
 -- ========================================================================== --
 -- 4. LSP設定 (nixd & lua_ls)
 -- ========================================================================== --
--- 診断表示のカスタマイズ
 vim.diagnostic.config({
-  virtual_text = true,      -- 行末にうっすらエラーを出す
-  signs = true,             -- 行番号の左側にアイコンを出す
-  underline = true,         -- エラー箇所に下線を引く
-  update_in_insert = false, -- 入力中はうるさくないように更新しない
-  severity_sort = true,     -- 重大なエラーを優先して表示
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
 })
 
 local servers = {
@@ -96,7 +87,6 @@ local servers = {
   },
 }
 
--- バイナリ名のマッピング (実行ファイル名がLSP名と異なる場合)
 local bin_map = {
   lua_ls = 'lua-language-server',
   hls = 'haskell-language-server-wrapper',
@@ -108,38 +98,29 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 for lsp, config in pairs(servers) do
   local bin = bin_map[lsp] or lsp
-
   if vim.fn.executable(bin) == 1 then
-    -- 新しい設定方式: vim.lsp.config を使用 (v0.11+)
-    -- もし lspconfig の拡張機能が必要な場合は、ここを vim.lsp.config(lsp, config) にします
     config.capabilities = capabilities
     vim.lsp.enable(lsp)
-
-    -- 特殊な設定（lua_ls の globals など）がある場合は config を渡す
     if next(config) ~= nil then
       vim.lsp.config(lsp, config)
     end
   end
 end
 
--- LSPが起動した時の共通キーマッピング
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local opts = { buffer = args.buf }
     key('n', 'gd', vim.lsp.buf.definition, opts)
     key('n', 'K', vim.lsp.buf.hover, opts)
     key('n', '<leader>rn', vim.lsp.buf.rename, opts)
-
-    -- 'gl' (Go Line diagnostics) で浮動ウィンドウにエラー理由を表示
     key('n', 'gl', vim.diagnostic.open_float, opts)
-    -- '[d' や ']d' でエラー箇所を飛び回る
     key('n', '[d', vim.diagnostic.goto_prev, opts)
     key('n', ']d', vim.diagnostic.goto_next, opts)
   end,
 })
 
 -- ========================================================================== --
--- 5. オートコマンド (IME制御)
+-- 5. オートコマンド (IME制御 / 自動フォーマット)
 -- ========================================================================== --
 vim.api.nvim_create_autocmd("InsertLeave", {
   pattern = "*",
@@ -150,20 +131,17 @@ vim.api.nvim_create_autocmd("InsertLeave", {
   end,
 })
 
--- ========================================================================== --
--- 6. オートフォーマット (保存時に実行)
--- ========================================================================== --
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function()
-    -- LSPに整列を依頼する
-    -- (フォーマッタがPATHに存在し、LSPがそれに対応している場合のみ動作)
     vim.lsp.buf.format({ async = false })
   end,
 })
 
+-- ========================================================================== --
+-- 6. Orgmode / Otter
+-- ========================================================================== --
 require('orgmode').setup({
-  -- あなたのTODOファイルの場所を指定（例：ホームディレクトリのorgフォルダ内すべて）
   org_agenda_files = { '~/Documents/org/**/*' },
   org_default_notes_file = '~/Documents/org/refile.org',
   org_todo_keywords = { 'TODO(t)', 'NEXT(n)', 'STARTED(s)', 'WAITING(w)', '|', 'DONE(d)' },
@@ -174,7 +152,7 @@ require('orgmode').setup({
   },
   mappings = {
     org = {
-      org_toggle_checkbox = '<leader>x', -- Space + x でチェック！
+      org_toggle_checkbox = '<leader>x',
     },
   },
 })
@@ -187,13 +165,10 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- ========================================================================== --
--- 補完(cmp)の設定
+-- 7. 補完(cmp) / 編集補助
 -- ========================================================================== --
--- indent-blankline (インデントの視覚化)
 require("ibl").setup()
--- nvim-surround (文字の囲み操作)
 require("nvim-surround").setup()
--- telescope-fzf-native のロード
 require('telescope').load_extension('fzf')
 
 local cmp = require('cmp')
@@ -208,78 +183,66 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'conjure' },
-    { name = 'orgmode' }, -- Orgmodeのタグなども補完対象に
+    { name = 'orgmode' },
   }, {
     { name = 'buffer' },
     { name = 'path' },
   })
 })
 
--- 画像の表示
+-- 画像 / Markdown 表示
 require("image").setup({
   backend = vim.g.terminal_image_backend,
   integrations = {
     markdown = {
       enabled = true,
-      clear_in_insert_mode = false,
-      download_remote_images = true,
-      only_render_image_at_cursor = false,
-      filetypes = { "markdown", "vimwiki", "org" }, -- orgも追加しておくと便利です
-    },
-  },
-  max_width = 100,
-  max_height = 12,
-  window_overlap_clear_enabled = true, -- ウィンドウが重なった時に画像を消す
-  window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-})
-
--- ========================================================================== --
--- AI 連携 (Avante.nvim)
--- ========================================================================== --
-require("codecompanion").setup({
-  adapters = {
-    http = {
-      ollama = function()
-        return require("codecompanion.adapters").extend("ollama", {
-          env = {
-            url = "http://127.0.0.1:11434",
-          },
-          schema = {
-            model = {
-              default = "qwen2.5:7b",
-              choices = {
-                "qwen2.5:7b",
-                "qwen2.5:14b",
-                "llama3.2:3b",
-              },
-            },
-            num_ctx = {
-              default = 8192, -- 14bモデルならこれくらいあると便利
-            },
-          },
-        })
-      end,
-    },
-  },
-  strategies = {
-    -- チャットモードの設定
-    chat = {
-      adapter = "ollama",
-    },
-    -- インライン編集（コード書き換え）モードの設定
-    inline = {
-      adapter = "ollama",
-    },
-    -- ツール（/buffer など）の設定
-    agent = {
-      adapter = "ollama",
+      filetypes = { "markdown", "vimwiki", "org" },
     },
   },
 })
-
-vim.cmd([[cabbrev cc CodeCompanion]])
-
--- render-markdown
 require('render-markdown').setup({
   file_types = { "markdown", "codecompanion" },
 })
+
+-- ========================================================================== --
+-- 8. AI 連携 (CodeCompanion)
+-- ========================================================================== --
+require("codecompanion").setup({
+  strategies = {
+    chat = {
+      adapter = "gemini",
+      slash_commands = {
+        ["search"] = {
+          callback = "strategies.chat.slash_commands.mcp",
+          opts = {
+            adapter = "gemini",
+            command = "npx",
+            -- OpenWebSearch へ変更
+            args = { "-y", "@Aas-ee/open-websearch" },
+            -- APIキー不要のため env は空
+            env = {},
+          },
+        },
+      },
+    },
+    inline = { adapter = "ollama" },
+    agent = { adapter = "ollama" },
+  },
+  adapters = {
+    gemini = function()
+      return require("codecompanion.adapters").extend("gemini", {
+        env = { api_key = vim.env.GEMINI_API_KEY },
+      })
+    end,
+    ollama = function()
+      return require("codecompanion.adapters").extend("ollama", {
+        env = { url = "http://127.0.0.1:11434" },
+        schema = {
+          model = { default = "qwen2.5:7b" },
+          num_ctx = { default = 8192 },
+        },
+      })
+    end,
+  },
+})
+vim.cmd([[cabbrev cc CodeCompanion]])

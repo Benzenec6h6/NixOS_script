@@ -67,6 +67,10 @@ in
       which-key-nvim        # Spaceを押した時にガイドを出す (ストイック期の味方)
     ];
 
+    extraPackages = with pkgs; [
+      nodejs_24 # MCP実行用 (最新のLTS付近が無難)
+    ];
+
     extraConfig = ''
       set number
       set relativenumber
@@ -79,6 +83,31 @@ in
     '';
 
     extraLuaConfig = ''
+      -- sops-nix テンプレートから環境変数を読み込むヘルパー
+      local function load_env_file(path)
+        local f = io.open(path, "r")
+        if not f then return end
+        for line in f:lines() do
+          -- コメント行を無視し、KEY="VALUE" または KEY=VALUE の形式を抽出
+          local key, value = line:match("^([^#%s.-][^=]*)=\"?(.*)\"?$")
+          if key and value then
+            -- 末尾の引用符を削除（matchで取りきれない場合用）
+            value = value:gsub("\"$", "")
+            vim.env[key] = value
+          end
+        end
+        f:close()
+      end
+
+      -- 読み込む環境変数ファイルのリスト
+      local env_files = {
+        "/run/secrets/ai-env",
+      }
+
+      for _, path in ipairs(env_files) do
+        load_env_file(path)
+      end
+
       vim.g.terminal_image_backend = "${image_backend}"
       vim.g.fcitx5_remote_path = "${pkgs.fcitx5}/bin/fcitx5-remote"
       ${builtins.readFile ./init.lua}
