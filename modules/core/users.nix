@@ -54,7 +54,7 @@
   users.users.${vars.user.name} = {
     isNormalUser = true;
     description = "Main user";
-    extraGroups = [ "wheel" "networkmanager" "scanner" "lp" "video" "input"  "audio" "docker" "libvirtd" "kvm" ];
+    extraGroups = [ "wheel" "networkmanager" "scanner" "lp" "video" "input"  "audio" "podman" "libvirtd" "kvm" ];
     hashedPasswordFile = config.sops.secrets.password.path;
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
