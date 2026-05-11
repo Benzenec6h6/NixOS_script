@@ -16,7 +16,7 @@
       '';
     };
   };
-  virtualisation.efi.OVMF.enable = true;
+  virtualisation.efi.OVMF = pkgs.OVMFFull.fd;
 
   services.tuned = {
     enable = true;
