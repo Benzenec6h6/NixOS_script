@@ -16,6 +16,7 @@
       '';
     };
   };
+  virtualisation.efi.OVMF.enable = true;
 
   services.tuned = {
     enable = true;
