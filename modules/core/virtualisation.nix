@@ -8,16 +8,15 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
-      package = pkgs.qemu_full; # GUI等フル機能版のQEMU
+      package = pkgs.qemu_kvm; # GUI等フル機能版のQEMU
+      runAsRoot = false;
       swtpm.enable = true;      # TPMエミュレータを有効化
       verbatimConfig = ''
-        user = "teto"  # あなたのUID 1000のユーザー名
-        group = "libvirtd"
+        namespaces = []
       '';
     };
   };
-  virtualisation.efi.OVMF = pkgs.OVMFFull.fd;
-
+  
   services.tuned = {
     enable = true;
     # 基本的な設定
