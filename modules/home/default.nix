@@ -28,6 +28,7 @@
     #./themes.nix
     ./xdg.nix
     ./yazi.nix
+    ./zellij.nix
     ./zsh.nix
   ] 
   ++ (lib.optionals (vars.user.terminal == "kitty") [ ./kitty.nix ])
