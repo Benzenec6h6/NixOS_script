@@ -9,7 +9,6 @@
       "Music"
       "Pictures"
       "Videos"
-      "MEGA"
       ".ssh"
       ".local/share/containers"
       ".local/share/distrobox"
