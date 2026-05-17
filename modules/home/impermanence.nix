@@ -20,6 +20,7 @@
       ".config/Futu-Linux"
       ".config/keepassxc"
       ".mozilla/native-messaging-hosts"
+      ".megaCmd"
       #".mozilla/firefox"
       ".local/share/keepassxc"
     ];
