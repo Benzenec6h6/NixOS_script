@@ -2,7 +2,8 @@
 let
   # ターミナルに応じた image.nvim のバックエンドを決定
   image_backend = if vars.user.terminal == "kitty" then "kitty" 
-                  else if vars.user.terminal == "ghostty" then "iterm2" 
+                  else if vars.user.terminal == "ghostty" then "iterm2"
+                  else if vars.user.terminal == "foot" then "sixel"
                   else "ueberzug"; # フォールバック
 in
 {

@@ -3,6 +3,7 @@ let
   # ターミナルに応じた画像プロトコルの決定
   logoType = if vars.user.terminal == "kitty" then "kitty-direct" 
              else if vars.user.terminal == "ghostty" then "iterm2" # Ghosttyはiterm2プロトコルが非常に安定しています
+             else if vars.user.terminal == "foot" then "sixel"
              else "auto";
 in
 {
