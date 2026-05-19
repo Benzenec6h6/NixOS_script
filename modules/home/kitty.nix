@@ -20,6 +20,7 @@
         "ctrl+shift+t" = "new_tab";
         "ctrl+shift+w" = "close_tab";
         "shift+enter" = "send_text all \\x1b[13;2u";
+        "ctrl+shift+enter" = "launch --cwd=current";
     };
   };
 
