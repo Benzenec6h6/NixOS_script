@@ -30,6 +30,7 @@ in
       cmp_luasnip
       indent-blankline-nvim
       nvim-surround
+      conform-nvim
       
       # --- ファイル管理・検索 ---
       nvim-tree-lua         # サイドバー (C-n)
@@ -54,7 +55,7 @@ in
         nix lua vim vimdoc bash racket
         json yaml toml
         markdown markdown_inline
-        html css javascript typescript python haskell
+        html css javascript typescript python haskell elixir heex
       ]))
 
       # --- 特定のワークフロー ---
@@ -70,6 +71,9 @@ in
 
     extraPackages = with pkgs; [
       nodejs_24 # MCP実行用 (最新のLTS付近が無難)
+      ruff
+      prettier
+      alejandra
     ];
 
     extraConfig = ''
