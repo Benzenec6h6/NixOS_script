@@ -80,6 +80,7 @@ local servers = {
   basedpyright = {},
   hls = {},
   ts_ls = {},
+  elixir_ls = {},
   lua_ls = {
     settings = {
       Lua = { diagnostics = { globals = { 'vim' } } }
@@ -92,6 +93,7 @@ local bin_map = {
   hls = 'haskell-language-server-wrapper',
   bashls = 'bash-language-server',
   ts_ls = 'typescript-language-server',
+  elixir_ls = 'elixir-ls'
 }
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -100,10 +102,16 @@ for lsp, config in pairs(servers) do
   local bin = bin_map[lsp] or lsp
   if vim.fn.executable(bin) == 1 then
     config.capabilities = capabilities
-    vim.lsp.enable(lsp)
+    -- 重要: ts_lsやbasedpyrightのLSPフォーマッタが重複起動して衝突するのを防ぐ
+    config.on_attach = function(client, bufnr)
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+    end
+
     if next(config) ~= nil then
       vim.lsp.config(lsp, config)
     end
+    vim.lsp.enable(lsp)
   end
 end
 
@@ -117,6 +125,32 @@ vim.api.nvim_create_autocmd('LspAttach', {
     key('n', '[d', vim.diagnostic.goto_prev, opts)
     key('n', ']d', vim.diagnostic.goto_next, opts)
   end,
+})
+
+-- ========================================================================== --
+-- 4.5. Conform.nvim 設定（コード規約フォーマッタの一元管理）
+-- ========================================================================== --
+require("conform").setup({
+  formatters_by_ft = {
+    -- 言語ごとに、適用したいツールを順番に割り当てます
+    python = { "ruff_format" },
+    typescript = { "prettier" },
+    javascript = { "prettier" },
+    typescriptreact = { "prettier" },
+    javascriptreact = { "prettier" },
+    json = { "prettier" },
+    html = { "prettier" },
+    css = { "prettier" },
+    nix = { "alejandra" },
+    -- ElixirはLSP内蔵ではなくプロジェクトの.formatter.exsに従うmixを実行可能
+    elixir = { "mix" },
+    heex = { "mix" },
+  },
+  -- 保存時の自動フォーマットに関する詳細設定
+  format_on_save = {
+    timeout_ms = 500,        -- 0.5秒以内に終わらない場合はバックグラウンド処理
+    lsp_format = "fallback", -- conformに指定がない言語はLSPフォーマットを試みる
+  },
 })
 
 -- ========================================================================== --
