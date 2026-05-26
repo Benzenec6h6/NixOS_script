@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   virtualisation.podman = {
     enable = true;
     dockerCompat = true;
@@ -10,13 +9,13 @@
     qemu = {
       package = pkgs.qemu_kvm; # GUI等フル機能版のQEMU
       runAsRoot = false;
-      swtpm.enable = true;      # TPMエミュレータを有効化
+      swtpm.enable = true; # TPMエミュレータを有効化
       verbatimConfig = ''
         namespaces = []
       '';
     };
   };
-  
+
   services.tuned = {
     enable = true;
     # 基本的な設定
