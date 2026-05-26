@@ -1,10 +1,13 @@
-{ config, pkgs, vars, ... }:
-
 {
+  config,
+  pkgs,
+  vars,
+  ...
+}: {
   time.timeZone = vars.locale.timeZone;
   i18n.defaultLocale = vars.locale.default;
   i18n.extraLocales = vars.locale.extra;
-  
+
   console.keyMap = vars.locale.keyMap;
 
   nix = {
@@ -15,14 +18,16 @@
       options = "--delete-older-than 30d";
     };
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      substituters = [ 
+      experimental-features = ["nix-command" "flakes"];
+      substituters = [
+        "https://cache.tvl.fyi/"
         "https://cache.lix.systems"
         "https://attic.xuyh0120.win/lantian"
         "https://cache.garnix.io"
         "https://cache.nixos.org"
       ];
       trusted-public-keys = [
+        "cache.tvl.su:kjc6KOMupXc1vHVufJUoDUYeLzbwSr9abcAKdn/U1Jk="
         "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
         "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
@@ -32,16 +37,16 @@
       cores = 0;
       auto-optimise-store = true;
     };
-    optimise ={
+    optimise = {
       automatic = true;
-      dates = [ "monthly" ];
+      dates = ["monthly"];
     };
   };
 
   boot = {
     initrd.systemd = {
       enable = true;
-      tpm2.enable = true ;
+      tpm2.enable = true;
     };
     tmp.cleanOnBoot = true;
   };
@@ -60,6 +65,6 @@
   services.btrfs.autoScrub = {
     enable = true;
     interval = "monthly";
-    fileSystems = [ "/" ];
+    fileSystems = ["/"];
   };
 }
