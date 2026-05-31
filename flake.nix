@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
 
     impermanence = {
@@ -22,7 +22,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -64,12 +64,28 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, nix-cachyos-kernel, disko, impermanence, lanzaboote, home-manager, stylix, nur, sops-nix, nix-index-database, zen-browser, moomoo, nix-flatpak, ... }@inputs:
-    let
-      vars = import ./vars.nix;
-      system = vars.system;
+  outputs = {
+    nixpkgs,
+    nixpkgs-unstable,
+    nix-cachyos-kernel,
+    disko,
+    impermanence,
+    lanzaboote,
+    home-manager,
+    stylix,
+    nur,
+    sops-nix,
+    nix-index-database,
+    zen-browser,
+    moomoo,
+    nix-flatpak,
+    ...
+  } @ inputs: let
+    vars = import ./vars.nix;
+    system = vars.system;
 
-      mkNixosConfig = host: nixpkgs.lib.nixosSystem {
+    mkNixosConfig = host:
+      nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit inputs vars;
         };
@@ -77,7 +93,7 @@
           {
             nixpkgs.hostPlatform = system;
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [ 
+            nixpkgs.overlays = [
               #nur.overlays.default
               nix-cachyos-kernel.overlays.default
               (final: prev: {
@@ -85,7 +101,7 @@
                   system = prev.stdenv.hostPlatform.system;
                   config.allowUnfree = true;
                 };
-              }) 
+              })
             ];
           }
           nix-flatpak.nixosModules.nix-flatpak
@@ -97,10 +113,10 @@
           ./hosts/${host}
         ];
       };
-    in {
-      nixosConfigurations = {
-        laptop = mkNixosConfig "laptop";
-        vm = mkNixosConfig "vm";
-      };
+  in {
+    nixosConfigurations = {
+      laptop = mkNixosConfig "laptop";
+      vm = mkNixosConfig "vm";
     };
+  };
 }
