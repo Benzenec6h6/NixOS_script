@@ -1,6 +1,8 @@
-{ pkgs, vars, ... }:
-
 {
+  pkgs,
+  vars,
+  ...
+}: {
   imports = [
     ./hardware.nix
     ./disko.nix
@@ -15,7 +17,7 @@
     rulesProvider = pkgs.ananicy-rules-cachyos;
     package = pkgs.ananicy-cpp;
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -26,7 +28,7 @@
       vpl-gpu-rt
     ];
   };
-  
+
   hardware.nvidia = {
     open = true;
     nvidiaSettings = true;
@@ -54,15 +56,15 @@
     #LIBVA_DRIVER_NAME = "nvidia";
     #NVD_BACKEND = "direct";
   };
-  
+
   boot.initrd.systemd.services.rollback = {
     description = "Rollback Btrfs root subvolume to a pristine state";
-    wantedBy = [ "initrd.target" ];
+    wantedBy = ["initrd.target"];
     # rootパーティションが出現した後、かつマウントされる前に実行
-    after = [ "dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device" ];
-    before = [ "sysroot.mount" ];
+    after = ["dev-disk-by\\x2dpartlabel-disk\\x2dmain\\x2droot.device"];
+    before = ["sysroot.mount"];
     unitConfig.DefaultDependencies = "no";
-    path = with pkgs; [ btrfs-progs coreutils gawk gnused ];
+    path = with pkgs; [btrfs-progs coreutils gawk gnused];
     serviceConfig = {
       Type = "oneshot";
       # 必要なバイナリ(bash, btrfs-progs, coreutils)を確実にパスに通して実行
