@@ -1,3 +1,4 @@
 .vscode/
 vars.nix
 ./hosts/laptop/hardware.nix
+.envrc
