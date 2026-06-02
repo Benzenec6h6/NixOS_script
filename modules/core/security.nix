@@ -5,7 +5,7 @@
 }: {
   security = {
     # sudo 設定
-    sudo = {
+    sudo-rs = {
       enable = true;
       wheelNeedsPassword = true; # wheel グループのユーザーにパスワード要求
     };
