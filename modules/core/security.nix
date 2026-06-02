@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   security = {
     # sudo 設定
     sudo = {
@@ -10,12 +12,14 @@
 
     # polkit (GUI アプリの権限昇格)
     polkit.enable = true;
+    # rtkit (PipeWireなどのオーディオサーバーへのリアルタイム優先度割り当て)
+    rtkit.enable = true;
 
     # パスワード認証の強化 (libpam)
-    pam.services ={
+    pam.services = {
       sshd.showMotd = true; # SSH接続時にmotd表示
       login.enableGnomeKeyring = true;
-      sddm.enableGnomeKeyring = true;   # SDDM を使う場合
+      sddm.enableGnomeKeyring = true; # SDDM を使う場合
       #greetd.enableGnomeKeyring = true; # greetd を使う場合
     };
 
