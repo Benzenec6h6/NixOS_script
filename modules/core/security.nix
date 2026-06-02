@@ -8,6 +8,9 @@
     sudo-rs = {
       enable = true;
       wheelNeedsPassword = true; # wheel グループのユーザーにパスワード要求
+      extraConfig = ''
+        Defaults !pwfeedback
+      '';
     };
 
     # polkit (GUI アプリの権限昇格)
