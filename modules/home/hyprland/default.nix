@@ -87,20 +87,21 @@ in {
         };
       };
 
-      windowrulev2 = [
-        "tag +terminal, class:^(Alacritty|kitty|kitty-dropterm|ghostty|ghostty-dropterm)$"
-        #電卓用
-        "float, class:^(.*[Cc]alc.*|speedcrunch)$"
-        "size 400 600, class:^(.*[Cc]alc.*|speedcrunch)$"
-        "center, class:^(.*[Cc]alc.*|speedcrunch)$"
+      windowrule = [
+        "match:class ^(Alacritty|kitty|kitty-dropterm|ghostty|ghostty-dropterm)$, tag +terminal"
 
-        # 動画壁紙用 mpv だけを対象にする
-        "float, class:^(mpv-wallpaper)$"
-        "fullscreen, class:^(mpv-wallpaper)$"
-        "nofocus, class:^(mpv-wallpaper)$"
-        "noinitialfocus, class:^(mpv-wallpaper)$"
-        "noblur, class:^(mpv-wallpaper)$"
-        "opacity 1.0 1.0, class:^(mpv-wallpaper)$"
+        # 電卓用
+        "match:class ^(.*[Cc]alc.*|speedcrunch)$, float"
+        "match:class ^(.*[Cc]alc.*|speedcrunch)$, size 400 600"
+        "match:class ^(.*[Cc]alc.*|speedcrunch)$, center"
+
+        # 動画壁紙用 mpv
+        "match:class ^(mpv-wallpaper)$, float"
+        "match:class ^(mpv-wallpaper)$, fullscreen"
+        "match:class ^(mpv-wallpaper)$, nofocus"
+        "match:class ^(mpv-wallpaper)$, noinitialfocus"
+        "match:class ^(mpv-wallpaper)$, noblur"
+        "match:class ^(mpv-wallpaper)$, opacity 1.0 1.0"
       ];
     };
   };
