@@ -1,6 +1,6 @@
 {
   system = "x86_64-linux";
-  version = "25.11";
+  version = "26.05";
   host = "laptop";
   disk = "/dev/nvme0n1";
   bootloader = "limine";
