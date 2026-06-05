@@ -5,16 +5,25 @@
   ...
 }: let
   isLaptop = vars.host == "laptop";
-in{
+in {
   programs.mpv = {
     enable = true;
     config = {
       osc = "no";
       osd-bar = "no";
       profile = "gpu-hq";
-      vo =  if isLaptop then "gpu-next" else "gpu";
-      gpu-api = if isLaptop then "vulkan" else "opengl";
-      hwdec = if isLaptop then "nvdec" else "vaapi";
+      vo =
+        if isLaptop
+        then "gpu-next"
+        else "gpu";
+      gpu-api =
+        if isLaptop
+        then "vulkan"
+        else "opengl";
+      hwdec =
+        if isLaptop
+        then "nvdec"
+        else "vaapi";
       #hwdec = "nvdec-copy";
       scale = "ewa_lanczossharp";
       cscale = "ewa_lanczossharp";
@@ -75,18 +84,18 @@ in{
       "CTRL+0" = ''
         no-osd change-list glsl-shaders clr ""; show-text "GLSL shaders cleared"'';
     };
-    scripts = with pkgs.mpvScripts;
-      [
-        mpv-cheatsheet
-        mpris
-        autoload
-        youtube-upnext
-        memo
-        uosc
-        webtorrent-mpv-hook
-        thumbfast
-        sponsorblock
-        quality-menu
-      ];
+    scripts = with pkgs.mpvScripts; [
+      mpv-cheatsheet-ng
+      mpris
+      autoload
+      youtube-upnext
+      memo
+      uosc
+      webtorrent-mpv-hook
+      thumbfast
+      sponsorblock
+      quality-menu
+    ];
   };
 }
+
