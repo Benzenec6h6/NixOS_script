@@ -90,17 +90,17 @@ in {
       windowrule = [
         "match:class ^(Alacritty|kitty|kitty-dropterm|ghostty|ghostty-dropterm)$, tag +terminal"
 
-        # 電卓用
-        "match:class ^(.*[Cc]alc.*|speedcrunch)$, float"
+        # 2. 電卓用
+        "match:class ^(.*[Cc]alc.*|speedcrunch)$, float 1"
         "match:class ^(.*[Cc]alc.*|speedcrunch)$, size 400 600"
-        "match:class ^(.*[Cc]alc.*|speedcrunch)$, center"
+        "match:class ^(.*[Cc]alc.*|speedcrunch)$, center 1"
 
-        # 動画壁紙用 mpv
-        "match:class ^(mpv-wallpaper)$, float"
-        "match:class ^(mpv-wallpaper)$, fullscreen"
-        "match:class ^(mpv-wallpaper)$, nofocus"
-        "match:class ^(mpv-wallpaper)$, noinitialfocus"
-        "match:class ^(mpv-wallpaper)$, noblur"
+        # 3. 動画壁紙用 mpv
+        "match:class ^(mpv-wallpaper)$, float 1"
+        "match:class ^(mpv-wallpaper)$, fullscreen 1"
+        "match:class ^(mpv-wallpaper)$, nofocus 1"
+        "match:class ^(mpv-wallpaper)$, noinitialfocus 1"
+        "match:class ^(mpv-wallpaper)$, noblur 1"
         "match:class ^(mpv-wallpaper)$, opacity 1.0 1.0"
       ];
     };
