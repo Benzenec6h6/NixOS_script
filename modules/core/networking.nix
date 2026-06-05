@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # NetworkManager を有効化
   networking.networkmanager = {
     enable = true;
@@ -31,9 +33,11 @@
 
   services.resolved = {
     enable = true;
-    dnssec = "false";
-    fallbackDns = [ "1.1.1.1" "8.8.8.8" ];
-    dnsovertls = "opportunistic";
+    settings.Resolve = {
+      DNSSEC = "false";
+      FallbackDNS = ["1.1.1.1" "8.8.8.8"];
+      DNSOverTLS = "opportunistic";
+    };
   };
 
   #networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
@@ -42,8 +46,8 @@
   # Firewall 設定 (ufw or nftables のどちらか)
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 22 ]; # SSHを使う場合のみ
-    allowedUDPPorts = [ ];
+    allowedTCPPorts = [22]; # SSHを使う場合のみ
+    allowedUDPPorts = [];
   };
 
   # SSH サーバ
