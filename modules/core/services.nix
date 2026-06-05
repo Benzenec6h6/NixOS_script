@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   services = {
     # 時刻同期
     timesyncd.enable = true;
@@ -13,7 +11,7 @@
 
     # Avahi (mDNS, AirPrint/AirPlay)
     avahi.enable = false;
-    
+
     gnome.gnome-keyring.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
@@ -21,7 +19,7 @@
     fwupd.enable = true;
     #power-profiles-daemon.enable = true;
   };
-  
+
   programs.niri.enable = true;
   programs.hyprland = {
     enable = true;
@@ -44,8 +42,8 @@
   programs.xwayland.enable = true;
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
-      exo
+    plugins = with pkgs; [
+      xfce4-exo
       thunar-archive-plugin
       thunar-volman
       tumbler
@@ -58,8 +56,8 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
-  environment.pathsToLink = [ 
-    "/share/xdg-desktop-portal" 
-    "/share/applications" 
+  environment.pathsToLink = [
+    "/share/xdg-desktop-portal"
+    "/share/applications"
   ];
 }
