@@ -98,9 +98,9 @@ in {
         # 3. 動画壁紙用 mpv
         "match:class ^(mpv-wallpaper)$, float 1"
         "match:class ^(mpv-wallpaper)$, fullscreen 1"
-        "match:class ^(mpv-wallpaper)$, nofocus 1"
-        "match:class ^(mpv-wallpaper)$, noinitialfocus 1"
-        "match:class ^(mpv-wallpaper)$, noblur 1"
+        "match:class ^(mpv-wallpaper)$, no_focus 1"
+        "match:class ^(mpv-wallpaper)$, no_initial_focus 1"
+        "match:class ^(mpv-wallpaper)$, no_blur 1"
         "match:class ^(mpv-wallpaper)$, opacity 1.0 1.0"
       ];
     };
