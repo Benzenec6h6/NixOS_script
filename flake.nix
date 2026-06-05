@@ -96,6 +96,7 @@
             nixpkgs.overlays = [
               #nur.overlays.default
               nix-cachyos-kernel.overlays.default
+              #nix-cachyos-kernel.overlays.pinned
               (final: prev: {
                 unstable = import nixpkgs-unstable {
                   system = prev.stdenv.hostPlatform.system;
