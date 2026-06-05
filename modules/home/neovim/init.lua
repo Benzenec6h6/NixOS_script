@@ -21,9 +21,9 @@ key('n', '<leader>ff', ts.find_files, {}) -- ファイル名検索
 key('n', '<leader>fg', ts.live_grep, {})  -- 全文検索
 key('n', '<leader>fb', ts.buffers, {})    -- 開いているバッファ一覧
 
--- 【UI】nvim-tree (Ctrl + n または Space + e)
-key('n', '<C-n>', ':NvimTreeToggle<CR>', { silent = true })
-key('n', '<leader>e', ':NvimTreeFocus<CR>', { silent = true })
+-- 💡 【ファイル管理】yazi.nvim (Ctrl + n または Space + e で浮遊表示)
+key('n', '<C-n>', '<cmd>Yazi<CR>', { silent = true, desc = "Toggle Yazi" })
+key('n', '<leader>e', '<cmd>Yazi toggle<CR>', { silent = true, desc = "Toggle Yazi at current file" })
 
 -- 【検索ハイライト】Esc 2回で検索の光を消す
 key('n', '<Esc><Esc>', ':nohlsearch<CR>', { silent = true })
@@ -44,12 +44,12 @@ key("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true
 -- Gitsigns (差分表示)
 require('gitsigns').setup()
 
--- nvim-tree
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = { width = 30 },
-  renderer = { group_empty = true },
-  filters = { dotfiles = false },
+-- 💡 nvim-tree のセットアップを削除し、yazi のセットアップに置き換え
+require("yazi").setup({
+  open_for_directories = false, -- ディレクトリを開いたときに netrw の代わりに yazi を使うか（お好みで）
+  keymaps = {
+    show_help = '<f1>',
+  },
 })
 
 -- Lualine (下のバー)
@@ -102,7 +102,6 @@ for lsp, config in pairs(servers) do
   local bin = bin_map[lsp] or lsp
   if vim.fn.executable(bin) == 1 then
     config.capabilities = capabilities
-    -- 重要: ts_lsやbasedpyrightのLSPフォーマッタが重複起動して衝突するのを防ぐ
     config.on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
       client.server_capabilities.documentRangeFormattingProvider = false
@@ -128,11 +127,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 -- ========================================================================== --
--- 4.5. Conform.nvim 設定（コード規約フォーマッタの一元管理）
+-- 4.5. Conform.nvim 設定
 -- ========================================================================== --
 require("conform").setup({
   formatters_by_ft = {
-    -- 言語ごとに、適用したいツールを順番に割り当てます
     python = { "ruff_format" },
     typescript = { "prettier" },
     javascript = { "prettier" },
@@ -142,14 +140,12 @@ require("conform").setup({
     html = { "prettier" },
     css = { "prettier" },
     nix = { "alejandra" },
-    -- ElixirはLSP内蔵ではなくプロジェクトの.formatter.exsに従うmixを実行可能
     elixir = { "mix" },
     heex = { "mix" },
   },
-  -- 保存時の自動フォーマットに関する詳細設定
   format_on_save = {
-    timeout_ms = 500,        -- 0.5秒以内に終わらない場合はバックグラウンド処理
-    lsp_format = "fallback", -- conformに指定がない言語はLSPフォーマットを試みる
+    timeout_ms = 500,
+    lsp_format = "fallback",
   },
 })
 
@@ -162,7 +158,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     local cmd = vim.g.fcitx5_remote_path or "fcitx5-remote"
     local handle = io.popen(cmd .. " -c")
     if handle then handle:close() end
-  end,
+  end
 })
 
 -- ========================================================================== --
@@ -244,9 +240,7 @@ require("codecompanion").setup({
           opts = {
             adapter = "gemini",
             command = "npx",
-            -- OpenWebSearch へ変更
             args = { "-y", "@Aas-ee/open-websearch" },
-            -- APIキー不要のため env は空
             env = {},
           },
         },

@@ -1,12 +1,19 @@
-{ osConfig, pkgs, vars, ... }:
-let
-  # ターミナルに応じた image.nvim のバックエンドを決定
-  image_backend = if vars.user.terminal == "kitty" then "kitty" 
-                  else if vars.user.terminal == "ghostty" then "iterm2"
-                  else if vars.user.terminal == "foot" then "sixel"
-                  else "ueberzug"; # フォールバック
-in
 {
+  osConfig,
+  pkgs,
+  vars,
+  ...
+}: let
+  # ターミナルに応じた image.nvim のバックエンドを決定
+  image_backend =
+    if vars.user.terminal == "kitty"
+    then "kitty"
+    else if vars.user.terminal == "ghostty"
+    then "iterm2"
+    else if vars.user.terminal == "foot"
+    then "sixel"
+    else "ueberzug"; # フォールバック
+in {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -15,58 +22,74 @@ in
 
     plugins = with pkgs.vimPlugins; [
       # --- UI / 情報表示 ---
-      lualine-nvim          # 下部のステータスライン
-      nvim-web-devicons     # 各種アイコン表示用
-      image-nvim            #画像の表示
-      gitsigns-nvim         # [解決済] 行番号横の差分表示
-      nvim-lspconfig        #lsp設定を動かす
+      lualine-nvim # 下部のステータスライン
+      nvim-web-devicons # 各種アイコン表示用
+      image-nvim #画像の表示
+      gitsigns-nvim # [解決済] 行番号横の差分表示
+      nvim-lspconfig #lsp設定を動かす
 
       # --- 補完 / スニペット ---
       nvim-cmp
       cmp-nvim-lsp
       cmp-buffer
       cmp-path
-      luasnip 
+      luasnip
       cmp_luasnip
       indent-blankline-nvim
       nvim-surround
       conform-nvim
-      
+
       # --- ファイル管理・検索 ---
-      nvim-tree-lua         # サイドバー (C-n)
-      telescope-nvim        # [重要] あらゆる検索の窓口
+      #nvim-tree-lua  サイドバー (C-n)
+      telescope-nvim # [重要] あらゆる検索の窓口
       telescope-fzf-native-nvim
-      plenary-nvim          # telescope等の動作に必須
-      yazi-nvim             # ファイルマネージャーyaziとの連携
+      plenary-nvim # telescope等の動作に必須
+      yazi-nvim # ファイルマネージャーyaziとの連携
 
       # --- Lisp / Racket 開発環境 ---
-      conjure               # [重要] REPL駆動開発の核心
-      vim-racket            # Racket用のインデント・構文定義
-      parinfer-rust         # 括弧の自動管理 (任意ですが超強力です)
+      conjure # [重要] REPL駆動開発の核心
+      vim-racket # Racket用のインデント・構文定義
+      parinfer-rust # 括弧の自動管理 (任意ですが超強力です)
 
       # --- AI 連携 ---
       codecompanion-nvim
-      plenary-nvim          
-      nvim-treesitter       
+      plenary-nvim
+      nvim-treesitter
       dressing-nvim
 
       # --- 構文解析・編集補助 ---
-      (nvim-treesitter.withPlugins (p: with p; [
-        nix lua vim vimdoc bash racket
-        json yaml toml
-        markdown markdown_inline
-        html css javascript typescript python haskell elixir heex
-      ]))
+      (nvim-treesitter.withPlugins (p:
+        with p; [
+          nix
+          lua
+          vim
+          vimdoc
+          bash
+          racket
+          json
+          yaml
+          toml
+          markdown
+          markdown_inline
+          html
+          css
+          javascript
+          typescript
+          python
+          haskell
+          elixir
+          heex
+        ]))
 
       # --- 特定のワークフロー ---
-      orgmode          # メモ・タスク管理
+      orgmode # メモ・タスク管理
       otter-nvim
       pkgs.tree-sitter-grammars.tree-sitter-org-nvim
-      toggleterm-nvim       # Neovim内で端末を浮遊表示
+      toggleterm-nvim # Neovim内で端末を浮遊表示
       render-markdown-nvim
 
       # --- [提案] 操作を覚えるための補助 ---
-      which-key-nvim        # Spaceを押した時にガイドを出す (ストイック期の味方)
+      which-key-nvim # Spaceを押した時にガイドを出す (ストイック期の味方)
     ];
 
     extraPackages = with pkgs; [
@@ -87,7 +110,7 @@ in
       set mouse=a
     '';
 
-    extraLuaConfig = ''
+    initLua = ''
       -- sops-nix テンプレートから環境変数を読み込むヘルパー
       local ai_env_path = "${osConfig.sops.templates."ai-env".path}"
       local f = io.open(ai_env_path, "r")
