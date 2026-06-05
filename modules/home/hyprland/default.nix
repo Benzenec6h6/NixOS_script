@@ -1,34 +1,44 @@
-{ config, pkgs, lib, vars, ... }:
-let
-  keybindData = import ./keybinddata.nix { inherit lib vars; };
-  
+{
+  config,
+  pkgs,
+  lib,
+  vars,
+  ...
+}: let
+  keybindData = import ./keybinddata.nix {inherit lib vars;};
+
   # ヘルパー関数: 定義リストをHyprlandの形式 "MOD, KEY, DISPATCHER, ARG" に変換
-  mkBind = list: map (b: 
-    let 
-      cmdPart = if b.arg == "" then b.dispatcher else "${b.dispatcher}, ${b.arg}";
-    in "${b.mod}, ${b.key}, ${cmdPart}"
-  ) list;
+  mkBind = list:
+    map (
+      b: let
+        cmdPart =
+          if b.arg == ""
+          then b.dispatcher
+          else "${b.dispatcher}, ${b.arg}";
+      in "${b.mod}, ${b.key}, ${cmdPart}"
+    )
+    list;
 
   # (オプション) ヘルパー用にJSON等を出力する仕組みを作っておくと後が楽です
   keybindsJson = pkgs.writeText "keybinds.json" (builtins.toJSON keybindData);
 
   hostConfig = {
-    laptop.monitor = [ "eDP-1,1920x1080,0x0,1" ];
-    vm.monitor     = [ "Virtual-1,1280x720@60,0x0,1" ];
+    laptop.monitor = ["eDP-1,1920x1080,0x0,1"];
+    vm.monitor = ["Virtual-1,1280x720@60,0x0,1"];
   };
 
   nvidiaEnv = [
-    "LIBVA_DRIVER_NAME,nvidia"          # ハードウェア動画再生支援用
+    "LIBVA_DRIVER_NAME,nvidia" # ハードウェア動画再生支援用
     "__GLX_VENDOR_LIBRARY_NAME,nvidia" # OpenGLアプリをNVIDIAで動かすため
-    "NIXOS_OZONE_WL,1"                # Electron/Chrome系をWayland対応させる
+    "NIXOS_OZONE_WL,1" # Electron/Chrome系をWayland対応させる
   ];
-in
-{
+in {
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "hyprlang";
     systemd = {
       enable = true;
-      variables = ["--all"]; 
+      variables = ["--all"];
     };
     settings = {
       env = lib.optionals (vars.host == "laptop") nvidiaEnv;
@@ -49,7 +59,7 @@ in
 
       # キーボードレイアウトの設定
       input = {
-        kb_layout = vars.locale.kbLayout;        # JISキーボード
+        kb_layout = vars.locale.kbLayout; # JISキーボード
         kb_variant = "";
         kb_model = "";
         kb_options = "caps:ctrl_modifier"; # CapsをCtrlに割り当て例
