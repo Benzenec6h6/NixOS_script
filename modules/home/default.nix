@@ -28,6 +28,7 @@
       ./hypridle.nix
       ./impermanence.nix
       ./keepassxc.nix
+      ./lazygit.nix
       #./niri.nix
       ./stylix.nix
       ./swaync.nix
