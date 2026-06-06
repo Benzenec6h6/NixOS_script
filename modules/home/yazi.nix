@@ -20,12 +20,17 @@
       };
     };
 
+    initLua = ''
+      -- git プラグインを初期化して有効化する
+      require("git"):setup()
+    '';
+
     # 2. 選別した便利なLuaプラグインの導入
     plugins = {
       # Gitの視認性と操作強化（コア機能）
       git = pkgs.yaziPlugins.git;
       diff = pkgs.yaziPlugins.diff;
-      #lazygit = pkgs.yaziPlugins.lazygit;
+      lazygit = pkgs.yaziPlugins.lazygit;
 
       # 操作性の向上（Vimライクな相対行移動など）
       relative-motions = pkgs.yaziPlugins.relative-motions;
@@ -44,7 +49,7 @@
     keymap = {
       manager.prepend_keymap = [
         {
-          on = ["g"];
+          on = ["G"];
           run = "plugin lazygit";
           desc = "Call Lazygit";
         }
@@ -64,4 +69,3 @@
     ];
   };
 }
-
