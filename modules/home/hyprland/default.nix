@@ -11,10 +11,20 @@
   mkBind = list:
     map (
       b: let
+        # exec だったら自動的に execr に昇格させつつ、uwsm を付与する
+        finalDispatcher =
+          if b.dispatcher == "exec"
+          then "execr"
+          else b.dispatcher;
+        finalArg =
+          if b.dispatcher == "exec" && !(lib.hasPrefix "uwsm app --" b.arg)
+          then "uwsm app -- ${b.arg}"
+          else b.arg;
+
         cmdPart =
-          if b.arg == ""
-          then b.dispatcher
-          else "${b.dispatcher}, ${b.arg}";
+          if finalArg == ""
+          then finalDispatcher
+          else "${finalDispatcher}, ${finalArg}";
       in "${b.mod}, ${b.key}, ${cmdPart}"
     )
     list;
