@@ -1,25 +1,27 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   programs.wlogout = {
     enable = true;
 
     layout = [
       {
         label = "shutdown";
-        action = "sleep 1; systemctl poweroff";
+        action = "sleep 1; loginctl poweroff";
         text = "Shutdown";
         keybind = "s";
       }
       {
         label = "reboot";
-        action = "sleep 1; systemctl reboot";
+        action = "sleep 1; loginctl reboot";
         text = "Reboot";
         keybind = "r";
       }
       {
         label = "logout";
-        action = "hyprctl dispatch exit";
+        action = "uwsm stop";
         text = "Logout";
         keybind = "e";
       }
