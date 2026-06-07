@@ -16,21 +16,7 @@
     gvfs.enable = true;
     udisks2.enable = true;
     tumbler.enable = true;
-    fwupd.enable = true;
-    fwupd.daemonSettings = {
-      DisabledPlugins = ["test" "invalid"];
-
-      # もし特定のハードウェアでエラーが出る場合はここに記述
-      # DisabledDevices = [ "..." ];
-
-      EspLocation = "/boot";
-    };
-    fwupd.extraRemotes = ["lvfs-testing"];
     #power-profiles-daemon.enable = true;
-  };
-
-  systemd.services.fwupd-refresh = {
-    serviceConfig.Restart = "no";
   };
 
   programs.niri.enable = true;
@@ -53,15 +39,6 @@
     };
   };
   programs.xwayland.enable = true;
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs; [
-      xfce4-exo
-      thunar-archive-plugin
-      thunar-volman
-      tumbler
-    ];
-  };
   programs.nix-index-database.comma.enable = true;
   programs.nix-ld.enable = true;
 
