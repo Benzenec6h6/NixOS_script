@@ -62,7 +62,7 @@ in {
         kb_layout = vars.locale.kbLayout; # JISキーボード
         kb_variant = "";
         kb_model = "";
-        kb_options = "caps:ctrl_modifier"; # CapsをCtrlに割り当て例
+        kb_options = "ctrl:nocaps"; # CapsをCtrlに割り当て例
         follow_mouse = 1;
         sensitivity = 0;
 
