@@ -1,6 +1,4 @@
-{ inputs, ... }:
-
-{
+{inputs, ...}: {
   imports = [
     ./fcitx5-mozc
     ./scripts
@@ -8,6 +6,7 @@
     ./base.nix
     ./bootloader.nix
     ./flatpak.nix
+    ./fwupd.nix
     #./greetd.nix
     ./hibernate.nix
     ./impermanence.nix
@@ -19,6 +18,7 @@
     ./security.nix
     ./services.nix
     ./stylix.nix
+    ./thunar.nix
     ./update.nix
     ./users.nix
     ./virtualisation.nix
