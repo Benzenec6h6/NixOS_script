@@ -27,10 +27,10 @@
   programs.uwsm = {
     enable = true;
     waylandCompositors = {
-      hyprland = {
-        prettyName = "Hyprland";
-        binPath = "/run/current-system/sw/bin/start-hyprland";
-      };
+      #hyprland = {
+      #  prettyName = "Hyprland";
+      #  binPath = "/run/current-system/sw/bin/start-hyprland";
+      #};
       niri = {
         prettyName = "niri";
         comment = "Scrollable-tile Wayland compositor";
