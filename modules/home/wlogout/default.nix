@@ -9,13 +9,13 @@
     layout = [
       {
         label = "shutdown";
-        action = "sleep 1; loginctl poweroff";
+        action = "sleep 1; systemctl poweroff";
         text = "Shutdown";
         keybind = "s";
       }
       {
         label = "reboot";
-        action = "sleep 1; loginctl reboot";
+        action = "sleep 1; systemctl reboot";
         text = "Reboot";
         keybind = "r";
       }
