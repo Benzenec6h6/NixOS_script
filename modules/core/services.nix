@@ -29,7 +29,7 @@
     waylandCompositors = {
       hyprland = {
         prettyName = "Hyprland";
-        binPath = "/run/current-system/sw/bin/Hyprland";
+        binPath = "/run/current-system/sw/bin/start-hyprland";
       };
       niri = {
         prettyName = "niri";
