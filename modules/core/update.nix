@@ -1,11 +1,19 @@
-{ pkgs, lib, vars, ... }:
 {
+  pkgs,
+  lib,
+  vars,
+  ...
+}: {
   system.autoUpgrade = {
     enable = true;
     flake = "github:Benzenec6h6/NixOS_script";
     dates = "daily";
     persistent = true;
     randomizedDelaySec = "20min";
+    upgrade = false;
+    flags = [
+      "--no-write-lock-file"
+    ];
   };
 
   systemd.services.nixos-upgrade = {
