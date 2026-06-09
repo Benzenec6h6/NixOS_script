@@ -34,8 +34,6 @@ in {
     ]
     ++ (with pkgs;
       [
-        vscodium
-
         # 通信用
         discord
 
