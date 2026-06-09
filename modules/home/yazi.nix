@@ -7,90 +7,158 @@
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
-    shellWrapperName = "y"; # "y" だけで起動
+    shellWrapperName = "y";
 
-    # 1. 基本的な挙動とGit連携の設定
+    # 1. yazi.toml の設定
     settings = {
-      manager = {
-        show_hidden = true; # 隠しファイルを表示
-        respect_gitignore = false; # .gitignoreを無視してプレビュー可能に
-        show_git = true; # Gitのステータス変更を追跡
-        linemode = "git"; # ファイルの右端にGitステータスを表示
+      mgr = {
+        show_hidden = true;
+        respect_gitignore = false;
+        show_git = true;
+        linemode = "git";
         sort_by = "alphabetical";
-        ratio = [1 3 4]; # スペースを空けてNixの正しいリスト形式に修正
+        ratio = [1 3 4];
+      };
+
+      plugin = {
+        prepend_previewers = [
+          {
+            url = "*.md";
+            run = "code";
+          }
+          {
+            url = "*.csv";
+            run = ''shell -- "mlr --icsv --opprint -g color cat \"$1\"" '';
+          }
+          {
+            url = "*.diff";
+            run = "diff";
+          }
+          {
+            mime = "audio/*";
+            run = "mediainfo";
+          }
+          {
+            mime = "video/*";
+            run = "mediainfo";
+          }
+        ];
       };
     };
 
-    # 2. ソースコードの仕様に完全に適合させたプラグイン設定
+    # 2. プラグインの定義
     plugins = {
-      # setup = true にすることで、Home-managerが自動で require("git"):setup() を生成します
       git = {
         package = pkgs.yaziPlugins.git;
         setup = true;
       };
-      diff = {
-        package = pkgs.yaziPlugins.diff;
-        setup = true;
-      };
       lazygit = {
         package = pkgs.yaziPlugins.lazygit;
-        setup = true;
-      };
-
-      relative-motions = {
-        package = pkgs.yaziPlugins.relative-motions;
-        setup = true;
-      };
-      smart-enter = {
-        package = pkgs.yaziPlugins.smart-enter;
-        setup = true;
+        setup = false;
       };
       bookmarks = {
         package = pkgs.yaziPlugins.bookmarks;
-        setup = true;
+        setup = false;
       };
 
+      # ハイフンを含むプラグイン名は、Nixの文字列クォートで囲むと安全です
+      "relative-motions" = {
+        package = pkgs.yaziPlugins.relative-motions;
+        setup = true;
+      };
+      "smart-enter" = {
+        package = pkgs.yaziPlugins.smart-enter;
+        setup = false;
+      };
+
+      # 呼ぶべき setup() を持たないプレビュー・機能系プラグインは setup = false に
+      diff = {
+        package = pkgs.yaziPlugins.diff;
+        setup = false;
+      };
       glow = {
         package = pkgs.yaziPlugins.glow;
-        setup = true;
+        setup = false;
       };
       mediainfo = {
         package = pkgs.yaziPlugins.mediainfo;
-        setup = true;
+        setup = false;
       };
       miller = {
         package = pkgs.yaziPlugins.miller;
-        setup = true;
+        setup = false;
       };
-      wl-clipboard = {
+      "wl-clipboard" = {
         package = pkgs.yaziPlugins.wl-clipboard;
-        setup = true;
+        setup = false;
       };
     };
 
-    # 3. キーバインドの修正（Gの衝突を回避）
+    # 3. keymap.toml の設定
     keymap = {
-      manager.prepend_keymap = [
-        {
-          on = ["g" "l"]; # 大文字 'G' 単体から、'g' -> 'l' の複合キーに変更
-          run = "plugin lazygit";
-          desc = "Call Lazygit";
-        }
-      ];
+      mgr.prepend_keymap =
+        [
+          {
+            on = ["l"];
+            run = "plugin smart-enter";
+            desc = "Enter directory or open file";
+          }
+          {
+            on = ["g" "l"];
+            run = "plugin lazygit";
+            desc = "Call Lazygit";
+          }
+          {
+            on = ["y"];
+            run = "plugin wl-clipboard";
+            desc = "Copy to system clipboard";
+          }
+          {
+            on = ["m"];
+            run = "plugin bookmarks --args=save";
+            desc = "Save bookmark";
+          }
+          {
+            on = ["'"];
+            run = "plugin bookmarks --args=jump";
+            desc = "Jump to bookmark";
+          }
+          {
+            on = ["d" "f"];
+            run = "plugin diff";
+            desc = "Diff selected files";
+          }
+        ]
+        ++ (map (n: {
+          on = [(toString n)];
+          run = "plugin relative-motions --args=${toString n}";
+          desc = "Move in relative steps";
+        }) [1 2 3 4 5 6 7 8 9]);
     };
 
-    # 4. プレビューやプラグインの動作に必要なツール群
+    # 4. init.lua への追加記述 (UI調整など)
+    initLua = ''
+      -- ステータスバーにGit情報を表示する設定（型安全な結合に修正）
+      Status:children_add(function()
+          local h = cx.active.current.hovered
+          if h == nil or h.git == nil then return "" end
+          return " (" .. tostring(h.git) .. ")"
+      end, 500, Status.RIGHT)
+    '';
+
+    # 5. 必要なバイナリの導入
     extraPackages = with pkgs; [
       lazygit
       wl-clipboard
-      ffmpegthumbnailer
-      imagemagick
-      poppler
+      glow
+      mediainfo
+      miller
       fd
       ripgrep
       fzf
-      glow
-      mediainfo
+      ffmpegthumbnailer
+      imagemagick
+      poppler
     ];
   };
 }
