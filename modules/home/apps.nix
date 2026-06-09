@@ -11,6 +11,7 @@
 in {
   programs.hyprlock.enable = true;
   programs.distrobox.enable = true;
+  services.tailscale-systray.enable = true;
   services.hypridle.enable = true;
   services.blueman-applet.enable = true;
   services.swaync.enable = true;
