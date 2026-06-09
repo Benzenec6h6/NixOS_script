@@ -18,6 +18,7 @@
     ./security.nix
     ./services.nix
     ./stylix.nix
+    ./tailscale.nix
     ./thunar.nix
     ./update.nix
     ./users.nix
