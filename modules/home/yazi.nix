@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   programs.yazi = {
@@ -11,61 +12,85 @@
     # 1. 基本的な挙動とGit連携の設定
     settings = {
       manager = {
-        show_hidden = true; # 隠しファイル（.config等）を表示
-        respect_gitignore = false; # .gitignoreを無視して、すべての中身をプレビュー可能に
+        show_hidden = true; # 隠しファイルを表示
+        respect_gitignore = false; # .gitignoreを無視してプレビュー可能に
         show_git = true; # Gitのステータス変更を追跡
-        linemode = "git"; # ファイルの右端にGitステータス(M, A等)を常時表示
+        linemode = "git"; # ファイルの右端にGitステータスを表示
         sort_by = "alphabetical";
-        ratio = [1 3 4]; # 左カラム:中央:右(プレビュー) の比率
+        ratio = [1 3 4]; # スペースを空けてNixの正しいリスト形式に修正
       };
     };
 
-    initLua = ''
-      -- git プラグインを初期化して有効化する
-      require("git"):setup()
-    '';
-
-    # 2. 選別した便利なLuaプラグインの導入
+    # 2. ソースコードの仕様に完全に適合させたプラグイン設定
     plugins = {
-      # Gitの視認性と操作強化（コア機能）
-      git = pkgs.yaziPlugins.git;
-      diff = pkgs.yaziPlugins.diff;
-      lazygit = pkgs.yaziPlugins.lazygit;
+      # setup = true にすることで、Home-managerが自動で require("git"):setup() を生成します
+      git = {
+        package = pkgs.yaziPlugins.git;
+        setup = true;
+      };
+      diff = {
+        package = pkgs.yaziPlugins.diff;
+        setup = true;
+      };
+      lazygit = {
+        package = pkgs.yaziPlugins.lazygit;
+        setup = true;
+      };
 
-      # 操作性の向上（Vimライクな相対行移動など）
-      relative-motions = pkgs.yaziPlugins.relative-motions;
-      smart-enter = pkgs.yaziPlugins.smart-enter;
-      bookmarks = pkgs.yaziPlugins.bookmarks;
+      relative-motions = {
+        package = pkgs.yaziPlugins.relative-motions;
+        setup = true;
+      };
+      smart-enter = {
+        package = pkgs.yaziPlugins.smart-enter;
+        setup = true;
+      };
+      bookmarks = {
+        package = pkgs.yaziPlugins.bookmarks;
+        setup = true;
+      };
 
-      # ファイルプレビューの強化（Markdown、各種メディア）
-      glow = pkgs.yaziPlugins.glow;
-      mediainfo = pkgs.yaziPlugins.mediainfo;
-      miller = pkgs.yaziPlugins.miller;
-
-      # システムクリップボードとの連携（Wayland環境用）
-      wl-clipboard = pkgs.yaziPlugins.wl-clipboard;
+      glow = {
+        package = pkgs.yaziPlugins.glow;
+        setup = true;
+      };
+      mediainfo = {
+        package = pkgs.yaziPlugins.mediainfo;
+        setup = true;
+      };
+      miller = {
+        package = pkgs.yaziPlugins.miller;
+        setup = true;
+      };
+      wl-clipboard = {
+        package = pkgs.yaziPlugins.wl-clipboard;
+        setup = true;
+      };
     };
 
+    # 3. キーバインドの修正（Gの衝突を回避）
     keymap = {
       manager.prepend_keymap = [
         {
-          on = ["G"];
+          on = ["g" "l"]; # 大文字 'G' 単体から、'g' -> 'l' の複合キーに変更
           run = "plugin lazygit";
           desc = "Call Lazygit";
         }
       ];
     };
 
-    # 3. プレビューやプラグインの動作に必要なツール群
+    # 4. プレビューやプラグインの動作に必要なツール群
     extraPackages = with pkgs; [
-      ffmpegthumbnailer # 動画用
-      imagemagick # 画像用
-      poppler # PDF用
-      fd # 検索高速化
-      ripgrep # 内容検索高速化
-      fzf # フィルタリング
-      glow # Markdownプレビュー用（プラグインが内部で使用）
-      mediainfo # メディア情報取得用（プラグインが内部で使用）
+      lazygit
+      wl-clipboard
+      ffmpegthumbnailer
+      imagemagick
+      poppler
+      fd
+      ripgrep
+      fzf
+      glow
+      mediainfo
     ];
   };
 }
