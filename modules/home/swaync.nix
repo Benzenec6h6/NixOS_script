@@ -51,7 +51,7 @@
       };
       widgets = [
         "title"
-        "mpris"
+        #"mpris"
         "volume"
         "backlight"
         "dnd"
