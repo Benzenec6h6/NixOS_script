@@ -7,17 +7,29 @@
 }: let
   keybindData = import ./keybinddata.nix {inherit lib vars;};
 
-  # ヘルパー関数: 定義リストをHyprlandの形式 "MOD, KEY, DISPATCHER, ARG" に変換
   mkBind = list:
     map (
       b: let
-        # exec だったら自動的に execr に昇格させつつ、uwsm を付与する
+        # tty属性がある場合は専用のchvt命令を作る
+        isTty = b ? tty;
+
+        isPassthrough = !(b ? dispatcher) && !isTty;
+
         finalDispatcher =
-          if b.dispatcher == "exec"
+          if isTty
+          then "exec"
+          else if isPassthrough
+          then "exec"
+          else if b.dispatcher == "exec"
           then "execr"
           else b.dispatcher;
+
         finalArg =
-          if b.dispatcher == "exec" && !(lib.hasPrefix "uwsm app --" b.arg)
+          if isTty
+          then "chvt ${b.tty}" # ← ここで chvt X に変換する
+          else if isPassthrough
+          then "true"
+          else if b.dispatcher == "exec" && !(lib.hasPrefix "uwsm app --" b.arg)
           then "uwsm app -- ${b.arg}"
           else b.arg;
 
@@ -65,7 +77,7 @@ in {
 
       # キーバインド例
       bind = mkBind keybindData.main;
-      bindl = mkBind keybindData.locked;
+      bindl = (mkBind keybindData.locked) ++ (mkBind keybindData.ttySwitch);
 
       # キーボードレイアウトの設定
       input = {

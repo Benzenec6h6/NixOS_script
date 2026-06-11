@@ -310,4 +310,52 @@ in {
       desc = "Previous";
     }
   ];
+
+  ttySwitch = [
+    {
+      mod = "CTRL ALT";
+      key = "F1";
+      tty = "1";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F2";
+      tty = "2";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F3";
+      tty = "3";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F4";
+      tty = "4";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F5";
+      tty = "5";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F6";
+      tty = "6";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F7";
+      tty = "7";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F8";
+      tty = "8";
+    }
+    {
+      mod = "CTRL ALT";
+      key = "F9";
+      tty = "9";
+    }
+  ];
 }
