@@ -69,7 +69,7 @@ in {
 
       # 起動時に実行するコマンド
       exec-once = [
-        "swaync"
+        #"swaync"
         "waybar"
         "fcitx5"
         "qs" # quickshell AGS Desktop Overview alternative
