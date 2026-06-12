@@ -10,6 +10,7 @@
       wheelNeedsPassword = true; # wheel グループのユーザーにパスワード要求
       extraConfig = ''
         Defaults !pwfeedback
+        %wheel ALL=(ALL) NOPASSWD: /run/current-system/sw/bin/chvt
       '';
     };
 
