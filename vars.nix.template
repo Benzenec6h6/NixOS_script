@@ -4,6 +4,7 @@
   host = "HOST";
   disk = "DISK";
   bootloader = "limine";
+  displaymanager = "sddm";
   user = {
     name = "teto";
     terminal = "kitty";
