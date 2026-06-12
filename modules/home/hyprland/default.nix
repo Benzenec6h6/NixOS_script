@@ -17,7 +17,7 @@
 
         finalDispatcher =
           if isTty
-          then "exec"
+          then "execr"
           else if isPassthrough
           then "exec"
           else if b.dispatcher == "exec"
@@ -26,7 +26,7 @@
 
         finalArg =
           if isTty
-          then "chvt ${b.tty}" # ← ここで chvt X に変換する
+          then "sudo chvt ${b.tty}" # ← ここで chvt X に変換する
           else if isPassthrough
           then "true"
           else if b.dispatcher == "exec" && !(lib.hasPrefix "uwsm app --" b.arg)
