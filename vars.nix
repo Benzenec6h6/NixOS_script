@@ -4,6 +4,7 @@
   host = "laptop";
   disk = "/dev/nvme0n1";
   bootloader = "limine";
+  displaymanager = "sddm";
   user = {
     name = "teto";
     terminal = "kitty";

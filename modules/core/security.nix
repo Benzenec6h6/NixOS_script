@@ -1,6 +1,8 @@
 {
   config,
   pkgs,
+  vars,
+  lib,
   ...
 }: {
   security = {
@@ -23,8 +25,8 @@
     pam.services = {
       sshd.showMotd = true; # SSH接続時にmotd表示
       login.enableGnomeKeyring = true;
-      sddm.enableGnomeKeyring = true; # SDDM を使う場合
-      #greetd.enableGnomeKeyring = true; # greetd を使う場合
+      sddm.enableGnomeKeyring = vars.displaymanager == "sddm";
+      greetd.enableGnomeKeyring = vars.displaymanager == "greetd";
     };
 
     tpm2 = {
