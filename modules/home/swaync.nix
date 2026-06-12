@@ -51,9 +51,9 @@
       };
       widgets = [
         "title"
-        "mpris"
-        "volume"
-        "backlight"
+        #"mpris"
+        #"volume"
+        #"backlight"
         "dnd"
         "notifications"
       ];
