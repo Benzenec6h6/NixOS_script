@@ -314,16 +314,6 @@ in {
   ttySwitch = [
     {
       mod = "CTRL ALT";
-      key = "F1";
-      tty = "1";
-    }
-    {
-      mod = "CTRL ALT";
-      key = "F2";
-      tty = "2";
-    }
-    {
-      mod = "CTRL ALT";
       key = "F3";
       tty = "3";
     }
