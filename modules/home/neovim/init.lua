@@ -90,6 +90,7 @@ local servers = {
 }
 
 local bin_map = {
+  rust_analyzer = 'rust-analyzer',
   lua_ls = 'lua-language-server',
   hls = 'haskell-language-server-wrapper',
   bashls = 'bash-language-server',
