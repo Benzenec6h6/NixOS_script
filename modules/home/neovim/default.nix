@@ -28,6 +28,9 @@ in {
       gitsigns-nvim # [解決済] 行番号横の差分表示
       nvim-lspconfig #lsp設定を動かす
 
+      # --- 環境連携 ---
+      direnv-vim
+
       # --- 補完 / スニペット ---
       nvim-cmp
       cmp-nvim-lsp
