@@ -79,6 +79,7 @@ in {
           haskell
           elixir
           heex
+          rust
         ]))
 
       # --- 特定のワークフロー ---
@@ -97,6 +98,8 @@ in {
       ruff
       prettier
       alejandra
+      rust-analyzer
+      rustfmt
     ];
 
     extraConfig = ''

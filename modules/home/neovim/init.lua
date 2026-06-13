@@ -81,6 +81,7 @@ local servers = {
   hls = {},
   ts_ls = {},
   elixir_ls = {},
+  rust_analyzer = {},
   lua_ls = {
     settings = {
       Lua = { diagnostics = { globals = { 'vim' } } }
@@ -142,6 +143,7 @@ require("conform").setup({
     nix = { "alejandra" },
     elixir = { "mix" },
     heex = { "mix" },
+    rust = { "rustfmt" },
   },
   format_on_save = {
     timeout_ms = 500,
