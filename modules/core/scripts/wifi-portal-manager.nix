@@ -12,8 +12,6 @@ in {
   networking.networkmanager.dispatcherScripts = [
     {
       source = "${wifiPortalAlert}/bin/wifi-portal-alert";
-      # up (接続) と down (切断) のイベントだけをトリガーにする
-      onEvents = ["up" "down"];
     }
   ];
 }
