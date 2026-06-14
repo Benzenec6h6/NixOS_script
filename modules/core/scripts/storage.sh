@@ -17,7 +17,7 @@ export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
 
 # ユーザー権限に切り替えて、SwayNCへ超軽量に通知！
-sudo -u "$(ls /home | head -n1)" notify-send \
+sudo -u "$USER_NAME" notify-send \
   --icon="drive-removable-media-symbolic" \
   "Removable Storage Connected" \
   "Device: /dev/$DEV_NAME"

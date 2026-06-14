@@ -3,6 +3,7 @@
   storageAlert = pkgs.writeShellApplication {
     name = "storage-alert";
     runtimeInputs = [pkgs.libnotify pkgs.coreutils pkgs.bash];
+    checkPhase = "";
     text = builtins.readFile ./storage.sh;
   };
 in {

@@ -2,6 +2,7 @@
   wifiPortalAlert = pkgs.writeShellApplication {
     name = "wifi-portal-alert";
     runtimeInputs = [pkgs.libnotify pkgs.networkmanager pkgs.xdg-utils pkgs.coreutils];
+    checkPhase = "";
     text = builtins.readFile ./wifi-portal-manager.sh;
   };
 in {

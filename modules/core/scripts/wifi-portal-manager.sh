@@ -15,8 +15,9 @@ fi
 OPEN_URL="http://neverssl.com"
 
 # rootで実行されるため、ユーザー環境のSwayNCに通知を通すおまじない
-USER_ID=$(id -u "$(ls /home | head -n1)")
-USER_NAME=$(ls /home | head -n1)
+USER_NAME=$(who | awk '{print $1}' | head -n1)
+USER_NAME="${USER_NAME:-$USER}"
+USER_ID=$(id -u "$USER_NAME")
 export DISPLAY=:0
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$USER_ID/bus"
 
