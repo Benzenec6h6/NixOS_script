@@ -1,23 +1,29 @@
-{ pkgs, inputs, vars, lib, config, osConfig, ... }:
-
-let
-  # 共通の引数(pkgs)を渡してインポートする関数
-  importScript = path: import path { inherit pkgs inputs vars config osConfig; };
-  hyprlandKeyData = import ../hyprland/keybinddata.nix { inherit lib vars; };
-in
 {
-  imports = [
-    ./battery-monitor.nix
-    ./storage-monitor.nix
-    ./wifi-portal-manager.nix
-  ];
+  pkgs,
+  inputs,
+  vars,
+  lib,
+  config,
+  osConfig,
+  ...
+}: let
+  # 共通の引数(pkgs)を渡してインポートする関数
+  importScript = path: import path {inherit pkgs inputs vars config osConfig;};
+  hyprlandKeyData = import ../hyprland/keybinddata.nix {inherit lib vars;};
+in {
+  #imports = [
+  #  ./battery-monitor.nix
+  #  ./storage-monitor.nix
+  #  ./wifi-portal-manager.nix
+  #];
 
   home.packages = [
+    (importScript ./battery.nix)
     (importScript ./Brightness.nix)
     (importScript ./ClipManager.nix)
     (importScript ./Dropterminal.nix)
-    (import ./keybind-menu.nix { 
-      inherit pkgs; 
+    (import ./keybind-menu.nix {
+      inherit pkgs;
       data = hyprlandKeyData;
     })
     (importScript ./recorder.nix)
