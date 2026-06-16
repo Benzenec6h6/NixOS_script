@@ -46,6 +46,26 @@
       };
     };
 
+    theme = {
+      git = {
+        # 1. 一度コミットした後に内容を編集したファイル（Modified）
+        # Draculaの鮮やかなイエロー/オレンジを指定して、埋もれないようにします
+        modified = {fg = "yellow";};
+
+        # 2. まだ一度もコミット・追跡されていない完全な新規ファイル（Untracked）
+        # 今まで通り、目立つピンク/レッドで警告します
+        untracked = {fg = "magenta";}; # もしくは "red"
+
+        # 3. git add してコミットを待っている状態（Staged）
+        # 綺麗なグリーンに変化させて安心感を演出します
+        staged = {fg = "green";};
+
+        # その他、リネームや削除
+        renamed = {fg = "cyan";};
+        deleted = {fg = "red";};
+      };
+    };
+
     # 2. プラグインの定義
     plugins = {
       git = {
