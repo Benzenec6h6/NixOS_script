@@ -31,6 +31,7 @@ in {
     [
       inputs.zen-browser.packages.${vars.system}.default
       inputs.moomoo.packages.${vars.system}.default
+      inputs.rust-tools.packages.${vars.system}.default
     ]
     ++ (with pkgs;
       [
@@ -62,12 +63,6 @@ in {
         shfmt
       ]
       ++ lib.optionals isLaptop [
-        # Virtualization
-        #開発環境のflakeに閉じ込めた。
-        #virt-viewer virt-manager libosinfo swtpm
-        #optionを使った
-        #dnsmasq tuned
-        #optionがない開発flakeに隔離する訳にもいかない
         ntfs3g
 
         kicad-small

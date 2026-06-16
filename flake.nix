@@ -61,6 +61,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rust-tools = {
+      url = "github:Benzenec6h6/rust-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
   };
 
@@ -78,6 +83,7 @@
     nix-index-database,
     zen-browser,
     moomoo,
+    rust-tools,
     nix-flatpak,
     ...
   } @ inputs: let
