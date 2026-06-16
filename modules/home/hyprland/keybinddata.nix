@@ -101,7 +101,7 @@ in {
         mod = "SUPER SHIFT";
         key = "Return";
         dispatcher = "exec";
-        arg = "Dropterminal ${vars.user.terminal}";
+        arg = "sys-controls ${vars.user.terminal}";
         desc = "Dropdown terminal";
       }
       {

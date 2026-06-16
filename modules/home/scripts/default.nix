@@ -19,9 +19,9 @@ in {
 
   home.packages = [
     (importScript ./battery.nix)
-    (importScript ./Brightness.nix)
+    #(importScript ./Brightness.nix)
     (importScript ./ClipManager.nix)
-    (importScript ./Dropterminal.nix)
+    #(importScript ./Dropterminal.nix)
     (import ./keybind-menu.nix {
       inherit pkgs;
       data = hyprlandKeyData;
@@ -29,7 +29,7 @@ in {
     (importScript ./recorder.nix)
     (importScript ./ScreenShot.nix)
     (importScript ./Thaw.nix)
-    (importScript ./Volume.nix)
+    #(importScript ./Volume.nix)
     (importScript ./WaybarCava.nix)
     (importScript ./WaybarScripts.nix)
     (importScript ./Weather.nix)
