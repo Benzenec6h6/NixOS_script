@@ -14,7 +14,7 @@
     };
 
     Service = {
-      ExecStart = "${pkgs.rust-tools}/bin/wifi-portal-watch";
+      ExecStart = "${inputs.rust-tools.packages.${pkgs.system}.default}/bin/wifi-portal-watch";
       Restart = "on-failure";
       RestartSec = "5s";
     };
