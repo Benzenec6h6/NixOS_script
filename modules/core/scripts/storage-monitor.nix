@@ -6,7 +6,7 @@
   ...
 }: let
   # inputsからRustツールを取得
-  rust-tools-pkg = inputs.rust-tools.packages.${pkgs.system}.default;
+  rust-tools-pkg = inputs.rust-tools.packages.${vars.system}.default;
 in {
   # 1. システム全体にバイナリをインストール（任意ですが、ターミナルからも叩けて便利です）
   environment.systemPackages = [rust-tools-pkg];
