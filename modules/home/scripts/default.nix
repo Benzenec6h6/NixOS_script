@@ -11,11 +11,9 @@
   importScript = path: import path {inherit pkgs inputs vars config osConfig;};
   hyprlandKeyData = import ../hyprland/keybinddata.nix {inherit lib vars;};
 in {
-  #imports = [
-  #  ./battery-monitor.nix
-  #  ./storage-monitor.nix
-  #  ./wifi-portal-manager.nix
-  #];
+  imports = [
+    ./wifi-portal-manager.nix
+  ];
 
   home.packages = [
     (importScript ./battery.nix)
