@@ -69,7 +69,6 @@ in {
 
       # 起動時に実行するコマンド
       exec-once = [
-        "wifi-portal-watch"
         "waybar"
         "fcitx5"
         "qs" # quickshell AGS Desktop Overview alternative
