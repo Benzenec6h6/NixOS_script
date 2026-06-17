@@ -1,17 +1,34 @@
-{pkgs, ...}: let
-  # 1. このファイルの中だけで使うローカルなパッケージとしてスクリプトを定義
-  storageAlert = pkgs.writeShellApplication {
-    name = "storage-alert";
-    runtimeInputs = [pkgs.libnotify pkgs.coreutils pkgs.bash];
-    checkPhase = "";
-    text = builtins.readFile ./storage.sh;
-  };
+{
+  config,
+  pkgs,
+  inputs,
+  vars,
+  ...
+}: let
+  # inputsからRustツールを取得
+  rust-tools-pkg = inputs.rust-tools.packages.${pkgs.system}.default;
 in {
-  # 2. システム全体（environment.systemPackages）に登録
-  environment.systemPackages = [storageAlert];
+  # 1. システム全体にバイナリをインストール（任意ですが、ターミナルからも叩けて便利です）
+  environment.systemPackages = [rust-tools-pkg];
 
-  # 3. この機能専用のudevルールをここで定義（${storageAlert} で直接パスを埋め込める！）
+  # 2. systemd サービス定義 (テンプレートサービス)
+  systemd.services."storage-monitor@" = {
+    description = "Storage monitor notification for %i";
+    serviceConfig = {
+      Type = "oneshot";
+      # フルパスで実行することで、確実にflakeのバイナリを叩く
+      ExecStart = "${rust-tools-pkg}/bin/storage-monitor %i";
+    };
+  };
+
+  # 3. udev ルール
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ATTR{removable}=="1", RUN+="${storageAlert}/bin/storage-alert %k"
+    ACTION=="add", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ATTR{removable}=="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="storage-monitor@%k.service"
+  '';
+
+  # 4. sudo-rs の設定 (storage-monitor内部でsudo -uを使うため)
+  security.sudo-rs.extraConfig = ''
+    # rootが一般ユーザーとしてnotify-sendを実行することを許可
+    root ALL=(ALL) NOPASSWD: ${pkgs.libnotify}/bin/notify-send
   '';
 }
