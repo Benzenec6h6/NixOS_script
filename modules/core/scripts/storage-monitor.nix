@@ -23,7 +23,8 @@ in {
 
   # 3. udev ルール
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ATTR{removable}=="1", TAG+="systemd", ENV{SYSTEMD_WANTS}+="storage-monitor@%k.service"
+    # ATTR{removable} を見るのをやめ、バス（ID_BUS）が "usb" かどうかを判定基準にする
+    ACTION=="add", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", ENV{ID_BUS}=="usb", TAG+="systemd", ENV{SYSTEMD_WANTS}+="storage-monitor@%k.service"
   '';
 
   # 4. sudo-rs の設定 (storage-monitor内部でsudo -uを使うため)
