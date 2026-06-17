@@ -28,7 +28,7 @@ in {
 
   # 4. sudo-rs の設定 (storage-monitor内部でsudo -uを使うため)
   security.sudo-rs.extraConfig = ''
-    # rootが一般ユーザーとしてnotify-sendを実行することを許可
-    root ALL=(ALL) NOPASSWD: ${pkgs.libnotify}/bin/notify-send
+    # root が teto として env コマンド（経由の通知）を実行することを許可
+    root ALL=(teto) NOPASSWD: /run/current-system/sw/bin/env
   '';
 }
