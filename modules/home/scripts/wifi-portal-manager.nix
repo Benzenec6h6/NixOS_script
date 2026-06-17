@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   systemd.user.services.wifi-portal-watch = {
     Unit = {
       Description = "Wi-Fi Captive Portal Watcher";
