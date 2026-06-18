@@ -23,14 +23,13 @@
       "gemini-api-key" = {owner = vars.user.name;};
     };
     templates."weather-env" = {
-      #path = "/run/secrets/weather-env";
       owner = vars.user.name;
       mode = "0444";
       content = ''
-        CITY_NAME="${config.sops.placeholder."location/city"}"
-        LAT="${config.sops.placeholder."location/lat"}"
-        LON="${config.sops.placeholder."location/lon"}"
-        OWM_KEY="${config.sops.placeholder."api-key"}"
+        export CITY_NAME="${config.sops.placeholder."location/city"}"
+        export LAT="${config.sops.placeholder."location/lat"}"
+        export LON="${config.sops.placeholder."location/lon"}"
+        export OWM_KEY="${config.sops.placeholder."api-key"}"
       '';
     };
     templates."ai-env" = {
