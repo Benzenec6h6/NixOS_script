@@ -10,6 +10,8 @@ pkgs.writeShellApplication {
   checkPhase = "true";
   text = ''
     ENV_FILE="${osConfig.sops.templates."weather-env".path}"
+    code
+    Code
 
     if [ -f "$ENV_FILE" ]; then
       # shellcheck source=/dev/null
@@ -21,5 +23,6 @@ pkgs.writeShellApplication {
 
     # apps.nix によって $PATH に入っている `weather-fetcher` をそのまま呼び出す
     exec weather-fetcher
+
   '';
 }
