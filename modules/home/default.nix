@@ -30,6 +30,7 @@
       ./keepassxc.nix
       ./lazygit.nix
       #./niri.nix
+      ./qutebrowser.nix
       ./stylix.nix
       ./swaync.nix
       #./themes.nix
