@@ -71,7 +71,7 @@ in {
       exec-once = [
         "waybar"
         "fcitx5"
-        "qs" # quickshell AGS Desktop Overview alternative
+        #"qs"
       ];
 
       # キーバインド例
