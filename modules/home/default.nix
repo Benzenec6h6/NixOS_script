@@ -12,6 +12,7 @@
       ./mpv
       ./neovim
       ./rofi
+      ./quickshell
       ./scripts
       ./starship
       ./waybar
@@ -47,5 +48,4 @@
   programs.home-manager.enable = true;
 
   home.file.".config/hypr/hyprlock".source = ./hyprlock;
-  home.file.".config/quickshell".source = ./quickshell;
 }

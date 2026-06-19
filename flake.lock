@@ -553,11 +553,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781852089,
-        "narHash": "sha256-rtWLZoXxzdoHCRZeviSk/PMO8HJeAulUtn+/OYM++cg=",
+        "lastModified": 1781853405,
+        "narHash": "sha256-Stba5Mv/HtoSvylmJBAwdNLY2veF4zVpaXAHNyi3v0A=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "c9ad5c97d48b09d019177fb1cd864e7edf8558c9",
+        "rev": "a1257ea67fdbcc45cb4e7aaf30e142b5dde625ff",
         "type": "github"
       },
       "original": {
@@ -614,26 +614,6 @@
         "type": "github"
       }
     },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781847791,
-        "narHash": "sha256-Mo2YtNEGlcySnbq0YuP3nUKMAQCMAfE+TcCffo5vzD8=",
-        "ref": "refs/heads/master",
-        "rev": "68c2c85c33845385f7ab8147b32f1450b1e468e0",
-        "revCount": 824,
-        "type": "git",
-        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.outfoxxed.me/outfoxxed/quickshell"
-      }
-    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -647,7 +627,6 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "nur": "nur",
-        "quickshell": "quickshell",
         "rust-tools": "rust-tools",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
