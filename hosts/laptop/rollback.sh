@@ -4,7 +4,7 @@ set -e
 # 作業用のマウントポイント作成
 mkdir -p /mnt-root
 # ls -l で確認した正確なラベル名を使用
-mount /dev/disk/by-partlabel/disk-main-root /mnt-root
+mount /dev/mapper/crypted /mnt-root
 
 # 1. 現在の @root を old_roots へ退避
 if [ -e /mnt-root/@root ]; then
