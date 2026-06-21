@@ -55,7 +55,7 @@ in {
         btop
         nvtopPackages.full
         qalculate-gtk
-        megacmd
+        #megacmd
 
         #LSPサーバー
         lua-language-server
