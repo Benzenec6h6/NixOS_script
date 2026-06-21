@@ -1,6 +1,4 @@
-{ vars, ... }:
-
-{
+{vars, ...}: {
   disko.devices.disk.main = {
     type = "disk";
     device = vars.disk;
@@ -15,7 +13,7 @@
             type = "filesystem";
             format = "vfat";
             mountpoint = "/boot";
-            mountOptions = [ "umask=0077" ];
+            mountOptions = ["umask=0077"];
           };
         };
 
@@ -26,30 +24,30 @@
             name = "crypted";
             settings = {
               allowDiscards = true;
-              crypttabExtraOpts = [ "tpm2-device=auto" ];
+              crypttabExtraOpts = ["tpm2-device=auto"];
             };
             content = {
               type = "btrfs";
-              extraArgs = [ "-f" ];
+              extraArgs = ["-f"];
               subvolumes = {
                 "@root" = {
                   mountpoint = "/";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = ["compress=zstd" "noatime"];
                 };
 
                 "@nix" = {
                   mountpoint = "/nix";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = ["compress=zstd" "noatime"];
                 };
 
                 "@home" = {
                   mountpoint = "/home";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = ["compress=zstd" "noatime"];
                 };
 
                 "@persist" = {
                   mountpoint = "/persist";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = ["compress=zstd" "noatime"];
                 };
 
                 "@swap" = {
