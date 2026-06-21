@@ -6,6 +6,7 @@
   imports = [
     ./hardware.nix
     ./disko.nix
+    ./ephemeral-root.nix
     ./vhdx-mount.nix
     ../../modules/core
   ];
@@ -55,17 +56,6 @@
   environment.variables = {
     #LIBVA_DRIVER_NAME = "nvidia";
     #NVD_BACKEND = "direct";
-  };
-
-  boot.initrd.systemd.services.rollback = {
-    description = "...";
-    wantedBy = ["initrd.target"];
-    after = ["cryptsetup.target"];
-    before = ["sysroot.mount"];
-    unitConfig.DefaultDependencies = "no";
-    path = with pkgs; [btrfs-progs coreutils util-linux];
-    serviceConfig.Type = "oneshot";
-    script = builtins.readFile ./rollback.sh;
   };
 
   services.udev.extraRules = ''
