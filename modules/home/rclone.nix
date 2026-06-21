@@ -6,10 +6,6 @@
   programs.rclone = {
     enable = true;
 
-    # 【重要】NixOS側のsops-nixと連携させるための明示的指定
-    # これにより、システム側で秘密情報が復号されるのを待ってからrcloneが起動します
-    requiresUnit = "sops-nix.service";
-
     remotes = {
       # リモート名は自由（rclone mount で使う名前になります）
       mega-vault = {
