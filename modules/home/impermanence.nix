@@ -1,6 +1,4 @@
-{ vars, ... }:
-
-{
+{vars, ...}: {
   home.persistence."/persist" = {
     directories = [
       "Downloads"
@@ -9,6 +7,8 @@
       "Music"
       "Pictures"
       "Videos"
+      "MEGA"
+      ".cache/rclone"
       ".ssh"
       ".local/share/containers"
       ".local/share/distrobox"
@@ -19,7 +19,7 @@
       ".config/Futu-Linux"
       ".config/keepassxc"
       ".mozilla/native-messaging-hosts"
-      ".megaCmd"
+      #".megaCmd"
       #".mozilla/firefox"
       ".local/share/keepassxc"
     ];

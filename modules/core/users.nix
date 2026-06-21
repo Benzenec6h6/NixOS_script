@@ -21,6 +21,7 @@
       "location/lon" = {owner = vars.user.name;};
       "api-key" = {owner = vars.user.name;};
       "gemini-api-key" = {owner = vars.user.name;};
+      "mega-password" = {owner = vars.user.name;};
     };
     templates."weather-env" = {
       owner = vars.user.name;
