@@ -22,6 +22,7 @@
       "api-key" = {owner = vars.user.name;};
       "gemini-api-key" = {owner = vars.user.name;};
       "mega-password" = {owner = vars.user.name;};
+      "mega-email" = {owner = vars.user.name;};
     };
     templates."weather-env" = {
       owner = vars.user.name;
@@ -38,6 +39,17 @@
       mode = "0444";
       content = ''
         GEMINI_API_KEY="${config.sops.placeholder."gemini-api-key"}"
+      '';
+    };
+    templates."rclone-config" = {
+      owner = vars.user.name;
+      path = "/home/${vars.user.name}/.config/rclone/rclone.conf";
+      mode = "0600";
+      content = ''
+        [mega-vault]
+        type = mega
+        user = ${config.sops.placeholder."mega-email"}
+        pass = ${config.sops.placeholder."mega-password"}
       '';
     };
   };
