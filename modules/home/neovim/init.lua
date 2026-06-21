@@ -74,6 +74,16 @@ vim.diagnostic.config({
 })
 
 local servers = {
+  gopls = {
+    settings = {
+      gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true, -- これを有効にすると、go-toolsの診断がLSP経由でNeovimに表示されます
+      },
+    },
+  },
   racket_langserver = {},
   nixd = {},
   bashls = {},
@@ -134,6 +144,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 require("conform").setup({
   formatters_by_ft = {
     python = { "ruff_format" },
+    go = { "goimports", "gofmt" },
     typescript = { "prettier" },
     javascript = { "prettier" },
     typescriptreact = { "prettier" },

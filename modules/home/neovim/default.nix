@@ -83,6 +83,7 @@ in {
           elixir
           heex
           rust
+          go
         ]))
 
       # --- 特定のワークフロー ---
