@@ -58,19 +58,14 @@
   };
 
   boot.initrd.systemd.services.rollback = {
-    description = "Rollback Btrfs root subvolume to a pristine state";
+    description = "...";
     wantedBy = ["initrd.target"];
-
-    # LUKS解除後、かつローカルファイルシステムがマウントされる前に実行
     after = ["cryptsetup.target"];
     before = ["sysroot.mount"];
-
     unitConfig.DefaultDependencies = "no";
-    path = with pkgs; [btrfs-progs coreutils gawk gnused];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = pkgs.writeShellScript "rollback" (builtins.readFile ./rollback.sh);
-    };
+    path = with pkgs; [btrfs-progs coreutils util-linux];
+    serviceConfig.Type = "oneshot";
+    script = builtins.readFile ./rollback.sh;
   };
 
   services.udev.extraRules = ''
