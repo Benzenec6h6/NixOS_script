@@ -40,15 +40,11 @@
     # キーバインドの設定（qutebrowser由来以外の余計な挙動を抑止・変更）
     keyBindings = {
       normal = {
-        # 1. ブラウザ標準のTab移動（暴走の原因）を完全に無効化
-        "<Tab>" = null;
-        "<Shift+Tab>" = null;
-
         # 2. タブの表示/非表示の切り替え（長押し対策として、キーを【離したとき】に実行）
-        "<Tab-Alt>" = "config-cycle tabs.show always never";
+        "<Tab+Alt>" = "config-cycle tabs.show always never";
 
         # 3. ステータスバーの切り替え（Tabキー無効化に伴い、Alt+s などに変更するのがおすすめです）
-        "<Tab+s>" = "config-cycle statusbar.show always in-mode";
+        "<Tab>s" = "config-cycle statusbar.show always in-mode";
       };
     };
   };
