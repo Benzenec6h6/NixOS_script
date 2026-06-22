@@ -50,8 +50,8 @@
   };
 
   nvidiaEnv = [
-    "LIBVA_DRIVER_NAME,nvidia" # ハードウェア動画再生支援用
-    "__GLX_VENDOR_LIBRARY_NAME,nvidia" # OpenGLアプリをNVIDIAで動かすため
+    #"LIBVA_DRIVER_NAME,nvidia" # ハードウェア動画再生支援用
+    #"__GLX_VENDOR_LIBRARY_NAME,nvidia" # OpenGLアプリをNVIDIAで動かすため
     "NIXOS_OZONE_WL,1" # Electron/Chrome系をWayland対応させる
   ];
 in {
