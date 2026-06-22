@@ -14,7 +14,7 @@
     settings = {
       # 1. 垂直タブの設定
       tabs.position = "left";
-      tabs.width = "15%"; # 幅はお好みで（ピクセル指定 "200" も可能）
+      tabs.width = "10%"; # 幅はお好みで（ピクセル指定 "200" も可能）
       tabs.show = "always"; # 初期状態は表示
 
       # 垂直タブを見やすくするための微調整
@@ -28,7 +28,6 @@
 
     extraConfig = ''
       # 2. タブの表示/非表示を切り替えるキーバインド
-      # 'bt' (Bar Tabs) で切り替え。お好みのキーに変えてください
       config.bind('<Alt-Tab>', 'config-cycle tabs.show always never')
 
       # 参考：ステータスバーも切り替えたい場合
