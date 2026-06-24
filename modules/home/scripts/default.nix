@@ -28,7 +28,7 @@ in {
     (importScript ./ScreenShot.nix)
     (importScript ./Thaw.nix)
     #(importScript ./Volume.nix)
-    (importScript ./WaybarCava.nix)
+    #(importScript ./WaybarCava.nix)
     (importScript ./WaybarScripts.nix)
     (importScript ./Weather.nix)
 

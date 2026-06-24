@@ -483,7 +483,7 @@
       };
       # This is a custom cava visualizer
       "custom/cava_mviz" = {
-        "exec" = "WaybarCava";
+        "exec" = "cava-formatter";
         "format" = "{}";
       };
 
