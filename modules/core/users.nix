@@ -41,17 +41,6 @@
         GEMINI_API_KEY="${config.sops.placeholder."gemini-api-key"}"
       '';
     };
-    templates."rclone-config" = {
-      owner = vars.user.name;
-      path = "/home/${vars.user.name}/.config/rclone/rclone.conf";
-      mode = "0600";
-      content = ''
-        [mega-vault]
-        type = mega
-        user = ${config.sops.placeholder."mega-email"}
-        pass = ${config.sops.placeholder."mega-password"}
-      '';
-    };
   };
 
   home-manager = {
