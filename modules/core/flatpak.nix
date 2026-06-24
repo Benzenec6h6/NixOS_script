@@ -1,12 +1,17 @@
-{ pkgs, lib, ... }:
-
 {
+  pkgs,
+  lib,
+  ...
+}: {
   services.flatpak = {
     enable = true;
     packages = [
       "com.usebottles.bottles"
       "com.github.tchx84.Flatseal"
       "io.github.dvlv.boxbuddyrs"
+      "com.valvesoftware.Steam"
+      "com.discordapp.Discord"
+      "org.kicad.KiCad"
     ];
     update.onActivation = false;
     update.auto = {
@@ -28,7 +33,7 @@
   # nix-flatpak が生成するサービスの設定を補強
   systemd.services.flatpak-managed-install = {
     # ネットワークが完全にオンラインになるのを待つ
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" ];
+    after = ["network-online.target"];
+    wants = ["network-online.target"];
   };
 }

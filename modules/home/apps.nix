@@ -36,12 +36,12 @@ in {
     ++ (with pkgs;
       [
         # 通信用
-        discord
+        #discord
 
         # ユーティリティ
-        steam
+        #steam
         transmission_4-gtk
-        qbittorrent
+        #qbittorrent
         #gparted
 
         # 便利ツール
@@ -65,6 +65,6 @@ in {
       ++ lib.optionals isLaptop [
         ntfs3g
 
-        kicad-small
+        #kicad-small
       ]);
 }
