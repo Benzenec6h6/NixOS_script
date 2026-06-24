@@ -12,6 +12,19 @@
 
     # 各種詳細設定
     settings = {
+      qt.args = [
+        # Intel iGPU環境で重くなりやすいMSAA(アンチエイリアス)を0にして描画を高速・安定化
+        "gpu-rasterization-msaa-sample-count=0"
+
+        # ドライバのブロックリストを無視し、WebGPU等のアクセラレーション機能を強制解放
+        "ignore-gpu-blocklist"
+        "enable-features=WebGPU"
+
+        "disable-accelerated-video-decode"
+      ];
+
+      # (任意) WebGLやアクセラレーションの安定性を高めるための追加設定
+      content.webgl = true;
       # 1. 垂直タブの設定
       tabs.position = "left";
       tabs.width = "10%";
@@ -40,10 +53,8 @@
     # キーバインドの設定（qutebrowser由来以外の余計な挙動を抑止・変更）
     keyBindings = {
       normal = {
-        # 2. タブの表示/非表示の切り替え（長押し対策として、キーを【離したとき】に実行）
-        "<Tab+Alt>" = "config-cycle tabs.show always never";
+        "<Alt-Tab>" = "config-cycle tabs.show always never";
 
-        # 3. ステータスバーの切り替え（Tabキー無効化に伴い、Alt+s などに変更するのがおすすめです）
         "<Tab>s" = "config-cycle statusbar.show always in-mode";
       };
     };
