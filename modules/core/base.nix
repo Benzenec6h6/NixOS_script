@@ -11,7 +11,8 @@
   console.keyMap = vars.locale.keyMap;
 
   nix = {
-    package = pkgs.lixPackageSets.stable.lix;
+    #package = pkgs.lixPackageSets.stable.lix;
+    package = pkgs.nix;
     gc = {
       automatic = true;
       dates = "monthly";
