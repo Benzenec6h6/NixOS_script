@@ -1,4 +1,9 @@
 {pkgs, ...}: {
+  boot.initrd.systemd.packages = with pkgs; [
+    btrfs-progs
+    util-linux
+  ];
+
   boot.initrd.systemd.services.create-pristine-once = {
     description = "Create pristine @root snapshot if missing";
     wantedBy = ["initrd.target"];
@@ -8,10 +13,7 @@
     ];
     before = ["sysroot.mount"];
     unitConfig.DefaultDependencies = "no";
-
-    # ★超重要: ここにmkdirやmount、btrfsコマンドのパスを含める
     path = with pkgs; [btrfs-progs coreutils util-linux bash];
-
     serviceConfig.Type = "oneshot";
     script = ''
       mkdir -p /mnt-root
@@ -19,7 +21,6 @@
         if mount /dev/mapper/crypted /mnt-root; then break; fi
         sleep 1
       done
-
       if ! btrfs subvolume show /mnt-root/@root_pristine >/dev/null 2>&1; then
         btrfs subvolume snapshot -r /mnt-root/@root /mnt-root/@root_pristine
       fi
@@ -37,10 +38,7 @@
     ];
     before = ["sysroot.mount"];
     unitConfig.DefaultDependencies = "no";
-
-    # ★超重要: こちらにも同様にパスを含める
     path = with pkgs; [btrfs-progs coreutils util-linux];
-
     serviceConfig.Type = "oneshot";
     script = builtins.readFile ./rollback.sh;
   };
