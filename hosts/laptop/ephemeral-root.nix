@@ -1,8 +1,7 @@
 {pkgs, ...}: {
-  boot.initrd.systemd.packages = with pkgs; [
-    btrfs-progs
-    util-linux
-  ];
+  boot.initrd.systemd.extraBin = {
+    btrfs = "${pkgs.btrfs-progs}/bin/btrfs";
+  };
 
   boot.initrd.systemd.services.create-pristine-once = {
     description = "Create pristine @root snapshot if missing";
@@ -13,7 +12,7 @@
     ];
     before = ["sysroot.mount"];
     unitConfig.DefaultDependencies = "no";
-    path = with pkgs; [btrfs-progs coreutils util-linux bash];
+    # path は指定しない（デフォルトの /bin:/sbin に mount/umount/coreutils が既にある）
     serviceConfig.Type = "oneshot";
     script = ''
       mkdir -p /mnt-root
@@ -38,7 +37,6 @@
     ];
     before = ["sysroot.mount"];
     unitConfig.DefaultDependencies = "no";
-    path = with pkgs; [btrfs-progs coreutils util-linux];
     serviceConfig.Type = "oneshot";
     script = builtins.readFile ./rollback.sh;
   };
