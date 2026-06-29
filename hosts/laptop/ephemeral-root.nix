@@ -3,6 +3,7 @@
     btrfs = "${pkgs.btrfs-progs}/bin/btrfs";
   };
 
+  /*
   boot.initrd.systemd.services.create-pristine-once = {
     description = "Create pristine @root snapshot if missing";
     wantedBy = ["initrd.target"];
@@ -26,6 +27,7 @@
       umount /mnt-root
     '';
   };
+  */
 
   boot.initrd.systemd.services.rollback = {
     description = "Rollback root subvolume to pristine state";
