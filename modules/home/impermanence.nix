@@ -14,7 +14,7 @@
       ".local/share/distrobox"
       ".local/share/applications"
       ".local/share/direnv"
-      ".config/zen-browser"
+      ".config/zen"
       ".config/moomoo"
       ".config/Futu-Linux"
       ".config/keepassxc"
