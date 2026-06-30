@@ -11,10 +11,12 @@
       ".cache/rclone"
       ".cache/zen"
       ".ssh"
+      ".local/share/keyrings"
       ".local/share/containers"
       ".local/share/distrobox"
       ".local/share/applications"
       ".local/share/direnv"
+      ".local/share/gh"
       ".config/zen"
       ".config/moomoo"
       ".config/Futu-Linux"
@@ -25,6 +27,7 @@
       #".megaCmd"
       #".mozilla/firefox"
       ".local/share/keepassxc"
+      ".var/app"
     ];
 
     files = [
