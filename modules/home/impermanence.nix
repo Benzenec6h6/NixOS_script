@@ -18,6 +18,8 @@
       ".config/moomoo"
       ".config/Futu-Linux"
       ".config/keepassxc"
+      ".config/gh"
+      ".config/gh-dash"
       ".mozilla/native-messaging-hosts"
       #".megaCmd"
       #".mozilla/firefox"
@@ -25,7 +27,6 @@
     ];
 
     files = [
-      ".config/gh/hosts.yml"
       ".config/sops/age/keys.txt"
     ];
   };
