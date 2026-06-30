@@ -14,12 +14,9 @@
   locale = {
     timeZone = "Asia/Tokyo";
     default = "en_US.UTF-8";
-    extra = ["ja_JP.UTF-8/UTF-8"];
+    extra = [ "ja_JP.UTF-8/UTF-8" ];
     keyMap = "jp106";
     kbLayout = "jp";
   };
-  busId = {
-    intel = "PCI:0:2:0";
-    nvidia = "PCI:1:0:0";
-  };
+  busId = { intel = "PCI:0:2:0"; nvidia = "PCI:1:0:0"; };
 }
