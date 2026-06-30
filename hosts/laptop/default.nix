@@ -6,7 +6,7 @@
   imports = [
     ./hardware.nix
     ./disko.nix
-    #./ephemeral-root.nix
+    ./ephemeral-root.nix
     ./vhdx-mount.nix
     ../../modules/core
   ];
