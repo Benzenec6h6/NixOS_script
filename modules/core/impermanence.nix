@@ -9,6 +9,7 @@
       "/var/log" # ログを残しておくとトラブルシューティングに役立ちます
       "/var/lib/sbctl"
       "/var/lib/bluetooth"
+      "/var/lib/systemd/backlight"
       "/var/lib/nixos"
       "/var/lib/flatpak"
       "/etc/NetworkManager/system-connections" # Wi-Fi設定など

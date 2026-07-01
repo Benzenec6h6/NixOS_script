@@ -12,6 +12,7 @@
       ".cache/zen"
       ".ssh"
       ".ollama"
+      ".local/state/wireplumber"
       ".local/share/keepassxc"
       ".local/share/keyrings"
       ".local/share/containers"
