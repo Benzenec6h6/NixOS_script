@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   programs.gh = {
     enable = true;
     extensions = with pkgs; [
-      gh-eco     # 依存関係グラフ表示
+      gh-eco # 依存関係グラフ表示
       gh-markdown-preview # READMEのプレビュー
     ];
     settings = {
@@ -18,8 +18,17 @@
     settings = {
       # ここにgh-dash独自のビュー設定などを記述
       prSections = [
-        { title = "My Pull Requests"; filters = "is:open author:@me"; }
+        {
+          title = "My Pull Requests";
+          filters = "is:open author:@me";
+        }
       ];
     };
   };
+
+  home.sessionVariables = {
+    # gh に secret-tool (keyring) を使わせないための環境変数
+    GH_CS_IGNORE_KEYRING = "1";
+  };
 }
+
