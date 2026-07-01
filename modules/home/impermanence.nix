@@ -11,6 +11,8 @@
       ".cache/rclone"
       ".cache/zen"
       ".ssh"
+      ".ollama"
+      ".local/share/keepassxc"
       ".local/share/keyrings"
       ".local/share/containers"
       ".local/share/distrobox"
@@ -23,10 +25,7 @@
       ".config/keepassxc"
       ".config/gh"
       ".config/gh-dash"
-      #".mozilla/native-messaging-hosts"
-      #".megaCmd"
-      #".mozilla/firefox"
-      ".local/share/keepassxc"
+      ".config/git"
       ".var/app"
     ];
 
