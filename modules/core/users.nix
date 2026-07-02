@@ -23,6 +23,7 @@
       "gemini-api-key" = {owner = vars.user.name;};
       "mega-password" = {owner = vars.user.name;};
       "mega-email" = {owner = vars.user.name;};
+      "github-token" = {owner = vars.user.name;};
     };
     templates."weather-env" = {
       owner = vars.user.name;
