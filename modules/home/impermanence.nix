@@ -12,7 +12,6 @@
       ".cache/zen"
       ".ssh"
       ".ollama"
-      ".local/state/wireplumber"
       ".local/share/keepassxc"
       ".local/share/keyrings"
       ".local/share/containers"
@@ -32,6 +31,8 @@
 
     files = [
       ".config/sops/age/keys.txt"
+      ".local/state/wireplumber/default-routes"
+      ".local/state/wireplumber/stream-properties"
     ];
   };
 }
