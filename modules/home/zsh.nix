@@ -42,7 +42,7 @@
     };
 
     # --- 2. 純粋なZshスクリプトフック（ツール初期化系はすべて排除） ---
-    initExtra = ''
+    initContent = ''
       # 補完メニューの選択を矢印キーで可能に
       zstyle ':completion:*' menu select
 
