@@ -64,7 +64,7 @@
           zle reset-prompt
         else
           zle accept-line
-        }
+        fi
       }
       zle -N accept-line-with-magic
       bindkey '^M' accept-line-with-magic
