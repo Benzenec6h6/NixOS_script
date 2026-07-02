@@ -82,6 +82,7 @@
     nix-flatpak,
     ...
   } @ inputs: let
+    self = inputs.self;
     vars = import ./vars.nix;
     system = vars.system;
 
@@ -119,6 +120,11 @@
     nixosConfigurations = {
       laptop = mkNixosConfig "laptop";
       vm = mkNixosConfig "vm";
+    };
+
+    checks.${system} = {
+      nixos-laptop = self.nixosConfigurations.laptop.config.system.build.toplevel;
+      nixos-vm = self.nixosConfigurations.vm.config.system.build.toplevel;
     };
   };
 }
