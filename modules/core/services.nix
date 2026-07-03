@@ -19,7 +19,10 @@
     #power-profiles-daemon.enable = true;
   };
 
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-stable;
+  };
   programs.hyprland = {
     enable = true;
     withUWSM = true;
