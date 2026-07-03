@@ -5,8 +5,6 @@
   vars,
   ...
 }: {
-  imports = [inputs.home-manager.nixosModules.home-manager];
-
   sops = {
     # 秘密情報ファイルの場所（Flakeルートからの相対パスなど）
     defaultSopsFile = ../../secrets/secrets.yaml;
@@ -23,7 +21,6 @@
       "gemini-api-key" = {owner = vars.user.name;};
       "mega-password" = {owner = vars.user.name;};
       "mega-email" = {owner = vars.user.name;};
-      "github-token" = {owner = vars.user.name;};
     };
     templates."weather-env" = {
       owner = vars.user.name;
