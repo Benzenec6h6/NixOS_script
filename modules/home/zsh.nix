@@ -69,11 +69,6 @@
       }
       zle -N accept-line-with-magic
       bindkey '^M' accept-line-with-magic
-
-      if [ -f "/run/secrets/github-token" ]; then
-        export GITHUB_TOKEN="$(cat /run/secrets/github-token)"
-        export GH_TOKEN="$GITHUB_TOKEN"
-      fi
     '';
   };
 }
