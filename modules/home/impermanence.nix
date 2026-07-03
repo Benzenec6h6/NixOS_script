@@ -17,6 +17,8 @@
       ".local/share/containers"
       ".local/share/distrobox"
       ".local/share/applications"
+      ".local/share/zsh"
+      ".local/share/zoxide"
       ".local/share/direnv"
       ".local/share/gh"
       ".config/zen"
