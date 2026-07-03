@@ -52,9 +52,6 @@
   nvidiaEnv = [
     #"LIBVA_DRIVER_NAME,nvidia" # ハードウェア動画再生支援用
     #"__GLX_VENDOR_LIBRARY_NAME,nvidia" # OpenGLアプリをNVIDIAで動かすため
-    #"MOZ_LEGACY_PROFILES,1"
-    #"MOZ_ALLOW_DOWNGRADE,1"
-    "NIXOS_OZONE_WL,1" # Electron/Chrome系をWayland対応させる
   ];
 in {
   wayland.windowManager.hyprland = {
