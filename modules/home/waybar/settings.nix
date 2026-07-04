@@ -468,6 +468,7 @@
         "return-type" = "json";
         "exec" = "Weather";
         "tooltip" = true;
+        "signal" = 8;
       };
       "custom/hyprpicker" = {
         "format" = "";

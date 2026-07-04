@@ -9,18 +9,9 @@ pkgs.writeShellApplication {
 
   checkPhase = "true";
   text = ''
-    # 秘密情報のパスを取得
     ENV_FILE="${osConfig.sops.templates."weather-env".path}"
+    [ -f "$ENV_FILE" ] && source "$ENV_FILE"
 
-    if [ -f "$ENV_FILE" ]; then
-      # shellcheck source=/dev/null
-      source "$ENV_FILE"
-    else
-      # エラーメッセージを JSON 形式で出力（Waybar用）
-      echo '{"text":"󰤭 ", "tooltip":"Secret file not found"}'
-      exit 0
-    fi
-
-    exec weather-fetcher
+    exec weather-fetcher "$@"
   '';
 }
