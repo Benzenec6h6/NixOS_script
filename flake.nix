@@ -73,19 +73,7 @@
     nixpkgs,
     nixpkgs-unstable,
     nix-cachyos-kernel,
-    disko,
-    impermanence,
-    lanzaboote,
-    home-manager,
-    stylix,
-    nur,
-    sops-nix,
-    nix-index-database,
     niri,
-    zen-browser,
-    moomoo,
-    rust-tools,
-    nix-flatpak,
     ...
   } @ inputs: let
     self = inputs.self;
