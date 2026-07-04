@@ -21,7 +21,7 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri-stable;
+    package = pkgs.niri-unstable;
   };
   programs.hyprland = {
     enable = true;
