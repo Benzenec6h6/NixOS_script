@@ -1,0 +1,8 @@
+builds:
+  include:
+    # Garnix には nixosConfigurations だけを見に行かせる
+    - 'nixosConfigurations.*'
+  exclude:
+    # nix-ci 用に書いた checks は Garnix の評価対象から外す
+    - 'checks.*.*'
+    - 'devShell.*'
