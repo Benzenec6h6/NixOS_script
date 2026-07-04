@@ -5,6 +5,7 @@
 }: {
   # niri-flake の home-manager モジュールを使用することを前提としています
   programs.niri.settings = {
+    xwayland-satellite.enable = true;
     # 1. 入力設定（JIS配列 & Caps->Ctrl を死守）
     input = {
       keyboard.xkb = {
@@ -23,9 +24,10 @@
     # ※ UWSMを使っている場合、これらは uwsm 側で管理するのも手ですが
     # ここに書いておけば niri-session 起動時に実行されます。
     spawn-at-startup = [
+      {argv = ["dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "NIRI_SOCKET"];}
       {argv = ["waybar"];}
       {argv = ["fcitx5"];}
-      {argv = ["swaync"];}
+      #{argv = ["swaync"];}
     ];
 
     # 3. レイアウト設定

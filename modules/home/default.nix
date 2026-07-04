@@ -30,7 +30,7 @@
       ./impermanence.nix
       ./keepassxc.nix
       ./lazygit.nix
-      #./niri.nix
+      ./niri.nix
       ./qutebrowser.nix
       #./rclone.nix
       ./stylix.nix
