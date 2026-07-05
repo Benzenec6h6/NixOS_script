@@ -29,6 +29,7 @@
       ".config/gh-dash"
       ".config/git"
       ".var/app"
+      "Library/Containers/moomoo/2.0/Data/Library/Application Support"
     ];
 
     files = [
