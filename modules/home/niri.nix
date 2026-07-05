@@ -5,7 +5,10 @@
 }: {
   # niri-flake の home-manager モジュールを使用することを前提としています
   programs.niri.settings = {
-    xwayland-satellite.enable = true;
+    xwayland-satellite = {
+      enable = true;
+      path = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+    };
     # 1. 入力設定（JIS配列 & Caps->Ctrl を死守）
     input = {
       keyboard.xkb = {
