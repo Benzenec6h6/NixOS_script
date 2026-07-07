@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -10,14 +9,16 @@
   programs.nh = {
     enable = true;
     # OSかHome Manager、メインで使っているflakeのパスを指定（任意）
-    flake = "/home/teto/Documents/nixproject/NixOS_script"; 
-    
-    #clean = {
-    #  enable = true;
-    #   毎週月曜日に、3日より古い世代を削除し、最低5世代は残す設定（例）
-    #  extraArgs = "--keep-since 3d --keep 5";
-    #};
+    flake = "/home/teto/Documents/nixproject/nixos_parts/NixOS_script";
+
+    clean = {
+      enable = true;
+      #   毎週月曜日に、7日より古い世代を削除し、最低5世代は残す設定（例）
+      extraArgs = "--keep-since 7d --keep 5";
+      dates = "weekly";
+    };
   };
+  nix.gc.automatic = false;
 
   programs.fzf = {
     enable = true;
@@ -36,5 +37,5 @@
 
   programs.bat.enable = true;
   programs.fd.enable = true;
-  programs.nix-your-shell.nix-output-monitor.enable = true; 
+  programs.nix-your-shell.nix-output-monitor.enable = true;
 }
