@@ -19,6 +19,9 @@
     #power-profiles-daemon.enable = true;
   };
 
+  programs.mangowc = {
+    enable = true;
+  };
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -38,6 +41,11 @@
         prettyName = "niri";
         comment = "Scrollable-tile Wayland compositor";
         binPath = "/run/current-system/sw/bin/niri";
+      };
+      mango = {
+        prettyName = "Mango";
+        comment = "Fast, feature-rich Wayland compositor based on dwl";
+        binPath = "/run/current-system/sw/bin/mango"; # 実際のバイナリパスに合わせる
       };
     };
   };

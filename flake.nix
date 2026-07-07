@@ -51,6 +51,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    mango = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     zen-browser = {
       url = "github:Benzenec6h6/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,12 +99,14 @@
               #nix-cachyos-kernel.overlays.default
               nix-cachyos-kernel.overlays.pinned
               niri.overlays.niri
+              /*
               (final: prev: {
                 unstable = import nixpkgs-unstable {
                   system = prev.stdenv.hostPlatform.system;
                   config.allowUnfree = true;
                 };
               })
+              */
             ];
           }
           ./hosts/${host}

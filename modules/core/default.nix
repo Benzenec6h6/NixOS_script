@@ -7,6 +7,7 @@
   imports =
     [
       # --- 外部 Flake モジュール (inputsから直接インポート) ---
+      inputs.mango.nixosModules.mango
       inputs.niri.nixosModules.niri
       inputs.stylix.nixosModules.stylix
       inputs.home-manager.nixosModules.home-manager
