@@ -815,11 +815,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784077282,
-        "narHash": "sha256-SJcYmh4njIFNtkwEX6ywzWAdmDzvzfGlD1YXEq33ZtQ=",
+        "lastModified": 1784081068,
+        "narHash": "sha256-McgBcxJwMoypOytkxZov6Ba/sf5Wezzwln8HCM0NYcU=",
         "owner": "Benzenec6h6",
         "repo": "rust-tools",
-        "rev": "fc398e11180a24acd73e5ed74b9151f6b6c7588d",
+        "rev": "0d07d6b36ff4c0e8282047e4983e71133b2d0340",
         "type": "github"
       },
       "original": {
