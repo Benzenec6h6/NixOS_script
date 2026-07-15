@@ -19,6 +19,7 @@
       #./waybar/waybar-JaKooLit.nix
       ./wlogout
       ./apps.nix
+      ./audio.nix
       #./brave.nix
       ./cava.nix
       ./cli-tools.nix
