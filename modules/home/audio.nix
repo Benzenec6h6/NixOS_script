@@ -6,7 +6,7 @@
       configs = {
         "10-separate-volumes" = {
           "wireplumber.settings" = {
-            "keep.routes.volume" = false;
+            "keep.routes.volume" = true;
           };
         };
       };
