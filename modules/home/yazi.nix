@@ -28,7 +28,7 @@
           }
           {
             url = "*.csv";
-            run = ''shell -- "mlr --icsv --opprint -g color cat \"$1\"" '';
+            run = "miller";
           }
           {
             url = "*.diff";
@@ -158,12 +158,6 @@
 
     # 4. init.lua への追加記述 (UI調整など)
     initLua = ''
-      -- ステータスバーにGit情報を表示する設定（型安全な結合に修正）
-      Status:children_add(function()
-          local h = cx.active.current.hovered
-          if h == nil or h.git == nil then return "" end
-          return " (" .. tostring(h.git) .. ")"
-      end, 500, Status.RIGHT)
     '';
 
     # 5. 必要なバイナリの導入
