@@ -17,18 +17,59 @@
         show_git = true;
         linemode = "git";
         sort_by = "alphabetical";
-        ratio = [1 3 4];
+        ratio = [1 2 5]; # データの視認性を上げるため、プレビュー幅を広げる [1 3 4] から [1 2 5] に変更
       };
 
       plugin = {
+        prepend_fetchers = [
+          {
+            url = "*";
+            run = "git";
+            group = "git"; # これが同期に必須です
+          }
+          {
+            url = "*/";
+            run = "git";
+            group = "git";
+          }
+        ];
         prepend_previewers = [
           {
             url = "*.md";
             run = "code";
           }
+          # duckdb.yazi が対応する各種データ拡張子を登録
           {
             url = "*.csv";
-            run = "miller";
+            run = "duckdb";
+          }
+          {
+            url = "*.tsv";
+            run = "duckdb";
+          }
+          {
+            url = "*.json";
+            run = "duckdb";
+          }
+          {
+            url = "*.parquet";
+            run = "duckdb";
+          }
+          {
+            url = "*.txt";
+            run = "duckdb";
+          }
+          {
+            url = "*.xlsx";
+            run = "duckdb";
+          }
+          {
+            url = "*.db";
+            run = "duckdb";
+          }
+          {
+            url = "*.duckdb";
+            run = "duckdb";
           }
           {
             url = "*.diff";
@@ -43,26 +84,60 @@
             run = "mediainfo";
           }
         ];
+        # スムーズなスクロールのための事前キャッシュ読み込み（preload）を設定
+        prepend_preloaders = [
+          {
+            url = "*.csv";
+            run = "duckdb";
+            multi = false;
+          }
+          {
+            url = "*.tsv";
+            run = "duckdb";
+            multi = false;
+          }
+          {
+            url = "*.json";
+            run = "duckdb";
+            multi = false;
+          }
+          {
+            url = "*.parquet";
+            run = "duckdb";
+            multi = false;
+          }
+          {
+            url = "*.txt";
+            run = "duckdb";
+            multi = false;
+          }
+          {
+            url = "*.xlsx";
+            run = "duckdb";
+            multi = false;
+          }
+        ];
       };
     };
 
     theme = {
       git = {
-        # 1. 一度コミットした後に内容を編集したファイル（Modified）
-        # Draculaの鮮やかなイエロー/オレンジを指定して、埋もれないようにします
+        # 色の設定 (Style)
         modified = {fg = "yellow";};
+        untracked = {fg = "magenta";};
+        added = {fg = "green";};
+        deleted = {
+          fg = "red";
+          bold = true;
+        };
+        ignored = {fg = "blue";};
+        clean = {fg = "green";};
 
-        # 2. まだ一度もコミット・追跡されていない完全な新規ファイル（Untracked）
-        # 今まで通り、目立つピンク/レッドで警告します
-        untracked = {fg = "magenta";}; # もしくは "red"
-
-        # 3. git add してコミットを待っている状態（Staged）
-        # 綺麗なグリーンに変化させて安心感を演出します
-        staged = {fg = "green";};
-
-        # その他、リネームや削除
-        renamed = {fg = "cyan";};
-        deleted = {fg = "red";};
+        modified_sign = "M";
+        untracked_sign = "?";
+        added_sign = "A";
+        deleted_sign = "D";
+        clean_sign = "✔";
       };
     };
 
@@ -91,7 +166,6 @@
         setup = false;
       };
 
-      # 呼ぶべき setup() を持たないプレビュー・機能系プラグインは setup = false に
       diff = {
         package = pkgs.yaziPlugins.diff;
         setup = false;
@@ -104,9 +178,9 @@
         package = pkgs.yaziPlugins.mediainfo;
         setup = false;
       };
-      miller = {
-        package = pkgs.yaziPlugins.miller;
-        setup = false;
+      duckdb = {
+        package = pkgs.yaziPlugins.duckdb;
+        setup = true;
       };
       "wl-clipboard" = {
         package = pkgs.yaziPlugins.wl-clipboard;
@@ -148,6 +222,27 @@
             run = "plugin diff";
             desc = "Diff selected files";
           }
+          # ─── duckdb 用のキーマップ ───
+          {
+            on = ["H"];
+            run = "plugin duckdb -1";
+            desc = "Scroll one column to the left";
+          }
+          {
+            on = ["L"];
+            run = "plugin duckdb +1";
+            desc = "Scroll one column to the right";
+          }
+          {
+            on = ["g" "o"];
+            run = "plugin duckdb -open";
+            desc = "open with duckdb";
+          }
+          {
+            on = ["g" "u"];
+            run = "plugin duckdb -ui";
+            desc = "open with duckdb ui";
+          }
         ]
         ++ (map (n: {
           on = [(toString n)];
@@ -156,8 +251,12 @@
         }) [1 2 3 4 5 6 7 8 9]);
     };
 
-    # 4. init.lua への追加記述 (UI調整など)
+    # 4. init.lua への追加記述
+    # plugins.*.setup = true の場合、Home Managerが自動で `require("duckdb"):setup()` を生成しますが、
+    # オプション（モードやキャッシュサイズ等）をカスタムしたい場合は、ここに以下のように記述できます。
     initLua = ''
+      -- 必要に応じてカスタム設定を行う場合（現状はデフォルト動作になります）
+      -- require("duckdb"):setup({ mode = "summarized", cache_size = 500 })
     '';
 
     # 5. 必要なバイナリの導入
@@ -166,7 +265,7 @@
       wl-clipboard
       glow
       mediainfo
-      miller
+      duckdb
       fd
       ripgrep
       fzf
