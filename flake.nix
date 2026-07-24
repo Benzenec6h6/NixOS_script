@@ -71,12 +71,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-flatpak.url = "github:gmodena/nix-flatpak?ref=latest";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
   };
 
   outputs = {
     nixpkgs,
-    nixpkgs-unstable,
+    #nixpkgs-unstable,
     nix-cachyos-kernel,
     niri,
     ...
