@@ -19,6 +19,7 @@
       options = "--delete-older-than 30d";
     };
     settings = {
+      trusted-users = ["root" vars.user.name];
       experimental-features = ["nix-command" "flakes"];
       substituters = [
         "https://cache.nixos.org"
