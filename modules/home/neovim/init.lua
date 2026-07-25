@@ -74,6 +74,7 @@ vim.diagnostic.config({
 })
 
 local servers = {
+  nls = {},
   gopls = {
     settings = {
       gopls = {
@@ -156,6 +157,7 @@ require("conform").setup({
     elixir = { "mix" },
     heex = { "mix" },
     rust = { "rustfmt" },
+    nickel = { "nickel" },
   },
   format_on_save = {
     timeout_ms = 500,

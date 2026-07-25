@@ -60,9 +60,11 @@ in {
       nvim-treesitter
       dressing-nvim
 
+      vim-nickel
       # --- 構文解析・編集補助 ---
       (nvim-treesitter.withPlugins (p:
         with p; [
+          nickel
           nix
           lua
           vim
