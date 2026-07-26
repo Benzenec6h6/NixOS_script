@@ -10,10 +10,9 @@
 in {
   services.ollama = {
     enable = true;
-    acceleration = "cuda";
 
     # 最新のエンジンを使う（unstableチャンネルを設定している前提）
-    package = pkgs-unstable.ollama;
+    package = pkgs-unstable.ollama-vulkan;
 
     # VRAM 6GBを効率よく使うためのチューニング
     environmentVariables = {
