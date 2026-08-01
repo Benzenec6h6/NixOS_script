@@ -461,8 +461,8 @@
       };
 
       "custom/weather" = {
-        "format" = "{}";
-        "format-alt" = "{alt}: {}";
+        "format" = "{text}";
+        "format-alt" = "{alt}: {text}";
         "format-alt-click" = "click";
         "interval" = 1800;
         "return-type" = "json";
@@ -489,7 +489,7 @@
       };
 
       "custom/playerctl" = {
-        "format" = "<span>{}</span>";
+        "format" = "<span>{text}</span>";
         "return-type" = "json";
         "max-length" = 25;
         "exec" = "playerctl -a metadata --format '{\"text\": \"{{artist}}  {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F";
@@ -504,7 +504,7 @@
       "custom/swaync" = {
         "tooltip" = true;
         "tooltip-format" = "Left Click: Launch Notification Center\nRight Click: Do not Disturb";
-        "format" = "{} {icon} ";
+        "format" = "{text} {icon} ";
         "format-icons" = {
           "notification" = "<span foreground='red'><sup></sup></span>";
           "none" = "";

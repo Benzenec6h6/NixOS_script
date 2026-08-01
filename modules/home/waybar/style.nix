@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{config, ...}: {
   programs.waybar.style = ''
     * {
         font-family: "${config.stylix.fonts.monospace.name}";
@@ -14,7 +13,7 @@
     }
 
     /* ツールチップ：Stylixカラーを活用 */
-    tooltip {
+    #tooltip {
         background: #${config.lib.stylix.colors.base01};
         border-radius: 12px;
         border: 1px solid #${config.lib.stylix.colors.base03};
@@ -29,9 +28,9 @@
     }
 
     /* 各種モジュールの共通テキスト色 */
-    #custom-cava_mviz, #custom-playerctl, #window, #hyprland-window, 
-    #custom-swaync, #workspaces, #hyprland-workspaces, #clock, 
-    #custom-weather, #idle_inhibitor, #custom-hint, #tray, 
+    #custom-cava_mviz, #custom-playerctl, #window, #hyprland-window,
+    #custom-swaync, #workspaces, #hyprland-workspaces, #clock,
+    #custom-weather, #idle_inhibitor, #custom-hint, #tray,
     #network.speed, #network, #group-audio, #group-mobo_drawer, #custom-wlogout {
         color: #${config.lib.stylix.colors.base06};
         padding: 0 6px;
