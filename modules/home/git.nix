@@ -1,10 +1,14 @@
-{ vars, ... }: {
+{vars, ...}: {
   programs.git = {
     enable = true;
-    settings.user = {
-      name = vars.user.gitName;
-      email = vars.user.gitEmail;
+    settings = {
+      user = {
+        name = vars.user.gitName;
+        email = vars.user.gitEmail;
+      };
+      init = {
+        defaultBranch = "main";
+      };
     };
   };
 }
-
