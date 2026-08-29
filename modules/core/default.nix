@@ -30,7 +30,6 @@
       ./impermanence.nix
       ./networking.nix
       ./packages.nix
-      ./power-management.nix
       ./quickshell.nix
       ./security.nix
       ./services.nix
