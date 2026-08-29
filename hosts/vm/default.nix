@@ -11,7 +11,7 @@
   ];
 
   boot.kernelPackages = pkgs.linuxPackages;
-  #boot.kernelPackages = pkgs.linuxPackages_6_12;
+  #boot.kernelPackages = pkgs.linuxPackages_6_18;
   services.xserver.videoDrivers = ["virtio"];
 
   # VM特有の設定
