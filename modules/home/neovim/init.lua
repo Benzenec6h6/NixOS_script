@@ -270,6 +270,11 @@ require("codecompanion").setup({
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           env = { api_key = vim.env.GEMINI_API_KEY },
+          schema = {
+            model = {
+              default = "gemini-flash-latest",
+            },
+          },
         })
       end,
       ollama = function()
