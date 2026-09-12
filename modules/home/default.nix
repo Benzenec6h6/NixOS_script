@@ -30,6 +30,7 @@
       ./hypridle.nix
       ./impermanence.nix
       ./keepassxc.nix
+      ./ladybird.nix
       ./lazygit.nix
       ./niri.nix
       #./qutebrowser.nix

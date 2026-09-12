@@ -35,9 +35,6 @@ in {
     ]
     ++ (with pkgs;
       [
-        #お試しブラウザ
-        ladybird
-
         # 通信用
         #discord
 
