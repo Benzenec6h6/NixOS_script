@@ -3,19 +3,21 @@
   inputs,
   ...
 }: let
-  # nixpkgs-unstable から Ladybird 用にインスタンス化
   pkgs-unstable = import inputs.nixpkgs-unstable {
     system = pkgs.stdenv.hostPlatform.system;
     config = {
       allowUnfree = true;
-      # Ladybird の脆弱性警告をバイパスする設定を追加
-      permittedInsecurePackages = [
-        "ladybird-0-unstable-2026-05-04"
+      # パッケージ名が "ladybird-" から始まるものは日付を問わず全て許可
+      permittedInsecurePackages = [];
+      whitelistInsecurePackages = []; # システムによっては predicate を利用
+
+      # 名前判定でワイルドカード的に許可する関数
+      permittedInsecurePackagePredicates = [
+        (pkg: pkgs.lib.hasPrefix "ladybird-" (pkgs.lib.getName pkg))
       ];
     };
   };
 in {
-  # Home Manager で入れる場合
   home.packages = [
     pkgs-unstable.ladybird
   ];
