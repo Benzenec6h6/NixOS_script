@@ -32,7 +32,7 @@
       ./keepassxc.nix
       ./lazygit.nix
       ./niri.nix
-      ./qutebrowser.nix
+      #./qutebrowser.nix
       #./rclone.nix
       ./stylix.nix
       ./swaync.nix

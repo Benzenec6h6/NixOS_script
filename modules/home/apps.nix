@@ -35,6 +35,9 @@ in {
     ]
     ++ (with pkgs;
       [
+        #お試しブラウザ
+        ladybird
+
         # 通信用
         #discord
 
@@ -45,8 +48,8 @@ in {
         #gparted
 
         # 便利ツール
-        eww #ags
-        awww
+        #eww ags
+        #awww
         mpvpaper
         pavucontrol #playerctl
         imagemagick
