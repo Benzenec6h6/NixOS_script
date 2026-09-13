@@ -30,6 +30,7 @@
       nos = "nh os switch";
       nhb = "nh home switch";
       ncu = "nh os switch --update";
+      Ladybird = "QT_STYLE_OVERRIDE='' QT_QPA_PLATFORMTHEME='' Ladybird";
 
       # 基本のセーフティ
       rm = "rm -i";
