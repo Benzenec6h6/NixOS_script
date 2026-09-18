@@ -93,7 +93,9 @@ local servers = {
   ts_ls = {},
   elixir_ls = {},
   rust_analyzer = {},
-  qmlls = {},
+  qmlls = {
+    cmd = { "qmlls", "-E" },
+  },
   lua_ls = {
     settings = {
       Lua = { diagnostics = { globals = { 'vim' } } }
@@ -159,7 +161,7 @@ require("conform").setup({
     heex = { "mix" },
     rust = { "rustfmt" },
     nickel = { "nickel" },
-    qml = { "qmlfmt" },
+    qml = { "qmlformat" },
   },
   format_on_save = {
     timeout_ms = 500,
