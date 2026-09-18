@@ -64,6 +64,7 @@ in {
       # --- 構文解析・編集補助 ---
       (nvim-treesitter.withPlugins (p:
         with p; [
+          qmljs
           nickel
           nix
           lua
