@@ -21,10 +21,10 @@
         };
 
         mounts = {
-          "" = {
+          "MEGA" = {
             enable = true;
             autoMount = true;
-            mountPoint = "${config.home.homeDirectory}";
+            mountPoint = "${config.home.homeDirectory}/MEGA";
             options = {
               vfs-cache-mode = "full";
               dir-cache-time = "24h";
