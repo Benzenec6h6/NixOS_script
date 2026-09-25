@@ -17,14 +17,14 @@
 
         secrets = {
           user = osConfig.sops.secrets."mega-email".path;
-          password = osConfig.sops.secrets."mega-password".path;
+          pass = osConfig.sops.secrets."mega-password".path;
         };
 
         mounts = {
           "" = {
             enable = true;
             autoMount = true;
-            mountPoint = "${config.home.homeDirectory}/MEGA";
+            mountPoint = "${config.home.homeDirectory}";
             options = {
               vfs-cache-mode = "full";
               dir-cache-time = "24h";
