@@ -34,7 +34,7 @@
       ./lazygit.nix
       ./niri.nix
       #./qutebrowser.nix
-      #./rclone.nix
+      ./rclone.nix
       ./stylix.nix
       ./swaync.nix
       #./themes.nix
