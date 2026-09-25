@@ -8,8 +8,6 @@
   programs.rclone = {
     enable = true;
 
-    requiresUnit = null;
-
     remotes = {
       mega-vault = {
         config = {
@@ -30,7 +28,6 @@
             options = {
               vfs-cache-mode = "full";
               dir-cache-time = "24h";
-              # ここにお好みのオプションを追加
             };
             logLevel = "NOTICE";
           };
@@ -39,6 +36,16 @@
     };
   };
 
-  # 【重要】以前の爆走ループを物理的に阻止する設定
-  #systemd.user.services.rclone-config.Service.Restart = lib.mkForce "no";
+  # 【修正 2】暴走防止セーフティ
+  # 失敗時に無限ループせず、数回で諦めるように設定
+  systemd.user.services.rclone-config = {
+    Unit = {
+      StartLimitIntervalSec = 60;
+      StartLimitBurst = 3; # 60秒間に3回失敗したら停止
+    };
+    Service = {
+      Restart = lib.mkForce "on-failure";
+      RestartSec = "10s"; # 再起動待機時間を設ける
+    };
+  };
 }
