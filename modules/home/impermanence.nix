@@ -7,7 +7,6 @@
       "Music"
       "Pictures"
       "Videos"
-      "MEGA"
       ".cache/rclone"
       ".cache/zen"
       ".ssh"
