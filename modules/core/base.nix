@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   vars,
   ...
@@ -24,11 +23,13 @@
       substituters = [
         "https://cache.nixos.org"
         "https://cache.lix.systems"
+        "https://finix.cachix.org"
         "https://cache.tvl.fyi/"
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+        "finix.cachix.org-1:0ejikHDeCp0UErsduUUHcg9IJczY2/h2e5132Z/As/c="
         "cache.tvl.su:kjc6KOMupXc1vHVufJUoDUYeLzbwSr9abcAKdn/U1Jk="
       ];
       max-jobs = "auto";
