@@ -440,11 +440,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795634734,
-        "narHash": "sha256-IQukjqTg9uIcjgpTPIu9OugOCM4kpaNVT/exTfYD6sA=",
+        "lastModified": 1795693619,
+        "narHash": "sha256-rfzp3ALTlrR8DJjeDCmKIWEE0MMZZl9u7W08xnrVWi0=",
         "owner": "Benzenec6h6",
         "repo": "moomoo_flake",
-        "rev": "8b468b6fb494f9ba414e75d326c2bf785d1483cf",
+        "rev": "71dec151d24d566236aa324891312483b3f8e49e",
         "type": "github"
       },
       "original": {
