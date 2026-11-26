@@ -1,12 +1,8 @@
-{ config, pkgs, ... }:
-
-{
+{pkgs, ...}: {
   i18n.inputMethod = {
     type = "fcitx5";
     enable = true;
     fcitx5.addons = with pkgs; [
-      #libsForQt5.fcitx5-configtool
-      #libsForQt5.fcitx5-qt
       kdePackages.fcitx5-configtool
       kdePackages.fcitx5-qt
       fcitx5-mozc-ut
@@ -27,7 +23,7 @@
   };
 
   environment.systemPackages = [
-    (pkgs.runCommand "fcitx5-custom-icons" { } ''
+    (pkgs.runCommand "fcitx5-custom-icons" {} ''
       mkdir -p $out/share/icons/hicolor/scalable/status
       cp ${./input-keyboard-symbolic-svgrepo-com.svg} \
          $out/share/icons/hicolor/scalable/status/input-keyboard-symbolic.svg
